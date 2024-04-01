@@ -17,13 +17,12 @@ const menuData: Menu[] = [
     id: 3,
     title: "Property",
     path: "/property",
-    newTab: false,
+    newTab: false
   },
   {
     id: 4,
     title: "Services",
-    path: "/services",
-    newTab: false,
+    newTab: false
   },
   {
     id: 5,
