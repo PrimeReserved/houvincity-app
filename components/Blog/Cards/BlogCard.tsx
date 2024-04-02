@@ -224,6 +224,5 @@ const BlogCard: React.FC<IBlogCardProps> = ({ article }) => {
   );
 };
 
-
 export default BlogCard;
 >>>>>>> b361d4b (I worked on the Property Listing Card)
