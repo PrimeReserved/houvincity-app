@@ -1,7 +1,7 @@
 // pages/index.tsx
 
 import React from "react";
-import imageUrlBuilder from '@sanity/image-url'
+import imageUrlBuilder from "@sanity/image-url";
 import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 import Image from "next/image";
@@ -72,8 +72,6 @@ const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
     </div>
   );
 };
-
-
 export default BlogCard;
 
 
