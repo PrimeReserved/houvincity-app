@@ -77,4 +77,5 @@ const config: Config = {
   plugins: [],
 >>>>>>> b361d4b (I worked on the Property Listing Card)
 };
+
 export default config;

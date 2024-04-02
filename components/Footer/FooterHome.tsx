@@ -197,6 +197,7 @@ const Copyright = () => (
       Copyright © {getCurrentYear()} Hovincity. All rights reserved.
     </p>
   </div>
+
 );
 
 export default FooterHome;
