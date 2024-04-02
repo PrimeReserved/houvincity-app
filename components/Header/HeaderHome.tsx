@@ -7,8 +7,10 @@ import { usePathname } from "next/navigation";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 
+import Logo from "@/public/logo.svg";
+
 const DynamicScrollToContactButton = React.lazy(
-//   () => import("../Buttons/ScrollToContactButton"),
+  () => import("../Buttons/ScrollToContactButton"),
 );
 
 const Header = () => {
@@ -33,7 +35,7 @@ const Header = () => {
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
-  const handleSubmenu = (index) => {
+  const handleSubmenu = (index: number) => {
     if (openIndex === index) {
       setOpenIndex(-1);
     } else {
@@ -61,14 +63,14 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/images/logo/primereservedlogo.png"
+                  src={Logo}
                   alt="logo"
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
                 />
                 <Image
-                  src="/images/logo/primereservedlogo.png"
+                  src={Logo}
                   alt="logo"
                   width={140}
                   height={30}
@@ -108,7 +110,7 @@ const Header = () => {
                       : "invisible top-[120%] opacity-0"
                   }`}
                 >
-                  <ul className="block lg:flex lg:space-x-12">
+                  <ul className="block lg:flex lg:space-x-12 gap-6">
                     {menuData.map((menuItem, index) => (
                       <li key={index} className="group relative">
                         {menuItem.path ? (
@@ -145,7 +147,8 @@ const Header = () => {
                                 openIndex === index ? "block" : "hidden"
                               }`}
                             >
-                              {menuItem.submenu.map((submenuItem, index) => (
+                              {menuItem.submenu?.map((submenuItem, index) => 
+                                submenuItem.path ? (
                                 <Link
                                   href={submenuItem.path}
                                   key={index}
@@ -153,7 +156,7 @@ const Header = () => {
                                 >
                                   {submenuItem.title}
                                 </Link>
-                              ))}
+                              ): null )}
                             </div>
                           </>
                         )}
@@ -173,9 +176,9 @@ const Header = () => {
                     <DynamicScrollToContactButton />
                   </React.Suspense>
                 </div>
-                <div>
+                {/* <div>
                   <ThemeToggler />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
