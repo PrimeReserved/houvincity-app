@@ -27,7 +27,6 @@ const RecentPostCard = () => {
             Read more
           </p>
           <Image src={ArrowRight} alt="Arrow Right" width={12} height={12} className="" />
-
         </div>
       </div>
     </div>
