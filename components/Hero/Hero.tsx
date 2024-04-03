@@ -1,24 +1,23 @@
 import React from "react";
-import Image from "next/image";
-import Heroimage from "../../public/Hero_section.png";
+import StyledHeading from "../Typography/StyledHeading";
+import StyledText from "../Typography/StyledText";
+
 
 function Hero() {
   return (
     <div>
       <div
-        className="hero min-h-[30rem]"
+        className="hero min-h-[20rem]"
         style={{
-          backgroundImage: `url(${Heroimage.src})`,
+          backgroundImage: `url('./images/blog/Hero section.png')`,
         }}
       >
         <div className="hero-content text-center ">
           <div className=" max-w-md md:max-w-[48rem]">
-            <h1 className="mb-7 text-4xl md:text-5xl font-semibold ">Welcome to Our Blog</h1>
-            <p className="mt-5 text-[17px] px-8 font-medium">
-            Stay updated with Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua.
-            </p>
+            <StyledHeading>{"Welcome to Our Blog"}</StyledHeading>
+            <StyledText>{"Stay updated with Lorem ipsum dolor sit amet, consectetur adipiscing\
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna\
+            aliqua."}</StyledText>
           </div>
         </div>
       </div>

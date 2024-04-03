@@ -1,6 +1,6 @@
 import React from "react";
 
-function Newletter() {
+function Newsletter() {
   return (
     <div>
       <div className="hero min-h-[30rem] bg-white">
@@ -30,4 +30,4 @@ function Newletter() {
   );
 }
 
-export default Newletter;
+export default Newsletter;

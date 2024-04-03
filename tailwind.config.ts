@@ -37,6 +37,7 @@ const config: Config = {
         white: "#FFFFFF",
         black: "#121723",
         dark: "#1D2430",
+        heroText: "#CDD0CB",
         // primary: "#4A6CF7",
         primary: "#6DBA3A",
         yellow: "#FBB040",

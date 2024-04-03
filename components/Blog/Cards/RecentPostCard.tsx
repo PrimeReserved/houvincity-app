@@ -7,12 +7,12 @@ import Link from "next/link";
 
 const RecentPostCard = () => {
   return (
-    <div className="card card-side w-[300px] h-[130px] bg-base-100 shadow-xl">
+    <div className="mb-5 card card-side w-[300px] h-[130px] bg-base-100 shadow-xl">
       <figure>
         <Image
           src={KeyHolder}
           alt="Blog Image"
-          width={300}
+          width={100}
           height={200}
           className="h-[100%] ml-10"
         />

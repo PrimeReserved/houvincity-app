@@ -7,7 +7,7 @@ import Image from "next/image";
 
 function BlogCard() {
   return (
-    <div className="">
+    <div className="mb-4">
       <div className="card w-[250px] h-[450px] bg-base-100 drop-shadow-md">
         <div className="mt-3.5 ml-2.5">
           <Image src={BlogImage} alt="Blog Image" width={230} height={400} />
