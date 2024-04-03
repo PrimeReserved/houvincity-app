@@ -5,10 +5,10 @@ import Link from "next/link";
 import SocialLink from "../Socials/SocialLink";
 
 import Logo from "@/public/logo.svg";
-import Instagram from "@/public/images/socials/path1165.svg"
-import Twitter from "@/public/images/socials/path1009.svg"
-import Facebook from "@/public/images/socials/Vector.svg"
-import Youtube from "@/public/images/socials/youtube.png"
+import Instagram from "@/public/images/socials/path1165.svg";
+import Twitter from "@/public/images/socials/path1009.svg";
+import Facebook from "@/public/images/socials/Vector.svg";
+import Youtube from "@/public/images/socials/youtube.png";
 
 const getCurrentYear = () => {
   return new Date().getFullYear();
@@ -18,77 +18,88 @@ const FooterHome = () => {
   return (
     <footer className="relative z-10 bg-customPrimary pt-16 dark:bg-customDarkBg md:pt-20 lg:pt-24">
       <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 md:w-1/2 lg:w-6/12 xl:w-6/12">
-            <div className="mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16">
-              <Link href="/" className="mb-8 inline-block">
-                <Image
-                  src={Logo}
-                  alt="logo"
-                  className="w-full dark:hidden"
-                  width={140}
-                  height={30}
-                />
-                <Image
-                  src={Logo}
-                  alt="logo"
-                  className="hidden w-full dark:block"
-                  width={140}
-                  height={30}
-                />
-              </Link>
-              <p className="dark:text-white-dark mb-9 text-base font-light leading-relaxed text-white">
-                Your Trusted Partner in Real Estate Excellence. Unlock your dream home with our dedicated team,
-                offering tailored solutions for every property journey.
-                From starter homes to luxury estates, we&lsquo;re committed to making your real estate experience seamless and rewarding.
-              </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className=" ">
+            {/* intro */}
+            <div className=" pl-4">
+              <div className="mb-12 lg:mb-16">
+                <Link href="/" className="mb-8 inline-block">
+                  <Image
+                    src={Logo}
+                    alt="logo"
+                    className=" dark:hidden"
+                    width={140}
+                    height={30}
+                  />
+                  <Image
+                    src={Logo}
+                    alt="logo"
+                    className="hidden  dark:block"
+                    width={140}
+                    height={30}
+                  />
+                </Link>
+                <p className="dark:text-white-dark mb-9 md:text-[14px] text-[14px] font-light leading-loose text-white px-4 w-[100%]  md:w-[100%] lg:w-[75%] mt-2">
+                  Your Trusted Partner in Real Estate Excellence. Unlock your
+                  dream home with our dedicated team, offering tailored
+                  solutions for every property journey. From starter homes to
+                  luxury estates, we&lsquo;re committed to making your real
+                  estate experience seamless and rewarding.
+                </p>
+              </div>
+              {/* Contact Us Section */}
+              <div className="w-[100%] pl-4 mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16 -mt-4">
+                <div className="dark:text-white-dark mb-9 text-[14px] font-light leading-relaxed text-white">
+                  <h1 className="text-[18px] ">Contact Us:</h1>
+                  <p className="pt-3">Phone Number: +2348034652178</p>
+                  <p className="py-2">
+                    Address: 31C Rumuola Road by Rumuola Junction.
+                  </p>
+                  <p className="pt">Email: info@houvincityltd.com</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="sm:w-2/2 flex w-full flex-wrap justify-between px-4 md:w-1/2 lg:w-5/12 xl:w-5/12">
-            <QuickLinks />
-            <Services />
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          {/* Contact Us Section */}
-          <div className="w-full px-4 md:w-1/2 lg:w-6/12 xl:w-6/12 mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16">
-            <div className="dark:text-white-dark mb-9 text-base font-light leading-relaxed text-white">
-              <h1 className="text-md md:w">Contact Us:</h1>
-              <p>Phone Number: +2348034652178</p>
-              <p>Address: 31C Rumuola Road by Rumuola Junction.</p>
-              <p>Email: info@houvincityltd.com</p>
+          <div className="">
+            <div className="flex md:space-x-[12rem] justify-between md:justify-normal px-8">
+              <QuickLinks />
+              <Services />
+            </div>
+
+            {/* Social Media Links */}
+            <div className=" md:hidden border-t-[1px] "></div>
+            <div className="flex md:-mt-6 md:ml-7 my-6 items-center  md:justify-normal justify-center gap-10 md:gap-0">
+              <span className="md:text-[20px] text-[14px] text-white md:mr-10">
+                Follow Us
+              </span>
+              <div className="flex md:space-x-14">
+                <SocialLink
+                  href="https://www.linkedin.com/company/primereserved"
+                  image={Instagram}
+                  alt="Instagram"
+                />
+                <SocialLink
+                  href="https://www.instagram.com/primereservedtech"
+                  image={Twitter}
+                  alt="Twitter"
+                />
+                <SocialLink
+                  href="https://www.facebook.com/groups/1554028415142497/"
+                  image={Facebook}
+                  alt="Facebook"
+                />
+                <SocialLink
+                  href="https://www.youtube.com/@primereservedtech"
+                  image={Youtube}
+                  alt="Youtube"
+                />
+              </div>
             </div>
           </div>
-          {/* Social Media Links */}
-          <div className="w-full sm:w-auto px-4 md:w-1/2 lg:w-5/12 xl:w-5/12 flex items-center">
-            <span className="text-md mr-6 text-white lg:text-2xl">Follow Us</span>
-            <SocialLink
-              href="https://www.linkedin.com/company/primereserved"
-              image={Instagram}
-              alt="Instagram"
-            />
-            <SocialLink
-              href="https://www.instagram.com/primereservedtech"
-              image={Twitter}
-              alt="Twitter"
-            />
-            <SocialLink
-              href="https://www.facebook.com/groups/1554028415142497/"
-              image={Facebook}
-              alt="Facebook"
-            />
-            <SocialLink
-              href="https://www.youtube.com/@primereservedtech"
-              image={Youtube}
-              alt="Youtube"
-            />
-          </div>
         </div>
-        <hr className="h-px w-full bg-[#D2D8E183] xs:flex md:hidden" />
 
-
-        <hr className="h-px w-full bg-[#D2D8E183]" />
+        <div className=" border-t-[1px] "></div>
 
         <Copyright />
 
@@ -97,8 +108,6 @@ const FooterHome = () => {
     </footer>
   );
 };
-
-
 
 const QuickLinks = () => (
   <div className="mb-12 lg:mb-16">
@@ -185,12 +194,11 @@ const Services = () => (
 );
 
 const Copyright = () => (
-  <div className="items-center justify-center py-8 font-light md:flex">
-    <p className="text-base text-white dark:text-white">
+  <div className="items-center justify-center py-8 font-light flex">
+    <p className=" text-[14px] md:text-base text-white dark:text-white">
       Copyright © {getCurrentYear()} PrimeReserved. All rights reserved.
     </p>
   </div>
-
 );
 
 export default FooterHome;
