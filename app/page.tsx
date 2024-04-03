@@ -13,13 +13,11 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      {/* <ErrorBoundary fallback={<Error />}> */}
-        {/* <Header /> */}
-        <RecentPostCard />
-        <BlogCard />
-        {/* <UnderConstruction />
+      <ErrorBoundary fallback={<Error />}> 
+        <Header />
+        <UnderConstruction />
         <FooterHome />
-      </ErrorBoundary> */}
+      </ErrorBoundary>
     </div>
   );
 };
