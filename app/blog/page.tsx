@@ -6,6 +6,7 @@ import FooterHome from '@/components/Footer/FooterHome'
 import Header from '@/components/Header/HeaderHome'
 import Hero from '@/components/Hero/Hero'
 import Newsletter from '@/components/Newsletter/Newsletter'
+import NumberCount from '@/components/NumberCount/NumberCount'
 import React from 'react'
 
 function page() {
@@ -20,36 +21,17 @@ function page() {
           <Hero />
         </ErrorBoundary>
         {/* Blog body  */}
-        <div className="flex flex-wrap md:flex-nowrap">
-          <div className="flex-1 p-20">
-            <div className="mb-8">
-              <h2 className="text-xl text-primary font-semibold mb-4">Recent Posts</h2>
-              <ul>
-                <RecentPostCard />
-                <RecentPostCard />
-                <RecentPostCard />
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Recent News</h2>
-              <ul>
-                <RecentPostCard />
-                <RecentPostCard />
-                <RecentPostCard />
-              </ul>
-            </div>
+        <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>
+          <div className=' col-span-1'>
+            <RecentPostCard />
           </div>
-
-          <div className="flex-1 p-20">
-            {/*  BlogCard Components */}
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-            </div>
+          <div className=' col-span-2'>
+            <BlogCard />
           </div>
         </div>
+
+<NumberCount />
+
 
       <ErrorBoundary>
         <Newsletter />
