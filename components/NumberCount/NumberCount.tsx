@@ -64,8 +64,5 @@ const NumberCount: React.FC<PaginationProps> = ({
   );
 };
 
-<<<<<<< HEAD
+
 export default NumberCount;
-=======
-export default NumberCount;
->>>>>>> b361d4b (I worked on the Property Listing Card)
