@@ -18,7 +18,12 @@ function page() {
         </ErrorBoundary>
 
         <ErrorBoundary fallback={<Error />}>
-          <Hero />
+          <Hero
+            title="Welcome to Our Blog"
+            description="Stay updated with Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua."
+          />
         </ErrorBoundary>
         {/* Blog body  */}
         <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>

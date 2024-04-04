@@ -1,28 +1,28 @@
+"use client"
+
 import React from "react";
 import StyledHeading from "../Typography/StyledHeading";
 import StyledText from "../Typography/StyledText";
+import IHeroProps from "@/interfaces/IHeroProps"
 
 
-function Hero() {
+
+const Hero: React.FC<IHeroProps> = ({ image, title, description, children }) => {
+  const backgroundImageStyle = {
+    backgroundImage: image ? `url(${image})` : `url('./images/blog/Hero section.png')`,
+  };
+
   return (
-    <div>
-      <div
-        className="hero min-h-[20rem]"
-        style={{
-          backgroundImage: `url('./images/blog/Hero section.png')`,
-        }}
-      >
-        <div className="hero-content text-center ">
-          <div className=" max-w-md md:max-w-[48rem]">
-            <StyledHeading>{"Welcome to Our Blog"}</StyledHeading>
-            <StyledText>{"Stay updated with Lorem ipsum dolor sit amet, consectetur adipiscing\
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna\
-            aliqua."}</StyledText>
-          </div>
+    <div className="hero min-h-[20rem]" style={backgroundImageStyle}>
+      <div className="hero-content text-center">
+        <div className="max-w-md md:max-w-[48rem]">
+          {title && <StyledHeading>{title}</StyledHeading>}
+          {description && <StyledText>{description}</StyledText>}
+          {children}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Hero;
