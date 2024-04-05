@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "@sanity/client": "^6.15.7",
+    "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.8",
     "next": "14.1.2",
     "next-themes": "^0.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",

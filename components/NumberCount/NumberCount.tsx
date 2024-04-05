@@ -1,16 +1,67 @@
-import React from 'react'
+"use client"
 
-function NumberCount() {
-  return (
-    <div className='flex justify-center items-center mt-[5rem] text-center text-[#040A3B] text-xl gap-2'>
-      <p className='w-9 h-10 bg-primary text-white flex items-center justify-center'>1</p>
-      <p className='w-9 h-10 flex items-center justify-center'>2</p>
-      <p className='w-9 h-10 flex items-center justify-center'>3</p>
-      <p className='w-9 h-10 flex items-center justify-center mb-3'>...</p>
-      <p className='w-15 h-10 flex items-center justify-center'>Next</p>
+import React, { useState } from "react";
 
-    </div>
-  )
+interface PaginationProps {
+  totalPages: number;
+  currentPage: number;
+  onPageChange?: (pageNumber: number) => void;
 }
 
-export default NumberCount
+const NumberCount: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  onPageChange
+}) => {
+  // Handle previous/next button clicks
+  const handlePageChange = (pageNumber: number) => {
+    if (onPageChange && pageNumber > 0 && pageNumber <= totalPages) {
+      onPageChange(pageNumber);
+    }
+  };
+
+  // Render page numbers with active state
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.min(totalPages, 3); i++) {
+    // Show max 3 pages
+    pageNumbers.push(
+      <p
+        key={i}
+        className={`w-9 h-10 flex items-center justify-center ${currentPage === i ? 'bg-primary text-white' : 'hover:bg-gray-100'
+          }`}
+        onClick={() => handlePageChange(i)}
+      >
+        {i}
+      </p>
+    );
+  }
+
+  // Render ellipsis (...) if there are more pages
+  if (totalPages > 3) {
+    pageNumbers.push(
+      <p className="w-9 h-10 flex items-center justify-center mb-3">...</p>
+    );
+  }
+
+  return (
+    <div className="flex justify-center items-center mt-[5rem] text-center text-[#040A3B] text-xl gap-2">
+      {currentPage > 1 && ( // Only show previous button if not on first page
+        <button
+          className="w-15 h-10 flex items-center justify-center hover:bg-gray-100"
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          Previous
+        </button>
+      )}
+      {pageNumbers}
+      <button
+        className="w-15 h-10 flex items-center justify-center hover:bg-gray-100"
+        onClick={() => handlePageChange(currentPage + 1)}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
+
+export default NumberCount;
