@@ -16,10 +16,7 @@ import { Post, Category } from "@/typings";
 import Loading from "@/app/loading";
 =======
 import React from "react";
-import BlogImage from "@/public/images/blog/Rectangle 23861.svg";
-import RealEstate from "@/public/images/blog/Real estate.svg";
-import Money from "@/public/images/blog/Money.svg";
-import People from "@/public/images/blog/People.svg";
+
 import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 import Image from "next/image";
