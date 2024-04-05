@@ -11,7 +11,12 @@ module.exports = {
             "www.wall-street.ro",
             "i.computer-bild.de",
             "tm.ibxk.com.br",
-            "img.etimg.com"
+            "img.etimg.com",
+            "www.dutchcowboys.nl",
+            "www.hwupgrade.it",
+            "www.hwupgrade.it",
+            "c.ndtvimg.com",
+            
         ]
     }
 }

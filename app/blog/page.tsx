@@ -100,6 +100,12 @@ function Page() {
             <BlogCard
               key={index}
               blogCards={[article]} // Pass each article as an array to blogCards
+              urlToImage={article.urlToImage} 
+              author={article.author} 
+              content={article.content} 
+              title={article.title} 
+              description={article.description} 
+              publishedAt={article.publishedAt}
             />
           ))}
         </div>
