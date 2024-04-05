@@ -20,7 +20,6 @@ type PageData = {
 }
 
 const ITEMS_PER_PAGE = 4;
-const BLOG_QUERY = `*[_type == "post"]`;
 
 
 
@@ -63,12 +62,6 @@ function Page() {
     fetchData();
   }, []);
 
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
-  if (isLoading) {
     return <div className="w-full h-screen flex items-center justify-center">Loading...</div>;
   }
 

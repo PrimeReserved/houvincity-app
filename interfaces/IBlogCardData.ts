@@ -20,7 +20,6 @@ export default interface IBlogCardData {
    body: [object];
 }
 
-
 export default interface IBlogCardProps {
-  article: IBlogCardData;
+  blogCards: IBlogCardData[];
 }
