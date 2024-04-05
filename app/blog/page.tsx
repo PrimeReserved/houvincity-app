@@ -1,8 +1,5 @@
 "use client"
 
-import Link from "next/link";
-import { SanityDocument } from "next-sanity";
-import { client } from "@/sanity/client";
 import BlogCard from '@/components/Blog/Cards/BlogCard';
 import RecentPostCard from '@/components/Blog/Cards/RecentPostCard';
 import ComponentError from '@/components/Error';
@@ -21,7 +18,23 @@ type PageData = {
 
 const ITEMS_PER_PAGE = 4;
 
+const fetchPageData = async () => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API}`, {
+      method: 'GET',
+    });
 
+    console.log(`Response: ${response}`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
+    const responseData: PageData = await response.json();
+    return responseData.articles; // Return articles directly
+  } catch (error) {
+    throw new Error('Failed to fetch data');
+  }
+};
 
 function Page() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,37 +44,30 @@ function Page() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
+      setIsLoading(true);
       try {
-        console.log("Fetching posts...");
-        const posts: SanityDocument[] = await client.fetch(BLOG_QUERY);
-        console.log("Posts:", posts);
-        if (!posts || posts.length === 0) {
-          console.log("No posts found.");
-          setError("No posts found.");
-          return;
-        }
-        console.log("Posts fetched successfully.");
-        const formattedArticles: IBlogCardData[] = posts.map((post) => ({
-          title: post.title,
-          slug: post.slug,
-          author: post.author,
-          mainImage: post.mainImage,
-          body: post.body,
-          publishedAt: post._createdAt,
-          article:post
-        }));
-        setData({ articles: formattedArticles });
-      } catch (err) {
-        console.error("Error fetching posts:", err);
-        setError("Failed to fetch data. Please try again later.");
+        const articles = await fetchPageData();
+        console.log(articles)
+        setData({ articles }); // Set articles to the data state variable
+        const totalPages = Math.ceil((articles?.length ?? 0) / ITEMS_PER_PAGE);
+        setTotalPages(totalPages);
+      } catch (error) {
+        setError((error as Error).message);
       } finally {
         setIsLoading(false);
       }
-    }
+    };
+
     fetchData();
   }, []);
 
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  if (isLoading) {
     return <div className="w-full h-screen flex items-center justify-center">Loading...</div>;
   }
 
@@ -69,13 +75,8 @@ function Page() {
     return <ComponentError />;
   }
 
-  const articles  = data?.articles || [];
-  console.log("articles:", articles);
-
-  const paginatedArticles = articles.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
-console.log(`Paginated Articles: ${paginatedArticles}`); // Log the actual paginated array
-
-  console.log("Rendering page...");
+  const paginatedArticles = data?.articles?.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE) || [];
+  console.log(`Paginated Articles: ${paginatedArticles}`)
 
   return (
     <div>
@@ -90,27 +91,27 @@ console.log(`Paginated Articles: ${paginatedArticles}`); // Log the actual pagin
             aliqua."
         />
       </ErrorBoundary>
-
-      <ErrorBoundary>
-        <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>
-          <div className=' col-span-1'>
-            <RecentPostCard />
-          </div>
-
-          <div className=' col-span-2'>
-          {data?.articles?.map((article) => (
-            <BlogCard key={article.slug.current} {...article} />
-          ))}
-          </div>
+      <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>
+        <div className=' col-span-1'>
+          <RecentPostCard />
         </div>
-        {data?.articles && (
-          <NumberCount
-            totalPages={Math.ceil(data.articles.length / ITEMS_PER_PAGE)}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        )}
-      </ErrorBoundary>
+        <div className=' col-span-2'>
+          {paginatedArticles.map((article: IBlogCardData, index: number) => (
+            <BlogCard
+              key={index}
+              blogCards={[article]} // Pass each article as an array to blogCards
+            />
+          ))}
+        </div>
+      </div>
+      {data?.articles && (
+        <NumberCount
+          totalPages={Math.ceil(data.articles.length / ITEMS_PER_PAGE)}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
+
       <ErrorBoundary>
         <Newsletter />
       </ErrorBoundary>

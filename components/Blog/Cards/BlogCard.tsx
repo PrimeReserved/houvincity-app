@@ -73,6 +73,7 @@ const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
   );
 };
 
+
 export default BlogCard;
 
 
