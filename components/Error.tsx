@@ -2,7 +2,12 @@
 
 import React from 'react';
 
-export default function Error({ error, reset }: Readonly<{ error?: Error; reset?: () => void }>) {
+interface ErrorProps {
+  error?: Error; // Make error prop optional and of type Error
+  reset?: () => void; // Make reset prop optional and of type function
+}
+
+const Error: React.FC<ErrorProps> = ({ error, reset }: Readonly<{ error?: Error; reset?: () => void }>) => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <h2 className='text-2xl md:text-3xl font-semibold '>Something went wrong!</h2>{' '}
@@ -11,3 +16,5 @@ export default function Error({ error, reset }: Readonly<{ error?: Error; reset?
     </div>
   );
 }
+
+export default Error;

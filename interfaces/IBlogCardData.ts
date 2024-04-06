@@ -1,12 +1,24 @@
 export default interface IBlogCardData {
-  urlToImage: string;
-  author: string;
-  content: string;
+  mainImage: any;
   title: string;
-  description: string;
-  publishedAt: string;
+  slug: {
+    current: string;
+  };
+  author: {
+    _ref: string; 
+    name?: string; 
+    mainImage?: {
+      asset: {
+        _ref: string;
+        alt?: string; 
+      };
+    };
+  };
+  body?: string; 
+  publishedAt?: string; 
 }
 
+
 export default interface IBlogCardProps {
-  blogCards: IBlogCardData[];
+  article: IBlogCardData;
 }
