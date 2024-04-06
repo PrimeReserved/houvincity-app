@@ -1,21 +1,23 @@
 export default interface IBlogCardData {
-  mainImage: any;
-  title: string;
-  slug: {
-    current: string;
-  };
-  author: {
-    _ref: string; 
-    name?: string; 
-    mainImage?: {
-      asset: {
-        _ref: string;
-        alt?: string; 
-      };
-    };
-  };
-  body?: string; 
-  publishedAt?: string; 
+  publishedAt: string;
+  _id: string;
+   _createdAt: string;
+   title: string;
+   author:{
+       name:string;
+       image: string;
+   },
+   description: string;
+   mainImage:{
+       asset:{
+           _ref(_ref: any): string | import("next/dist/shared/lib/get-img-props").StaticImport;
+           url:string;
+       };
+   };
+   slug:{
+       current: string;
+   };
+   body: [object];
 }
 
 

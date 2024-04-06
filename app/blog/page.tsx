@@ -20,7 +20,17 @@ type PageData = {
 }
 
 const ITEMS_PER_PAGE = 4;
-const BLOG_QUERY = `*[_type == "post"]`;
+const BLOG_QUERY = `*[_type == "post"] {
+   _id,
+   title,
+   author-> {
+    name,
+    image
+   },
+   description,
+   mainImage,
+   slug
+ }`;
 
 
 
@@ -49,8 +59,8 @@ function Page() {
           author: post.author,
           mainImage: post.mainImage,
           body: post.body,
-          publishedAt: post._createdAt,
-          article:post
+          publishedAt: post.publishedAt,
+          article: post
         }));
         setData({ articles: formattedArticles });
       } catch (err) {
@@ -76,11 +86,11 @@ function Page() {
     return <ComponentError />;
   }
 
-  const articles  = data?.articles || [];
+  const articles = data?.articles || [];
   console.log("articles:", articles);
 
   const paginatedArticles = articles.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
-console.log(`Paginated Articles: ${paginatedArticles}`); // Log the actual paginated array
+  console.log(`Paginated Articles: ${paginatedArticles}`); // Log the actual paginated array
 
   console.log("Rendering page...");
 
@@ -106,7 +116,7 @@ console.log(`Paginated Articles: ${paginatedArticles}`); // Log the actual pagin
 
           <div className=' col-span-2'>
           {data?.articles?.map((article) => (
-            <BlogCard key={article.slug.current} {...article} />
+            <BlogCard key={article.slug.current} article={article} />
           ))}
           </div>
         </div>

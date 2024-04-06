@@ -56,23 +56,16 @@ const BlogCard: React.FC<IBlogCardProps> = ({ article }) => {
               <p className="text-xs">{article?.publishedAt}</p>
             </div>
             <h1 className="font-semibold text-lg mt-1">{article.title}</h1>
-            <p className="text-[12px] mt-1">{article?.body}</p>
-            <Link href={`/blog/${article.slug.current}`}>
-              <div className="card-actions">
-                <button
-                  className=" btn bg-primary text-white text-[12px] font-light w-[8rem]"
-                  onClick={handleReadMoreClick}
-                >
-                  <p>Read more</p>
-                  <Image
-                    src={ArrowRightWhite}
-                    alt="Arrow Right"
-                    width={12}
-                    height={12}
-                  />
-                </button>
-              </div>
-            </Link>
+            <p className="text-[12px] mt-1">
+              {article?.description}
+            </p>
+            <div className="card-actions">
+              <button className=" btn bg-primary text-white text-[12px] font-light w-[8rem]"
+                onClick={handleReadMoreClick}>
+                <p>Read more</p>
+                <Image src={ArrowRightWhite} alt="Arrow Right" width={12} height={12} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
