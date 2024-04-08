@@ -58,7 +58,6 @@ export default defineConfig({
   theme: myTheme,
   studio: {
     components: {
-      logo: Logo,
       navbar: StudioNavbar
     }
   },

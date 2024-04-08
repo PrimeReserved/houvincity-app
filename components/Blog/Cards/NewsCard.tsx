@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { client } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import ArrowRight from "@/public/images/blog/Vector.svg";
 import imageUrlBuilder from "@sanity/image-url";
@@ -166,8 +165,6 @@ const NewsCard = async () => {
             </figure>
           </Link>
         ))}
-  
-        {/* The rest of your component code... */}
       </div>
     );
   };
