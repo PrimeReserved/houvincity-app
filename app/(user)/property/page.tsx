@@ -1,12 +1,12 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import FooterHome from "@/components/Footer/FooterHome";
 import Header from "@/components/Header/HeaderHome";
 import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
-import PropertyListing from "@/components/Property/PropertyListing";
-import PropertyProvider from "@/context/PropertyProvider";
-import Loading from "@/app/loading";
+import SearchProperty from "@/components/Property/SearchPropety";
+import House from "@/components/Property/Houses";
+import Land from "@/components/Property/Land";
 
 function page() {
   return (
@@ -20,17 +20,9 @@ function page() {
           image={`./images/property/property.png`}
           title="Property Listing"
         />
-      </ErrorBoundary>
-
-      <ErrorBoundary>
-        <Suspense fallback={<Loading />}>
-          <PropertyProvider>
-            <PropertyListing />
-          </PropertyProvider>
-        </Suspense>
-      </ErrorBoundary>
-
-      <ErrorBoundary>
+        <SearchProperty />
+        {/* <Land /> */}
+        <House />
         <ContactUsBtn />
       </ErrorBoundary>
 

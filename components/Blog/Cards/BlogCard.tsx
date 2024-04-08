@@ -19,10 +19,9 @@ import React from "react";
 import imageUrlBuilder from "@sanity/image-url";
 import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
-import IBlogCardProps from "@/interfaces/IBlogCardData";
-
 import Image from "next/image";
 import { client } from "@/sanity/client";
+import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Link from "next/link";
 >>>>>>> b361d4b (I worked on the Property Listing Card)

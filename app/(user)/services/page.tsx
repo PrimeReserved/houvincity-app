@@ -1,4 +1,3 @@
-
 import ErrorBoundary from '@/components/ErrorBoundary';
 import FooterHome from '@/components/Footer/FooterHome';
 import Header from '@/components/Header/HeaderHome';

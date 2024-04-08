@@ -191,6 +191,7 @@ const Header = () => {
             ? "fixed bg-white shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
             : "bg-transparent"
         }`}
+        data-testid="header"
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
@@ -243,6 +244,7 @@ const Header = () => {
                 </button>
                 <nav
                   id="navbarCollapse"
+                  data-testid="navbarCollapse"
                   className={`navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
                     navbarOpen
                       ? "visibility top-full opacity-100"

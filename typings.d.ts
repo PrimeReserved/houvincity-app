@@ -6,41 +6,39 @@ type Base = {
     _updateAt: string
 }
 
-export interface Post extends Base {
+interface Post extends Base {
     author: Author;
     body: Block[];
     categories: Category[];
     mainImage: Image;
     slug: Slug;
     title: string;
-    description: string;
-    publishedAt: string;
+    description: string
 }
 
-export interface Author extends Base {
+interface Author extends Base {
     bio: Block[];
     image: Image;
     name: string;
     slug: string;
-    publishedAt: string;
 }
 
-export interface Image {
+interface Image {
     _type: "image";
     asset: Reference;
 }
 
-export interface Reference {
+interface Reference {
     _ref: string;
     _type: "reference";
 }
 
-export interface Slug {
+interface Slug {
     _type: "slug";
     current: string;
 }
 
-export interface Block {
+interface Block {
     _key: string;
     _type: "block";
     children: Span[];
@@ -48,56 +46,19 @@ export interface Block {
     style: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote"; 
 }
 
-export interface Span {
+interface Span {
     _key: string;
     _type: "span";
     marks: string[];
     text: string;
 }
 
-export interface Category extends Base {
+interface Category extends Base {
     description: string;
     title: string;
 }
 
-export interface MainImage {
+interface MainImage {
     _type: "image";
     current: string;
-}
-
-export interface News extends Base {
-    author: Author;
-    body: Block[];
-    categories: Category[];
-    mainImage: Image;
-    slug: Slug;
-    title: string;
-    description: string;
-    publishedAt: string;
-}
-
-export interface Property extends Base {
-    title: string;
-    description: string;
-    propertyType: string;
-    propertyImage: Image;
-    fullPropertyImage: Image;
-    leftSidePropertyImage: Image;
-    rightSidePropertyImage: Image;
-    middlePropertyImage: Image;
-    youtubeLink: string;
-    legalSurvey: string;
-    location: string;
-    propertySize: string;
-    budget: string;
-    bedrooms: number;
-    bathrooms: number;
-    slug: Slug;
-    body: BlockContent;
-  }
-
-export interface SearchItem {
-  title: string;
-  path: string;
-  content: string;
 }
