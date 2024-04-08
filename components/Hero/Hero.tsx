@@ -12,8 +12,13 @@ const Hero: React.FC<IHeroProps> = ({ image, title, description, children }) => 
     backgroundImage: image ? `url(${image})` : `url('./images/blog/Hero section.png')`,
   };
 
+  console.log(backgroundImageStyle)
+
   return (
-    <div className="hero min-h-[20rem]" style={backgroundImageStyle}>
+    <div className="hero min-h-[20rem] flex items-center justify-center" 
+    data-testid="hero" 
+    data-background-image={backgroundImageStyle.backgroundImage}
+    style={backgroundImageStyle}>
       <div className="hero-content text-center">
         <div className="max-w-md md:max-w-[48rem]">
           {title && <StyledHeading>{title}</StyledHeading>}
