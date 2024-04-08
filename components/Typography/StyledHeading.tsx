@@ -6,7 +6,7 @@ interface IStyledHeadingProps {
 
 const StyledHeading: React.FC<IStyledHeadingProps> = ({ children }) => {
     return (
-      <h1 className="mb-7 text-white text-4xl md:text-5xl font-semibold ">{children}</h1>
+      <h1 className="mb-7 text-white text-4xl md:text-5xl font-semibold">{children}</h1>
     );
   };
   

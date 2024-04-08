@@ -21,8 +21,8 @@ interface Category {
   description: string;
 }
 
-const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
 
+const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
   return (
     <div className="mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
@@ -73,5 +73,3 @@ const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
   );
 };
 export default BlogCard;
-
-

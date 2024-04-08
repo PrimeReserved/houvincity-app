@@ -62,4 +62,3 @@ async function Page({ params }: { params: QueryParams }) {
 }
 
 export default Page;
-

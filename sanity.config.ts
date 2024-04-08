@@ -24,13 +24,10 @@ export default defineConfig({
   theme: myTheme,
   studio: {
     components: {
-      logo: Logo,
       navbar: StudioNavbar
     }
   },
   plugins: [
-    structureTool(),
-    visionTool({defaultApiVersion: apiVersion}),
     presentationTool({
       previewUrl: {
         draftMode: {
