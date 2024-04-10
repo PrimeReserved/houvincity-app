@@ -6,7 +6,10 @@ on:
       - main
       - staging
       - development
+<<<<<<< HEAD
       - testing
+=======
+>>>>>>> b361d4b (I worked on the Property Listing Card)
 
 jobs:
   build:

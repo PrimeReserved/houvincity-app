@@ -4,6 +4,7 @@ import blockContent from './schemaTypes/blockContent'
 import category from './schemaTypes/category'
 import post from './schemaTypes/post'
 import author from './schemaTypes/author'
+<<<<<<< HEAD
 import news from './schemaTypes/news'
 import propertyListing from './schemaTypes/property'
 import subscription from './schemaTypes/subscription'
@@ -21,4 +22,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     subscription,
     testimony
   ],
+=======
+
+export const schema: { types: SchemaTypeDefinition[] } = {
+  types: [post, author, category, blockContent],
+>>>>>>> b361d4b (I worked on the Property Listing Card)
 }

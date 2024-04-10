@@ -47,11 +47,14 @@ export default defineType({
         },
       ],
     }),
+<<<<<<< HEAD
     defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
     }),
+=======
+>>>>>>> b361d4b (I worked on the Property Listing Card)
   ],
   preview: {
     select: {

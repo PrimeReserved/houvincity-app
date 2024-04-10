@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+<<<<<<< HEAD
 import { draftMode } from "next/headers";
 import { Josefin_Sans } from 'next/font/google';
 import './globals.css';
@@ -23,6 +24,16 @@ export const metadata: Metadata = {
     images: [`${Logo}`]
   },
   keywords:["Houvincity Real Estate and Propety Management Website", "Houvincity", "Houvincity Real Estate", "Houvincity Property Management", "Houvincity Website"]
+=======
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Houvincty',
+  description: 'Houvincity Real Estate',
+>>>>>>> b361d4b (I worked on the Property Listing Card)
 };
 
 export default function RootLayout({
@@ -32,10 +43,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+<<<<<<< HEAD
       <body className={josefinSans.className}>
         {children}
         {draftMode().isEnabled && <LiveVisualEditing />}
         </body>
+=======
+      <body className={inter.className}>{children}</body>
+>>>>>>> b361d4b (I worked on the Property Listing Card)
     </html>
   );
 }

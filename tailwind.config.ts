@@ -62,6 +62,7 @@ const config: Config = {
       },
     },
   },
+<<<<<<< HEAD
   
   daisyui: {
     themes: false,
@@ -72,6 +73,9 @@ const config: Config = {
     require("daisyui"),
     require('tailwindcss-animated'),
   ],
+=======
+  plugins: [],
+>>>>>>> b361d4b (I worked on the Property Listing Card)
 };
 
 export default config;
