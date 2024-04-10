@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ], // Standard library options
+    "allowJs": true, // Allow importing JavaScript files
+    "skipLibCheck": true, // Skip lib check for faster builds (optional)
+    "strict": true, // Enforce stricter type checking
+    // "noEmit": true, // Disable type checking during compilation (optional, consider enabling for better experience)
+    "esModuleInterop": true, // Enable ES module interoperability
+    "module": "esnext", // Use ESNext modules
+    "moduleResolution": "bundler", // Module resolution strategy
+    "resolveJsonModule": true, // Allow resolving JSON modules
+    "isolatedModules": true, // Isolate modules (optional, adjust based on needs)
+    "jsx": "preserve", // Preserve JSX syntax
+    "incremental": true, // Enable incremental compilation
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ] // Path mapping for your project (optional)
+    },
+    "target": "ES2017" // Target browser compatibility level (adjust based on needs)
+    ,
+    "noEmit": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
