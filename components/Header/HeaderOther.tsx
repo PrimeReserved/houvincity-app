@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import ThemeToggler from "./ThemeToggler";
+// import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import IconButton from "../Buttons/IconButton";
 import BtnArrowIcon from "../Buttons/BtnArrowIcon";

@@ -12,7 +12,7 @@ import BlogCard from '@/components/Blog/Cards/BlogCard';
 const Home: React.FC = () => {
 
   return (
-    <div>
+    <div className='max-w-7xl mx-auto'>
       <ErrorBoundary fallback={<Error />}> 
         <Header />
         <UnderConstruction />
