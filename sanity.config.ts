@@ -45,6 +45,8 @@ export default defineConfig({
 import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schema'
 import { myTheme } from './theme'
+import StudioNavbar from './components/StudioNabar'
+import Logo from '@/components/Logo'
 
 export default defineConfig({
   basePath: '/studio',
@@ -54,6 +56,12 @@ export default defineConfig({
   dataset,
   schema,
   theme: myTheme,
+  studio: {
+    components: {
+      logo: Logo,
+      navbar: StudioNavbar
+    }
+  },
   plugins: [
     structureTool(),
     visionTool({defaultApiVersion: apiVersion}),

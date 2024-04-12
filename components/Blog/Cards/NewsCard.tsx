@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { client } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import ArrowRight from "@/public/images/blog/Vector.svg";
 import imageUrlBuilder from "@sanity/image-url";
@@ -118,23 +119,25 @@ const NewsCard = async () => {
   
     return (
       <div className="lg:mx-12">
-        <p className="text-primary font-medium text-xl">Recent Posts</p>
-  
-        {news.map((item, index) => (
-          <Link href={`/blog/${item.slug?.current}`} key={index}>
+        <p className="text-primary font-medium mt-[2.6rem] text-xl">News</p>
+        {news?.map((article) => (
+          <Link href={`/blog/${article.slug?.current}`} key={article._id}>
             <figure className="flex bg-white rounded-md mt-5 drop-shadow-md">
-              {/* <Image
-                src={item.image?.asset?.url}
-                alt={item.image?.alt}
+            {article?.image && (
+              <Image
+                src={urlFor(article?.image).url()} // Assuming `image` field contains the image source
+                alt={`${article.slug?.current}`}
                 width={100}
                 height={200}
                 className="h-[100%]"
-              /> */}
+              />
+            )}
               <div className="flex flex-col justify-center px-4">
                 <blockquote>
-                  <p className="text-sm lg:text-[10px] xl:text-sm font-medium">{item.description}</p>
+                  <p className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-medium">{article?.description}</p>
                 </blockquote>
                 <figcaption className="text-[16px] font-medium flex gap-3 mt-3">
+                <Link className="flex space-x-2" href={`/blog/${article?.slug.current}`}>
                   <div className="text-primary lg:text-[12px] xl:text-base">Read More</div>
 >>>>>>> ac73bd8 (feat(testing): Implement comprehensive testing for Header component after experimenting with sanity)
                   <Image
@@ -157,6 +160,7 @@ const NewsCard = async () => {
 =======
                     className=""
                   />
+                  </Link>
                 </figcaption>
               </div>
             </figure>

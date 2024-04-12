@@ -27,6 +27,8 @@ export const metadata: Metadata = {
 =======
 import { Inter } from 'next/font/google';
 import './globals.css';
+import LiveVisualEditing from "@/components/LiveVisualEditing";
+
 
 const inter = Inter({ subsets: ['latin'] });
 

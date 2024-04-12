@@ -3,10 +3,7 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-<<<<<<< HEAD
-=======
-import ThemeToggler from "./ThemeToggler";
->>>>>>> b361d4b (I worked on the Property Listing Card)
+// import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import IconButton from "../Buttons/IconButton";
 import BtnArrowIcon from "../Buttons/BtnArrowIcon";

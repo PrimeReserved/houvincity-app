@@ -4,23 +4,23 @@
 
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
-import { Post } from "@/typings"
+import { SanityDocument } from "next-sanity";
 
 import BlogCard from "@/components/Blog/Cards/BlogCard";
 
 export default function PostsPreview({
   initial,
 }: {
-  initial: QueryResponseInitial<Post>;
+  initial: QueryResponseInitial<SanityDocument[]>;
 }) {
-  const { data } = useQuery<Post | null>(
+  const { data } = useQuery<SanityDocument[] | null>(
     POSTS_QUERY,
     {},
     { initial }
   );
 
   return data ? (
-    <BlogCard />
+    <BlogCard posts={data} />
   ) : (
     <div className="bg-red-100">No posts found</div>
   );
