@@ -5,7 +5,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { SanityDocument } from "next-sanity";
-import TruncateText from '@/components/Blog/TruncateText'
+import { POSTS_QUERY } from "@/sanity/lib/queries";
 
 
 const builder = imageUrlBuilder(client);
@@ -14,14 +14,28 @@ function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
-interface Category {
-  description: string;
+async function getData() {
+  try {
+    const query = POSTS_QUERY;
+    const data = await client.fetch(query);
+
+    const slicedData = data.slice(0, 3);
+
+    return slicedData;
+  } catch (error) {
+
+    console.error("Error fetching data:", error);
+    throw new Error("Error fetching data");
+  }
 }
 
-const RecentPostCard = ({ posts }: { posts: SanityDocument[] }) => {
+
+export default async function RecentPostCard (){
+
+  const posts: SanityDocument[] = await getData();
 
   if (!posts || !Array.isArray(posts)) {
-    return <h1>Something is happening, please be still..</h1>
+    return <h1>Fetching Posts, please be still..</h1>
   }
 
   return (
@@ -65,5 +79,3 @@ const RecentPostCard = ({ posts }: { posts: SanityDocument[] }) => {
     </div>
   );
 };
-
-export default RecentPostCard;

@@ -28,6 +28,8 @@ export default defineConfig({
     }
   },
   plugins: [
+    structureTool(),
+    visionTool(),
     presentationTool({
       previewUrl: {
         draftMode: {

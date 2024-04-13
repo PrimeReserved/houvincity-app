@@ -5,5 +5,5 @@ export const client = createClient({
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
     apiVersion: "2024-01-01",
     // unless you have caching for your front end, `useCdn` should be `true` for most production environments
-    useCdn: false, 
+    useCdn: true, 
 })

@@ -1,6 +1,6 @@
 // pages/index.tsx
 
-import React from "react";
+"use client"
 import imageUrlBuilder from "@sanity/image-url";
 import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
@@ -9,6 +9,10 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { SanityDocument } from "next-sanity";
+import { POSTS_QUERY } from "@/sanity/lib/queries";
+import NumberCount from "@/components/NumberCount/NumberCount";
+import { useEffect, useState } from "react";
+import PostSkeleton from "@/components/Blog/PostSkeleton"
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -17,12 +21,53 @@ function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
-interface Category {
-  description: string;
+const ITEMS_PER_PAGE = 2;
+
+export const revalidate = 30;
+
+
+
+async function getData() {
+  const query = POSTS_QUERY
+
+  const data = await client.fetch(query);
+
+  return data;
 }
 
 
-const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
+export default function BlogCard(){
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [posts, setPosts] = useState<SanityDocument[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getData();
+        if (!data || !Array.isArray(data)) return;
+  
+        const totalPosts = data.length;
+        setTotalPages(Math.ceil(totalPosts / ITEMS_PER_PAGE));
+  
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        setPosts(data.slice(startIndex, endIndex));
+      } catch (error) {
+        // Handle the error here
+        console.error("Error fetching data:", error);
+      }
+    }
+  
+    fetchData();
+  }, [currentPage]);
+  
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
@@ -56,7 +101,7 @@ const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
                 </p>
                 <div className="card-actions">
                   <Link href={`/blog/${post?.slug?.current}`}>
-                    <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-primary text-white text-[12px] font-light inline-flex items-center space-x-2">
+                    <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-primary text-white text-[12px] font-light inline-flex px-5 py-5 rounded-xl items-center space-x-2">
                       <span>Read more</span>
                       <Image src={ArrowRightWhite} alt="Arrow Right" width={12} height={12} />
                     </button>
@@ -66,10 +111,14 @@ const BlogCard = ({ posts }: { posts: SanityDocument[] }) => {
             </div>
           ))
         ) : (
-          <div className="p-4 text-red-500">No posts found</div>
+        <PostSkeleton />
         )}
       </div>
+      <NumberCount
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
-export default BlogCard;

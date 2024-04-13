@@ -6,6 +6,8 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import ArrowRight from "@/public/images/blog/Vector.svg";
 import imageUrlBuilder from "@sanity/image-url";
+import { NEWS_QUERY } from "@/sanity/lib/queries";
+import { SanityDocument } from "next-sanity";
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
 
@@ -13,11 +15,23 @@ function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
+async function getData() {
+  const query = NEWS_QUERY
 
-const NewsCard = ({ news }: { news: { description: string, _id: string, title: string, slug: { current: string }, image: any }[] }) => {
+  const data = await client.fetch(query);
+
+  // Slice the data to only include the first 3 posts
+  const slicedData = data.slice(0, 3);
+
+  return slicedData;
+}
+
+export default async function NewsCard(){
+
+  const news: SanityDocument[] = await getData();
   
   if (!news || !Array.isArray(news)) {
-    return <h1>Something is happening, please be still..</h1>
+    return <h1>Fetching News, please be still..</h1>
   }
     return (
       <div className="lg:mx-12">
@@ -27,7 +41,7 @@ const NewsCard = ({ news }: { news: { description: string, _id: string, title: s
             <figure className="flex bg-white rounded-md mt-5 drop-shadow-md">
             {article?.image && (
               <Image
-                src={urlFor(article?.image).url()} // Assuming `image` field contains the image source
+                src={urlFor(article?.image).url()}
                 alt={`${article.slug?.current}`}
                 width={100}
                 height={200}
@@ -57,6 +71,4 @@ const NewsCard = ({ news }: { news: { description: string, _id: string, title: s
       </div>
     );
   };
-  
-  export default NewsCard;
   

@@ -22,4 +22,5 @@ export async function GET(request: Request) {
   draftMode().enable();
 
   redirect(redirectTo);
+  
 }
