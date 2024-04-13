@@ -1,64 +1,43 @@
-import { QueryParams, SanityDocument } from "next-sanity";
-import { draftMode } from "next/headers";
-import { loadQuery } from "@/sanity/lib/store";
-import { POSTS_QUERY, POST_QUERY, AUTHOR_QUERY } from "@/sanity/lib/queries";
-import PostPreview from "@/components/PostPreview";
-import { client } from "@/sanity/lib/client";
+// // app/(user)/blog/[slug]/page.tsx
+import { SanityDocument } from "next-sanity";
+import { POST_QUERY, AUTHOR_QUERY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/client";
 import DetailedCard from "@/components/Blog/Cards/DetailedCard";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 
-export async function generateStaticParams() {
-    const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY);
-    return posts.map((post) => ({
-        slug: post.slug.current,
-    }))
+interface DetailedCardProps {
+  slug: string;
 }
 
-async function Page({ params }: { params: QueryParams }) {
-    const { slug } = params;
-   
-    const initial = await loadQuery<SanityDocument>(POST_QUERY, params, {
-        perspective: draftMode().isEnabled ? "previewDrafts" : "published",
-    });
 
-    // Fetch the author data using the reference ID
-    const authorData = await loadQuery<SanityDocument>(
-        AUTHOR_QUERY, 
-        { slug, authorId: initial.data?.author?._ref } // Pass the authorId parameter
-    );
-    console.log("Author:", authorData);
-    const authorProps = {
-        name: authorData.data?.name,
-        createdAt: authorData.data?._createdAt,
-        image: authorData.data?.image
-    };
+async function getPostData(slug: string) {
+  const query = POST_QUERY(slug);
 
-      // Fetch recent posts data
-    const recentPostsData = await client.fetch<SanityDocument[]>(POSTS_QUERY);
-
-    
-    return draftMode().isEnabled ? (
-        <PostPreview initial={initial} params={params} />
-    ) : (
-        <>
-            <Header />
-            <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>
-                <div className=' col-span-2'>
-                    <DetailedCard post={initial.data} />
-                </div>
-                <div className='col-span-1'>
-                    <AuthorProfile author={authorProps} />
-                    <RecentPostCard posts={recentPostsData.slice(0,3)} />
-                </div>
-                <div className='col-span-1'>
-                </div>
-            </div>
-            <FooterHome />
-        </>
-    );
+  const data = await client.fetch(query);
+  console.log(data)
+  return data;
 }
 
-export default Page;
+export default async function Page({slug}: DetailedCardProps) {
+  const post: SanityDocument = await getPostData(slug);
+  console.log(`Post information: ${JSON.stringify(post)}`)
+  return (
+    <>
+      <Header />
+      <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
+        <div className=" col-span-2">
+          <DetailedCard slug={post?.slug} />
+        </div>
+        <div className="col-span-1">
+          {/* <AuthorProfile slug={params.slug}  /> */}
+          <RecentPostCard  />
+        </div>
+        <div className="col-span-1"></div>
+      </div>
+      <FooterHome />
+    </>
+  );
+};

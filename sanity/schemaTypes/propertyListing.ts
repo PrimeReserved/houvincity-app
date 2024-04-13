@@ -1,8 +1,8 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
-  name: 'news',
-  title: 'News',
+  name: 'propertyListing',
+  title: 'Property Listing',
   type: 'document',
   fields: [
     defineField({
@@ -20,10 +20,19 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    }),
+    defineField({
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+    }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
     }),
     defineField({
       name: 'image',
@@ -37,36 +46,40 @@ export default defineType({
           name: 'alt',
           type: 'string',
           title: 'Alternative Text',
-        }
-      ]
+        },
+      ],
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      name: 'bedrooms',
+      title: 'Bedrooms',
+      type: 'number',
+    }),
+    defineField({
+      name: 'bathrooms',
+      title: 'Bathrooms',
+      type: 'number',
+    }),
+    defineField({
+      name: 'area',
+      title: 'Area (sqm)',
+      type: 'number',
+    }),
+    defineField({
+      name: 'garage',
+      title: 'Garage',
+      type: 'boolean',
     }),
     defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
     }),
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
-    }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
       media: 'image',
     },
-    prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
-    },
   },
-})
+});

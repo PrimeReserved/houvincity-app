@@ -7,9 +7,7 @@ import { groq } from "next-sanity";
 export const POSTS_QUERY = groq`*[_type == "post"]
 {
   ...,
-    slug{
-        current,
-    },
+    "currentSlug": slug.current,
     publishedAt,
     mainImage{
         alt,
@@ -40,9 +38,7 @@ export const POSTS_QUERY = groq`*[_type == "post"]
 // Retrieve only the most recent post first
 export const RECENT_POSTS_QUERY = groq`*[_type == "post"]
 {
-    slug{
-        current,
-    },
+    "currentSlug": slug.current,
     publishedAt,
     mainImage{
         alt,
@@ -81,8 +77,15 @@ export const CATEGORIES_QUERY = groq`*[_type == "post" && references(categories[
   `;
 
 // Get a single post by its slug.
-export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
-
+export const POST_QUERY = (slug: string) => groq`
+*[_type == "post" && slug.current == ${slug}]{
+  ...,
+  slug{
+    current,
+  },
+  title,
+}[0]
+`;
 // Construct a new query to fetch the author data based on the reference ID
 export const AUTHOR_QUERY = groq`
 *[_id == $authorId] {
@@ -114,3 +117,41 @@ export const NEWS_QUERY = groq`
     },
     description,
   } | order(_createdAt desc)`;
+
+
+  /**
+   * Queries for property listing
+   */
+
+  // Query to fetch all property listings:
+  export const PROPERTY_LISTING_QUERY = groq`*[_type == "propertyListing"]{
+    title,
+    slug,
+    description,
+    price,
+    location,
+    image,
+    bedrooms,
+    bathrooms,
+    area,
+    garage,
+    publishedAt
+  }`
+
+  // Query to fetch a single property by its slug:
+  export const PROPERY_LISTING =  groq`
+  *[_type == "propertyListing" && slug.current == $slug]{
+    title,
+    slug,
+    description,
+    price,
+    location,
+    image,
+    bedrooms,
+    bathrooms,
+    area,
+    garage,
+    publishedAt
+  }[0]
+  `
+
