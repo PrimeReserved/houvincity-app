@@ -13,11 +13,9 @@ function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
-interface AuthorCardProps {
-  author: Author;
-}
 
-const AuthorProfile = ({ author }: Readonly<{ author: AuthorCardProps["author"]}>) => {
+
+const AuthorProfile = ({ author }: Readonly<{ author: Author}>) => {
 
 
   const { name, image } = author;

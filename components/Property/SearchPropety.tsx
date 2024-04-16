@@ -1,19 +1,26 @@
-import React, { useState, useMemo, useEffect } from "react";
+"use client"
+
+import { useState, useMemo, useEffect } from "react";
 import { groq } from "next-sanity";
 import { client } from "@/sanity/client";
 import { Property } from "@/typings";
 import House from "./Houses";
+import Land from "./Land";
 
 const SearchProperty = () => {
+  const [allProperties, setAllProperties] = useState<Property[]>([]);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [searchType, setSearchType] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
   const [searchSize, setSearchSize] = useState('');
   const [searchBudget, setSearchBudget] = useState('');
+  // Filter data
   const [filteredHouses, setFilteredHouses] = useState<Property[]>([]);
   const [filteredLand, setFilteredLand] = useState<Property[]>([]);
+
+
   const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = React.useMemo(() => 6, []);
+  const propertiesPerPage = useMemo(() => 6, []);
   const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
   const [locations, setLocations] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
@@ -26,71 +33,47 @@ const SearchProperty = () => {
   const fetchAllProperties = async () => {
     const query = groq`*[_type == "property"]`;
     const allProperties: Property[] = await client.fetch(query);
-    console.log(`All Properties: ${allProperties}`)
+    setAllProperties(allProperties);
+    // Populate data 
     setPropertyTypes(Array.from(new Set(allProperties.map(property => property.propertyType))));
+    setLocations(Array.from(new Set(allProperties.map(property => property.location))));
+    setSizes(Array.from(new Set(allProperties.map(property => property.propertySize))));
+    setBudgets(Array.from(new Set(allProperties.map(property => property.budget))));
+
+    // Filter each data
     setFilteredHouses(allProperties.filter(property => property.propertyType === 'House'));
     setFilteredLand(allProperties.filter(property => property.propertyType === 'Land'));
   };
 
-  // const fetchProperties = async () => {
-  //   const query = groq`*[_type == "property"]`;
-  //   const propertiesData: Property[] = await client.fetch(query);
-  //   console.log(`Properties Data: ${JSON.stringify(propertiesData)}`)
-  //   setFilteredProperties(propertiesData);
-
-  //   const typesSet = new Set<string>();
-  //   const locationsSet = new Set<string>();
-  //   const sizesSet = new Set<string>();
-  //   const budgetsSet = new Set<number>();
-
-  //   propertiesData.forEach((property) => {
-  //     typesSet.add(property.propertyType);
-  //     locationsSet.add(property.location);
-  //     sizesSet.add(property.propertySize);
-  //     budgetsSet.add(property.budget);
-  //   });
-
-  //   setPropertyTypes(Array.from(typesSet));
-  //   setLocations(Array.from(locationsSet));
-  //   setSizes(Array.from(sizesSet));
-  //   setBudgets(Array.from(budgetsSet));
-  // };
-
-  const handleSearch = async () => {
-    let query = groq`*[_type == 'property'] && location == $location && propertySize == $propertySize && budget == $budget
-    `;
-    let params: any = {};
+  const handleSearch = () => {
+    let filteredProperties = [...allProperties];
 
     if (searchType) {
-      query += groq` && propertyType == $propertyType`;
-      params.propertyType = searchType;
+      filteredProperties = filteredProperties.filter(property => property.propertyType === searchType);
     }
     if (searchLocation) {
-      query += groq` && location == $location`;
-      params.location = searchLocation;
+      filteredProperties = filteredProperties.filter(property => property.location === searchLocation);
     }
-
     if (searchSize) {
-      query += groq` && propertySize == $propertySize`;
-      params.propertySize = searchSize;
+      filteredProperties = filteredProperties.filter(property => property.propertySize === searchSize);
     }
-
     if (searchBudget) {
-      query += groq` && budget == $budget`;
-      params.budget = searchBudget;
+      filteredProperties = filteredProperties.filter(property => property.budget === parseInt(searchBudget));
     }
-    console.log("Query:", query);
-    console.log("Params:", params); 
 
-    const properties: Property[] = await client.fetch(query, params);
-    console.log(`All Properties: ${properties}`)
+    // Separate houses and land properties
+    const filteredHouses = filteredProperties.filter(property => property.propertyType === 'House');
+    const filteredLand = filteredProperties.filter(property => property.propertyType === 'Land');
 
+    // Update state variables
     setFilteredHouses(filteredHouses);
     setFilteredLand(filteredLand);
-
-    setFilteredProperties(properties || []);
+    setFilteredProperties(filteredProperties);
     setCurrentPage(1);
   };
+
+
+
 
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
@@ -170,8 +153,28 @@ const SearchProperty = () => {
         <p className="xl:text-lg md:text-base text-white text-xs ">Search</p>
       </button>
 
-      <House properties={filteredHouses} />
+      {/* Conditionally render House component if there are filtered houses */}
+      {filteredHouses.length > 0 && <House properties={filteredHouses} />}
 
+      {/* Conditionally render Land component if there are filtered lands */}
+      {/* {filteredLand.length > 0 && <Land properties={filteredLand} />} */}
+
+      {/* Render a message if there are no properties */}
+      {filteredHouses.length === 0 && filteredLand.length === 0 && <p>No properties found.</p>}
+
+      <div className="flex justify-center mt-8 space-x-4">
+        {Array.from({
+          length: Math.ceil(filteredProperties.length / propertiesPerPage),
+        }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => pagination(index + 1)}
+            className="bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded"
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
 
   );

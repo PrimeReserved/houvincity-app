@@ -6,19 +6,26 @@ import Detail3 from "@/public/images/property/Detail3.svg";
 import Detail4 from "@/public/images/property/Detail4.svg";
 import YoutubeEmbed from "./YoutubeEmbed";
 import Calendar from "@/public/images/blog/Icon/Calendar2.svg";
+import ErrorBoundary from "../ErrorBoundary";
+import Header from "../Header/HeaderHome";
+import FooterHome from "../Footer/FooterHome";
 
 function PropertyDetailed() {
   return (
-    <div className="wrapper my-10">
+    <>
+    <ErrorBoundary>
+      <Header/>
+    </ErrorBoundary>
+    <div className="wrapper mb-10">
       <div className="flex justify-center items-center">
         <Image src={Detail1} alt="House1" width={1500} height={100} />
       </div>
-      <div className="grid grid-cols-3  gap-2 justify-center items-center mt-12 mx-auto">
+      <div className="grid grid-cols-3 px-10  gap-2 justify-center items-center mt-12 mx-auto">
         <Image src={Detail2} alt="House2" width={385} height={300} />
         <Image src={Detail3} alt="House3" width={385} height={300} />
         <Image src={Detail4} alt="House4" width={385} height={300} />
       </div>
-      <div className="mt-10">
+      <div className="mt-10 px-10">
         <p className=" text-customPrimary text-base font-semibold border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] pb-5">
           13, North Dupe, Portharcourt
         </p>
@@ -33,7 +40,7 @@ function PropertyDetailed() {
         </p>
       </div>
 
-      <p className="text-customTextColor text-base leading-loose my-10">
+      <p className="text-customTextColor text-base leading-loose my-10 px-10">
         Welcome to our three-bedroom luxury apartment, designed for comfort and
         style. The spacious living room, hardwood floors, and large windows
         create an inviting atmosphere. The bedrooms feature plush carpeting,
@@ -62,6 +69,10 @@ function PropertyDetailed() {
         </button>
       </div>
     </div>
+    <ErrorBoundary>
+      <FooterHome/>
+    </ErrorBoundary>
+    </>
   );
 }
 

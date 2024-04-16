@@ -42,7 +42,7 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
           <DetailedCard post={post} />
         </div>
         <div className="col-span-1">
-          {/* <AuthorProfile author={post.author}  /> */}
+          <AuthorProfile author={post.author}  />
           <RecentPostCard  />
         </div>
         <div className="col-span-1"></div>

@@ -19,10 +19,10 @@ function page() {
           image={`./images/property/property.png`}
           title="Property Listing"
         />
-       
+      </ErrorBoundary>
 
+      <ErrorBoundary>
         <PropertyListing />
-
       </ErrorBoundary>
 
       <ErrorBoundary>
