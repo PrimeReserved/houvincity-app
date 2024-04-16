@@ -7,8 +7,6 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import Image from "next/image";
 import Link from "next/link";
-import Loading from "@/app/loading";
-import { Suspense } from "react";
 
 const builder = imageUrlBuilder(client);
 
@@ -94,6 +92,11 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                 <p className="text-customPrimary font-semibold ">
                   &#x20A6; {property.budget}
                 </p>
+                <Link href={`/property/${property.slug?.current}`}>
+                  <button className="text-white bg-primary text-base px-3 py-2 -mr-5 rounded-br-md">
+                    View Full Details
+                  </button>
+                </Link>
               </div>
               <Link href={`/property/${property.slug?.current}`}>
                   <button className="text-white bg-primary text-base px-3 py-2 -mr-6 rounded-br-md flex float-end -mb-8">
