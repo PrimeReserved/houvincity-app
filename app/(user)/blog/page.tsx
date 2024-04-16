@@ -23,8 +23,8 @@ function Page() {
         <Hero
           title="Welcome to Our Blog"
           description="Stay updated with Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-      aliqua."
+          elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua."
         />
       </ErrorBoundary>
 

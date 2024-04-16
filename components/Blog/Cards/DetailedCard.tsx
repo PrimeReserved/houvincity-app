@@ -6,28 +6,19 @@ import imageUrlBuilder from "@sanity/image-url";
 import { dataset, projectId } from "@/sanity/env";
 import { RichTextComponents } from "./RichTextComponents";
 import { PortableText } from "@portabletext/react";
-import { SanityDocument } from "next-sanity";
-import { POST_QUERY, AUTHOR_QUERY } from "@/sanity/lib/queries";
-import { client } from "@/sanity/client";
+import { Post } from "@/typings"
 
-export const revalidate = 30; // revalidate at most 30 seconds
-
-interface DetailedCardProps {
-  slug: string;
-}
-
-async function getData(slug: string) {
-  const query = POST_QUERY;
-
-  const data = await client.fetch(query(slug));
-  return data;
-}
-
-
+export const revalidate = 30;
 const builder = imageUrlBuilder({ projectId, dataset });
 
-export default async function DetailedCard({ slug }: DetailedCardProps) {
-  const post: SanityDocument = await getData(slug);
+
+interface DetailedCardProps {
+  post: Post;
+}
+
+
+
+export default async function DetailedCard({ post }: Readonly<DetailedCardProps>) {
   
   return (
     <div className="w-[45.6rem]">
@@ -40,7 +31,7 @@ export default async function DetailedCard({ slug }: DetailedCardProps) {
               .height(600)
               .quality(100)
               .url()}
-            alt={post?.mainImage.alt || "Houses"}
+            alt={post?.title || "Houses"}
             width={697}
             height={600}
           />

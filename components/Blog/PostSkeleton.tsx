@@ -6,11 +6,11 @@ import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 const PostSkeleton = () => {
   return (
     <div className="rounded-md bg-gray-200 p-4 animate-pulse">
-      <div className="h-32 w-full bg-gray-300 mb-4"></div>
-      <div className="h-6 w-3/4 bg-gray-300 mb-2"></div>
-      <div className="h-6 w-1/2 bg-gray-300 mb-2"></div>
-      <div className="h-6 w-3/4 bg-gray-300 mb-2"></div>
-    </div>
+       <div className="h-32 w-full bg-gray-300 mb-4"></div>
+       <div className="h-6 w-3/4 bg-gray-300 mb-2"></div>
+       <div className="h-6 w-1/2 bg-gray-300 mb-2"></div>
+       <div className="h-6 w-3/4 bg-gray-300 mb-2"></div>
+     </div>
     // <div className="card lg:w-[400px] lg:h-[580px] bg-base-100 drop-shadow-md">
     //   <div className="mt-3.5 ml-2.5">
     //     <div className="h-[500px] bg-gray-200"></div>

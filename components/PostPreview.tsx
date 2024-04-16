@@ -4,7 +4,8 @@
 
 import { POST_QUERY } from "@/sanity/lib/queries";
 import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
-import { QueryParams, SanityDocument } from "next-sanity";
+import { QueryParams } from "next-sanity";
+import { Post } from "@/typings"
 
 import DetailedCard from "@/components/Blog/Cards/DetailedCard";
 
@@ -12,10 +13,10 @@ export default function PostPreview({
   initial,
   params
 }: {
-  initial: QueryResponseInitial<SanityDocument>;
+  initial: QueryResponseInitial<Post>;
   params: QueryParams
 }) {
-  const { data } = useQuery<SanityDocument | null>(
+  const { data } = useQuery<Post | null>(
     POST_QUERY,
     params,
     { initial }

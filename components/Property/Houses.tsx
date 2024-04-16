@@ -1,13 +1,6 @@
 import React from "react";
 import Houses1 from "@/public/images/property/house1.svg";
-import Houses2 from "@/public/images/property/house2.svg";
-import Houses3 from "@/public/images/property/house3.svg";
-import Houses4 from "@/public/images/property/house4.svg";
-import Houses5 from "@/public/images/property/house5.svg";
-import Houses7 from "@/public/images/property/house7.svg";
-import Houses8 from "@/public/images/property/house8.svg";
-import Houses9 from "@/public/images/property/house9.svg";
-import Houses6 from "@/public/images/property/house1.svg";
+import { Property } from "@/typings";
 
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { SanityDocument } from "next-sanity";
@@ -22,33 +15,21 @@ function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
-interface Property {
-  _id: string;
-  description: string;
-  price: number;
-  bedrooms: number;
-  bathrooms: number;
-  area: number;
-  garage: boolean;
-  publishedAt: Date | null;
-  title: string;
-  location: string;
-  image: {
-    alt: string,
-    asset: [Object];
-  };
-  slug: {
-    current: string;
-  };
-}
-
 
 interface HouseProps {
   properties: Property[];
 }
 
 const House: React.FC<HouseProps> = ({ properties }) => {
-  console.log(properties);
+  console.log(`Properties: ${JSON.stringify(properties)}`);
+
+  if (properties.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-[20rem]">
+        <div>There is currently no available property listing for now, kindly check back later</div>
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper">
@@ -61,16 +42,17 @@ const House: React.FC<HouseProps> = ({ properties }) => {
           >
             <figure>
               <Image
-                src={urlFor(property.image).url()}
-                alt={property.slug.current}
+                src={property?.propertyImage ? urlFor(property.propertyImage).url() : Houses1}
+                alt={property?.title}
                 width={355}
                 height={285}
               />
+
             </figure>
             <div className="card-body mx-5 mt-5">
               <div className="flex justify-between ">
                 <p className="card-title text-xs text-primary font-semibold">
-                  {property.title}
+                  {property?.title}
                 </p>
                 <div className="flex gap-1">
                   <div className="flex gap-1 items-center">
@@ -99,14 +81,14 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                     </svg>
                     <p className="text-xs ">{property.bathrooms}</p>
                   </div>
-                  <p className="text-xs ">{property.area} sqm</p>
+                  <p className="text-xs ">{property.propertySize} sqm</p>
                 </div>
               </div>
               <p className="text-xs font-medium mt-4">{property.location}</p>
 
               <div className="mt-2 flex justify-between">
                 <p className="text-customPrimary font-semibold ">
-                  {property.price}
+                  &#x20A6; {property.budget}
                 </p>
                 <button className="text-white bg-primary text-base px-3 py-2 -mr-5 rounded-br-md">
                   View Full Details

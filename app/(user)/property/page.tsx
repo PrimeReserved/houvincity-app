@@ -5,8 +5,6 @@ import Header from "@/components/Header/HeaderHome";
 import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
 import SearchProperty from "@/components/Property/SearchPropety";
-import House from "@/components/Property/Houses";
-import Land from "@/components/Property/Land";
 import PropertyListing from "@/components/Property/PropertyListing";
 
 function page() {
@@ -22,8 +20,7 @@ function page() {
           title="Property Listing"
         />
        
-        {/* <Land /> */}
-        {/* <House /> */}
+
         <PropertyListing />
 
       </ErrorBoundary>

@@ -37,7 +37,7 @@ export default async function NewsCard(){
       <div className="lg:mx-12">
         <p className="text-primary font-medium mt-[2.6rem] text-xl">News</p>
         {news?.map((article) => (
-          <Link href={`/blog/${article.slug?.current}`} key={article._id}>
+          <Link href={`/news/${article.slug?.current}`} key={article._id}>
             <figure className="flex bg-white rounded-md mt-5 drop-shadow-md">
             {article?.image && (
               <Image
@@ -53,7 +53,7 @@ export default async function NewsCard(){
                   <p className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-medium">{article?.description}</p>
                 </blockquote>
                 <figcaption className="text-[16px] font-medium flex gap-3 mt-3">
-                <Link className="flex space-x-2" href={`/blog/${article?.slug.current}`}>
+                <Link className="flex space-x-2" href={`/news/${article?.slug.current}`}>
                   <div className="text-primary lg:text-[12px] xl:text-base">Read More</div>
                   <Image
                     src={ArrowRight}

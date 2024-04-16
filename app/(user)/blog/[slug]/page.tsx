@@ -1,5 +1,7 @@
 // // app/(user)/blog/[slug]/page.tsx
+import { groq } from "next-sanity";
 import { SanityDocument } from "next-sanity";
+import { Post } from "../../../../typings"
 import { POST_QUERY, AUTHOR_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/client";
 import DetailedCard from "@/components/Blog/Cards/DetailedCard";
@@ -8,31 +10,39 @@ import FooterHome from "@/components/Footer/FooterHome";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 
-interface DetailedCardProps {
-  slug: string;
+interface Props {
+  params: {
+    slug: string;
+  }
 }
 
+export const revalidate = 30;
 
-async function getPostData(slug: string) {
-  const query = POST_QUERY(slug);
+export const generateStaticParams = async () => {
+  const query = groq`*[_type == 'post']{
+    slug
+  }`;
+  const slugs: Post[] = await client.fetch(query);
+  const slugRoutes = slugs.map((slug) => slug?.slug?.current);
+  console.log(`Slug Routes: ${slugRoutes}`);
+  return slugRoutes?.map((slug) => ({
+    slug,
+  }));
+};
 
-  const data = await client.fetch(query);
-  console.log(data)
-  return data;
-}
+export default async function Page({ params: { slug} }: Readonly<Props>){
+  const query = POST_QUERY;
+  const post: Post = await client.fetch(query, { slug });
 
-export default async function Page({slug}: DetailedCardProps) {
-  const post: SanityDocument = await getPostData(slug);
-  console.log(`Post information: ${JSON.stringify(post)}`)
   return (
     <>
       <Header />
       <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
         <div className=" col-span-2">
-          <DetailedCard slug={post?.slug} />
+          <DetailedCard post={post} />
         </div>
         <div className="col-span-1">
-          {/* <AuthorProfile slug={params.slug}  /> */}
+          {/* <AuthorProfile author={post.author}  /> */}
           <RecentPostCard  />
         </div>
         <div className="col-span-1"></div>

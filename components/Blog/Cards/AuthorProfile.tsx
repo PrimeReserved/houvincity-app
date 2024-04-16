@@ -4,7 +4,7 @@ import { client } from "@/sanity/client";
 import ProfilePic from "@/public/images/blog/Ellipse 7.svg";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { SanityDocument } from "next-sanity";
+import { Author } from "@/typings";
 
 
 const builder = imageUrlBuilder(client);
@@ -14,22 +14,14 @@ function urlFor(source: SanityImageSource) {
 }
 
 interface AuthorCardProps {
-  author: {
-    createdAt: string;
-    name: string;
-    image: {
-      alt: string;
-      asset: {
-        _ref: string;
-      };
-    };
-  };
+  author: Author;
 }
 
 const AuthorProfile = ({ author }: Readonly<{ author: AuthorCardProps["author"]}>) => {
 
-  const { name, createdAt, image } = author;
 
+  const { name, image } = author;
+  console.log(`Author: ${author}`)
   if (!author || !author?.name || !author.image) {
     // Handle the case where author or its properties are undefined
     return <div>Author information is missing</div>;
@@ -71,7 +63,7 @@ const AuthorProfile = ({ author }: Readonly<{ author: AuthorCardProps["author"]}
             <div className="text-primary lg:text-[12px] xl:text-base">
               { name }
             </div>
-            <p className="font-light text-sm mt-1">on  {new Date(createdAt).toLocaleDateString("en-US")} </p>
+            <p className="font-light text-sm mt-1">on  Date</p>
           </figcaption>
         </div>
       </figure>
