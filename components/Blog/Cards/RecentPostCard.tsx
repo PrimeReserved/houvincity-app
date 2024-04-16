@@ -91,8 +91,8 @@ import Link from "next/link";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { SanityDocument } from "next-sanity";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { Category, Post } from "@/typings"
 
 
 const builder = imageUrlBuilder(client);
@@ -119,7 +119,7 @@ async function getData() {
 
 export default async function RecentPostCard (){
 
-  const posts: SanityDocument[] = await getData();
+  const posts: Post[] = await getData();
 
   if (!posts || !Array.isArray(posts)) {
     return <h1>Fetching Posts, please be still..</h1>

@@ -10,9 +10,9 @@ import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import NumberCount from "@/components/NumberCount/NumberCount";
-import { Suspense, useEffect, useState } from "react";
-import { Post, Category } from "@/typings";
-import Loading from "@/app/loading";
+import { useEffect, useState } from "react";
+import PostSkeleton from "@/components/Blog/PostSkeleton"
+import { Category } from "@/typings";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -44,7 +44,8 @@ export default function BlogCard() {
     async function fetchData() {
       try {
         const data = await getData();
-        // console.log(data)
+        // console.log(`Blog data: ${JSON.stringify([data])}`)
+
         if (!data || !Array.isArray(data)) return;
 
         const totalPosts = data.length;
@@ -110,7 +111,11 @@ export default function BlogCard() {
                   <Image src={Calendar} alt="Calendar" width={13} height={13} />            
                   {post?.publishedAt && (
                     <p className="text-xs">
-                      {formatDate(post?.publishedAt)}
+                      {new Date(post?.publishedAt).toLocaleDateString('en-US', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
                     </p>
                   )}
                 </div>
@@ -118,6 +123,7 @@ export default function BlogCard() {
                 <h1 className="font-semibold text-lg mt-1">{post?.title}</h1>
                 <p className="line-clamp-3 text-[12px]">
                   {post?.categories.map((category: Category, index: number) => (
+                    <span key={category._id}>{category.description}</span>
                     <span key={category._id}>{category.description}</span>
                   ))}
                 </p>
