@@ -4,7 +4,6 @@ import FooterHome from "@/components/Footer/FooterHome";
 import Header from "@/components/Header/HeaderHome";
 import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
-import SearchProperty from "@/components/Property/SearchPropety";
 import PropertyListing from "@/components/Property/PropertyListing";
 
 function page() {

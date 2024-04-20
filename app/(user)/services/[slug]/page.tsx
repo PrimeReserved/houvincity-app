@@ -39,6 +39,7 @@ const Page = ({ params }: { params: Services })  => {
     }
 
     const { title, hero, description } = service;
+    console.log(hero)
 
     const modifiedContent = addSpaceAfterFourLines(description)
 
