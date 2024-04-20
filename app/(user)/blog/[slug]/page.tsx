@@ -1,14 +1,15 @@
 // // app/(user)/blog/[slug]/page.tsx
 import { groq } from "next-sanity";
-import { SanityDocument } from "next-sanity";
 import { Post } from "../../../../typings"
-import { POST_QUERY, AUTHOR_QUERY } from "@/sanity/lib/queries";
+import { POST_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/client";
 import DetailedCard from "@/components/Blog/Cards/DetailedCard";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import BlogCard from "@/components/Blog/Cards/BlogCard";
 
 interface Props {
   params: {
@@ -40,9 +41,15 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
       <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
         <div className=" col-span-2">
           <DetailedCard post={post} />
+          <div>
+            <h1 className="text-center">More Like This</h1>
+            <ErrorBoundary>
+              <BlogCard />
+            </ErrorBoundary>
+          </div>
         </div>
         <div className="col-span-1">
-          <AuthorProfile author={post.author}  />
+          <AuthorProfile author={post.author} publishedAt={post.publishedAt} />
           <RecentPostCard  />
         </div>
         <div className="col-span-1"></div>

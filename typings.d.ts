@@ -13,7 +13,8 @@ export interface Post extends Base {
     mainImage: Image;
     slug: Slug;
     title: string;
-    description: string
+    description: string;
+    publishedAt: string;
 }
 
 export interface Author extends Base {
@@ -21,6 +22,7 @@ export interface Author extends Base {
     image: Image;
     name: string;
     slug: string;
+    publishedAt: string;
 }
 
 export interface Image {

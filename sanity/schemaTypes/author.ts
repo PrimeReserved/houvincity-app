@@ -47,6 +47,11 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+    }),
   ],
   preview: {
     select: {

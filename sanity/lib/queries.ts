@@ -9,6 +9,7 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)]
     slug{
       current,
     },
+    title,
     publishedAt,
     mainImage{
         alt,
@@ -23,10 +24,11 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)]
       name,
       image{
         alt,
-        asset{
+        asset->{
           _ref,
         },
       },
+      publishedAt,
     },
     body[]{
         children[]{
@@ -109,6 +111,7 @@ export const AUTHOR_QUERY = groq`
       url
     }
   }
+  publishedAt,
 }[0]
 `;
 

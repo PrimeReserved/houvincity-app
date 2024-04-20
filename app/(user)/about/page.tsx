@@ -1,5 +1,6 @@
 import ErrorBoundary from '@/components/ErrorBoundary'
 import FooterHome from '@/components/Footer/FooterHome'
+import Founders from '@/components/About/Founders'
 import Header from '@/components/Header/HeaderHome'
 import Hero from '@/components/Hero/Hero'
 import React from 'react'
@@ -19,6 +20,9 @@ function page() {
         />
       </ErrorBoundary>
 
+      <ErrorBoundary>
+        <Founders />
+      </ErrorBoundary>
       <ErrorBoundary>
         <FooterHome />
       </ErrorBoundary>
