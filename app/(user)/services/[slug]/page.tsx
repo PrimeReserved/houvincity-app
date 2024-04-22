@@ -56,10 +56,10 @@ const Page = ({ params }: { params: Services })  => {
           />
         </ErrorBoundary>
         <div className="bg-[#FAFAFA] mb-10 h-20">
-          <h3 className="pl-20 font-bold pt-5">Service: <span className="font-normal">{title}</span></h3>
+          <h3 className="pl-20 mt-6 font-bold break-normal md:break-all inline-block align-middle">Service: <span className="font-normal">{title}</span></h3>
         </div>
 
-        <section className="px-20 pb-20 whitespace-normal text-justify subpixel-antialiased tracking-wide">
+        <section className="px-20 pb-20 text-justify break-normal md:break-all inline-block align-middle whitespace-pre-line">
           { modifiedContent }
         </section>
 

@@ -25,14 +25,14 @@ const House: React.FC<HouseProps> = ({ properties }) => {
   if (properties.length === 0) {
     return (
       <div className="flex justify-center items-center h-[20rem]">
-        <div>There is currently no available property listing for now, kindly check back later</div>
+        <h1 className="text-customTextColor text-4xl">There is currently no available property listing for now, kindly check back later</h1>
       </div>
     );
   }
 
   return (
     <div className="wrapper">
-      <h1 className=" text-customPrimary font-bold text-4xl my-10">Houses</h1>
+      <h1 className=" text-customPrimary font-bold text-4xl m-10">Houses</h1>
       <div className="grid grid-cols-1 px-5 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
         {properties.map((property) => (
           <div
@@ -45,6 +45,8 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                 alt={property?.title}
                 width={355}
                 height={285}
+                layout="responsive"
+                loading="lazy"
               />
 
             </figure>

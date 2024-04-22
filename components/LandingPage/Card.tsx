@@ -1,8 +1,9 @@
 import React from "react";
-import Land from "@/public/images/landingPage/Land.svg";
+import Land from "@/public/images/landingPage/land1.png";
+import Land1 from "@/public/images/landingPage/land2.png";
+import Land2 from "@/public/images/landingPage/land3.png";
 import Image from "next/image";
 import { HiOutlineCube } from "react-icons/hi";
-// import Icon from "@/public/images/landingpage/Vector.svg";
 
 function Card() {
   return (
@@ -22,6 +23,8 @@ function Card() {
                     "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
                 }}
                 className=" rounded-t-lg"
+                layout="responsive"
+                loading="lazy"
               />
             </div>
             <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">
@@ -51,8 +54,8 @@ function Card() {
           <div>
             <div className="">
               <Image
-                src={Land}
-                alt="Land"
+                src={Land1}
+                alt="Land1"
                 width={420}
                 height={496.93}
                 style={{
@@ -60,6 +63,8 @@ function Card() {
                     "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
                 }}
                 className=" rounded-t-lg"
+                layout="responsive"
+                loading="lazy"
               />
             </div>
             <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">
@@ -89,8 +94,8 @@ function Card() {
           <div>
             <div className="">
               <Image
-                src={Land}
-                alt="Land"
+                src={Land2}
+                alt="Land2"
                 width={420}
                 height={496.93}
                 style={{
@@ -98,6 +103,8 @@ function Card() {
                     "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
                 }}
                 className=" rounded-t-lg"
+                layout="responsive"
+                loading="lazy"
               />
             </div>
             <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">

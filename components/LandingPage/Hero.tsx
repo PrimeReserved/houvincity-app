@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import IconButtonHref from '../Buttons/IconButtonHref';
 import SearchHomePage from './ SearchHomePage';
-import Banner from "@/public/images/landingPage/Rectangle 23803.svg"
+import Banner from "@/public/images/landingPage/Rectangle 23803.png"
 
 
 const Hero: React.FC = () => {
@@ -12,9 +12,11 @@ const Hero: React.FC = () => {
       <Image
         src={Banner}
         alt="Hero Image"
+        placeholder="blur"
         fill
         objectFit="cover"
         className="absolute inset-0"
+        priority
       />
 
       {/* Overlay */}

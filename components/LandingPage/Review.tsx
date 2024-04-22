@@ -13,7 +13,7 @@ function Review() {
           Our Happy Homeowners
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[5rem] gap-14 mt-[5rem] ">
-          <div className="bg-primary  rounded-3xl">
+          <div className="bg-primary  rounded-3xl text-white">
             <div className="ml-12 lg:-mt-[4rem] -mt-[2.8rem] ">
               <Image
                 src={ProfilePic}
@@ -24,7 +24,7 @@ function Review() {
               />
             </div>
             <div className="lg:ml-[14rem] ml-[10rem] lg:-mt-[2rem] ">
-              <p className="font-medium text-white text-sm lg:text-base">
+              <p className="font-medium text-sm lg:text-base">
                 Mr Martins Egwuatu
               </p>
               <div className="flex gap-1">
@@ -36,7 +36,7 @@ function Review() {
               </div>
             </div>
             <div>
-              <p className="text-white text-sm lg:p-10 p-6 font-light ">
+              <p className=" text-sm lg:p-10 p-6 font-light ">
                 I am privileged to have gotten my land through the agency of
                 Houvincity Limited. It was indeed a seamless journey, from
                 meeting Mr. Hope Uzodimma who educated and enlightened me on the
@@ -49,7 +49,7 @@ function Review() {
             </div>
           </div>
 
-          <div className="bg-primary  rounded-3xl">
+          <div className="bg-primary  rounded-3xl text-white">
             <div className="ml-12 lg:-mt-[4rem] -mt-[2.8rem] ">
               <Image
                 src={ProfilePic}

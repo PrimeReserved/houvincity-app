@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import FooterHome from "@/components/Footer/FooterHome";
 import Header from "@/components/Header/HeaderHome";
@@ -21,7 +21,9 @@ function page() {
       </ErrorBoundary>
 
       <ErrorBoundary>
-        <PropertyListing />
+        <Suspense fallback={<p>Loading screen...</p>}>
+          <PropertyListing />
+        </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary>

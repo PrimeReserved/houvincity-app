@@ -1,9 +1,9 @@
 import { StaticImageData } from "next/image";
-import Service_one from "@/public/images/services/image/Rectangle 3.svg"
-import Service_two from "@/public/images/services/image/Rectangle 3 (1).svg"
-import Service_three from "@/public/images/services/image/Rectangle 3 (2).svg"
-import Service_four from "@/public/images/services/image/Rectangle 3 (3).svg"
-import Service_five from "@/public/images/services/image/Rectangle 3 (4).svg"
+import Service_one from "@/public/images/services/image/real-estate-development.png";
+import Service_two from "@/public/images/services/image/property-management.png";
+import Service_three from "@/public/images/services/image/consultancy.png";
+import Service_four from "@/public/images/services/image/construction.png";
+import Service_five from "@/public/images/services/image/property-agency.png";
 
 export interface Services {
   slug: string;
@@ -26,9 +26,9 @@ export const services: Services[] = [
     Construction is where vision meets action, as developers oversee the transformation of blueprints into buildings, parks, and infrastructure. They manage construction schedules, coordinate subcontractors, and monitor progress to ensure that projects are completed on time and within budget. Quality control is paramount, as developers strive to deliver spaces that are not only aesthetically pleasing but also functional, durable, and environmentally sustainable.
     Real estate development is also about placemaking, creating environments that foster connection, community, and a sense of belonging. Developers design public spaces, amenities, and programming that enhance quality of life and promote social interaction. From vibrant retail corridors and cultural venues to green spaces and recreational facilities, developers seek to create places that people are proud to call home, work, and play.
     In the end, real estate development is about more than just building structures; it's about shaping the fabric of cities, enriching lives, and leaving a lasting legacy for future generations. Developers are the visionaries who dare to imagine what's possible, the entrepreneurs who take calculated risks to bring their vision to life, and the stewards who nurture and sustain the communities they create. Through their passion, perseverance, and commitment to excellence, developers shape the world around us, one project at a time.`,
-    hero: "./images/services/image/real-estate-management.svg"
+    hero: "./images/services/image/real-estate-dev.png",
   },
-  
+
   {
     slug: "property-management",
     image: Service_two,
@@ -42,7 +42,7 @@ export const services: Services[] = [
     One of the hallmarks of effective property management is responsiveness and transparency. Property managers are accessible to tenants and owners, providing timely communication, addressing concerns promptly, and fostering trust and goodwill. By listening attentively to the needs and feedback of stakeholders, property managers cultivate a culture of accountability and collaboration that drives continuous improvement and excellence.
     In the end, property management is about more than just maintaining buildings; it's about enriching lives, building communities, and creating lasting value. Property managers are the unsung heroes of real estate, working tirelessly behind the scenes to ensure that properties fulfill their potential and serve the needs of all who inhabit them. Through their expertise, dedication, and empathy, property managers transform spaces into places that people are proud to call home.    
     `,
-    hero: "./images/services/image/property-management.svg"
+    hero: "./images/services/image/property-management-banner.png",
   },
   {
     slug: "consultancy",
@@ -56,7 +56,7 @@ export const services: Services[] = [
     Collaboration is the cornerstone of effective consultancy, as consultants partner closely with their clients to co-create solutions that resonate with their unique vision and values. Through open communication, mutual respect, and a spirit of partnership, consultants forge lasting relationships built on trust, integrity, and shared goals. They act as sounding boards, thought partners, and mentors, offering guidance, support, and encouragement every step of the way.
     In an era defined by rapid change and uncertainty, the role of consultancy has never been more critical. Consultants serve as navigators, helping businesses navigate choppy waters, anticipate challenges, and seize opportunities on the horizon. They are the architects of change, helping organizations evolve, innovate, and thrive in an ever-evolving landscape.
     In the end, consultancy is about more than just solving problems; it's about unlocking potential, inspiring confidence, and transforming vision into reality. With their blend of expertise, insight, and collaborative spirit, consultants empower businesses to reach new heights of success and chart a course towards a brighter, more prosperous future.`,
-    hero: "./images/services/image/consultancy.svg"
+    hero: "./images/services/image/consultancy-banner.png",
   },
   {
     slug: "construction",
@@ -70,7 +70,7 @@ export const services: Services[] = [
     Safety is paramount in the world of construction, where the stakes are high, and the margin for error is slim. Rigorous protocols and training ensure that every worker is equipped with the knowledge and tools to perform their tasks safely and efficiently. From harnesses and hard hats to scaffolding and safety nets, precautions are taken at every turn to mitigate risks and protect the well-being of all involved.
     As the project nears completion, anticipation mounts, and a sense of pride swells among the construction team. Each beam raised and window installed is a testament to their skill and dedication, a tangible reminder of the transformative power of construction. And when the final nail is hammered, and the last coat of paint applied, the result is more than just a building; it's a symbol of possibility, a beacon of progress, and a testament to the enduring spirit of human endeavor.
     In the end, construction is about more than just erecting structures; it's about shaping communities, fostering connections, and leaving a lasting legacy for generations to come. In the hands of skilled craftsmen and women, every construction project becomes a work of art, a testament to the power of human creativity and collaboration. And as we gaze upon the skylines that stretch towards the heavens, we are reminded of the indomitable spirit that drives us to build, to innovate, and to dream of a better tomorrow.`,
-    hero: "./images/services/image/construction.svg"
+    hero: "./images/services/image/construction-banner.png",
   },
   {
     slug: "property-agency",
@@ -85,6 +85,6 @@ export const services: Services[] = [
     In an ever-evolving industry, innovation is key, and property agencies embrace technology as a powerful ally. From virtual tours that bring properties to life, to sophisticated analytics that illuminate market trends, they harness the latest tools to enhance the client experience and stay ahead of the curve.
     Yet amidst the fast-paced world of real estate, one thing remains constant: the human element. At its core, a property agency is about people - their dreams, their aspirations, and their journey towards finding a place to call home. And in that pursuit, agents serve as guides, mentors, and confidants, walking alongside their clients every step of the way.   
     In the end, a property agency is more than just a business; it's a conduit for dreams, a beacon of hope, and a testament to the power of finding oneself in the spaces we inhabit. In the hands of skilled agents, every transaction becomes a story waiting to be told, and every property, a chapter in the unfolding saga of human experience.`,
-    hero: "./images/services/image/property-agent.svg"
+    hero: "./images/services/image/property-management-banner.png",
   },
 ];

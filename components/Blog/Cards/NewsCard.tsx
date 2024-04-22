@@ -38,34 +38,37 @@ export default async function NewsCard(){
         <p className="text-primary font-medium mt-[2.6rem] text-xl">News</p>
         {news?.map((article) => (
           <Link href={`/news/${article.slug?.current}`} key={article._id}>
-            <figure className="flex bg-white rounded-md mt-5 drop-shadow-md">
+            <div className="flex bg-white rounded-md mt-5 drop-shadow-md">
             {article?.image && (
               <Image
                 src={urlFor(article?.image).url()}
                 alt={`${article.slug?.current}`}
                 width={100}
                 height={200}
-                className="h-[100%]"
+                loading="lazy"
+                style={{
+                  width: "100%"
+                }}
               />
             )}
-              <div className="flex flex-col justify-center px-4">
+              <div className="flex flex-col justify-center m-5">
                 <blockquote>
                   <p className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-medium">{article?.description}</p>
                 </blockquote>
-                <figcaption className="text-[16px] font-medium flex gap-3 mt-3">
+                <div className="text-[16px] font-medium flex gap-3 mt-3">
                 <Link className="flex space-x-2" href={`/news/${article?.slug.current}`}>
-                  <div className="text-primary lg:text-[12px] xl:text-base">Read More</div>
+                  <p className="text-primary lg:text-[12px] xl:text-base">Read More</p>
                   <Image
                     src={ArrowRight}
                     alt="Arrow Right"
                     width={12}
                     height={12}
-                    className=""
+                    loading="lazy"
                   />
                   </Link>
-                </figcaption>
+                </div>
               </div>
-            </figure>
+            </div>
           </Link>
         ))}
       </div>

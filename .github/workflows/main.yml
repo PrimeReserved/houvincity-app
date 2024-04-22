@@ -6,6 +6,7 @@ on:
       - main
       - staging
       - development
+      - testing
 
 jobs:
   build:

@@ -43,25 +43,29 @@ export default async function RecentPostCard (){
       <p className="text-primary font-medium text-xl">Recent Posts</p>
       {posts?.length > 0 ? (
         posts.map((post) => (
-          <figure key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md">
+          <div key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md">
             <Image
               src={urlFor(post?.mainImage).url()}
               alt={`${post?.slug?.current}`}
               width={100}
               height={200}
+              loading="lazy"
+              style={{
+                width: "100%"
+              }}
             />
 
-            <div className="flex flex-col justify-center px-4">
-              <blockquote className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-medium">
+            <div className="flex flex-col justify-center m-5">
+              <blockquote className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-normal">
                 <p>
                 {post?.categories.map((category: Category, index: number) => (
                     <span key={index}>{category.description}</span>
                   ))}
                 </p>
               </blockquote>
-              <figcaption className="text-[16px] font-medium flex gap-3 mt-3">
+              <div className="text-[16px] font-medium flex gap-3 mt-3">
                 <Link className="flex space-x-2" href={`/blog/${post?.slug.current}`}>
-                  <div className="text-primary lg:text-[12px] xl:text-base">Read More</div>
+                  <p className="text-primary lg:text-[12px] xl:text-base">Read More</p>
                     <Image
                       src={ArrowRight}
                       alt="Arrow Right"
@@ -69,9 +73,9 @@ export default async function RecentPostCard (){
                       height={12}
                     />
                 </Link>
-              </figcaption>
+              </div>
             </div>
-          </figure>
+          </div>
         ))
       ) : (
         <div className="p-4 text-red-500">No Recent Post</div>

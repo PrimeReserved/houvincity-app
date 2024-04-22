@@ -26,6 +26,9 @@ export default function Service() {
                                         src={service.image}
                                         alt={service.title}
                                         width={500}
+                                        height={500}
+                                        layout="responsive"
+                                        loading="lazy"
                                     />
                                 </figure>
                                 <Link href={`/services/${service.slug}`}>

@@ -160,7 +160,11 @@ const SearchProperty = () => {
       {/* {filteredLand.length > 0 && <Land properties={filteredLand} />} */}
 
       {/* Render a message if there are no properties */}
-      {filteredHouses.length === 0 && filteredLand.length === 0 && <p>No properties found.</p>}
+      {filteredHouses.length === 0 && filteredLand.length === 0 &&  (
+      <div className="flex justify-center items-center h-[20rem]">
+        <p className="text-customTextColor">There is currently no available property listing for now, kindly check back later</p>
+      </div>
+    )}
 
       <div className="flex justify-center mt-8 space-x-4">
         {Array.from({

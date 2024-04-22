@@ -9,7 +9,7 @@ import { presentationTool } from 'sanity/presentation'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
-import {schema} from './sanity/schema'
+import { schema } from './sanity/schema'
 import { myTheme } from './theme'
 import StudioNavbar from './components/StudioNabar'
 import Logo from '@/components/Logo'

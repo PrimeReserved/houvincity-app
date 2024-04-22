@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from "next/image";
-import Founder_one from "@/public/images/about/founders/Frame 1000002841.svg"
-import Founder_two from "@/public/images/about/founders/Frame 1000002842.svg"
-import Founder_three from "@/public/images/about/founders/Frame 1000002843.svg"
-import About_section from "@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.svg"
+import Founder_one from "@/public/images/about/founders/founder_one.png"
+import Founder_two from "@/public/images/about/founders/founder_two.png"
+import Founder_three from "@/public/images/about/founders/founder_three.png"
+import About_section from "@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.png"
 
 interface Founder {
     image: StaticImageData;
@@ -44,7 +44,7 @@ export default function Founders() {
                             />
                         </figure>
                         <div className="card-body text-center">
-                            <h2 className="card-title space-y-4 text-[#040A3B]">{founder.name}</h2>
+                            <h2 className="card-title text-[#040A3B]">{founder.name}</h2>
                             <p className="text-1xl text-[#79747E]  font-extralight">({founder.position})</p>
                         </div>
                     </div>
@@ -57,23 +57,23 @@ export default function Founders() {
                     <section className="p-5">
                         <h2 className="mb-5 text-2xl">Discover our work ethics</h2>
                         <h1 className="text-4xl mb-5">About Our Company</h1>
-                        <p>We are a group of real estate engineers with the core value of satisfying our clients needs and desires. We set out principles and work towards the improvements, both for us as a company and to our clients, their satisfaction is our utmost priority
+                        <p className="font-light leading-normal">We are a group of real estate engineers with the core value of satisfying our clients needs and desires. We set out principles and work towards the improvements, both for us as a company and to our clients, their satisfaction is our utmost priority
                         </p>
                     </section>
 
                     <section className="mb-5 p-5">
                         <h3 className="mb-5 text-2xl">Mission</h3>
-                        <p>To be the leading real estate company that promotes the safety of clients’ investments through an automated property insurance system.
+                        <p className="font-light leading-normal">To be the leading real estate company that promotes the safety of clients’ investments through an automated property insurance system.
                         </p>
                     </section>
                     <section className="mb-5 p-5">
                         <h3 className="mb-5 text-2xl">Vision</h3>
-                        <p>LTo revolutionize the real estate system of operation by introducing a viable system that eliminates fraud, property theft, or land grabbing through adequate safety measures, and building smart cities that meet international standards, in real estate and housing.
+                        <p className="font-light leading-normal">LTo revolutionize the real estate system of operation by introducing a viable system that eliminates fraud, property theft, or land grabbing through adequate safety measures, and building smart cities that meet international standards, in real estate and housing.
                         </p>
                     </section>
                     <section className="mb-5 p-5">
                         <h3 className="mb-5 text-2xl">Value</h3>
-                        <p>Viability, Innovativeness, Credibility and Excellence (VICE)
+                        <p className="font-light leading-normal">Viability, Innovativeness, Credibility and Excellence (VICE)
                         </p>
                     </section>
                 </section>
@@ -115,9 +115,9 @@ export default function Founders() {
             </div>
 
             {/* Buttons  */}
-            <div className="flex justify-center gap-1 mb-20 relative bottom-5">
-                <button className="btn rounded-md bg-primary text-white py-4 px-5">Have a Question</button>
-                <button className="btn rounded-md bg-[#040A3B] text-white py-4 px-6">Find Property</button>
+            <div className="flex justify-center gap-5 mb-20 relative bottom-5">
+                <button className="btn rounded-md bg-primary text-white p-5">Have a Question</button>
+                <button className="btn rounded-md bg-[#040A3B] text-white p-5 px-8">Find Property</button>
             </div>
         </div>
     );

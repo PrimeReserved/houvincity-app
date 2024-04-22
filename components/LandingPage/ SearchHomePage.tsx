@@ -6,11 +6,12 @@ import IconButtonHref from "../Buttons/IconButtonHref";
 function SearchHomePage() {
   return (
     <div className="mt-[5rem]">
-
       <div className="lg:flex justify-center mt-[5rem] hidden">
-        <div className="flex xl:w-[70%] lg:w-[90%]  bg-[#F1F1F1] justify-evenly rounded-full opacity-80 py-2  ">
+        <div className="flex xl:w-[70%] lg:w-[90%] bg-[#F1F1F1] justify-evenly rounded-full opacity-80 py-2  ">
           <div className="flex gap-7 items-center">
-            <IoHomeOutline className="w-45 h-45" />
+            <div className="outline outline-offset-1 outline-primary p-2 rounded-full text-primary">
+              <IoHomeOutline className="w-5 h-5" />
+            </div>
             <div className="">
               <p className="text-xs text-customTextColor">I’m Looking to...</p>
               <select className="text-xs -ml-1 bg-[#F1F1F1]">
@@ -21,7 +22,9 @@ function SearchHomePage() {
           </div>
 
           <div className="flex gap-7 items-center">
-            <MdLocationOn className="h-45 "/>
+          <div className="outline outline-offset-1 outline-primary p-2 rounded-full text-primary">
+          <MdLocationOn className="h-5  w-5" />
+          </div>
             <div>
               <p className="text-xs text-customTextColor">Location</p>
               <select className="text-xs -ml-1 bg-[#F1F1F1]">
@@ -32,7 +35,9 @@ function SearchHomePage() {
             </div>
           </div>
           <div className="flex gap-7 items-center">
-            <IoHomeOutline className="w-45 h-45" />
+            <div className="outline outline-offset-1 outline-primary p-2 rounded-full text-primary">
+              <IoHomeOutline className="w-5 h-5" />
+            </div>
             <div className="">
               <p className="text-xs text-customTextColor">Price Range</p>
               <select className="text-xs -ml-1 bg-[#F1F1F1]">
@@ -47,7 +52,6 @@ function SearchHomePage() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

@@ -69,32 +69,30 @@ const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>
             <Image
               src={urlFor(image).url()}
               alt="Author"
-              width={80}
-              height={80}
-              className="h-[100%]"
+              width={70}
+              height={70}
+              loading="lazy"
             />
           ) : (
             <Image
               src={ProfilePic}
               alt="Profile Pic"
-              width={100}
-              height={200}
-              className="h-[100%]"
+              width={70}
+              height={70}
+              loading="lazy"
           />
           )}
         
         <div className=" flex flex-col justify-center px-4">
-          <blockquote>
             <p className="text-xs lg:text-[10px] xl:text-sm font-light">
               Posted by
             </p>
-          </blockquote>
-          <figcaption className="text-[16px] font-medium mt-1">
+          <div className="text-[16px] font-medium mt-1">
             <div className="text-primary lg:text-[12px] xl:text-base">
               { formatName(name) }
             </div>
             <p className="font-light text-sm mt-1">on {formatDate(publishedAt)}</p>
-          </figcaption>
+          </div>
         </div>
       </figure>
     </div>

@@ -34,9 +34,11 @@ export default async function DetailedCard({ post }: Readonly<DetailedCardProps>
             alt={post?.title || "Houses"}
             width={697}
             height={600}
+            layout="responsive"
+            loading="lazy"
           />
         ) : (
-          <Image src={Houses} alt="Houses" width={697} height={600} />
+          <Image src={Houses} alt="Houses" width={697} height={600} layout="responsive" loading="lazy" />
         )}
         <div className="absolute z-10 bg-black  px-10 py-7 h-[10rem] w-[43.6rem] bottom-0 opacity-70 ">
           <p className="text-primary text-xs mb-3">5 min read</p>

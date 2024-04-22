@@ -89,28 +89,27 @@ export default function BlogCard() {
   }
 
   return (
-    <div className="mt-5" suppressHydrationWarning>
+    <div className="mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
-        {posts?.length > 0 ? (
-          posts.map((post) => (
-            <div key={post._id} className="card lg:w-[400px] lg:h-[580px] bg-base-100 drop-shadow-md">
-              <div className="mt-3.5 ml-2.5" >
+        {
+          posts?.map((post) => (
+            <div key={post._id} className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col">
+              <div className="relative overflow-hidden rounded-t-lg h-100" >
                 {post?.mainImage && (
-                  <figure suppressHydrationWarning>
                     <Image
                       src={urlFor(post?.mainImage).url()}
                       alt={`${post.slug?.current}`}
                       width={380}
                       height={500}
+                      layout="responsive"
+                      loading="lazy"
+                      className="w-full h-full object-cover"
                     />
-                  </figure>
                 )}
               </div>
               <div className="card-body items-start mt-1">
                 <div className="flex items-center gap-2">
-                  <figure suppressHydrationWarning>
-                    <Image src={Calendar} alt="Calendar" width={13} height={13} />
-                  </figure>
+                  <Image src={Calendar} alt="Calendar" width={13} height={13} />            
                   {post?.publishedAt && (
                     <p className="text-xs">
                       {formatDate(post?.publishedAt)}
@@ -119,27 +118,23 @@ export default function BlogCard() {
                 </div>
                 
                 <h1 className="font-semibold text-lg mt-1">{post?.title}</h1>
-                <p className="line-clamp-3 text-[12px] mt-1">
+                <p className="line-clamp-3 text-[12px]">
                   {post?.categories.map((category: Category, index: number) => (
                     <span key={category._id}>{category.description}</span>
                   ))}
                 </p>
                 <div className="card-actions">
-                  <Link href={`/blog/${post?.slug?.current}`} suppressHydrationWarning>
-                    <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-primary text-white text-[12px] font-light inline-flex rounded-xl items-center space-x-2">
-                      <span>Read more</span>
-                      <figure suppressHydrationWarning>
-                        <Image src={ArrowRightWhite} alt="Arrow Right" width={12} height={12} />
-                      </figure>
+                  <Link href={`/blog/${post?.slug?.current}`}>
+                    <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
+                      Read more
+                      <Image src={ArrowRightWhite} alt="Arrow Right" width={12} height={12} />
                     </button>
                   </Link>
                 </div>
               </div>
             </div>
           ))
-        ) : (
-          <PostSkeleton />
-        )}
+        }
       </div>
       <NumberCount
         totalPages={totalPages}

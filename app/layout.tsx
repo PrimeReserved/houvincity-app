@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import { draftMode } from "next/headers";
-import { Inter } from 'next/font/google';
+import { Josefin_Sans } from 'next/font/google';
 import './globals.css';
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 
 
-const inter = Inter({ subsets: ['latin'] });
+const josefinSans = Josefin_Sans({
+  weight: ['300', '400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap'
+});
 
 export const metadata: Metadata = {
   title: 'Houvincty',
@@ -19,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={josefinSans.className}>
         {children}
         {draftMode().isEnabled && <LiveVisualEditing />}
         </body>
