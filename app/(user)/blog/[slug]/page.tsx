@@ -30,15 +30,15 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export default async function Page({ params: { slug} }: Readonly<Props>){
+export default async function Page({ params: { slug } }: Readonly<Props>) {
   const query = POST_QUERY;
   const post: Post = await client.fetch(query, { slug });
 
   return (
     <>
       <Header />
-      <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
-        <div className=" col-span-2">
+      <div className="flex flex-row mt-[5rem] xl:mx-10 justify-center mx-5">
+        <div className="basis-1/2">
           <DetailedCard post={post} />
         </div>
         <div className="col-span-1">

@@ -7,6 +7,8 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 const builder = imageUrlBuilder(client);
 

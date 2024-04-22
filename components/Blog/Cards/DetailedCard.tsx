@@ -34,6 +34,8 @@ export default async function DetailedCard({ post }: Readonly<DetailedCardProps>
             alt={post?.title || "Houses"}
             width={697}
             height={600}
+            layout="responsive"
+            loading="lazy"
           />
         ) : (
           <Image src={Houses} alt="Houses" width={697} height={600} layout="responsive" loading="lazy" />

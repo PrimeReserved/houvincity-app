@@ -13,6 +13,7 @@ import NumberCount from "@/components/NumberCount/NumberCount";
 import { useEffect, useState } from "react";
 import PostSkeleton from "@/components/Blog/PostSkeleton"
 import { Category } from "@/typings";
+import Loading from "@/app/loading";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -123,7 +124,6 @@ export default function BlogCard() {
                 <h1 className="font-semibold text-lg mt-1">{post?.title}</h1>
                 <p className="line-clamp-3 text-[12px]">
                   {post?.categories.map((category: Category, index: number) => (
-                    <span key={category._id}>{category.description}</span>
                     <span key={category._id}>{category.description}</span>
                   ))}
                 </p>

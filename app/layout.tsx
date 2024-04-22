@@ -30,7 +30,12 @@ import './globals.css';
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 
 
-const inter = Inter({ subsets: ['latin'] });
+const josefinSans = Josefin_Sans({
+  weight: ['300', '400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap'
+});
 
 export const metadata: Metadata = {
   title: 'Houvincty',
