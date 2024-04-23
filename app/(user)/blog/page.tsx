@@ -40,7 +40,7 @@ function Page() {
           <div className='col-span-2'>
             <ErrorBoundary>
               <Suspense fallback={<Loading />}>
-              <BlogCard  />
+                <BlogCard  />
               </Suspense>
             </ErrorBoundary>
           </div>

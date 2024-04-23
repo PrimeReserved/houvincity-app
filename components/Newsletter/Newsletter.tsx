@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client"
 
 import { Suspense, useState } from "react";
@@ -26,11 +25,6 @@ function Newsletter() {
       setError(error.message);
     }
   };
-=======
-import React from "react";
-
-function Newsletter() {
->>>>>>> b361d4b (I worked on the Property Listing Card)
   return (
     <div>
       <div className="hero min-h-[30rem] bg-white">
@@ -39,22 +33,14 @@ function Newsletter() {
             <h1 className=" text-[28px] md:text-[50px] text-[#040A3B] font-medium md:font-semibold">
               Never Miss A Beat
             </h1>
-<<<<<<< HEAD
             <p className="py-3 text-[#79747E] ">
-=======
-            <p className="py-6 text-[#79747E] ">
->>>>>>> b361d4b (I worked on the Property Listing Card)
               Stay In the Loop with our newsletter! Subscribe now for exclusive
-              updates, real estate insights and exciting offers delivered to
               your inbox
             </p>
-          </div>
-
           <div className="md:w-[60%] w-[100%]">
             <input
               type="email"
               placeholder="Enter your email Address"
-<<<<<<< HEAD
               className="p-4 focus-within:border-2 focus-within:border-primary bg-white rounded-full w-full border-[1px] h-[4rem] md:h-[5rem] relative shadow-md text-[14px] focus:outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -74,21 +60,13 @@ function Newsletter() {
               )}
               </>
             )}
-=======
-              className="p-4 bg-white rounded-full w-full border-[1px] h-[4rem] md:h-[5rem] relative shadow-md text-[14px] "
-            />
-            <button className=" absolute -ml-[8rem] md:-ml-[10rem] mt-3 md:mt-5 text-[12px] w-[7rem] md:w-[8rem]  h-[2.5rem] bg-[#6DBA3A] rounded-md focus:outline-none ">Subscribe</button>
->>>>>>> b361d4b (I worked on the Property Listing Card)
           </div>
         </div>
       </div>
     </div>
-  );
-}
+  </div>
+  )};
 
 export default Newsletter;
-<<<<<<< HEAD
 
 
-=======
->>>>>>> b361d4b (I worked on the Property Listing Card)
