@@ -7,7 +7,7 @@ import Banner from "@/public/images/landingPage/Rectangle 23803.png"
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-center bg-cover py-20 md:py-28">
+    <section className="relative w-full mt-[3rem] overflow-hidden bg-center bg-cover py-20 md:py-28">
       {/* Background Image */}
       <Image
         src={Banner}

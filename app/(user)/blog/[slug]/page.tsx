@@ -16,6 +16,9 @@ import Instagram from "@/public/images/socials/path1165.svg";
 import Twitter from "@/public/images/socials/path1009.svg";
 import Facebook from "@/public/images/socials/Vector.svg";
 import Youtube from "@/public/images/socials/youtube.png";
+import { Suspense } from "react";
+import SocialLogos from "@/components/Socials/SocialLogos";
+import DetailedSocialLink from "@/components/Socials/DetailedSocialLink";
 
 interface Props {
   params: {
@@ -49,36 +52,22 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
           <DetailedCard post={post} />
         </div>
         <div className="basis-1/1">
-          <AuthorProfile author={post.author} publishedAt={post.publishedAt} />
-          <RecentPostCard />
-          <div className="flex">
-            <SocialLink
-              href="https://www.linkedin.com/company/primereserved"
-              image={Instagram}
-              alt="Instagram"
-            />
-            <SocialLink
-              href="https://www.instagram.com/primereservedtech"
-              image={Twitter}
-              alt="Twitter"
-            />
-            <SocialLink
-              href="https://www.facebook.com/groups/1554028415142497/"
-              image={Facebook}
-              alt="Facebook"
-            />
-            <SocialLink
-              href="https://www.youtube.com/@primereservedtech"
-              image={Youtube}
-              alt="Youtube"
-            />
-          </div>
+          <Suspense fallback={<p>Loading...</p>}>
+            <AuthorProfile author={post.author} publishedAt={post.publishedAt} />
+          </Suspense>
+          
+          <Suspense fallback={<p>Loading...</p>}>
+            <RecentPostCard />
+          </Suspense>
+          <DetailedSocialLink href={""} image={Instagram} alt={""}/>
         </div>
       </div>
       <div className="p-10">
         <h1 className="text-center text-4xl">More Like This</h1>
         <ErrorBoundary>
+        <Suspense fallback={<p>Loading...</p>}>
           <BlogDetailPost />
+        </Suspense>
         </ErrorBoundary>
       </div>
       <FooterHome />
