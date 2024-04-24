@@ -1,9 +1,15 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image";
 import Link from "next/link";
 import { Services, services } from "./data/service";
 import { FaChevronRight } from "react-icons/fa";
 
+
 export default function Service() {
+  const [hoveredService, setHoveredService] = useState<Services | null>(null);
+
   return (
     <main className="bg-[#FAFAFA] pb-10">
       <h1 className="py-10 text-center text-4xl text-primary font-bold border-primary underline">
@@ -27,15 +33,25 @@ export default function Service() {
               {" "}
               {row.map((service, index) => (
                 <div
-                  className="container card bg-base-100 shadow-x"
+                  className="container card shadow-x relative"
                   key={index}
+                  onMouseEnter={() => setHoveredService(service)}
+                  onMouseLeave={() => setHoveredService(null)}
+                  role="contentinfo"
                 >
-                  <figure>
+                  <figure className="relative">
                     <Image
                       src={service.image}
                       alt={service.title}
                       width={400}
                     />
+                    {hoveredService === service && (
+                    <div className="absolute inset-0 bg-white flex justify-center items-center">
+                      <p className="text-center p-4 line-clamp-6">
+                        {service.description}
+                      </p>
+                    </div>
+                  )}
                   </figure>
                   <Link href={`/services/${service.slug}`}>
                     <div className="py-5 justify-between hover:bg-primary hover:text-white shadow shadow-primary px-4">
