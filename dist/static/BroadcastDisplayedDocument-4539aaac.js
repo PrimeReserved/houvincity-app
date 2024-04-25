@@ -1,0 +1,1 @@
+import{r}from"./sanity-c9240aca.js";import{m as e}from"./DisplayedDocumentBroadcaster-576d0804.js";var l=r.memo(function(o){const t=e();return r.useEffect(()=>t==null?void 0:t(o.value),[o.value,t]),null});export{l as default};

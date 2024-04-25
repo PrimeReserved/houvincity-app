@@ -17,22 +17,16 @@ interface DetailedNewsProps {
 }
 
 
-
-
 export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
   console.log('Received article in DetailedNews:', article);
-
-  const parsedDescription = article?.description
-    ? JSON.parse(article.description)
-    : null;
 
   return (
     <div className="w-[45.6rem]">
       <div className="relative">
-        {article?.image?.asset?._ref ? (
+        {article?.mainImage ? (
           <Image
             src={builder
-              .image(article?.image?.asset?._ref)
+              .image(article?.mainImage)
               .width(697)
               .height(600)
               .quality(100)
@@ -40,6 +34,7 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
             alt={article?.title || "Houses"}
             width={697}
             height={600}
+            priority
           />
         ) : (
           <Image src={Houses} alt="Houses" width={697} height={600} />
@@ -56,8 +51,8 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
         </div>
       </div>
       <div className="pb-10">
-        {parsedDescription ? (
-          <PortableText value={parsedDescription} components={RichTextComponents} />
+      {article?.body ? (
+          <PortableText value={article?.body} components={RichTextComponents} />
         ) : null}
       </div>
     </div>

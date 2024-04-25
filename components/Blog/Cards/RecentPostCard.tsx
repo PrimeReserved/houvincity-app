@@ -45,22 +45,17 @@ export default async function RecentPostCard (){
         posts.map((post) => (
           <div key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md">
             <Image
-              src={urlFor(post?.mainImage).url()}
+              src={urlFor(post?.mainImage).width(100).height(100).quality(100).url()}
               alt={`${post?.slug?.current}`}
               width={100}
-              height={200}
+              height={100}
               loading="lazy"
-              style={{
-                width: "100%"
-              }}
             />
 
             <div className="flex flex-col justify-center m-5">
-              <blockquote className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-normal">
+              <blockquote className="text-sm lg:text-[10px] xl:text-sm font-normal">
                 <p>
-                {post?.categories.map((category: Category, index: number) => (
-                    <span key={index}>{category.description}</span>
-                  ))}
+                {post.title}
                 </p>
               </blockquote>
               <div className="text-[16px] font-medium flex gap-3 mt-3">

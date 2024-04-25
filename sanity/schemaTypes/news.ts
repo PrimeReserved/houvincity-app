@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'news',
@@ -26,8 +26,8 @@ export default defineType({
       to: {type: 'author'},
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
+      name: 'mainImage',
+      title: 'Main image',
       type: 'image',
       options: {
         hotspot: true,
@@ -41,10 +41,20 @@ export default defineType({
       ]
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      description: 'Short description of the recent post or news.',
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'category'}}],
+    }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      type: 'blockContent',
     }),
   ],
 
@@ -52,7 +62,7 @@ export default defineType({
     select: {
       title: 'title',
       author: 'author.name',
-      media: 'image',
+      media: 'mainImage',
     },
     prepare(selection) {
       const {author} = selection

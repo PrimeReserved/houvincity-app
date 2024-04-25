@@ -65,12 +65,16 @@ export interface MainImage {
     current: string;
 }
 
-export interface News {
-    title: string;
+export interface News extends Base {
+    author: Author;
+    body: Block[];
+    categories: Category[];
+    mainImage: Image;
     slug: Slug;
-    image: Image;
+    title: string;
     description: string;
-  }
+    publishedAt: string;
+}
 
 export interface Property extends Base {
   title: string;

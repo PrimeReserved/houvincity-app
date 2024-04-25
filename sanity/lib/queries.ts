@@ -117,24 +117,57 @@ export const AUTHOR_QUERY = groq`
 
 
 // Retrive news
-export const NEWS_QUERY = groq`
-*[_type == "news"]{
-  ...,
-    author->,
-    _id,
-    title,
+export const NEWS_QUERY = groq`*[_type == "news" && defined(slug)]
+{
     slug{
-      current
+      current,
     },
+    title,
+    publishedAt,
+    mainImage{
+        alt,
+        asset{
+            _ref,
+        },
+    },
+    author->{
+      slug{
+        current,
+      },
+      name,
+      image{
+        alt,
+        asset->{
+          _ref,
+        },
+      },
+      publishedAt,
+    },
+    body[]{
+        children[]{
+            text,
+        },
+    },
+    categories[]->
+} | order(_createdAt asc)`;
+
+
+export const SINGLE_NEWS_QUERY = groq`*[_type == 'news' && slug.current == $slug][0]{
+  ...,
+  body,
+  author->{
+    slug{
+      current,
+    },
+    name,
     image{
       alt,
       asset{
-      _ref,
+        _ref,
       },
     },
-    description,
-  } | order(_createdAt desc)`;
-
+  },
+}`;
 
 /**
  * Queries for property listing

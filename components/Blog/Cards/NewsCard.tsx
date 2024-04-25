@@ -7,7 +7,8 @@ import Image from "next/image";
 import ArrowRight from "@/public/images/blog/Vector.svg";
 import imageUrlBuilder from "@sanity/image-url";
 import { NEWS_QUERY } from "@/sanity/lib/queries";
-import { SanityDocument } from "next-sanity";
+import { groq } from "next-sanity";
+import { News } from "@/typings";
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
 
@@ -16,19 +17,25 @@ function urlFor(source: SanityImageSource) {
 }
 
 async function getData() {
-  const query = NEWS_QUERY
-
-  const data = await client.fetch(query);
-
-  // Slice the data to only include the first 3 posts
-  const slicedData = data.slice(0, 3);
-
-  return slicedData;
+  try {
+    const query = groq`*[_type == 'news']{
+      ...,
+      author->,
+      categories[]->
+    } | order(_createdAt asc)`;
+    const data = await client.fetch(query);
+    // Slice the data to only include the first 3 posts
+    const slicedData = data.slice(0, 3);
+    return slicedData;
+  } catch (error) {
+    console.log(`Error fetching data: ${error}`);
+    throw new Error(`Error fetching News data`)
+  }
 }
 
 export default async function NewsCard(){
 
-  const news: SanityDocument[] = await getData();
+  const news: News[] = await getData();
   
   if (!news || !Array.isArray(news)) {
     return <h1>Fetching News, please be still..</h1>
@@ -39,21 +46,18 @@ export default async function NewsCard(){
         {news?.map((article) => (
           <Link href={`/news/${article.slug?.current}`} key={article._id}>
             <div className="flex bg-white rounded-md mt-5 drop-shadow-md">
-            {article?.image && (
+            {article?.mainImage && (
               <Image
-                src={urlFor(article?.image).url()}
+                src={urlFor(article?.mainImage).width(100).height(100).quality(100).url()}
                 alt={`${article.slug?.current}`}
                 width={100}
-                height={200}
+                height={100}
                 loading="lazy"
-                style={{
-                  width: "100%"
-                }}
               />
             )}
               <div className="flex flex-col justify-center m-5">
                 <blockquote>
-                  <p className="line-clamp-2 text-sm lg:text-[10px] xl:text-sm font-medium">{article?.description}</p>
+                  <p className="text-sm lg:text-[10px] xl:text-sm font-medium">{article?.title}</p>
                 </blockquote>
                 <div className="text-[16px] font-medium flex gap-3 mt-3">
                 <Link className="flex space-x-2" href={`/news/${article?.slug.current}`}>

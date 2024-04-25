@@ -34,7 +34,7 @@ export const generateStaticParams = async () => {
   }`;
   const slugs: Post[] = await client.fetch(query);
   const slugRoutes = slugs.map((slug) => slug?.slug?.current);
-  console.log(`Slug Routes: ${slugRoutes}`);
+ 
   return slugRoutes?.map((slug) => ({
     slug,
   }));
