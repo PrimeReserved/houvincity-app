@@ -20,7 +20,6 @@ interface HouseProps {
 }
 
 const House: React.FC<HouseProps> = ({ properties }) => {
-  console.log(`Properties: ${JSON.stringify(properties)}`);
 
   if (properties.length === 0) {
     return (
@@ -50,7 +49,7 @@ const House: React.FC<HouseProps> = ({ properties }) => {
               />
 
             </figure>
-            <div className="card-body mx-5 mt-5">
+            <div className="card-body mt-5">
               <div className="flex justify-between ">
                 <p className="card-title text-xs text-primary font-semibold">
                   {property?.title}
@@ -81,8 +80,8 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                       ></path>
                     </svg>
                     <p className="text-xs ">{property.bathrooms}</p>
+                    <p className="text-xs">{property.propertySize} sqm</p>
                   </div>
-                  <p className="text-xs ">{property.propertySize} sqm</p>
                 </div>
               </div>
               <p className="text-xs font-medium mt-4">{property.location}</p>

@@ -16,19 +16,15 @@ function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
+interface LandProps {
+  properties: Property[];
+}
 
 
 import Land1 from "@/public/images/property/Land1.svg";
-// import Land2 from "@/public/images/property/Land2.svg";
-// import Land3 from "@/public/images/property/Land3.svg";
-// import Land4 from "@/public/images/property/Land2.svg";
-// import Land5 from "@/public/images/property/Land1.svg";
-// import Land6 from "@/public/images/property/Land3.svg";
-// import Land7 from "@/public/images/property/Land1.svg";
-// import land8 from "@/public/images/property/Land3.svg";
-// import Land9 from "@/public/images/property/Land2.svg";
 
-const Land: React.FC<Property> = ({ properties }: any) => {
+
+const Land: React.FC<LandProps> = ({ properties }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   if (properties.length === 0) {
@@ -64,12 +60,12 @@ const Land: React.FC<Property> = ({ properties }: any) => {
               />
             </figure>
             <div className="card-body mx-5 mt-5">
-              <p className="text-customPrimary font-semibold ">N500,000,000</p>
+              <p className="text-customPrimary font-semibold ">N {property.budget}</p>
               <p className="text-xs font-medium mt-4">
                 {property.location}
               </p>
               <div className="mt-4 flex justify-between">
-                <p className="text-customPrimary font-semibold text-xs">1035sqft</p>
+                <p className="text-customPrimary font-semibold text-xs">{property.propertySize} sqft</p>
                 <button className="text-white bg-primary text-base px-3 py-2 -mr-5 rounded-br-md">
                   View Full Details
                 </button>
