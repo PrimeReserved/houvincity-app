@@ -1,26 +1,51 @@
+"use client"
+
+import { useEffect, useState } from "react";
 import Hero from "./Hero";
 import AboutProperty from "@/components/LandingPage/AboutProperty";
 import BlogHomePage from "@/components/LandingPage/BlogHomePage";
 import Card from "@/components/LandingPage/Card";
 import Review from "@/components/LandingPage/Review";
 import Newsletter from "@/components/Newsletter/Newsletter";
-import { client } from "@/sanity/lib/client";
-import { groq } from "next-sanity";
+import { usePropertyContext } from "@/context/PropertyContext";
+import { Post } from "@/typings";
+import { getPost } from "@/lib/data";
 
 export const revalidate = 30;
-const query = groq`*[_type == 'post']{
-  ...,
-  author->,
-  categories[]->
-} | order(_createdAt asc)`;
 
-export default async function Home() {
-  const posts = await client.fetch(query);
+export default function Home() {
+  const [selectedPropertyType, setSelectedPropertyType] = useState('House');
+  const { properties, setProperties } = usePropertyContext();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLandActive, setIsLandActive] = useState(false);
+
+  console.log(properties)
+
+  useEffect(() => {
+    async function fetchPost() {
+      try {
+        const postsData = await getPost();
+        if (!postsData || !Array.isArray(postsData)) return;
+        setPosts(postsData);
+      } catch (error) {
+        console.error(`Error Post in landing page: ${error}`)
+      }
+    }
+
+    fetchPost();
+  }, []);
+
+  const filterPropertiesByType = (propertyType: string) => {
+    return properties.filter(property => property.propertyType === propertyType);
+  };
+
+  const handlePropertyTypeChange = (propertyType: string) => {
+    setSelectedPropertyType(propertyType);
+  };
 
   return (
     <main>
       <Hero />
-
       {/* Discover Property */}
       <div className=" wrapper flex justify-center my-[6rem] ">
         <div className="flex flex-col xl:w-[40%] md:mx-20 mx-32 text-center ">
@@ -34,20 +59,30 @@ export default async function Home() {
           </p>
 
           <div className="flex justify-center">
-            <div className="flex gap-5 justify-center bg-white drop-shadow-lg py-10 w-[400px] ">
-              <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
-                Land
-              </button>
-              <button className="py-3 px-[3rem] bg-primary rounded-md text-xs text-white">
-                Smart Homes
-              </button>
+            <div className="flex justify-center">
+              <div className="flex gap-5 justify-center bg-white drop-shadow-lg py-10 w-[400px] ">
+                <button
+                  className={`py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ${isLandActive ? "bg-primary text-white" : "bg-white text-primary"
+                    }`}
+                    onClick={() => handlePropertyTypeChange('Land')}
+                >
+                  Land
+                </button>
+                <button
+                  className={`py-3 px-[3rem] border-[1px] border-primary rounded-md text-xs text-primary ${!isLandActive ? "bg-primary text-white" : "bg-white text-primary"
+                    }`}
+                    onClick={() => handlePropertyTypeChange('House')}
+                >
+                  Smart Homes
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Land */}
-      <Card />
+      <Card properties={filterPropertiesByType(selectedPropertyType)} />
       <AboutProperty />
 
       <BlogHomePage posts={posts} />

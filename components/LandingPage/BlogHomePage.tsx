@@ -38,19 +38,19 @@ const BlogHomePage = ({ posts }: Props) => {
   const displayedPosts = posts.slice(startIndex, endIndex);
 
   // Filter other posts
-  const otherPosts = posts.filter(
-    (post) => !post.categories.find((category) => category.title === "Featured")
-  );
-  
+  // const otherPosts = posts.filter(
+  //   (post) => !post.categories.find((category) => category.title === "Featured")
+  // );
+
   return (
     <div className="wrapper flex justify-center items-center  mb-[5rem] px-10">
-      <div className="flex flex-col items-center mt-10"> 
+      <div className="flex flex-col items-center mt-10">
         <h1 className="text-customSecondary text-4xl font-semibold">Stay Updated from Our Blog</h1>
         <p className="text-base text-customTextColor mt-3 mb-[3rem] ">Gather Infromation From Our Blog and Stay Updated</p>
         <div className="mb-10 flex justify-center items-center ">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5  md:space-y-0">
             {displayedPosts.map((post, idx) => (
-              <Link href={`/post/${post.slug.current}`} key={idx}>
+              <Link href={`/post/${post.slug.current}`} key={post.slug.current}>
                 <div className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col">
                   <div className="relative overflow-hidden rounded-t-lg h-72">
                     <Image
@@ -100,9 +100,11 @@ const BlogHomePage = ({ posts }: Props) => {
           </div>
         </div>
         <div className="flex justify-center mt-10">
-          <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
-            View All
-          </button>
+          <Link href={`/blog`}>
+            <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
+              View All
+            </button>
+          </Link>
         </div>
       </div>
     </div>

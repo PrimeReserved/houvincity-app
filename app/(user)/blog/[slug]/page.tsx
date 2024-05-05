@@ -49,7 +49,9 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
       <Header />
       <div className="flex flex-row mt-[5rem] xl:mx-10 justify-center mx-5">
         <div className="basis-1/2">
+         <Suspense fallback={<p>Loading...</p>}>
           <DetailedCard post={post} />
+         </Suspense>
         </div>
         <div className="basis-1/1">
           <Suspense fallback={<p>Loading...</p>}>

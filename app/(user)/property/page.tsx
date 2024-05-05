@@ -5,6 +5,7 @@ import Header from "@/components/Header/HeaderHome";
 import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
 import PropertyListing from "@/components/Property/PropertyListing";
+import PropertyProvider from "@/context/PropertyProvider";
 
 function page() {
   return (
@@ -22,7 +23,9 @@ function page() {
 
       <ErrorBoundary>
         <Suspense fallback={<p>Loading screen...</p>}>
-          <PropertyListing />
+          <PropertyProvider>
+            <PropertyListing />
+          </PropertyProvider>
         </Suspense>
       </ErrorBoundary>
 

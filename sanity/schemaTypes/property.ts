@@ -32,6 +32,48 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'fullPropertyImage',
+      title: 'Full Property Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'leftSidePropertyImage',
+      title: 'Left Side Property Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'rightSidePropertyImage',
+      title: 'Right Side Property Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'middlePropertyImage',
+      title: 'Middle Property Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'youtubeLink',
+      title: 'Youtube Link',
+      type: 'string',
+    }),
+    defineField({
+      name: 'legalSurvey',
+      title: 'Legal Survey',
+      type: 'string',
+    }),
+    defineField({
       name: 'location',
       title: 'Location',
       type: 'string',
@@ -47,7 +89,7 @@ export default defineType({
     defineField({
       name: 'budget',
       title: 'Budget',
-      type: 'number',
+      type: 'string',
     }),
     defineField({
       name: 'bedrooms',
@@ -56,7 +98,7 @@ export default defineType({
     }),
     defineField({
       name: 'bathrooms',
-      title: 'Badthrooms',
+      title: 'Bathrooms',
       type: 'number',
     }),
     defineField({

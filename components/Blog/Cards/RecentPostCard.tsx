@@ -43,7 +43,7 @@ export default async function RecentPostCard (){
       <p className="text-primary font-medium text-xl">Recent Posts</p>
       {posts?.length > 0 ? (
         posts.map((post) => (
-          <div key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md">
+          <div key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md animate-jump animate-once animate-ease-in">
             <Image
               src={urlFor(post?.mainImage).width(100).height(100).quality(100).url()}
               alt={`${post?.slug?.current}`}

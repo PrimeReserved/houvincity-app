@@ -3,9 +3,40 @@ import Image from 'next/image';
 import IconButtonHref from '../Buttons/IconButtonHref';
 import SearchHomePage from './ SearchHomePage';
 import Banner from "@/public/images/landingPage/Rectangle 23803.png"
-
+import { usePropertyContext } from "@/context/PropertyContext";
 
 const Hero: React.FC = () => {
+
+  const { properties, setProperties } = usePropertyContext();
+  // console.log(properties)
+  const uniqueTypes = [...new Set(properties.map(property => property.propertyType))];
+  const uniqueLocations = [...new Set(properties.map(property => property.location))];
+  const uniqueBudget = [...new Set(properties.map(property => property.budget))];
+
+  const filterProperties = (
+    selectedTypes: string,
+    selectedLocations: string,
+    selectedBudget: string,
+  ) => {
+    let filteredProperties = properties;
+    console.log("Selected Values:", selectedTypes, selectedLocations, selectedBudget);
+    if (selectedTypes) {
+      filteredProperties = filteredProperties.filter(property => property.propertyType === selectedTypes);
+      console.log("After Type Filter:", filteredProperties);
+    }
+    if (selectedLocations) {
+      filteredProperties = filteredProperties.filter(property => property.location === selectedLocations);
+      console.log("After Location Filter:", filteredProperties);
+    }
+  
+    if (selectedBudget) {
+      filteredProperties = filteredProperties.filter(property => property.budget === (selectedBudget));
+      console.log("After Budget Filter:", filteredProperties);
+    }
+    console.log(`Filtered Properties:`, filteredProperties);
+    setProperties(filteredProperties);
+  };
+
   return (
     <section className="relative w-full mt-[3rem] overflow-hidden bg-center bg-cover py-20 md:py-28">
       {/* Background Image */}
@@ -44,8 +75,12 @@ const Hero: React.FC = () => {
           />
         </div>
       </div>
-      <SearchHomePage />
-
+      <SearchHomePage
+        filterProperties={filterProperties}
+        uniqueTypes={uniqueTypes}
+        uniqueLocations={uniqueLocations}
+        uniqueBudget={uniqueBudget}
+       />
     </section>
   );
 };

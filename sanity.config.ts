@@ -20,6 +20,7 @@ export default defineConfig({
   title: "Real Estate Property Management",
   projectId,
   dataset,
+  apiVersion,
   schema,
   theme: myTheme,
   studio: {

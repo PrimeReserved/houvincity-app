@@ -24,14 +24,11 @@ function urlFor(source: SanityImageSource) {
 
 const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>  {
   const { name, image } = author;
-  console.log(`Author: ${author.publishedAt}`)
 
   if (!author || !author?.name || !author.image) {
     // Handle the case where author or its properties are undefined
     return <div>Author information is missing</div>;
   }
-
-  console.log("Author data:", author);
 
   function getOrdinalSuffix(day: number) {
     if (day > 3 && day < 21) return 'th';
@@ -63,7 +60,7 @@ const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>
   return (
     <div className="mx-10 mb-12">
       <h1 className="text-primary font-medium text-xl">Author</h1>
-      <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4" suppressHydrationWarning>
+      <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4 animate-jump animate-once animate-ease-in" suppressHydrationWarning>
         {
           image ? (
             <Image

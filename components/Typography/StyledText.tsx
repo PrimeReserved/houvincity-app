@@ -6,7 +6,7 @@ interface IStyledTextProps {
 
 const StyledText: React.FC<IStyledTextProps> = ({ children }) => {
     return (
-      <p className="mt-5 text-heroText text-[17px] px-8 font-medium">{children}</p>
+      <p className="mt-5 text-heroText text-[17px] px-8 font-medium animate-ping animate-once animate-ease-in">{children}</p>
     );
 };
 

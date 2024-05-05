@@ -1,6 +1,30 @@
-import React from "react";
+"use client"
+
+import { Suspense, useState } from "react";
+import { client } from "@/sanity/client";
 
 function Newsletter() {
+
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const data = {
+        _type: 'newsletterSubscription',
+        email: email,
+      };
+      const response = await client.create(data);
+      console.log(`Response: ${response}`);
+      setSubmitted(true);
+      setEmail('');
+    } catch (error: any) {
+      console.log(`Error submitting email: ${error}`);
+      setError(error.message);
+    }
+  };
   return (
     <div>
       <div className="hero min-h-[30rem] bg-white">
@@ -21,8 +45,24 @@ function Newsletter() {
               type="email"
               placeholder="Enter your email Address"
               className="p-4 focus-within:border-2 focus-within:border-primary bg-white rounded-full w-full border-[1px] h-[4rem] md:h-[5rem] relative shadow-md text-[14px] focus:outline-none"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="btn absolute text-white -ml-[8rem] md:-ml-[10rem] mt-3 md:mt-5 text-[12px] w-[7rem] md:w-[8rem]  h-[2.5rem] bg-[#6DBA3A] rounded-md hover:border-primary hover:text-primary hover:bg-white hover:border-2">Subscribe</button>
+            {submitted ? (
+              <p className="text-3xl mt-3 text-primary">Great! You have been Subscribed!</p>
+            ) : (
+              <>
+              {error ? (
+                <p className="text-red-500">{error}</p>
+              ) : (
+               <Suspense fallback={<p>Please wait...</p>}>
+                  <button className="btn absolute text-white -ml-[8rem] md:-ml-[10rem] mt-3 md:mt-5 text-[12px] w-[7rem] md:w-[8rem]  h-[2.5rem] bg-[#6DBA3A] rounded-md hover:border-primary hover:text-primary hover:bg-white hover:border-2"
+                      onClick={handleSubmit}
+                      >Subscribe</button>
+               </Suspense>
+              )}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -31,3 +71,5 @@ function Newsletter() {
 }
 
 export default Newsletter;
+
+
