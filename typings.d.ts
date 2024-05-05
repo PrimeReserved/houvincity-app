@@ -71,14 +71,21 @@ export interface News {
   }
 
 export interface Property extends Base {
-  title: string;
-  propertyType: string;
-  propertyImage: Image;
-  location: string;
-  propertySize: string;
-  budget: number;
-  slug?: Slug;
-  description: string;
-  bedrooms: number;
-  bathrooms: number;
-}
+    title: string;
+    description: string;
+    propertyType: Image;
+    propertyImage: Image;
+    fullPropertyImage: Image;
+    leftSidePropertyImage: Image;
+    rightSidePropertyImage: Image;
+    middlePropertyImage: Image;
+    youtubeLink: string;
+    legalSurvey: string;
+    location: string;
+    propertySize: string;
+    budget: string;
+    bedrooms: number;
+    bathrooms: number;
+    slug?: Slug;
+    body: BlockContent;
+  }

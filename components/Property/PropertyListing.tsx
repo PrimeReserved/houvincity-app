@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ErrorBoundary from "@/components/ErrorBoundary";
 import SearchProperty from "./SearchPropety";

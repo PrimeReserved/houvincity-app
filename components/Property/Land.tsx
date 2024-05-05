@@ -42,13 +42,6 @@ const Land: React.FC<Property> = ({ properties }: any) => {
   return (
     <div className="wrapper">
       <h1 className=" text-customPrimary font-bold text-4xl my-10">Land</h1>
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search..."
-        className="border border-gray-300 px-3 py-2 rounded-md mb-5"
-      />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
         {properties.map(( property: Property ) => (
           <div
