@@ -11,7 +11,6 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import NumberCount from "@/components/NumberCount/NumberCount";
 import { useEffect, useState } from "react";
-import PostSkeleton from "@/components/Blog/PostSkeleton"
 import { Post, Category } from "@/typings";
 
 // Get a pre-configured url-builder from your sanity client
@@ -36,7 +35,6 @@ async function getData() {
 
 
 export default function BlogCard() {
-  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState<Post[]>([]);
