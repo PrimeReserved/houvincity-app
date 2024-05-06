@@ -19,8 +19,6 @@ export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLandActive, setIsLandActive] = useState(false);
 
-  console.log(properties)
-
   useEffect(() => {
     async function fetchPost() {
       try {

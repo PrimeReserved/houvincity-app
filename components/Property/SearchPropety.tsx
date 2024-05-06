@@ -34,7 +34,6 @@ const SearchProperty = ({ filterProperties, uniqueTypes, uniqueLocations, unique
       setSelectedSize('size');
       setSelectedBudget('budget');
       setProperties(properties)
-      console.log("No filter criteria selected");
     }
   };
   

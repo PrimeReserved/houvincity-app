@@ -9,7 +9,6 @@ const IconButtonHref: React.FC<IconButtonHrefProps> = ({
   href,
   icon,
 }) => {
-  console.log(`The href: ${href}`)
   return (
     <Link href={href ?? `${href}`}>
       <button className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[3rem] py-4 text-sm text-white duration-300 ease-in-out hover:bg-primary/80">

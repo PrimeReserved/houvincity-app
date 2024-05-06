@@ -19,7 +19,6 @@ function urlFor(source: SanityImageSource) {
 const PAGE_SIZE = 3;
 
 function Card({ properties }: Readonly<{ properties: Property[]}>) {
-  console.log({ properties })
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 

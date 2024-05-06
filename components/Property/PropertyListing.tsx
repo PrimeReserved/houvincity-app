@@ -20,25 +20,19 @@ export default function PropertyListing() {
     selectedBudget: string
   ) => {
     let filteredProperties = properties;
-    console.log("Selected Values:", selectedType, selectedLocation, selectedSize, selectedBudget);
     if (selectedType) {
       filteredProperties = filteredProperties.filter(property => property.propertyType === selectedType);
-      console.log("After Type Filter:", filteredProperties);
     }
     if (selectedLocation) {
       filteredProperties = filteredProperties.filter(property => property.location === selectedLocation);
-      console.log("After Location Filter:", filteredProperties);
     }
     // Corrected filter by property size
     if (selectedSize) {
       filteredProperties = filteredProperties.filter(property => property.propertySize === selectedSize);
-      console.log("After Size Filter:", filteredProperties);
     }
     if (selectedBudget) {
       filteredProperties = filteredProperties.filter(property => property.budget === parseInt(selectedBudget));
-      console.log("After Budget Filter:", filteredProperties);
     }
-    console.log(`Filtered Properties:`, filteredProperties);
     setProperties(filteredProperties);
   };
 
