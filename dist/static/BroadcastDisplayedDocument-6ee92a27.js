@@ -1,1 +1,0 @@
-import{r}from"./sanity-43b3ab63.js";import{m as e}from"./DisplayedDocumentBroadcaster-e3296dc1.js";var l=r.memo(function(o){const t=e();return r.useEffect(()=>t==null?void 0:t(o.value),[o.value,t]),null});export{l as default};

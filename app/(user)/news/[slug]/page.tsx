@@ -1,7 +1,6 @@
 // // app/(user)/blog/[slug]/page.tsx
 import { groq } from "next-sanity";
 import { News } from "../../../../typings"
-import { NEWS_QUERY, SINGLE_NEWS_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/client";
 import DetailedNews from "@/components/Blog/Cards/DetailedNews";
 import Header from "@/components/Header/HeaderHome";
@@ -26,7 +25,7 @@ export const generateStaticParams = async () => {
   }`;
   const slugs: News[] = await client.fetch(query);
   const slugRoutes = slugs.map((slug) => slug?.slug?.current);
-  console.log(`Slug Routes: ${slugRoutes}`);
+
   return slugRoutes?.map((slug) => ({
     slug,
   }));
@@ -50,7 +49,6 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
     },
   }`;
   const article: News = await client.fetch(query, { slug });
-  console.log('Fetched article:', article); 
 
   return (
     <>

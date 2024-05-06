@@ -31,7 +31,6 @@ async function getData() {
   const query = NEWS_QUERY
 
   const data = await client.fetch(query);
-  console.log(`News query: ${data}`)
   return data;
 }
 
@@ -120,10 +119,9 @@ export default function NewsPost() {
 
                 <h1 className="font-semibold text-lg mt-1">{post?.title}</h1>
                 <p className="line-clamp-3 text-[12px]">
-                  {post?.categories && post.categories.map((category: Category, index: number) => (
+                {post?.categories.map((category: Category, index: number) => (
                     <span key={category._id}>{category.description}</span>
                   ))}
-
                 </p>
                 <div className="card-actions">
                   <Link href={`/news/${post?.slug?.current}`}>
