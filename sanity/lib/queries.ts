@@ -174,7 +174,7 @@ export const SINGLE_NEWS_QUERY = groq`*[_type == 'news' && slug.current == $slug
  */
 
 // Query to fetch all property listings:
-export const PROPERTY_LISTING_QUERY = groq`*[_type == "propertyListing"]{
+export const PROPERTY_LISTING_QUERY = groq`*[_type == "property"]{
   ...,
   _id,
   title,
@@ -189,23 +189,11 @@ export const PROPERTY_LISTING_QUERY = groq`*[_type == "propertyListing"]{
   landDetails: *[_type == "land" && references(^._id)] {
     landSize
   }
-}
-`
+}`;
 
 // Query to fetch a single property by its slug:
-export const PROPERY_LISTING = groq`
-  *[_type == "propertyListing" && slug.current == $slug]{
-    title,
-    slug,
-    description,
-    price,
-    location,
-    image,
-    bedrooms,
-    bathrooms,
-    area,
-    garage,
-    publishedAt
-  }[0]
-  `
+export const PROPERTY_LISTING =  groq`*[_type == 'property' && slug.current == $slug][0]{
+  ...,
+  body,
+}`;
 

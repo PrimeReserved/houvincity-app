@@ -1,13 +1,13 @@
-import React from 'react'
 
-function YoutubeEmbed() {
+
+function YoutubeEmbed({ source }:any) {
   return (
     <div>
       <div className="video-responsive">
       <iframe
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/P4eLCRqJ97s?si=ql8kficVRpn7k-11"
+        src={source}
         title="YouTube video player"
         frameBorder="0" // Replace frameBorder with frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

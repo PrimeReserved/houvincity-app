@@ -12,7 +12,7 @@ const DetailedSocialLink: React.FC<SocialLinkProps> = ({
       aria-label="social-link"
       className="dark:text-white-dark mr-6 text-black duration-300 hover:text-primary dark:hover:text-primary"
     >
-      <Image src={image} alt={alt} width={30} height={30} />
+      <Image src={image} alt={alt} width={40} height={40} />
     </a>
   );
 

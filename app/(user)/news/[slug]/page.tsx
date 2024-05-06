@@ -49,7 +49,6 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
       },
     },
   }`;
-  console.log(query)
   const article: News = await client.fetch(query, { slug });
   console.log('Fetched article:', article); 
 
@@ -61,7 +60,7 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
           <DetailedNews article={article} />
         </div>
         <div className="col-span-1">
-          {/* <AuthorProfile author={article.author} publishedAt={article.publishedAt} /> */}
+          <AuthorProfile author={article?.author} publishedAt={article.publishedAt} />
           <RecentPostCard  />
         </div>
         <div className="col-span-1"></div>

@@ -30,9 +30,9 @@ const House: React.FC<HouseProps> = ({ properties }) => {
   }
 
   return (
-    <div className="wrapper">
+    <div className="container">
       <h1 className=" text-customPrimary font-bold text-4xl m-10">Houses</h1>
-      <div className="grid grid-cols-1 px-5 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
         {properties.map((property) => (
           <div
             className="card card-compact w-[20rem] bg-base-100 shadow-xl rounded-b-md"

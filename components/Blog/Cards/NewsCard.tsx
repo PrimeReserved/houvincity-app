@@ -42,7 +42,7 @@ export default async function NewsCard(){
   }
     return (
       <div className="lg:mx-12">
-        <p className="text-primary font-medium mt-[2.6rem] text-xl">News</p>
+        <p className="text-primary font-medium mt-[2.6rem] text-3xl">News</p>
         {news?.map((article) => (
           <Link href={`/news/${article.slug?.current}`} key={article._id}>
             <div className="flex bg-white rounded-md mt-5 drop-shadow-md">

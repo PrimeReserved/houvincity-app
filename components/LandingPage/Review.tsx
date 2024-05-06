@@ -7,7 +7,7 @@ import { FaStarHalf } from "react-icons/fa";
 
 function Review() {
   return (
-    <div className="px-10">
+    <div className="md:px-10">
       <div className="lg:wrapper mx-5 mb-[5rem] ">
         <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
           Our Happy Homeowners

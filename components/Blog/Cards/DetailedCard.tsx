@@ -21,8 +21,8 @@ interface DetailedCardProps {
 export default async function DetailedCard({ post }: Readonly<DetailedCardProps>) {
   
   return (
-    <div className="w-[45.6rem]">
-      <div className="relative">
+    <div className="md:w-[45.6rem]">
+      <div className="md:relative">
         {post?.mainImage ? (
           <Image
             src={builder
@@ -40,7 +40,7 @@ export default async function DetailedCard({ post }: Readonly<DetailedCardProps>
         ) : (
           <Image src={Houses} alt="Houses" width={697} height={600} layout="responsive" loading="lazy" />
         )}
-        <div className="absolute z-10 bg-black  px-10 py-7 h-[10rem] w-[43.6rem] bottom-0 opacity-70 ">
+        <div className="md:absolute z-10 bg-black  px-10 py-7 h-[10rem] md:w-[43.6rem] bottom-0 opacity-70 ">
           <p className="text-primary text-xs mb-3">5 min read</p>
           {post?.title ? (
             <h1 className="text-white text-3xl w-[30rem] ">{post?.title}</h1>
@@ -51,7 +51,7 @@ export default async function DetailedCard({ post }: Readonly<DetailedCardProps>
           )}
         </div>
       </div>
-      <div className="pb-10">
+      <div className="sm:p-x-5 pb-10">
         {post?.body ? (
           <PortableText value={post?.body} components={RichTextComponents} />
         ) : null}

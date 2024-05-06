@@ -109,7 +109,7 @@ export default function BlogDetailPost() {
 
   return (
     <div className="mt-5 mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-5  md:space-y-0">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:space-y-0">
         {posts?.map((post) => (
           <div
             key={post._id}

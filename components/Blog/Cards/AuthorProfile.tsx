@@ -58,8 +58,8 @@ const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>
 
 
   return (
-    <div className="mx-10 mb-12">
-      <h1 className="text-primary font-medium text-xl">Author</h1>
+    <div className="lg:mx-12">
+      <h1 className="text-primary font-medium text-3xl">Author</h1>
       <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4 animate-jump animate-once animate-ease-in" suppressHydrationWarning>
         {
           image ? (

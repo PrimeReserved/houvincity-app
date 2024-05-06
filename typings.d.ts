@@ -92,6 +92,6 @@ export interface Property extends Base {
     budget: string;
     bedrooms: number;
     bathrooms: number;
-    slug?: Slug;
+    slug: Slug;
     body: BlockContent;
   }
