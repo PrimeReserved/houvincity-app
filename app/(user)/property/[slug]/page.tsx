@@ -4,6 +4,7 @@ import { client } from "@/sanity/client";
 import { Property } from '@/typings';
 import { PROPERTY_LISTING } from '@/sanity/lib/queries';
 import { Suspense } from 'react';
+import Loading from '@/app/loading';
 
 interface Props {
   params: {
@@ -30,12 +31,9 @@ export const generateStaticParams = async () => {
   const query = PROPERTY_LISTING;
   const property: Property = await client.fetch(query, { slug });
 
-  console.log(`Property detail: ${property?.fullPropertyImage}`)
-  console.log(typeof property?.youtubeLink);
-
   return (
     <div>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loading/>}>
           <PropertyDetailed property={property} />
         </Suspense>
     </div>

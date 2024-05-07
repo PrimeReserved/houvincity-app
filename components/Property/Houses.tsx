@@ -20,6 +20,7 @@ interface HouseProps {
 }
 
 const House: React.FC<HouseProps> = ({ properties }) => {
+  const headerText = properties.some(property => property.propertyType === "House") ? "Houses" : "Land";
 
   if (properties.length === 0) {
     return (

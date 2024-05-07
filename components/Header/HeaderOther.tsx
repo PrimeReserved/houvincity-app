@@ -38,9 +38,9 @@ const HeaderOther = () => {
   return (
     <header
       className={classNames(
-        "header left-0 top-0 z-40 flex w-full items-center border-b-2 border-gray-100 dark:border-gray-dark",
+        "header left-0 top-0 z-40 flex w-full items-center border-b-2 border-gray-100",
         {
-          "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark":
+          "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition":
             sticky,
           "absolute bg-transparent": !sticky,
         }
@@ -55,14 +55,14 @@ const HeaderOther = () => {
                 alt="logo"
                 width={140}
                 height={30}
-                className="w-full dark:hidden"
+                className="w-full"
               />
               <Image
                 src="/images/logo/primereservedlogo.png"
                 alt="logo"
                 width={140}
                 height={30}
-                className="hidden w-full dark:block"
+                className="hidden w-full"
               />
             </Link>
           </div>
@@ -76,14 +76,14 @@ const HeaderOther = () => {
               >
                 <span
                   className={classNames(
-                    "relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white",
+                    "relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300",
                     { "top-[7px] rotate-45": navbarOpen, "opacity-0": navbarOpen }
                   )}
                 />
-                <span className="relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white" />
+                <span className="relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300" />
                 <span
                   className={classNames(
-                    "relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white",
+                    "relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300",
                     { "top-[-8px] -rotate-45": navbarOpen }
                   )}
                 />
@@ -132,7 +132,7 @@ const HeaderOther = () => {
                           </p>
                           <div
                             className={classNames(
-                              "submenu? relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full",
+                              "submenu? relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full",
                               { block: openIndex === index, hidden: openIndex !== index }
                             )}
                           >
@@ -141,7 +141,7 @@ const HeaderOther = () => {
                                 <Link
                                   href={submenuItem.path}
                                   key={subIndex}
-                                  className="block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3"
+                                  className="block rounded py-2.5 text-sm text-dark hover:text-primary lg:px-3"
                                 >
                                   {submenuItem.title}
                                 </Link>

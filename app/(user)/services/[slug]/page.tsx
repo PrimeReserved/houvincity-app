@@ -4,6 +4,8 @@ import Header from "@/components/Header/HeaderHome";
 import Hero from "@/components/Hero/Hero";
 import ServiceBox from "@/components/Services/ServiceBox";
 import { services, Services } from "@/components/Services/data/service"
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 function addSpaceAfterFourLines(content: string) {
   // Split the content into an array of lines
@@ -50,10 +52,12 @@ const Page = ({ params }: { params: Services })  => {
         </ErrorBoundary>
   
         <ErrorBoundary>
+          <Suspense fallback={<Loading/>}>
           <Hero
             image={`${hero}`}
             title={title}
           />
+          </Suspense>
         </ErrorBoundary>
         <div className="bg-[#FAFAFA] mb-10 h-20">
           <h3 className="pl-20 mt-6 font-bold break-normal md:break-all inline-block align-middle">Service: <span className="font-normal">{title}</span></h3>

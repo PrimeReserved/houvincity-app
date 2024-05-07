@@ -1,21 +1,19 @@
-import React from 'react';
 import ErrorBoundary from '@/components/ErrorBoundary'
 import FooterHome from '@/components/Footer/FooterHome'
 import Header from '@/components/Header/HeaderHome'
-import Privacy from '@/components/Privacy/Privacy';
+import Terms from '@/components/Privacy/Terms'
+import React from 'react'
 
-function page() {
+export default function Page() {
   return (
     <>
     <ErrorBoundary>
       <Header />
     </ErrorBoundary>
-    <Privacy />
+    <Terms />
     <ErrorBoundary>
       <FooterHome />
     </ErrorBoundary>
   </>
   )
 }
-
-export default page

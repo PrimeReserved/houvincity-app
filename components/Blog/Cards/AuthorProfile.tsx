@@ -1,12 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { client } from "@/sanity/client";
 import ProfilePic from "@/public/images/blog/Ellipse 7.svg";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Author } from "@/typings";
+import Loading from "@/app/loading";
 
 interface AuthorProfileProps {
   author: Author;
@@ -63,13 +64,15 @@ const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>
       <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4 animate-jump animate-once animate-ease-in" suppressHydrationWarning>
         {
           image ? (
-            <Image
+            <Suspense fallback={<Loading />}>
+              <Image
               src={urlFor(image).url()}
               alt="Author"
               width={70}
               height={70}
               loading="lazy"
             />
+            </Suspense>
           ) : (
             <Image
               src={ProfilePic}

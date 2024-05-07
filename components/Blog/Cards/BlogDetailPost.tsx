@@ -9,10 +9,9 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
-import NumberCount from "@/components/NumberCount/NumberCount";
-import { useEffect, useState } from "react";
-import PostSkeleton from "@/components/Blog/PostSkeleton";
+import { Suspense, useEffect, useState } from "react";
 import { Post, Category } from "@/typings";
+import Loading from "@/app/loading";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -117,7 +116,8 @@ export default function BlogDetailPost() {
           >
             <div className="relative overflow-hidden rounded-t-lg h-100">
               {post?.mainImage && (
-                <Image
+               <Suspense fallback={<Loading />}>
+                 <Image
                   src={urlFor(post?.mainImage).url()}
                   alt={`${post.slug?.current}`}
                   width={380}
@@ -126,6 +126,7 @@ export default function BlogDetailPost() {
                   loading="lazy"
                   className="w-full h-full object-cover"
                 />
+               </Suspense>
               )}
             </div>
             <div className="card-body items-start mt-1">

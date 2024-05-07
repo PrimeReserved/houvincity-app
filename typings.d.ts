@@ -79,7 +79,7 @@ export interface News extends Base {
 export interface Property extends Base {
     title: string;
     description: string;
-    propertyType: Image;
+    propertyType: string;
     propertyImage: Image;
     fullPropertyImage: Image;
     leftSidePropertyImage: Image;

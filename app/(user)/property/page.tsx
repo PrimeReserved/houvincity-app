@@ -6,6 +6,7 @@ import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
 import PropertyListing from "@/components/Property/PropertyListing";
 import PropertyProvider from "@/context/PropertyProvider";
+import Loading from "@/app/loading";
 
 function page() {
   return (
@@ -22,7 +23,7 @@ function page() {
       </ErrorBoundary>
 
       <ErrorBoundary>
-        <Suspense fallback={<p>Loading screen...</p>}>
+        <Suspense fallback={<Loading />}>
           <PropertyProvider>
             <PropertyListing />
           </PropertyProvider>

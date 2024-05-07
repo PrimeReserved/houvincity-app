@@ -189,6 +189,14 @@ const Services = () => (
           Privacy Policy
         </Link>
       </li>
+      <li>
+        <Link
+          href="/terms-and-conditions"
+          className="dark:text-white-dark mb-4 inline-block text-base font-light text-white duration-300 hover:text-primary dark:hover:text-primary"
+        >
+          Terms and Conditions
+        </Link>
+      </li>
     </ul>
   </div>
 );

@@ -7,6 +7,8 @@ import Service from '@/components/Services/Services'
 import CustomerTestimony from '@/components/Services/CustomerTestimony';
 import ServiceBox from '@/components/Services/ServiceBox';
 import { Metadata } from 'next'
+import { Suspense } from 'react';
+import Loading from '@/app/loading';
  
 export const metadata: Metadata = {
   title: 'Services | Houvinvity Real Estate Property Management',
@@ -24,10 +26,12 @@ function Page() {
       </ErrorBoundary>
 
       <ErrorBoundary>
-        <Hero
+       <Suspense fallback={<Loading />}>
+       <Hero
           image={`./images/services/services.png`}
           title="Services"
         />
+       </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary>

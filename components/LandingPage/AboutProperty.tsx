@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { FaCheck } from "react-icons/fa";
 import Image from "next/image";
 import LuxuryHome from "@/public/images/landingPage/Union.png";
+import Loading from "@/app/loading";
 
 function AboutProperty() {
   return (
@@ -74,6 +75,7 @@ function AboutProperty() {
         </div>
       </div>
       <div>
+        <Suspense fallback={<Loading />}>
         <Image
           src={LuxuryHome}
           alt="Luxury Home"
@@ -83,6 +85,7 @@ function AboutProperty() {
             clipPath: "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
           }}
         />
+        </Suspense>
       </div>
     </div>
   );

@@ -5,7 +5,9 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
-import { Category, Post } from "@/typings"
+import { Post } from "@/typings"
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 
 const builder = imageUrlBuilder(client);
@@ -44,13 +46,15 @@ export default async function RecentPostCard (){
       {posts?.length > 0 ? (
         posts.map((post) => (
           <div key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md animate-jump animate-once animate-ease-in">
-            <Image
-              src={urlFor(post?.mainImage).width(100).height(100).quality(100).url()}
-              alt={`${post?.slug?.current}`}
-              width={100}
-              height={100}
-              loading="lazy"
-            />
+            <Suspense fallback={<Loading />}>
+              <Image
+                src={urlFor(post?.mainImage).width(100).height(100).quality(100).url()}
+                alt={`${post?.slug?.current}`}
+                width={100}
+                height={100}
+                loading="lazy"
+              />
+            </Suspense>
 
             <div className="flex flex-col justify-center m-5">
               <blockquote className="text-sm lg:text-[10px] xl:text-sm font-normal">

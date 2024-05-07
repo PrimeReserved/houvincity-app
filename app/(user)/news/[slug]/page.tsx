@@ -10,6 +10,7 @@ import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Suspense } from "react";
 import NewsDetailPost from "@/components/Blog/Cards/NewsDetailPost";
+import Loading from "@/app/loading";
 
 interface Props {
   params: {
@@ -55,11 +56,18 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
       <Header />
       <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
         <div className=" col-span-2">
-          <DetailedNews article={article} />
+          <Suspense fallback={<Loading />}>
+            <DetailedNews article={article} />
+          </Suspense>
+        
         </div>
         <div className="col-span-1">
-          <AuthorProfile author={article?.author} publishedAt={article.publishedAt} />
-          <RecentPostCard  />
+          <Suspense fallback={<Loading />}>
+            <AuthorProfile author={article?.author} publishedAt={article.publishedAt} />
+          </Suspense>
+          <Suspense fallback={<Loading />}>
+            <RecentPostCard  />
+          </Suspense>
         </div>
         <div className="col-span-1"></div>
       </div>

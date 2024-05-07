@@ -7,6 +7,8 @@ import { dataset, projectId } from "@/sanity/env";
 import { RichTextComponents } from "./RichTextComponents";
 import { PortableText } from "@portabletext/react";
 import { News } from "@/typings"
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 export const revalidate = 30;
 const builder = imageUrlBuilder({ projectId, dataset });
@@ -24,7 +26,8 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
     <div className="w-[45.6rem]">
       <div className="relative">
         {article?.mainImage ? (
-          <Image
+          <Suspense fallback={<Loading />}>
+            <Image
             src={builder
               .image(article?.mainImage)
               .width(697)
@@ -36,6 +39,7 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
             height={600}
             priority
           />
+          </Suspense>
         ) : (
           <Image src={Houses} alt="Houses" width={697} height={600} />
         )}

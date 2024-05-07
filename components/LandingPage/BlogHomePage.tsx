@@ -5,9 +5,10 @@ import { Post } from "@/typings";
 import { client } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
+import Loading from "@/app/loading";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -53,6 +54,7 @@ const BlogHomePage = ({ posts }: Props) => {
               <Link href={`/post/${post.slug.current}`} key={post.slug.current}>
                 <div className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col">
                   <div className="relative overflow-hidden rounded-t-lg h-72">
+                    <Suspense fallback={<Loading />}>
                     <Image
                       src={urlFor(post.mainImage).url()}
                       alt={post.title}
@@ -62,6 +64,7 @@ const BlogHomePage = ({ posts }: Props) => {
                       layout="responsive"
                       loading="lazy"
                     />
+                    </Suspense>
                   </div>
                   <div className="p-4">
                     <div className="flex items-center gap-4">

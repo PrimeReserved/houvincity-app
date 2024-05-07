@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import Image from "next/image";
 import Link from "next/link";
 import { Services, services } from "./data/service";
 import { FaChevronRight } from "react-icons/fa";
+import Loading from "@/app/loading";
 
 
 export default function Service() {
@@ -40,17 +41,24 @@ export default function Service() {
                   role="contentinfo"
                 >
                   <figure className="relative">
-                    <Image
+                   <Suspense fallback={<Loading />}>
+                   <Image
                       src={service.image}
                       alt={service.title}
                       width={400}
                     />
+                   </Suspense>
                     {hoveredService === service && (
-                    <div className="absolute inset-0 bg-white flex justify-center items-center">
-                      <p className="text-center p-4 line-clamp-6">
-                        {service.description}
-                      </p>
-                    </div>
+                     <div>
+                      <div className="absolute inset-0 bg-white flex justify-center items-center">
+                       <div className="px-4">
+                       <h2 className="text-primary text-3xl pb-2 underline pr-5">{service.title}</h2>
+                       <p className="text-center line-clamp-6">
+                          {service.description}
+                        </p>
+                       </div>
+                      </div>
+                     </div>
                   )}
                   </figure>
                   <Link href={`/services/${service.slug}`}>

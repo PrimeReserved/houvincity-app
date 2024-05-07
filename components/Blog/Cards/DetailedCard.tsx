@@ -7,6 +7,8 @@ import { dataset, projectId } from "@/sanity/env";
 import { RichTextComponents } from "./RichTextComponents";
 import { PortableText } from "@portabletext/react";
 import { Post } from "@/typings"
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 export const revalidate = 30;
 const builder = imageUrlBuilder({ projectId, dataset });
@@ -19,24 +21,26 @@ interface DetailedCardProps {
 
 
 export default async function DetailedCard({ post }: Readonly<DetailedCardProps>) {
-  
+
   return (
     <div className="md:w-[45.6rem]">
       <div className="md:relative">
         {post?.mainImage ? (
-          <Image
-            src={builder
-              .image(post?.mainImage)
-              .width(697)
-              .height(600)
-              .quality(100)
-              .url()}
-            alt={post?.title || "Houses"}
-            width={697}
-            height={600}
-            layout="responsive"
-            loading="lazy"
-          />
+          <Suspense fallback={<Loading />}>
+            <Image
+              src={builder
+                .image(post?.mainImage)
+                .width(697)
+                .height(600)
+                .quality(100)
+                .url()}
+              alt={post?.title || "Houses"}
+              width={697}
+              height={600}
+              layout="responsive"
+              loading="lazy"
+            />
+          </Suspense>
         ) : (
           <Image src={Houses} alt="Houses" width={697} height={600} layout="responsive" loading="lazy" />
         )}

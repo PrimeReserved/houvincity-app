@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Hero from "./Hero";
 import AboutProperty from "@/components/LandingPage/AboutProperty";
 import BlogHomePage from "@/components/LandingPage/BlogHomePage";
@@ -10,6 +10,8 @@ import Newsletter from "@/components/Newsletter/Newsletter";
 import { usePropertyContext } from "@/context/PropertyContext";
 import { Post } from "@/typings";
 import { getPost } from "@/lib/data";
+import ErrorBoundary from "../ErrorBoundary";
+import Loading from "@/app/loading";
 
 export const revalidate = 30;
 
@@ -62,14 +64,14 @@ export default function Home() {
                 <button
                   className={`py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ${isLandActive ? "bg-primary text-white" : "bg-white text-primary"
                     }`}
-                    onClick={() => handlePropertyTypeChange('Land')}
+                  onClick={() => handlePropertyTypeChange('Land')}
                 >
                   Land
                 </button>
                 <button
                   className={`py-3 px-[3rem] border-[1px] border-primary rounded-md text-xs text-primary ${!isLandActive ? "bg-primary text-white" : "bg-white text-primary"
                     }`}
-                    onClick={() => handlePropertyTypeChange('House')}
+                  onClick={() => handlePropertyTypeChange('House')}
                 >
                   Smart Homes
                 </button>
@@ -80,10 +82,15 @@ export default function Home() {
       </div>
 
       {/* Land */}
+      <Suspense fallback={<Loading />}>
       <Card properties={filterPropertiesByType(selectedPropertyType)} />
+      </Suspense>
       <AboutProperty />
-
-      <BlogHomePage posts={posts} />
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <BlogHomePage posts={posts} />
+        </Suspense>
+      </ErrorBoundary>
       <Review />
       <Newsletter />
     </main>

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
 import IconButtonHref from '../Buttons/IconButtonHref';
 import SearchHomePage from './ SearchHomePage';
 import Banner from "@/public/images/landingPage/Rectangle 23803.png"
 import { usePropertyContext } from "@/context/PropertyContext";
+import Loading from '@/app/loading';
 
 const Hero: React.FC = () => {
 
@@ -40,6 +41,7 @@ const Hero: React.FC = () => {
   return (
     <section className="relative w-full mt-[3rem] overflow-hidden bg-center bg-cover py-20 md:py-28">
       {/* Background Image */}
+      <Suspense fallback={<Loading />}>
       <Image
         src={Banner}
         alt="Hero Image"
@@ -49,6 +51,7 @@ const Hero: React.FC = () => {
         className="absolute inset-0"
         priority
       />
+      </Suspense>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>

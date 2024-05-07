@@ -4,7 +4,7 @@ import FooterHome from '@/components/Footer/FooterHome';
 import Header from '@/components/Header/HeaderHome';
 import Hero from '@/components/Hero/Hero';
 import Newsletter from '@/components/Newsletter/Newsletter';
-import Loading from './loading'
+import Loading from '@/app/loading'
 
 import NewsCard from '@/components/Blog/Cards/NewsCard';
 import { Suspense } from 'react';

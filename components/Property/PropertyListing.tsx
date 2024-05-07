@@ -4,6 +4,8 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import SearchProperty from "./SearchPropety";
 import { usePropertyContext } from "@/context/PropertyContext";
 import House from "./Houses";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 export default function PropertyListing() {
 
@@ -49,7 +51,9 @@ export default function PropertyListing() {
       />
       </ErrorBoundary>
       <ErrorBoundary>
-        <House properties={properties} />
+        <Suspense fallback={<Loading />}>
+          <House properties={properties} />
+        </Suspense>
       </ErrorBoundary>
     </div>
   );
