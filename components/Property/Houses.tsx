@@ -7,6 +7,8 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import Image from "next/image";
 import Link from "next/link";
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 
 const builder = imageUrlBuilder(client);
 
@@ -32,15 +34,16 @@ const House: React.FC<HouseProps> = ({ properties }) => {
 
   return (
     <div className="container">
-      <h1 className=" text-customPrimary font-bold text-4xl m-10">Houses</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5 xl:gap-10">
+      <h1 className=" text-customPrimary font-bold text-4xl m-10">{headerText}</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
         {properties.map((property) => (
           <div
             className="bg-white rounded-lg transition duration-300 shadow-xl rounded-b-md"
             key={property._id}
           >
             <figure>
-              <Image
+             <Suspense fallback={<Loading />}>
+             <Image
                 src={property?.propertyImage ? urlFor(property.propertyImage).url() : Houses1}
                 alt={property?.title}
                 width={355}
@@ -48,7 +51,7 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                 layout="responsive"
                 loading="lazy"
               />
-
+             </Suspense>
             </figure>
             <div className="card-body mt-5 px-6 md:px-4 xl:px-6">
               <div className="flex justify-between ">

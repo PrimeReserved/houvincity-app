@@ -1,6 +1,11 @@
 
 
 function YoutubeEmbed({ source }:any) {
+  if (!source) {
+    // Handle case where source is undefined or empty
+    return <div>Invalid YouTube video source</div>;
+  }
+
   const youtubeId = source.split('v=')[1];
   const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
 

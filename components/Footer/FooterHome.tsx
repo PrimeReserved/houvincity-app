@@ -39,7 +39,7 @@ const FooterHome = () => {
                     height={30}
                   />
                 </Link>
-                <p className="dark:text-white-dark mb-9 md:text-[14px] text-[14px] font-semibold leading-loose text-white px-4 w-[100%]  md:w-[100%] lg:w-[75%] mt-2">
+                <p className="mb-9 md:text-[14px] text-[14px] font-semibold leading-loose text-white px-4 w-[100%]  md:w-[100%] lg:w-[75%] mt-2">
                   Your Trusted Partner in Real Estate Excellence. Unlock your
                   dream home with our dedicated team, offering tailored
                   solutions for every property journey. From starter homes to
@@ -48,9 +48,9 @@ const FooterHome = () => {
                 </p>
               </div>
               {/* Contact Us Section */}
-              <div className="w-[100%] pl-4 mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16 -mt-4">
-                <div className="dark:text-white-dark mb-9 text-[14px] font-semibold leading-relaxed text-white">
-                  <h1 className="text-[18px] ">Contact Us:</h1>
+              <div id="contact" className="w-[100%] pl-4 mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16 -mt-4">
+                <div className="mb-9 text-[14px] font-semibold leading-relaxed text-white">
+                  <h1 className="text-[18px]">Contact Us:</h1>
                   <p className="pt-3">Phone Number: +2348034652178</p>
                   <p className="py-2">
                     Address: 31C Rumuola Road by Rumuola Junction.
@@ -111,14 +111,14 @@ const FooterHome = () => {
 
 const QuickLinks = () => (
   <div className="mb-12 lg:mb-16">
-    <h2 className="mb-10 text-2xl font-semibold text-white dark:text-white">
+    <h2 className="mb-10 text-2xl font-semibold text-white ">
       NAVIGATION
     </h2>
     <ul>
       <li>
         <Link
           href="/"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Home
         </Link>
@@ -126,7 +126,7 @@ const QuickLinks = () => (
       <li>
         <Link
           href="/property"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Property
         </Link>
@@ -134,7 +134,7 @@ const QuickLinks = () => (
       <li>
         <Link
           href="/services"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Services
         </Link>
@@ -142,7 +142,7 @@ const QuickLinks = () => (
       <li>
         <Link
           href="/about"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           About
         </Link>
@@ -150,7 +150,7 @@ const QuickLinks = () => (
       <li>
         <Link
           href="/blog"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Blog
         </Link>
@@ -161,14 +161,14 @@ const QuickLinks = () => (
 
 const Services = () => (
   <div className="mb-12 mr-4 lg:mb-16 lg:mr-2">
-    <h2 className="mb-10 text-2xl font-semibold text-white dark:text-white">
+    <h2 className="mb-10 text-2xl font-semibold text-white ">
       SUPPORT
     </h2>
     <ul>
       <li>
         <Link
-          href="/services#webDevelopment"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          href="/contact#contact"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Contact Us
         </Link>
@@ -176,7 +176,7 @@ const Services = () => (
       <li>
         <Link
           href="/faqs"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           FAQS
         </Link>
@@ -184,7 +184,7 @@ const Services = () => (
       <li>
         <Link
           href="/privacy"
-          className="dark:text-white-dark mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Privacy Policy
         </Link>
@@ -192,7 +192,7 @@ const Services = () => (
       <li>
         <Link
           href="/terms-and-conditions"
-          className="dark:text-white-dark mb-4 inline-block text-base font-light text-white duration-300 hover:text-primary dark:hover:text-primary"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Terms and Conditions
         </Link>
@@ -203,7 +203,7 @@ const Services = () => (
 
 const Copyright = () => (
   <div className="items-center justify-center py-8 font-semibold flex">
-    <p className=" text-[14px] md:text-base text-white dark:text-white">
+    <p className=" text-[14px] md:text-base text-white ">
       Copyright © {getCurrentYear()} PrimeReserved. All rights reserved.
     </p>
   </div>

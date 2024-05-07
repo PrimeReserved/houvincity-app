@@ -12,6 +12,7 @@ import { Property } from "@/typings";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "../Blog/Cards/RichTextComponents";
 import Loading from "@/app/loading";
+import Link from "next/link";
 
 export const revalidate = 30;
 const builder = imageUrlBuilder(client);
@@ -25,19 +26,17 @@ interface PropertyDetailedProps {
 }
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
-  console.log(property.youtubeLink);
+
   return (
     <>
       <ErrorBoundary>
         <Header />
       </ErrorBoundary>
       <div className="wrapper mb-10">
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center px-10">
           {property?.fullPropertyImage && (
             <Image src={builder
               .image(property?.fullPropertyImage?.asset?._ref)
-              .width(1500)
-              .height(100)
               .quality(100)
               .url()} alt="House1" width={1500} height={100} />
           )}
@@ -46,8 +45,6 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
           {property?.leftSidePropertyImage && (
             <Image src={builder
               .image(property?.leftSidePropertyImage?.asset?._ref)
-              .width(385)
-              .height(300)
               .quality(100)
               .url()} alt="House2" width={385} height={300} />
           )}
@@ -55,8 +52,6 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             <Suspense fallback={<Loading />}>
               <Image src={builder
                 .image(property?.middlePropertyImage.asset._ref)
-                .width(385)
-                .height(300)
                 .quality(100)
                 .url()} alt="House3" width={385} height={300} />
             </Suspense>
@@ -64,8 +59,6 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
           {property.rightSidePropertyImage && (
             <Image src={builder
               .image(property?.rightSidePropertyImage.asset._ref)
-              .width(385)
-              .height(300)
               .quality(100)
               .url()} alt="House4" width={385} height={300} />
           )}
@@ -96,12 +89,14 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         </div>
 
         <div className="flex justify-center my-20">
+          <Link href="#contact">
           <button className="flex gap-2 items-center px-6 py-5 bg-primary rounded-md ">
             <Image src={Calendar} alt="Calendar" width={13} height={13} />
             <p className="text-sm font-semibold text-white">
               Contact Us For an Inspection Today
             </p>
           </button>
+          </Link>
         </div>
       </div>
       <ErrorBoundary>

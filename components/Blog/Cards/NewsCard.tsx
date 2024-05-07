@@ -41,12 +41,12 @@ export default async function NewsCard() {
   if (!news || !Array.isArray(news)) {
     return <h1>Fetching News, please be still..</h1>
   }
-    return (
-      <div className="xl:mx-12 lg:mx-6">
-        <p className="text-primary font-medium mt-[2.6rem] text-3xl">News</p>
-        {news?.map((article) => (
-          <Link href={`/news/${article.slug?.current}`} key={article._id}>
-            <div className="flex bg-white rounded-md mt-5 drop-shadow-md">
+  return (
+    <div className="lg:mx-12">
+      <p className="text-primary font-medium mt-[2.6rem] text-3xl">News</p>
+      {news?.map((article) => (
+        <Link href={`/news/${article.slug?.current}`} key={article._id}>
+          <div className="flex bg-white rounded-md mt-5 drop-shadow-md">
             {article?.mainImage && (
               <Suspense fallback={<Loading />}>
                  <Image
