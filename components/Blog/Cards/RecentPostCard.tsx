@@ -9,6 +9,9 @@ import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { Post } from "@/typings"
 import { Suspense } from "react";
 import Loading from "@/app/loading";
+import { Post } from "@/typings"
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 
 const builder = imageUrlBuilder(client);
@@ -47,6 +50,15 @@ export default async function RecentPostCard (){
       {posts?.length > 0 ? (
         posts.map((post) => (
           <div key={post._id} className="flex  bg-white rounded-md mt-5 drop-shadow-md animate-jump animate-once animate-ease-in">
+            <Suspense fallback={<Loading />}>
+              <Image
+                src={urlFor(post?.mainImage).width(100).height(100).quality(100).url()}
+                alt={`${post?.slug?.current}`}
+                width={100}
+                height={100}
+                loading="lazy"
+              />
+            </Suspense>
             <Suspense fallback={<Loading />}>
               <Image
                 src={urlFor(post?.mainImage).width(100).height(100).quality(100).url()}

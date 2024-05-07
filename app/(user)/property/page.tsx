@@ -4,9 +4,9 @@ import FooterHome from "@/components/Footer/FooterHome";
 import Header from "@/components/Header/HeaderHome";
 import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
-import SearchProperty from "@/components/Property/SearchPropety";
-import House from "@/components/Property/Houses";
-import Land from "@/components/Property/Land";
+import PropertyListing from "@/components/Property/PropertyListing";
+import PropertyProvider from "@/context/PropertyProvider";
+import Loading from "@/app/loading";
 
 function page() {
   return (
@@ -20,9 +20,17 @@ function page() {
           image={`./images/property/property.png`}
           title="Property Listing"
         />
-        <SearchProperty />
-        {/* <Land /> */}
-        <House properties={[]} />
+      </ErrorBoundary>
+
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <PropertyProvider>
+            <PropertyListing />
+          </PropertyProvider>
+        </Suspense>
+      </ErrorBoundary>
+
+      <ErrorBoundary>
         <ContactUsBtn />
       </ErrorBoundary>
 

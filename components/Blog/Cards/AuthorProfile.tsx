@@ -1,10 +1,14 @@
-import React from "react";
+
+"use client"
+
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { client } from "@/sanity/client";
 import ProfilePic from "@/public/images/blog/Ellipse 7.svg";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Author } from "@/typings";
+import Loading from "@/app/loading";
 
 
 const builder = imageUrlBuilder(client);
@@ -34,13 +38,15 @@ const AuthorProfile = ({ author }: Readonly<{ author: Author}>) => {
       <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4">
         {
           image ? (
-            <Image
-              src={builder.image(image).width(70).height(70).quality(100).url()}
+            <Suspense fallback={<Loading />}>
+              <Image
+              src={urlFor(image).url()}
               alt="Author"
               width={70}
               height={70}
               loading="lazy"
             />
+            </Suspense>
           ) : (
             <Image
               src={ProfilePic}

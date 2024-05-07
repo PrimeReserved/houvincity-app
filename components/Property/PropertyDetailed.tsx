@@ -26,7 +26,6 @@ interface PropertyDetailedProps {
 }
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
-
   return (
     <>
       <ErrorBoundary>
