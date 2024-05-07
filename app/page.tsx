@@ -9,7 +9,7 @@ import RecentPostCard from '@/components/Blog/Cards/RecentPostCard';
 import BlogCard from '@/components/Blog/Cards/BlogCard';
 import PropertyProvider from "@/context/PropertyProvider";
 import { useState } from "react";
-
+import Head from "next/head";
 
 const Home: React.FC = () => {
   const [error, setError] = useState<Error | null>(null);
@@ -31,6 +31,19 @@ const Home: React.FC = () => {
   return (
     <div className=''>
       <ErrorBoundary fallback={<Error error={error} reset={resetFunction} />}>
+        <Head>
+          <title>Houvincity</title>
+          <meta property="og:image" content="<generated>" />
+          <meta property="og:image:type" content="<generated>" />
+          <meta property="og:image:width" content="<generated>" />
+          <meta property="og:image:height" content="<generated>" />
+          <meta property="og:image:alt" content="About Houvincity" />
+          <meta name="twitter:image" content="<generated>" />
+          <meta property="twitter:image:alt" content="About Houvincity" />
+          <meta name="twitter:image:type" content="<generated>" />
+          <meta name="twitter:image:width" content="<generated>" />
+          <meta name="twitter:image:height" content="<generated>" />
+        </Head>
         <Header />
         <PropertyProvider>
           <LandingPage />
