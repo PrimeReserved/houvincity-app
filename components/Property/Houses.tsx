@@ -32,10 +32,10 @@ const House: React.FC<HouseProps> = ({ properties }) => {
   return (
     <div className="container">
       <h1 className=" text-customPrimary font-bold text-4xl m-10">Houses</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5 xl:gap-10">
         {properties.map((property) => (
           <div
-            className="card card-compact w-[20rem] bg-base-100 shadow-xl rounded-b-md"
+            className="bg-white rounded-lg transition duration-300 shadow-xl rounded-b-md"
             key={property._id}
           >
             <figure>
@@ -49,7 +49,7 @@ const House: React.FC<HouseProps> = ({ properties }) => {
               />
 
             </figure>
-            <div className="card-body mt-5">
+            <div className="card-body mt-5 px-6 md:px-4 xl:px-6">
               <div className="flex justify-between ">
                 <p className="card-title text-xs text-primary font-semibold">
                   {property?.title}

@@ -1,13 +1,14 @@
 import Image from "next/image";
 import CustomersImage from "@/public/images/services/image/Image.png";
-import { testimonies } from "./data/testimony"
+import { testimonies } from "./data/testimony";
+import CustomersImage2 from "@/public/images/services/image/Image2.svg";
 
 export default function CustomerTestimony() {
   return (
     <section className="lg:flex p-4">
       <figure className="xl:m-20 lg:m-10">
         <Image src={CustomersImage} alt="Customers" width={3500} className="hidden lg:block xl:w-[3500px]  " />
-        {/* <Image src={Image2} alt="Image2" width={735} className="lg:hidden md:w-[735px] w-[400px] "/> */}
+        <Image src={CustomersImage2} alt="CustomersImage" width={735} className="lg:hidden md:w-[735px] w-[400px] "/>
       </figure>
       <div>
         <h1 className="xl:pt-40 lg:pt-[3rem] pb-10 text-center xl:text-5xl lg:text-4xl text-3xl mt-10 text-primary font-bold border-primary underline">

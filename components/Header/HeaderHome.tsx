@@ -97,7 +97,7 @@ const Header = () => {
                     : 'invisible top-[120%] opacity-0'
                   }`}
               >
-                <ul className="block lg:flex xl:space-x-[5rem] lg:space-x-10 ">
+                <ul className="block lg:flex xl:space-x-[5rem] lg:space-x-10  xl:pl-[5rem] lg:pl-[2rem] ">
                   {menuData.map((menuItem, index) => (
                     <li key={index} className="group relative">
                       {menuItem.path ? (
@@ -165,9 +165,6 @@ const Header = () => {
                   href="/property"
                 />
               </div>
-              {/* <div>
-                  <ThemeToggler />
-                </div> */}
             </div>
           </div>
         </div>

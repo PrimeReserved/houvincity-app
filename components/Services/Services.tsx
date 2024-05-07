@@ -33,7 +33,7 @@ export default function Service() {
               {" "}
               {row.map((service, index) => (
                 <div
-                  className="container card shadow-x relative"
+                  className="container card shadow-x relative rounded-none"
                   key={index}
                   onMouseEnter={() => setHoveredService(service)}
                   onMouseLeave={() => setHoveredService(null)}

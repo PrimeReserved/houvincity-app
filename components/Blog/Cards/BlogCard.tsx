@@ -105,7 +105,7 @@ export default function BlogCard() {
                     />
                 )}
               </div>
-              <div className="card-body items-start mt-1">
+              <div className="card-body items-start mt-1 ">
                 <div className="flex items-center gap-2">
                   <Image src={Calendar} alt="Calendar" width={13} height={13} />            
                   {post?.publishedAt && (

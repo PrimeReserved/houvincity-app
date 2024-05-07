@@ -39,7 +39,7 @@ export default async function RecentPostCard (){
   }
 
   return (
-    <div className="lg:mx-12">
+    <div className="xl:mx-12 lg:mx-6">
       <p className="sm:p-5 text-primary font-medium text-3xl">Recent Posts</p>
       {posts?.length > 0 ? (
         posts.map((post) => (

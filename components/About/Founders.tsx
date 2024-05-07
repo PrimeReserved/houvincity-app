@@ -21,7 +21,7 @@ const founders: Founder[] = [
   {
     id: 2,
     image: Founder_two,
-    name: "Barr. Woryi Micheal. Onyema",
+    name: "Barr. Woryi Onyema",
     position: "Co-founder",
   },
   {
@@ -40,14 +40,15 @@ export default function Founders() {
       <h1 className="mt-5 text-center text-4xl text-[#040A3B] font-bold">
         Founders
       </h1>
-      <div className="lg:wrapper flex flex-col md:flex-row justify-between items-center gap-10 md:gap-2 lg:gap-10 p-10  mb-[5rem] ">
+      <div className="lg:wrapper flex flex-col md:flex-row justify-between items-center gap-10 md:gap-2 lg:gap-10 p-10  mb-[5rem]">
         {founders.map((founder) => (
-          <div className="card bg-base-100 shadow-xl" key={founder.id}>
+          <div className="card rounded bg-base-100 shadow-xl" key={founder.id}>
             <figure>
               <Image src={founder.image} alt={founder.name} width={400} />
             </figure>
+            
             <div className="card-body text-center py-6">
-              <h2 className="card-title space-y-4 text-[#040A3B]">
+              <h2 className="card-title md:text-xs lg:text-sm xl:text-xl space-y-4 flex justify-center text-center text-[#040A3B]">
                 {founder.name}
               </h2>
               <p className="text-1xl text-[#79747E]  font-extralight">
@@ -60,7 +61,6 @@ export default function Founders() {
       {/* About Section  */}
       <div className="flex flex-col lg:flex-row gap-4 items-center justify-center md:mx-8">
         <section className="md:px-10 md:py-5 text-white bg-customSecondary lg:w-6/12 w-[100%]">
-          {" "}
           <section className="p-5">
             <h2 className="mb-5 text-2xl">Discover our work ethics</h2>
             <h1 className="text-4xl mb-5">About Our Company</h1>
@@ -145,7 +145,7 @@ export default function Founders() {
         <hr className="border-solid border-1 border-primary" />
       </div>{" "}
       {/* Buttons  */}
-      <div className="flex flex-col md:flex-row mt-10 md:mt-0 mx-8 justify-center gap-3 md:mb-20 relative md:bottom-5">
+      <div className="flex flex-col md:flex-row mt-10 md:mt-0 mx-8 justify-center gap-3 mb-20 relative md:bottom-5">
         <button className="btn rounded-md bg-primary text-white py-4 px-5">
           Have a Question
         </button>

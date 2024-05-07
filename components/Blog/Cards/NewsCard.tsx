@@ -41,7 +41,7 @@ export default async function NewsCard(){
     return <h1>Fetching News, please be still..</h1>
   }
     return (
-      <div className="lg:mx-12">
+      <div className="xl:mx-12 lg:mx-6">
         <p className="text-primary font-medium mt-[2.6rem] text-3xl">News</p>
         {news?.map((article) => (
           <Link href={`/news/${article.slug?.current}`} key={article._id}>

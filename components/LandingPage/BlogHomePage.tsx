@@ -48,7 +48,7 @@ const BlogHomePage = ({ posts }: Props) => {
         <h1 className="text-customSecondary text-4xl font-semibold">Stay Updated from Our Blog</h1>
         <p className="text-base text-customTextColor mt-3 mb-[3rem] ">Gather Infromation From Our Blog and Stay Updated</p>
         <div className="mb-10 flex justify-center items-center ">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5  md:space-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  md:space-y-0">
             {displayedPosts.map((post, idx) => (
               <Link href={`/post/${post.slug.current}`} key={post.slug.current}>
                 <div className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col">

@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { MdLocationOn } from "react-icons/md";
@@ -7,19 +6,26 @@ import { usePropertyContext } from "@/context/PropertyContext";
 import { useState } from "react";
 
 interface SearchProps {
-  filterProperties: (uniqueTypes: string, uniqueLocations: string, uniqueBudget: string) => void;
+  filterProperties: (
+    uniqueTypes: string,
+    uniqueLocations: string,
+    uniqueBudget: string
+  ) => void;
   uniqueTypes: string[];
   uniqueLocations: string[];
   uniqueBudget: string[];
 }
 
-function SearchHomePage({ filterProperties, uniqueTypes, uniqueLocations, uniqueBudget }: Readonly<SearchProps>) {
-
+function SearchHomePage({
+  filterProperties,
+  uniqueTypes,
+  uniqueLocations,
+  uniqueBudget,
+}: Readonly<SearchProps>) {
   const { properties, setProperties } = usePropertyContext();
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [selectedBudget, setSelectedBudget] = useState('');
-  
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedBudget, setSelectedBudget] = useState("");
 
   const applyFilter = () => {
     // Check if at least one filter criteria is selected
@@ -27,10 +33,10 @@ function SearchHomePage({ filterProperties, uniqueTypes, uniqueLocations, unique
       // Call filterProperties function with selected values
       filterProperties(selectedType, selectedLocation, selectedBudget);
     } else {
-      setSelectedType('House');
-      setSelectedLocation('location');
-      setSelectedBudget('budget');
-      setProperties(properties)
+      setSelectedType("House");
+      setSelectedLocation("location");
+      setSelectedBudget("budget");
+      setProperties(properties);
       console.log("No filter criteria selected");
     }
   };
@@ -44,9 +50,9 @@ function SearchHomePage({ filterProperties, uniqueTypes, uniqueLocations, unique
               <IoHomeOutline className="w-5 h-5" />
             </div>
             <div className="">
-              <p className="text-xs text-customTextColor"
-              >I’m Looking to...</p>
-              <select className="text-xs -ml-1 bg-[#F1F1F1]"
+              <p className="text-xs text-customTextColor">I’m Looking to...</p>
+              <select
+                className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
               >
@@ -64,12 +70,15 @@ function SearchHomePage({ filterProperties, uniqueTypes, uniqueLocations, unique
             </div>
             <div>
               <p className="text-xs text-customTextColor">Location</p>
-              <select className="text-xs -ml-1 bg-[#F1F1F1]"
+              <select
+                className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={selectedLocation}
                 onChange={(e) => setSelectedLocation(e.target.value)}
               >
                 {uniqueLocations.map((location: string) => (
-                  <option key={location} value={location}>{location}</option>
+                  <option key={location} value={location}>
+                    {location}
+                  </option>
                 ))}
               </select>
             </div>
@@ -80,7 +89,8 @@ function SearchHomePage({ filterProperties, uniqueTypes, uniqueLocations, unique
             </div>
             <div className="">
               <p className="text-xs text-customTextColor">Price Range</p>
-              <select className="text-xs -ml-1 bg-[#F1F1F1]"
+              <select
+                className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={selectedBudget}
                 onChange={(e) => setSelectedBudget(e.target.value)}
               >
@@ -91,8 +101,24 @@ function SearchHomePage({ filterProperties, uniqueTypes, uniqueLocations, unique
                 ))}
               </select>
             </div>
-            <button className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[3rem] py-4 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
-              onClick={applyFilter}>
+            <button
+              className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[3rem] py-4 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
+              onClick={applyFilter}
+            >
+              <span>Search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:hidden">
+        <div className="flex justify-center">
+          <div className="flex w-[90%] bg-[#F1F1F1] justify-between items-center rounded-full opacity-80 py-2 px-4">
+            <p className="text-sm">Property type, Location or Price</p>
+            <button
+              className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[2rem] py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
+              onClick={applyFilter}
+            >
               <span>Search</span>
             </button>
           </div>
