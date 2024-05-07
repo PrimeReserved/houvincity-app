@@ -4,6 +4,8 @@ import { IoHomeOutline } from "react-icons/io5";
 import { MdLocationOn } from "react-icons/md";
 import { usePropertyContext } from "@/context/PropertyContext";
 import { useState } from "react";
+import FilterSearchHomePage from "@/components/LandingPage/FilterSearchHomePage";
+
 
 interface SearchProps {
   filterProperties: (
@@ -39,6 +41,16 @@ function SearchHomePage({
       setProperties(properties);
       console.log("No filter criteria selected");
     }
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -114,7 +126,7 @@ function SearchHomePage({
       <div className="lg:hidden">
         <div className="flex justify-center">
           <div className="flex w-[90%] bg-[#F1F1F1] justify-between items-center rounded-full opacity-80 py-2 px-4">
-            <p className="text-sm">Property type, Location or Price</p>
+            <p className="text-sm cursor-pointer" onClick={openModal}>Property type, Location or Price</p>
             <button
               className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[2rem] py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
               onClick={applyFilter}
@@ -124,6 +136,7 @@ function SearchHomePage({
           </div>
         </div>
       </div>
+      <FilterSearchHomePage isOpen={isModalOpen} onClose={closeModal}/>
     </div>
   );
 }
