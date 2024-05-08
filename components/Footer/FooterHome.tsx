@@ -16,7 +16,7 @@ const getCurrentYear = () => {
 
 const FooterHome = () => {
   return (
-    <footer className="relative z-10 bg-customPrimary pt-16 dark:bg-customDarkBg md:pt-20 lg:pt-24">
+    <footer className="relative z-10 bg-customPrimary pt-1 md:pt-20 lg:pt-24">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className=" ">
@@ -27,14 +27,7 @@ const FooterHome = () => {
                   <Image
                     src={Logo}
                     alt="logo"
-                    className=" dark:hidden"
-                    width={140}
-                    height={30}
-                  />
-                  <Image
-                    src={Logo}
-                    alt="logo"
-                    className="hidden  dark:block"
+                    className="block"
                     width={140}
                     height={30}
                   />
