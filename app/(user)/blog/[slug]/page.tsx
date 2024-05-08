@@ -69,22 +69,22 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
             <div className="p-5 bg-white rounded-md mt-5 drop-shadow-md">
               <div className="flex justify-center items-center gap-x-5">
                 <DetailedSocialLink
-                  href={"#"}
+                  href={`${process.env.NEXT_PUBLIC_INSTAGRAM_URL}`}
                   image={Instagram}
                   alt={"instagram"}
                 />
                 <DetailedSocialLink
-                  href={"#"}
+                  href={`${process.env.NEXT_PUBLIC_TWITTER_URL}`}
                   image={Twitter}
                   alt={"twitter"}
                 />
                 <DetailedSocialLink
-                  href={"#"}
+                  href={`${process.env.NEXT_PUBLIC_FACEBOOK_URL}`}
                   image={Facebook}
                   alt={"facebook"}
                 />
                 <DetailedSocialLink
-                  href={"#"}
+                  href={`${process.env.NEXT_PUBLIC_LINKEDIN}`}
                   image={Linkedin}
                   alt={"linkedlin"}
                 />
