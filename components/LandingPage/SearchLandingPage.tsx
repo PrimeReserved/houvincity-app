@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import Error from "@/components/Error";
+import Error from "@/app/error";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
 import SearchHomePage from "./ SearchHomePage";
@@ -13,6 +13,21 @@ import Land from "../Property/Land";
 
 const SearchLandingPage: React.FC = () => {
   const { properties, setProperties } = usePropertyContext();
+  const [error, setError] = useState<Error | null>(null);
+
+  // Reset function
+  const resetFunction = () => {
+    try {
+      // Reset application state here
+      setError(null);
+      // reload the page
+      window.location.reload();
+    } catch (error) {
+      console.error('Error occurred during reset:', error);
+      // Log the error for further analysis
+      // You can also notify the user about the error if needed
+    }
+  }
   // console.log(properties)
   const uniqueTypes = [
     ...new Set(properties.map((property) => property.propertyType)),
@@ -61,7 +76,7 @@ const SearchLandingPage: React.FC = () => {
 
   return (
     <div className="mt-[10rem]">
-      <ErrorBoundary fallback={<Error />}>
+      <ErrorBoundary fallback={<Error error={error} reset={resetFunction} />}>
         <Header />
         <SearchHomePage
           filterProperties={filterProperties}
