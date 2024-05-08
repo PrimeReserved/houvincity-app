@@ -93,9 +93,7 @@ const FooterHome = () => {
         </div>
 
         <div className=" border-t-[1px] "></div>
-
         <Copyright />
-
         {/* Mobile */}
       </div>
     </footer>

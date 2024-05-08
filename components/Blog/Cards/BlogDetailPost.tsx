@@ -112,7 +112,7 @@ export default function BlogDetailPost() {
         {posts?.map((post) => (
           <div
             key={post._id}
-            className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col"
+            className="border rounded-lg overflow-hidden bg-white shadow-md transition duration-300 transform hover:scale-105 flex flex-col"
           >
             <div className="relative overflow-hidden rounded-t-lg h-100">
               {post?.mainImage && (

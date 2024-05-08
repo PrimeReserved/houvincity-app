@@ -34,7 +34,6 @@ async function getData() {
 }
 
 export default function NewsDetailPost() {
-  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState<News[]>([]);

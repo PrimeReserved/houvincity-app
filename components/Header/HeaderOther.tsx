@@ -41,7 +41,7 @@ const HeaderOther = () => {
         {
           "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition":
             sticky,
-          "absolute bg-transparent": !sticky,
+          "absolute": !sticky,
         }
       )}
     >

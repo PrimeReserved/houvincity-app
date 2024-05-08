@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import Image from "next/image";
 import { client } from "@/sanity/client";
 import ProfilePic from "@/public/images/blog/Ellipse 7.svg";
@@ -61,7 +61,7 @@ const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>
   return (
     <div className="lg:mx-12">
       <h1 className="text-primary font-medium text-3xl">Author</h1>
-      <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4 animate-jump animate-once animate-ease-in" suppressHydrationWarning>
+      <figure className="flex gap-2 bg-white rounded-md mt-5 drop-shadow-md p-4 animate-jump animate-once animate-ease-in">
         {
           image ? (
             <Suspense fallback={<Loading />}>

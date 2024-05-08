@@ -1,9 +1,7 @@
 import { dataset, projectId } from "@/sanity/env";
 import Image from "next/image";
-import { getImageDimensions } from "@sanity/asset-utils"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
-import urlBuilder from "@sanity/image-url";
 
 
 const builder = imageUrlBuilder({ projectId, dataset });

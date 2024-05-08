@@ -47,7 +47,6 @@ const Hero: React.FC = () => {
         alt="Hero Image"
         placeholder="blur"
         fill
-        objectFit="cover"
         className="absolute inset-0"
         priority
       />
