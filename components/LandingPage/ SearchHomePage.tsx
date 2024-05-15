@@ -115,7 +115,7 @@ function SearchHomePage({
               <IoHomeOutline className="w-5 h-5" />
             </div>
             <div className="">
-              <p className="text-xs text-customTextColor">I#&39;m Looking to...</p>
+              <p className="text-xs text-customTextColor">I&#39;m Looking to...</p>
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={selectedType}
