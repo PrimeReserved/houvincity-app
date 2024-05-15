@@ -10,15 +10,9 @@ import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import BlogDetailPost from "@/components/Blog/Cards/BlogDetailPost";
-import SocialLink from "@/components/Socials/SocialLink";
-
-import Instagram from "@/public/images/socials/Instagram.png";
-import Twitter from "@/public/images/socials/X.png";
-import Facebook from "@/public/images/socials/Vector.png";
-import Linkedin from "@/public/images/socials/mingcute_linkedin-line.png";
+import SocialShare from "@/components/Blog/SocialShare";
 import { Suspense } from "react";
-import SocialLogos from "@/components/Socials/SocialLogos";
-import DetailedSocialLink from "@/components/Socials/DetailedSocialLink";
+
 
 interface Props {
   params: {
@@ -67,28 +61,7 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
           <div className="lg:mx-12">
           <p className="text-primary font-medium mt-[2.6rem] text-3xl">Share</p>
             <div className="p-5 bg-white rounded-md mt-5 drop-shadow-md">
-              <div className="flex justify-center items-center gap-x-5">
-                <DetailedSocialLink
-                  href={`${process.env.NEXT_PUBLIC_INSTAGRAM_URL}`}
-                  image={Instagram}
-                  alt={"instagram"}
-                />
-                <DetailedSocialLink
-                  href={`${process.env.NEXT_PUBLIC_TWITTER_URL}`}
-                  image={Twitter}
-                  alt={"twitter"}
-                />
-                <DetailedSocialLink
-                  href={`${process.env.NEXT_PUBLIC_FACEBOOK_URL}`}
-                  image={Facebook}
-                  alt={"facebook"}
-                />
-                <DetailedSocialLink
-                  href={`${process.env.NEXT_PUBLIC_LINKEDIN}`}
-                  image={Linkedin}
-                  alt={"linkedlin"}
-                />
-              </div>
+              <SocialShare />
             </div>
           </div>
         </div>

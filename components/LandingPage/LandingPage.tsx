@@ -9,7 +9,7 @@ import Review from "@/components/LandingPage/Review";
 import Newsletter from "@/components/Newsletter/Newsletter";
 import { usePropertyContext } from "@/context/PropertyContext";
 import { Post } from "@/typings";
-import { getPost } from "@/lib/data";
+import { getPost, getTestimony } from "@/lib/data";
 import ErrorBoundary from "../ErrorBoundary";
 import Loading from "@/app/loading";
 
@@ -17,11 +17,21 @@ export const revalidate = 30;
 
 export default function Home() {
   const [selectedPropertyType, setSelectedPropertyType] = useState('House');
-  const { properties, setProperties } = usePropertyContext();
+  const { properties } = usePropertyContext();
   const [posts, setPosts] = useState<Post[]>([]);
-  const [isLandActive, setIsLandActive] = useState(false);
+  const [reviews, setReviews] = useState<any>([]);
+  const [isLandActive] = useState(false);
 
   useEffect(() => {
+    async function fetchReview() {
+      try {
+        const reviewData = await getTestimony();
+        if (!reviewData || !Array.isArray(reviewData)) return;
+        setReviews(reviewData);
+      } catch(error){
+        console.log(`Error fetching customer review`)
+      }
+    }
     async function fetchPost() {
       try {
         const postsData = await getPost();
@@ -33,6 +43,7 @@ export default function Home() {
     }
 
     fetchPost();
+    fetchReview();
   }, []);
 
   const filterPropertiesByType = (propertyType: string) => {
@@ -57,7 +68,6 @@ export default function Home() {
             of your unique story. Your next home is not just a space , it a
             canvas inviting you to paint the chapters of your life
           </p>
-
           <div className="flex justify-center">
             <div className="flex justify-center">
               <div className="flex gap-5 justify-center bg-white drop-shadow-lg py-10 w-[400px] ">
@@ -80,10 +90,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* Land */}
       <Suspense fallback={<Loading />}>
-      <Card properties={filterPropertiesByType(selectedPropertyType)} />
+        <Card properties={filterPropertiesByType(selectedPropertyType)} />
       </Suspense>
       <AboutProperty />
       <ErrorBoundary>
@@ -91,7 +100,7 @@ export default function Home() {
           <BlogHomePage posts={posts} />
         </Suspense>
       </ErrorBoundary>
-      <Review />
+      <Review reviews={reviews} />
       <Newsletter />
     </main>
   );

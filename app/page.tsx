@@ -6,29 +6,19 @@ import Error from '@/app/error';
 import Header from '@/components/Header/HeaderHome';
 import FooterHome from '@/components/Footer/FooterHome';
 import PropertyProvider from "@/context/PropertyProvider";
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import Loading from "@/app/loading"
 import Head from "next/head";
+import resetError from "@/utils/helper-functions/resetError"
 
 const Home: React.FC = () => {
   const [error, setError] = useState<Error | null>(null);
 
-  // Reset function
-  const resetFunction = () => {
-    try {
-      // Reset application state here
-      setError(null);
-      // reload the page
-      window.location.reload();
-    } catch (error) {
-      console.error('Error occurred during reset:', error);
-      // Log the error for further analysis
-      // You can also notify the user about the error if needed
-    }
-  }
+ 
 
   return (
     <div className=''>
-      <ErrorBoundary fallback={<Error error={error} reset={resetFunction} />}>
+      <ErrorBoundary fallback={<Error error={error} reset={() => resetError(setError)} />}>
         <Head>
           <title>Houvincity</title>
           <meta property="og:image" content="<generated>" />
@@ -43,9 +33,11 @@ const Home: React.FC = () => {
           <meta name="twitter:image:height" content="<generated>" />
         </Head>
         <Header />
+        <Suspense fallback={<Loading />}>
         <PropertyProvider>
           <LandingPage />
         </PropertyProvider>
+        </Suspense>
         <FooterHome />
       </ErrorBoundary>
     </div>

@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import { Suspense, useState } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Error from "@/app/error";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
 import SearchHomePage from "./ SearchHomePage";
 import { usePropertyContext } from "@/context/PropertyContext";
-
-import PropertyProvider from "@/context/PropertyProvider";
 import Land from "../Property/Land";
+import Loading from "@/app/loading";
 
 const SearchLandingPage: React.FC = () => {
   const { properties, setProperties } = usePropertyContext();
   const [error, setError] = useState<Error | null>(null);
+
+  console.log(properties);
 
   // Reset function
   const resetFunction = () => {
@@ -24,8 +25,6 @@ const SearchLandingPage: React.FC = () => {
       window.location.reload();
     } catch (error) {
       console.error('Error occurred during reset:', error);
-      // Log the error for further analysis
-      // You can also notify the user about the error if needed
     }
   }
   // console.log(properties)
@@ -45,32 +44,22 @@ const SearchLandingPage: React.FC = () => {
     selectedBudget: string
   ) => {
     let filteredProperties = properties;
-    console.log(
-      "Selected Values:",
-      selectedTypes,
-      selectedLocations,
-      selectedBudget
-    );
     if (selectedTypes) {
       filteredProperties = filteredProperties.filter(
         (property) => property.propertyType === selectedTypes
       );
-      console.log("After Type Filter:", filteredProperties);
     }
     if (selectedLocations) {
       filteredProperties = filteredProperties.filter(
         (property) => property.location === selectedLocations
       );
-      console.log("After Location Filter:", filteredProperties);
     }
 
     if (selectedBudget) {
       filteredProperties = filteredProperties.filter(
         (property) => property.budget === selectedBudget
       );
-      console.log("After Budget Filter:", filteredProperties);
     }
-    console.log(`Filtered Properties:`, filteredProperties);
     setProperties(filteredProperties);
   };
 
@@ -86,23 +75,49 @@ const SearchLandingPage: React.FC = () => {
         />
 
         <div className="mt-12 mx-[1.5rem] md:mx-[5rem]">
-          <h1 className="text-base md:text-2xl">Lands for sale in Abuja, Nigeria</h1>
+          {
+            uniqueTypes.length === 0 ? (
+              <h1 className="text-base md:text-2xl">No Properties for Sale at the Moment</h1>
+            ) : (
+              <h1 className="text-base md:text-2xl">
+                {`${uniqueTypes[1] || `${uniqueTypes[0]}`}(s) for Sale in ${uniqueLocations[1] || `${uniqueLocations[0]}`}`}
+              </h1>
+            )
+          }
+
           <div className="flex gap-5 mt-4 justify-between lg:justify-normal">
-            <p className="text-customTextColor text-sm md:text-base">50 Lands Available</p>
+            {
+              uniqueTypes.length === 0 ? (
+                <p className="text-customTextColor text-sm md:text-base">No Properties Available</p>
+              ) : (
+                <p className="text-customTextColor text-sm md:text-base">
+                  {`${properties.length} ${uniqueTypes.length > 1 ? uniqueTypes[1] : uniqueTypes[0]}(s) Available`}
+                </p>
+              )
+            }
+
             <div className="flex gap-1">
               <p className="text-customTextColor text-sm md:text-base">Sort by</p>
-              <select name="" id="" className="text-sm md:text-base">
+              <select name="sort-by" id="sort-by" className="text-sm md:text-base">
+                {uniqueTypes.map((type, index) => (
+                  <option key={index} value={type}>{type}</option>
+                ))}
+              </select>
+
+              {/* <select name="" id="" className="text-sm md:text-base">
                 <option value="Relevant Listing">Relevant Listing</option>
                 <option value="Newest Listings  ">Newest Listings</option>
                 <option value="Lowest Pricing  ">Lowest Pricing</option>
                 <option value="Highest Pricing  ">Highest Pricing</option>
-              </select>
+              </select> */}
             </div>
           </div>
         </div>
 
         <ErrorBoundary>
-          <Land properties={properties} />
+          <Suspense fallback={<Loading />}>
+            <Land properties={properties} />
+          </Suspense>
         </ErrorBoundary>
 
         <FooterHome />

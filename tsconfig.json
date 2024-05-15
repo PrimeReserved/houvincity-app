@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["babel__generator"],
     "lib": [
       "dom",
       "dom.iterable",

@@ -5,6 +5,8 @@ import { MdLocationOn } from "react-icons/md";
 import { usePropertyContext } from "@/context/PropertyContext";
 import { useState } from "react";
 import FilterSearchHomePage from "@/components/LandingPage/FilterSearchHomePage";
+import Link from "next/link";
+import { useRouter, usePathname } from 'next/navigation';
 
 
 interface SearchProps {
@@ -24,33 +26,84 @@ function SearchHomePage({
   uniqueLocations,
   uniqueBudget,
 }: Readonly<SearchProps>) {
+  const router = useRouter();
+  const pathname = usePathname();
   const { properties, setProperties } = usePropertyContext();
   const [selectedType, setSelectedType] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedBudget, setSelectedBudget] = useState("");
+  const [savedSearchState, setSavedSearchState] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 
   const applyFilter = () => {
-    // Check if at least one filter criteria is selected
-    if (selectedType || selectedLocation || selectedBudget) {
-      // Call filterProperties function with selected values
-      filterProperties(selectedType, selectedLocation, selectedBudget);
+    // Check if the savedSearchState string is not empty
+    if (savedSearchState !== "") {
+      // Extract the search criteria from the savedSearchState string
+      const savedSearchStateArray = savedSearchState.split(', ');
+      const uniqueTypes = savedSearchStateArray[0].split(': ')[1];
+      const uniqueLocations = savedSearchStateArray[1].split(': ')[1];
+      const uniqueBudget = savedSearchStateArray[2].split(': ')[1];
+  
+      // Call filterProperties function with extracted values
+      filterProperties(uniqueTypes, uniqueLocations, uniqueBudget);
+  
+      // Check if the current route is the home page
+      if (pathname === '/') {
+        // Navigate to the search landing page
+        router.push('/search-landing-page');
+      }
     } else {
-      setSelectedType("House");
-      setSelectedLocation("location");
-      setSelectedBudget("budget");
-      setProperties(properties);
-      console.log("No filter criteria selected");
+      // Check if at least one filter criteria is selected
+      if (selectedType || selectedLocation || selectedBudget) {
+        // Call filterProperties function with selected values
+        filterProperties(selectedType, selectedLocation, selectedBudget);
+      } else {
+        setSelectedType("House");
+        setSelectedLocation("location");
+        setSelectedBudget("budget");
+        setProperties(properties);
+      }
+  
+      // Check if the current route is the home page
+      if (pathname === '/') {
+        // Navigate to the search landing page
+        router.push('/search-landing-page');
+      }
     }
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
+    applyFilter();
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const saveSearchState = (uniqueTypes: string, uniqueLocations: string, uniqueBudget: string) => {
+    // Save the search state to local state
+    const searchState = `${uniqueTypes}, ${uniqueLocations}, ${uniqueBudget}`;
+    setSavedSearchState(searchState);
+
+    // Save the search state to local state or perform any necessary actions
+    // For example:
+    setSelectedType(uniqueTypes);
+    setSelectedLocation(uniqueLocations);
+    setSelectedBudget(uniqueBudget);
+  };
+
+  const resetSearchState = () => {
+    // Reset the search state to default values
+    setSelectedType("");
+    setSelectedLocation("");
+    setSelectedBudget("");
+  };
+
+  const handleRemoveLocation = (location: string) => {
+    setSelectedLocation("");
   };
 
   return (
@@ -62,7 +115,7 @@ function SearchHomePage({
               <IoHomeOutline className="w-5 h-5" />
             </div>
             <div className="">
-              <p className="text-xs text-customTextColor">I’m Looking to...</p>
+              <p className="text-xs text-customTextColor">I#&39;m Looking to...</p>
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={selectedType}
@@ -126,7 +179,7 @@ function SearchHomePage({
       <div className="lg:hidden">
         <div className="flex justify-center">
           <div className="flex w-[90%] bg-[#F1F1F1] justify-between items-center rounded-full opacity-80 py-2 px-4">
-            <p className="text-sm cursor-pointer" onClick={openModal}>Property type, Location or Price</p>
+            <p className="text-sm cursor-pointer" onClick={openModal}>{savedSearchState || "Property type, Location or Price"}</p>
             <button
               className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[2rem] py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
               onClick={applyFilter}
@@ -136,7 +189,19 @@ function SearchHomePage({
           </div>
         </div>
       </div>
-      <FilterSearchHomePage isOpen={isModalOpen} onClose={closeModal}/>
+      <FilterSearchHomePage 
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        selectedType={selectedType}
+        selectedLocation={selectedLocation}
+        selectedBudget={selectedBudget}
+        setSelectedType={setSelectedType}
+        setSelectedLocation={setSelectedLocation}
+        setSelectedBudget={setSelectedBudget}
+        handleRemoveLocation={handleRemoveLocation}
+        saveSearchState={saveSearchState}
+        resetSearchState={resetSearchState}
+      />
     </div>
   );
 }

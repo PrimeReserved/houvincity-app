@@ -25,7 +25,8 @@ import Land1 from "@/public/images/property/Land1.svg";
 
 
 const Land: React.FC<LandProps> = ({ properties }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+
+  const headerText = properties.some(property => property.propertyType === "House") ? "Houses" : "Land";
 
   if (properties.length === 0) {
     return (
@@ -36,8 +37,8 @@ const Land: React.FC<LandProps> = ({ properties }) => {
   }
 
   return (
-    <div className="wrapper">
-      <h1 className=" text-customPrimary font-bold text-4xl my-10">Land</h1>
+    <div className="container">
+      <h1 className=" text-customPrimary font-bold text-4xl my-10">{headerText}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
         {properties.map(( property: Property ) => (
           <div

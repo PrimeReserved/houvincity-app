@@ -39,3 +39,16 @@ export async function getNews(){
         console.log(`An Error occurred while fetching properties: ${error}`)
     }
 }
+
+export async function getTestimony(){
+    try {
+        const query = groq`*[_type == "testimony"]`;
+        const response = await client.fetch(query);
+        if (!response) {
+            throw new Error(`Could not fetch reviews`);
+        }
+        return response;
+    } catch(error){
+        console.log(`An Error occurred while fetching reviews: ${error}`)
+    }
+}

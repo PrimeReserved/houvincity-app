@@ -7,8 +7,18 @@ import author from './schemaTypes/author'
 import news from './schemaTypes/news'
 import propertyListing from './schemaTypes/property'
 import subscription from './schemaTypes/subscription'
+import testimony from './schemaTypes/testimony'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [post, author, category, blockContent, news, propertyListing, subscription],
+  types: [
+    post,
+    author,
+    category,
+    blockContent,
+    news,
+    propertyListing,
+    subscription,
+    testimony
+  ],
 }
