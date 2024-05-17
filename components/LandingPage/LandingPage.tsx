@@ -59,18 +59,18 @@ export default function Home() {
       <Hero />
       {/* Discover Property */}
       <div className=" wrapper flex justify-center my-[6rem] ">
-        <div className="flex flex-col xl:w-[40%] md:mx-20 mx-32 text-center ">
-          <h1 className="text-2xl font-medium">
+        <div className="flex flex-col xl:w-[40%] md:mx-20 mx-32  text-center ">
+          <h1 className="text-2xl font-medium px-[3rem]">
             Effortless Property Dicovery, Just For You
           </h1>
-          <p className="text-sm font-medium my-5 text-customTextColor leading-loose">
+          <p className="text-sm px-[3rem] font-medium my-5 text-customTextColor leading-loose">
             Dive into a realm where walls and roofs transform into the backdrop
             of your unique story. Your next home is not just a space , it a
             canvas inviting you to paint the chapters of your life
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center  ">
             <div className="flex justify-center">
-              <div className="flex gap-5 justify-center bg-white drop-shadow-lg py-10 w-[400px] ">
+              <div className="flex gap-3 md:gap-5 justify-center bg-white drop-shadow-lg py-10 md:w-[400px] w-[350px] ">
                 <button
                   className={`py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ${isLandActive ? "bg-primary text-white" : "bg-white text-primary"
                     }`}

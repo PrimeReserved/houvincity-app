@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full mt-[3rem] overflow-hidden bg-center bg-cover py-20 md:py-28">
+    <section className="relative w-full mt-[6.5rem] overflow-hidden bg-center bg-cover py-20 md:py-28 " >
       {/* Background Image */}
       <Suspense fallback={<Loading />}>
       <Image
@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 text-white relative z-10">
+      <div className="container mx-auto px-4 pt-10 text-white relative z-10">
         <div className="max-w-2xl">
           {/* Heading */}
           <h1 className="mb-4 text-3xl font-extrabold md:text-4xl xl:text-5xl text-left">

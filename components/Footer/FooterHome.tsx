@@ -55,7 +55,7 @@ const FooterHome = () => {
           </div>
 
           <div className="">
-            <div className="flex md:space-x-[12rem] justify-between md:justify-normal px-8">
+            <div className="flex md:space-x-[12rem] space-x-10 justify-between md:justify-normal px-8">
               <QuickLinks />
               <Services />
             </div>
@@ -183,7 +183,7 @@ const Services = () => (
       <li>
         <Link
           href="/terms-and-conditions"
-          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
+          className="mb-4 md:inline-block hidden text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Terms and Conditions
         </Link>

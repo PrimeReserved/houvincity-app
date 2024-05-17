@@ -10,11 +10,11 @@ const Hero: React.FC<IHeroProps> = ({ image, title, description, children }) => 
   };
 
   return (
-    <div className="hero min-h-[30rem] flex items-center justify-center" 
+    <div className="hero min-h-[30rem] md:mt-[7rem] mt-[5rem] flex items-center justify-center" 
     data-testid="hero" 
     data-background-image={backgroundImageStyle.backgroundImage}
     style={backgroundImageStyle}>
-      <div className="hero-content text-center mt-[4rem]">
+      <div className="hero-content text-center mt-[2rem]">
         <div className="max-w-md md:max-w-[48rem]">
           {title && <StyledHeading>{title}</StyledHeading>}
           {description && <StyledText>{description}</StyledText>}

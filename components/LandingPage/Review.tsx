@@ -22,7 +22,7 @@ function Review({ reviews }: any) {
   console.log(reviews)
   return (
     <div className="">
-      <div className="lg:wrapper mx-5 mb-[5rem] ">
+      <div className="lg:wrapper mx-5  ">
         <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
           Our Happy Homeowners
         </h1>
