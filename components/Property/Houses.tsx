@@ -94,8 +94,9 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                 <p className="text-customPrimary font-semibold ">
                   &#x20A6; {property.budget}
                 </p>
-                <Link href={`/property/${property.slug?.current}`}>
-                  <button className="text-white bg-primary text-base px-3 py-2 -mr-5 rounded-br-md">
+              </div>
+              <Link href={`/property/${property.slug?.current}`}>
+                  <button className="text-white bg-primary text-base px-3 py-2 -mr-6 rounded-br-md flex float-end -mb-8">
                     View Full Details
                   </button>
                 </Link>
@@ -107,7 +108,6 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                 </Link>
 
             </div>
-          </div>
         ))}
       </div>
     </div>
