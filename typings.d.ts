@@ -95,3 +95,9 @@ export interface Property extends Base {
     slug: Slug;
     body: BlockContent;
   }
+
+export interface SearchItem {
+  title: string;
+  path: string;
+  content: string;
+}

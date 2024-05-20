@@ -1,36 +1,34 @@
-import { MetadataRoute } from "next";
+import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/client";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getData() {
+  const query = POSTS_QUERY
+
+  const data = await client.fetch(query);
+  return data;
+}
+
+
+
+export default async function sitemap() {
+
+  const baseURL = "https://houvincity.com";
+
+  const response = await getData();
+
+  const blogPost = response?.map((post: any) => {
+    return {
+      url: `${baseURL}/blog/${post?.slug}`,
+      lastModified: post?.createdAt
+    }
+  })
   return [
     {
-      url: "https://houvincity.com",
+      url: baseURL,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 1,
     },
-    {
-      url: "https://houvincity.com/about",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: "https://houvincity.com/blog",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://houvincity.com/news",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://houvincity.com/propety",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
+    ...blogPost,
   ];
 }
