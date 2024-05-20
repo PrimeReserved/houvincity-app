@@ -3,6 +3,7 @@ import { draftMode } from "next/headers";
 import { Josefin_Sans } from 'next/font/google';
 import './globals.css';
 import LiveVisualEditing from "@/components/LiveVisualEditing";
+import Logo from "@/public/logo.svg"
 
 
 const josefinSans = Josefin_Sans({
@@ -13,8 +14,15 @@ const josefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Houvincty',
-  description: 'Houvincity Real Estate',
+  title: {
+    default: "Houvincity Real Estate and Propety Management Website",
+    template: `%s | Houvincity Real Estate and Propety Management Website`
+  },
+  openGraph: {
+    description: "Houvincity Real Estate and Propety Management Website",
+    images: [`${Logo}`]
+  },
+  keywords:["Houvincity Real Estate and Propety Management Website", "Houvincity", "Houvincity Real Estate", "Houvincity Property Management", "Houvincity Website"]
 };
 
 export default function RootLayout({
