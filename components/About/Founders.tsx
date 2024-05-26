@@ -1,12 +1,9 @@
-import Image, { StaticImageData } from "next/image";
-import Founder_one from "@/public/images/about/founders/founder_one.png";
-import Founder_two from "@/public/images/about/founders/founder_two.png";
-import Founder_three from "@/public/images/about/founders/founder_three.png";
+import Image from "next/image";
 import About_section from "@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.png";
 
 interface Founder {
   id: number;
-  image: StaticImageData;
+  image: string;
   name: string;
   position: string;
 }
@@ -14,21 +11,27 @@ interface Founder {
 const founders: Founder[] = [
   {
     id: 1,
-    image: Founder_three,
+    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401926/houvincity/about/Frame_1000002841_pi7bwc.png",
     name: "Emmanuel Hope. U.",
     position: "GMD/Founder",
   },
   {
     id: 2,
-    image: Founder_two,
+    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716402028/houvincity/about/Frame_1000002842_2_igzrtx.png",
     name: "Barr. Woryi Onyema",
     position: "Co-founder",
   },
   {
     id: 3,
-    image: Founder_three,
+    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
     name: "Enoma Osawemwenma .J",
     position: "CO-founder",
+  },
+  {
+    id: 4,
+    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
+    name: "Mr Jonah Ukoh",
+    position: "Partner",
   },
 ];
 
@@ -95,7 +98,10 @@ export default function Founders() {
           </section>
         </section>
         <section className="">
-          <Image className="" src={About_section} alt="About section" />
+          <Image 
+            className="" 
+            src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1716401930/houvincity/about/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns_1_ds4c33.png`} 
+            alt="About section" />
         </section>
       </div>{" "}
       <div className="">

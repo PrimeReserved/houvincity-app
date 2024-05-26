@@ -1,61 +1,69 @@
-import BlogCard from '@/components/Blog/Cards/BlogCard';
-import RecentPostCard from '@/components/Blog/Cards/RecentPostCard';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import FooterHome from '@/components/Footer/FooterHome';
-import Header from '@/components/Header/HeaderHome';
-import Hero from '@/components/Hero/Hero';
-import Newsletter from '@/components/Newsletter/Newsletter';
-import Loading from '@/app/loading'
+import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import Hero from "@/components/Hero/Hero";
+import Newsletter from "@/components/Newsletter/Newsletter";
+import PostCard from "@/components/Blog/Cards/PostCard";
+import { getNews, getPosts } from "@/lib/action";
+import { Post } from "@/typings";
 
-import NewsCard from '@/components/Blog/Cards/NewsCard';
-import { Suspense } from 'react';
+async function Page() {
+  const posts = await getPosts();
+  const news = await getNews();
 
-
-
-function Page() {
+  if (!Array.isArray(posts) || posts.length === 0) {
+    return <p>No posts available</p>;
+  }
 
   return (
     <div>
       <ErrorBoundary>
-        <Header />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <Suspense fallback={<Loading />}>
         <Hero
           title="Welcome to Our Blog"
           description="Stay updated with Lorem ipsum dolor sit amet, consectetur adipiscing
           elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua."
         />
-        </Suspense>
       </ErrorBoundary>
-      <ErrorBoundary>
-        <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>
-          <div className='col-span-1'>
-            <Suspense fallback={<Loading />}>
-              <RecentPostCard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <NewsCard  />
-            </Suspense>
-          </div>
-          <div className='col-span-2'>
-            <ErrorBoundary>
-              <Suspense fallback={<Loading />}>
-                <BlogCard  />
-              </Suspense>
-            </ErrorBoundary>
-          </div>
+
+      <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
+        <div className="col-span-1">
+          <p className="sm:p-5 text-primary font-medium text-3xl">
+            Recent Posts
+          </p>
+          <ErrorBoundary>
+            {posts.map((post: Post) => (
+              <div key={post._id}>
+                <RecentPostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
+          <ErrorBoundary>
+            {posts.map((post: Post) => (
+              <div key={post._id}>
+                <RecentPostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
         </div>
-      </ErrorBoundary>
+        <div className="col-span-2">
+          <ErrorBoundary>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
+              {posts.map((post: Post) => (
+                <div key={post._id}>
+                  <PostCard post={post} />
+                </div>
+              ))}
+              {/* <BlogCard /> */}
+            </div>
+          </ErrorBoundary>
+        </div>
+      </div>
+
       <ErrorBoundary>
         <Newsletter />
       </ErrorBoundary>
-      <ErrorBoundary>
-        <FooterHome />
-      </ErrorBoundary>
     </div>
-  )
+  );
 }
 
 export default Page;

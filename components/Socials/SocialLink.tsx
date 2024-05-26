@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SocialLinkProps } from "@/interfaces/ISocialLinkProps";
+import Link from "next/link";
 
 
 const SocialLink: React.FC<SocialLinkProps> = ({
@@ -7,8 +8,8 @@ const SocialLink: React.FC<SocialLinkProps> = ({
     image,
     alt,
   }) => (
-    <a
-      href={href}
+    <Link
+      href={`${href}`}
       aria-label="social-link"
 <<<<<<< HEAD
       className="mr-6 text-white duration-300 hover:text-primary"
@@ -17,7 +18,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({
 >>>>>>> b361d4b (I worked on the Property Listing Card)
     >
       <Image src={image} alt={alt} width={36} height={30} />
-    </a>
+    </Link>
   );
 
 export default SocialLink;

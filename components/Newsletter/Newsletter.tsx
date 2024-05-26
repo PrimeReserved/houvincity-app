@@ -1,7 +1,7 @@
 "use client"
 
 import { Suspense, useState } from "react";
-import { client } from "@/sanity/client";
+import { subscribe } from "@/lib/action";
 
 function Newsletter() {
 
@@ -9,22 +9,20 @@ function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+
     try {
-      const data = {
-        _type: 'newsletterSubscription',
-        email: email,
-      };
-      const response = await client.create(data);
-      console.log(`Response: ${response}`);
+      await subscribe(email);
       setSubmitted(true);
-      setEmail('');
     } catch (error: any) {
-      console.log(`Error submitting email: ${error}`);
-      setError(error.message);
+      setError(error.message || 'An unexpected error occurred');
     }
   };
+
+
+  
   return (
     <div>
       <div className="hero min-h-[30rem] bg-white">
@@ -37,7 +35,9 @@ function Newsletter() {
               Stay In the Loop with our newsletter! Subscribe now for exclusive
               your inbox
             </p>
-          <div className="md:w-[60%] w-[100%]">
+          </div>
+
+          <form onSubmit={handleSubmit} className="md:w-[60%] w-[100%]">
             <input
               type="email"
               placeholder="Enter your email Address"
@@ -54,13 +54,13 @@ function Newsletter() {
               ) : (
                <Suspense fallback={<p>Please wait...</p>}>
                   <button className="btn border-none absolute text-white -ml-[8rem] md:-ml-[10rem] mt-2 md:mt-5 text-[12px] w-[7rem] md:w-[8rem]  h-[2.5rem] bg-[#6DBA3A] rounded-md hover:border-primary hover:text-primary hover:bg-white hover:border-2"
-                      onClick={handleSubmit}
+                      type="submit"
                       >Subscribe</button>
                </Suspense>
               )}
               </>
             )}
-          </div>
+          </form>
         </div>
       </div>
     </div>

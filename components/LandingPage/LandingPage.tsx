@@ -1,58 +1,29 @@
-"use client"
-
-import { Suspense, useEffect, useState } from "react";
 import Hero from "./Hero";
 import AboutProperty from "@/components/LandingPage/AboutProperty";
 import BlogHomePage from "@/components/LandingPage/BlogHomePage";
 import Card from "@/components/LandingPage/Card";
 import Review from "@/components/LandingPage/Review";
 import Newsletter from "@/components/Newsletter/Newsletter";
-import { usePropertyContext } from "@/context/PropertyContext";
 import { Post } from "@/typings";
-import { getPost, getTestimony } from "@/lib/data";
+import { getPosts, getTestimony } from "@/lib/action";
 import ErrorBoundary from "../ErrorBoundary";
 import Loading from "@/app/loading";
+import PostCard from "../Blog/Cards/PostCard";
 
-export const revalidate = 30;
 
-export default function Home() {
-  const [selectedPropertyType, setSelectedPropertyType] = useState('House');
-  const { properties } = usePropertyContext();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [reviews, setReviews] = useState<any>([]);
-  const [isLandActive] = useState(false);
 
-  useEffect(() => {
-    async function fetchReview() {
-      try {
-        const reviewData = await getTestimony();
-        if (!reviewData || !Array.isArray(reviewData)) return;
-        setReviews(reviewData);
-      } catch(error){
-        console.log(`Error fetching customer review`)
-      }
-    }
-    async function fetchPost() {
-      try {
-        const postsData = await getPost();
-        if (!postsData || !Array.isArray(postsData)) return;
-        setPosts(postsData);
-      } catch (error) {
-        console.error(`Error Post in landing page: ${error}`)
-      }
-    }
 
-    fetchPost();
-    fetchReview();
-  }, []);
+export default async function Home() {
+  const posts = await getPosts();
+  const reviews = await getTestimony();
 
-  const filterPropertiesByType = (propertyType: string) => {
-    return properties.filter(property => property.propertyType === propertyType);
-  };
+  if (!Array.isArray(posts) || posts.length === 0) {
+    return <p>No posts available</p>;
+  }
 
-  const handlePropertyTypeChange = (propertyType: string) => {
-    setSelectedPropertyType(propertyType);
-  };
+  if (!Array.isArray(reviews) || reviews.length === 0) {
+    return <p>No reviews available</p>;
+  }
 
   return (
     <main>
@@ -71,7 +42,7 @@ export default function Home() {
           <div className="flex justify-center  ">
             <div className="flex justify-center">
               <div className="flex gap-3 md:gap-5 justify-center bg-white drop-shadow-lg py-10 md:w-[400px] w-[350px] ">
-                <button
+                {/* <button
                   className={`py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ${isLandActive ? "bg-primary text-white" : "bg-white text-primary"
                     }`}
                   onClick={() => handlePropertyTypeChange('Land')}
@@ -84,23 +55,23 @@ export default function Home() {
                   onClick={() => handlePropertyTypeChange('House')}
                 >
                   Smart Homes
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
         </div>
       </div>
       {/* Land */}
-      <Suspense fallback={<Loading />}>
-        <Card properties={filterPropertiesByType(selectedPropertyType)} />
-      </Suspense>
+      <Card properties={[]} />
       <AboutProperty />
       <ErrorBoundary>
-        <Suspense fallback={<Loading />}>
-          <BlogHomePage posts={posts} />
-        </Suspense>
+        {posts.map((post: any) => (
+          <PostCard key={post._id} post={post} />
+        ))}
       </ErrorBoundary>
-      <Review reviews={reviews} />
+      {reviews.map((review: any) => (
+        <Review key={review._id} review={review} />
+      ))}
       <Newsletter />
     </main>
   );

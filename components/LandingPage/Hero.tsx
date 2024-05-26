@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
       {/* Background Image */}
       <Suspense fallback={<Loading />}>
       <Image
-        src={Banner}
+        src="https://res.cloudinary.com/dzd51q99i/image/upload/v1716402146/houvincity/landing-page/Rectangle_23803_jhw5qg.png"
         alt="Hero Image"
         placeholder="blur"
         fill

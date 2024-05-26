@@ -7,7 +7,7 @@ export default defineType({
   fields: [
     defineField({
       name: "name",
-      title: "Title",
+      title: "Name",
       type: "string",
     }),
     defineField({
@@ -40,7 +40,7 @@ export default defineType({
   preview: {
     select: {
       title: "title",
-      media: "propertyImage",
+      media: "authorImage",
     },
   },
 });

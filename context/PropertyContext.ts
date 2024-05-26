@@ -1,4 +1,5 @@
 // context/SearchContext.tsx
+"use client"
 
 import { SetStateAction, useContext, createContext, Dispatch } from "react";
 

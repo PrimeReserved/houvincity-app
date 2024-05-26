@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react"
 import { PropertyContext } from "./PropertyContext"
-import { getProperty } from "@/lib/data";
+import { getProperty } from "@/lib/action";
 
 
 const PropertyProvider = ({ children }: { children: React.ReactNode}) => {
@@ -12,7 +12,7 @@ const PropertyProvider = ({ children }: { children: React.ReactNode}) => {
     useEffect(() => {
       const fetchInitialProperties = async () => {
           try {
-              const fetchedProperties = await getProperty();
+              const fetchedProperties: any = await getProperty();
               setProperties(fetchedProperties);
           } catch (error) {
               console.error(`Error fetching properties:`, error);
