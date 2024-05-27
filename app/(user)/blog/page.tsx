@@ -5,12 +5,19 @@ import Newsletter from "@/components/Newsletter/Newsletter";
 import PostCard from "@/components/Blog/Cards/PostCard";
 import { getNews, getPosts } from "@/lib/action";
 import { Post } from "@/typings";
+import RecentNewsCard from "@/components/Blog/Cards/RecentNewsCard";
 
 async function Page() {
+  // Fetch data
   const posts = await getPosts();
   const news = await getNews();
 
-  if (!Array.isArray(posts) || posts.length === 0) {
+  // Limit the number of items to 4
+  const limitedRecentPosts = posts.slice(0, 3);
+  const limitedNewsPosts = news.slice(0, 3);
+  const limitedPosts = posts.slice(0, 4);
+
+  if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {
     return <p>No posts available</p>;
   }
 
@@ -31,29 +38,33 @@ async function Page() {
             Recent Posts
           </p>
           <ErrorBoundary>
-            {posts.map((post: Post) => (
+            {limitedRecentPosts.map((post: Post) => (
               <div key={post._id}>
                 <RecentPostCard post={post} />
               </div>
             ))}
           </ErrorBoundary>
-          <ErrorBoundary>
-            {posts.map((post: Post) => (
+          <div className="col-span-1">
+            <p className="sm:p-5 text-primary font-medium text-3xl">
+              Recent News
+            </p>
+            <ErrorBoundary>
+            {limitedNewsPosts.map((post: Post) => (
               <div key={post._id}>
-                <RecentPostCard post={post} />
+                <RecentNewsCard article={post} />
               </div>
             ))}
           </ErrorBoundary>
+          </div>
         </div>
         <div className="col-span-2">
           <ErrorBoundary>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
-              {posts.map((post: Post) => (
+              {limitedPosts.map((post: Post) => (
                 <div key={post._id}>
                   <PostCard post={post} />
                 </div>
               ))}
-              {/* <BlogCard /> */}
             </div>
           </ErrorBoundary>
         </div>

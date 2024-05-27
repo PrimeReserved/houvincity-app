@@ -1,57 +1,36 @@
 import Houses1 from "@/public/images/property/house1.svg";
 import { Property } from "@/typings";
-
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { client } from "@/sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import { urlForImage } from "@/sanity/lib/image";
 import Loading from "@/app/loading";
 
-const builder = imageUrlBuilder(client);
 
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
-
-
-interface HouseProps {
-  properties: Property[];
-}
-
-const House: React.FC<HouseProps> = ({ properties }) => {
-  const headerText = properties.some(property => property.propertyType === "House") ? "Houses" : "Land";
-
-  if (properties.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-[20rem]">
-        <h1 className="text-customTextColor text-4xl">There is currently no available property listing for now, kindly check back later</h1>
-      </div>
-    );
-  }
+export default function PropertyCard({ property }: any) {
+ 
 
   return (
     <div className="container">
-      <h1 className=" text-customPrimary font-bold text-4xl m-10">{headerText}</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
-        {properties.map((property) => (
           <div
             className="bg-white rounded-lg transition duration-300 shadow-xl rounded-b-md"
             key={property._id}
           >
             <figure>
-             <Suspense fallback={<Loading />}>
-             <Image
-                src={property?.propertyImage ? urlFor(property.propertyImage).url() : Houses1}
-                alt={property?.title}
-                width={355}
-                height={285}
-                layout="responsive"
-                loading="lazy"
-              />
-             </Suspense>
+              <Suspense fallback={<Loading />}>
+                <Image
+                  src={
+                    property?.propertyImage
+                      ? urlForImage(property.propertyImage)
+                      : Houses1
+                  }
+                  alt={property?.title}
+                  width={355}
+                  height={285}
+                  layout="responsive"
+                  loading="lazy"
+                />
+              </Suspense>
             </figure>
             <div className="card-body mt-5 px-6 md:px-4 xl:px-6">
               <div className="flex justify-between ">
@@ -96,22 +75,13 @@ const House: React.FC<HouseProps> = ({ properties }) => {
                 </p>
               </div>
               <Link href={`/property/${property.slug?.current}`}>
-                  <button className="text-white bg-primary text-base px-3 py-2 -mr-6 rounded-br-md flex float-end -mb-8">
-                    View Full Details
-                  </button>
-                </Link>
-              </div>
-              <Link href={`/property/${property.slug?.current}`}>
-                  <button className="text-white bg-primary text-base px-3 py-2 -mr-6 rounded-br-md flex float-end -mb-8">
-                    View Full Details
-                  </button>
-                </Link>
-
+                <button className="text-white bg-primary text-base px-3 py-2 -mr-6 rounded-br-md flex float-end -mb-8">
+                  View Full Details
+                </button>
+              </Link>
             </div>
-        ))}
+          </div>
       </div>
-    </div>
+    // </div>
   );
 };
-
-export default House;

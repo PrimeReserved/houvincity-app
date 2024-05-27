@@ -1,14 +1,15 @@
 // // app/(user)/blog/[slug]/page.tsx
-import { groq } from "next-sanity";
-import { SanityDocument } from "next-sanity";
-import { Post } from "../../../../typings"
-import { POST_QUERY, AUTHOR_QUERY } from "@/sanity/lib/queries";
-import { client } from "@/sanity/client";
-import DetailedCard from "@/components/Blog/Cards/DetailedCard";
-import Header from "@/components/Header/HeaderHome";
-import FooterHome from "@/components/Footer/FooterHome";
+import { Post } from "../../../../typings";
+import PostDetailedCard from "@/components/Blog/Cards/PostDetailedCard";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import BlogDetailPost from "@/components/Blog/Cards/BlogDetailPost";
+import SocialShare from "@/components/Blog/SocialShare";
+import { Suspense } from "react";
+import { getPost, getPosts } from "@/lib/action";
+import Loading from "@/app/loading";
+
 
 interface Props {
   params: {
@@ -16,13 +17,8 @@ interface Props {
   }
 }
 
-export const revalidate = 30;
-
 export const generateStaticParams = async () => {
-  const query = groq`*[_type == 'post']{
-    slug
-  }`;
-  const slugs: Post[] = await client.fetch(query);
+  const slugs: Post[] = await getPosts();
   const slugRoutes = slugs.map((slug) => slug?.slug?.current);
   console.log(`Slug Routes: ${slugRoutes}`);
   return slugRoutes?.map((slug) => ({
@@ -31,25 +27,49 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Page({ params: { slug } }: Readonly<Props>) {
-  const query = POST_QUERY;
-  const post: Post = await client.fetch(query, { slug });
+  const post = await getPost(slug);
+  const posts = await getPosts();
+
+  const limitedRecentPosts = posts.slice(0, 3);
 
   return (
     <>
-      <Header />
-      <div className="flex flex-row mt-[5rem] xl:mx-10 justify-center mx-5">
+      <div className="md:flex flex-row mt-[5rem] xl:mx-10 justify-center md:mx-5">
         <div className="basis-1/2">
-         <Suspense fallback={<p>Loading...</p>}>
-          <DetailedCard post={post} />
-         </Suspense>
+          <Suspense fallback={<Loading />}>
+            <PostDetailedCard post={post} />
+          </Suspense>
         </div>
-        <div className="col-span-1">
-          <AuthorProfile author={post.author}  />
-          <RecentPostCard  />
+        <div className="basis-1/1">
+          <Suspense fallback={<Loading />}>
+            <AuthorProfile
+              author={post.author}
+              publishedAt={post.publishedAt}
+            />
+          </Suspense>
+          <ErrorBoundary>
+            {limitedRecentPosts.map((post: Post) => (
+              <div key={post._id}>
+                <RecentPostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
+          <div className="lg:mx-12">
+          <p className="text-primary font-medium mt-[2.6rem] text-3xl">Share</p>
+            <div className="p-5 bg-white rounded-md mt-5 drop-shadow-md">
+              <SocialShare />
+            </div>
+          </div>
         </div>
-        <div className="col-span-1"></div>
       </div>
-      <FooterHome />
+      <div className="p-10">
+        <h1 className="text-center text-4xl">More Like This</h1>
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <BlogDetailPost />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
     </>
   );
 };

@@ -1,26 +1,22 @@
-// components/Blog/Cards/DetailedCard.tsx
+// components/Blog/Cards/PostDetailedCard.tsx
 
 import Houses from "@/public/images/blog/Rectangle 23861.svg";
 import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
-import { dataset, projectId } from "@/sanity/env";
 import { RichTextComponents } from "./RichTextComponents";
 import { PortableText } from "@portabletext/react";
 import { Post } from "@/typings"
 import { Suspense } from "react";
 import Loading from "@/app/loading";
-
-export const revalidate = 30;
-const builder = imageUrlBuilder({ projectId, dataset });
+import { urlForImage } from "@/sanity/lib/image";
 
 
-interface DetailedCardProps {
+interface PostDetailedCardProps {
   post: Post;
 }
 
 
 
-export default async function DetailedCard({ post }: Readonly<DetailedCardProps>) {
+export default async function PostDetailedCard({ post }: Readonly<PostDetailedCardProps>) {
 
   return (
     <div className="w-[45.6rem]">
@@ -28,12 +24,7 @@ export default async function DetailedCard({ post }: Readonly<DetailedCardProps>
         {post?.mainImage ? (
           <Suspense fallback={<Loading />}>
             <Image
-              src={builder
-                .image(post?.mainImage)
-                .width(697)
-                .height(600)
-                .quality(100)
-                .url()}
+              src={urlForImage(post?.mainImage)}
               alt={post?.title || "Houses"}
               width={697}
               height={600}

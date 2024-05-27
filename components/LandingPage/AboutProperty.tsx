@@ -77,7 +77,7 @@ function AboutProperty() {
       <div>
         <Suspense fallback={<Loading />}>
         <Image
-          src={LuxuryHome}
+          src="https://res.cloudinary.com/dzd51q99i/image/upload/v1716690096/houvincity/landing-page/Union_chih6l.png"
           alt="Luxury Home"
           width={407}
           height={390.39}

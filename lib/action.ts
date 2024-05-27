@@ -12,6 +12,19 @@ export async function getPosts() {
   }
 }
 
+export async function getPost(slug: string) {
+  try {
+    const response = await fetch(`${process.env.BLOG_API_URI}/${slug}`);
+    if (!response.ok) {
+      throw new Error(`Could not fetch post with ID: ${slug}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(`An error occurred while fetching the post: ${error}`);
+    return null;
+  }
+}
+
 // Get news
 export async function getNews() {
   try {
@@ -25,9 +38,22 @@ export async function getNews() {
   }
 }
 
+export async function getArticle(slug: string) {
+  try {
+    const response = await fetch(`${process.env.NEWS_API_URI}/${slug}`);
+    if (!response.ok) {
+      throw new Error(`Could not fetch News article with slug: ${slug}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(`An error occurred while fetching the News article: ${error}`);
+    return null;
+  }
+}
+
 // Get property
 
-export async function getProperty() {
+export async function getProperties() {
   try {
     const response = await fetch(`${process.env.PROPERTY_API_URI}`);
     if (!response) {
@@ -39,9 +65,24 @@ export async function getProperty() {
   }
 }
 
+export async function getProperty(slug: string) {
+  try {
+    const response = await fetch(`${process.env.PROPERTY_API_URI}/${slug}`);
+    if (!response.ok) {
+      throw new Error(`Could not fetch SINGLE property with slug: ${slug}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(`An error occurred while fetching a  SINGLE property: ${error}`);
+    return null;
+  }
+}
+
+
+
 // Get testimony
 
-export async function getTestimony() {
+export async function getTestimonies() {
   try {
     const response = await fetch(`${process.env.TESTIMONY_API_URI}`);
     if (!response) {
@@ -52,6 +93,20 @@ export async function getTestimony() {
     console.log(`An Error occurred while fetching testimony: ${error}`);
   }
 }
+
+export async function getTestimony(slug: string) {
+  try {
+    const response = await fetch(`${process.env.TESTIMONY_API_URI}/${slug}`);
+    if (!response.ok) {
+      throw new Error(`Could not fetch SINGLE testimony with slug: ${slug}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(`An error occurred while fetching the single testimony: ${error}`);
+    return null;
+  }
+}
+
 
 // Newsletter subscription
 export async function subscribe(email: string) {

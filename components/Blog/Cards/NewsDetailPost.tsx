@@ -13,13 +13,9 @@ import NumberCount from "@/components/NumberCount/NumberCount";
 import { useEffect, useState } from "react";
 import PostSkeleton from "@/components/Blog/PostSkeleton";
 import { News, Category } from "@/typings";
+import { urlForImage } from "@/sanity/lib/image";
 
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(client);
 
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 const ITEMS_PER_PAGE = 3;
 const MIN_LOAD_LINK_POSTS = 6;
@@ -117,7 +113,7 @@ export default function NewsDetailPost() {
             <div className="relative overflow-hidden rounded-t-lg h-100">
               {post?.mainImage && (
                 <Image
-                  src={urlFor(post?.mainImage).url()}
+                  src={urlForImage(post?.mainImage)}
                   alt={`${post.slug?.current}`}
                   width={380}
                   height={500}

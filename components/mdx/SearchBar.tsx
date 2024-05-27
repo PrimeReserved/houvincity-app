@@ -23,7 +23,7 @@ const customStyles = {
   },
 };
 
-export default function SearchBar({ data }: SearchComponentProps) {
+export default function SearchBar({ data }: Readonly<SearchComponentProps>) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

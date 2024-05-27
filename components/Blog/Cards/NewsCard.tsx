@@ -10,33 +10,13 @@ import { groq } from "next-sanity";
 import { News } from "@/typings";
 import { Suspense } from "react";
 import Loading from "@/app/loading";
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(client);
+import { getNews } from "@/lib/action";
+import { urlForImage } from "@/sanity/lib/image";
 
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
-
-async function getData() {
-  try {
-    const query = groq`*[_type == 'news']{
-      ...,
-      author->,
-      categories[]->
-    } | order(_createdAt asc)`;
-    const data = await client.fetch(query);
-    // Slice the data to only include the first 3 posts
-    const slicedData = data.slice(0, 3);
-    return slicedData;
-  } catch (error) {
-    console.log(`Error fetching data: ${error}`);
-    throw new Error(`Error fetching News data`)
-  }
-}
 
 export default async function NewsCard() {
 
-  const news: News[] = await getData();
+  const news: News[] = await getNews();
 
   if (!news || !Array.isArray(news)) {
     return <h1>Fetching News, please be still..</h1>
@@ -50,7 +30,7 @@ export default async function NewsCard() {
             {article?.mainImage && (
               <Suspense fallback={<Loading />}>
                  <Image
-                src={urlFor(article?.mainImage).width(100).height(100).quality(100).url()}
+                src={urlForImage(article?.mainImage)}
                 alt={`${article.slug?.current}`}
                 width={100}
                 height={100}

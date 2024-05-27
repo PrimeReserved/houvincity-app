@@ -1,81 +1,10 @@
-"use client"
+"use client";
 
-import{ ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
 
-
-interface FilterSearchProps {
-  isOpen: boolean;
-  onClose: () => void;
-  selectedType: string;
-  selectedLocation: string;
-  selectedBudget: string;
-  setSelectedType: (type: string) => void;
-  setSelectedLocation: (location: string) => void;
-  setSelectedBudget: (budget: string) => void;
-  handleRemoveLocation: (location: string) => void;
-  saveSearchState: (selectedType: string, selectedLocation: string, selectedBudget: string) => void;
-  resetSearchState: () => void;
-}
-
-
-const FilterSearchHomePage: React.FC<FilterSearchProps> = ({
-  isOpen,
-  onClose,
-  selectedType,
-  selectedLocation,
-  selectedBudget,
-  setSelectedType,
-  setSelectedLocation,
-  setSelectedBudget,
-  handleRemoveLocation,
-  saveSearchState,
-  resetSearchState,
-}) => {
-  const [showPriceRange, setShowPriceRange] = useState<boolean>(false);
-
-  if (!isOpen) return null;
-  const handleSave = () => {
-    // Call the saveSearchState function from props to save the search state
-    saveSearchState(selectedType, selectedLocation, selectedBudget);
-    onClose(); // Close the modal after saving
-  };
-
-  const handleReset = () => {
-    // Call the resetSearchState function from props to reset the search state
-    resetSearchState();
-  };
-
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(e.target.value);
-  };
-
-  const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    if (value === "") {
-      return;
-    }
-
-    if (selectedLocation === value) {
-      handleRemoveLocation(value);
-      return;
-    }
-
-    setSelectedLocation(value);
-  };
-
-  const handlePriceRangeToggle = () => {
-    setShowPriceRange(!showPriceRange);
-    if (showPriceRange) {
-      setSelectedBudget("");
-    } else {
-      setSelectedBudget("priceRange");
-    }
-  };
-
-
+const FilterSearchHomePage = () => {
   return (
     <div className="fixed bottom-10 left-0 w-full h-full flex items-center justify-center bg-opacity-50 z-40 lg:hidden mt-10">
       <div className="bg-white p-5 rounded-lg">
@@ -93,21 +22,15 @@ const FilterSearchHomePage: React.FC<FilterSearchProps> = ({
               type="text"
               placeholder="Add a location"
               className="text-sm font-medium text-customTextColor focus:outline-none bg-white"
-              value={selectedLocation}
-              onChange={handleLocationChange}
             />
           </div>
-          {selectedLocation && (
-            <div className="flex gap-3 mt-4 text-white border-b-[1px] border-customTextColor/50 pb-5">
-              <button
-                className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-2 py-1.5"
-                onClick={() => handleRemoveLocation(selectedLocation)}
-              >
-                <p>{selectedLocation}</p>
-                <IoMdClose />
-              </button>
-            </div>
-          )}
+
+          <div className="flex gap-3 mt-4 text-white border-b-[1px] border-customTextColor/50 pb-5">
+            <button className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-2 py-1.5">
+              <p>{`Lagos`}</p>
+              <IoMdClose />
+            </button>
+          </div>
         </div>
 
         <div className="mt-4">
@@ -115,21 +38,21 @@ const FilterSearchHomePage: React.FC<FilterSearchProps> = ({
             Property type
           </p>
 
-          <div className="flex gap-3 mt-3 text-white border-b-[1px] border-customTextColor/50 pb-5 ">
+          {/* <div className="flex gap-3 mt-3 text-white border-b-[1px] border-customTextColor/50 pb-5 ">
             <button
               className={`flex items-center gap-2 rounded-lg text-sm px-2 py-1.5 ${selectedType === 'Land' ? 'bg-primary text-white' : 'border-[1px] border-primary text-primary'}`}
-              onClick={() => setSelectedType('Land')}>
+             >
               <p>Land</p>
               {selectedType === 'Land' && <IoMdCheckmark />}
             </button>
             <button
               className={`flex items-center gap-2 rounded-lg text-sm px-2 py-1.5 ${selectedType === 'House' ? 'bg-primary text-white' : 'border-[1px] border-primary text-primary'}`}
-              onClick={() => setSelectedType('House')}
+              
             >
               <p>Smart Home</p>
               {selectedType === 'House' && <IoMdCheckmark />}
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-3">
@@ -141,35 +64,29 @@ const FilterSearchHomePage: React.FC<FilterSearchProps> = ({
               type="radio"
               className="ring-primary"
               id="priceRange"
-              checked={selectedBudget === 'priceRange'}
-              onChange={() => {
-                setSelectedBudget('priceRange');
-                setShowPriceRange(!showPriceRange);
-              }}
+              // checked={selectedBudget === 'priceRange'}
             />
-            <label htmlFor="priceRange" onClick={handlePriceRangeToggle}>Price Range</label>
+            <label htmlFor="priceRange">Price Range</label>
           </div>
 
-        {selectedBudget === 'priceRange' && (
-        <div className="flex items-center mt-3 gap-3">
-          <div className=" border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
-            <p className="text-xs mb-1.5">From</p>
-            <p>N250,000</p>
+          <div className="flex items-center mt-3 gap-3">
+            <div className=" border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
+              <p className="text-xs mb-1.5">From</p>
+              <p>N250,000</p>
+            </div>
+            <p>-</p>
+            <div className=" border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
+              <p className="text-xs mb-1.5">To</p>
+              <p>N500,000</p>
+            </div>
           </div>
-          <p>-</p>
-          <div className=" border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
-            <p className="text-xs mb-1.5">To</p>
-            <p>N500,000</p>
-          </div>
-        </div>
-        )}
         </div>
 
         <div className="flex justify-between mt-5">
-          <button className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-[4rem] py-3" onClick={handleSave}>
+          <button className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-[4rem] py-3">
             Save
           </button>
-          <button className="flex items-center gap-2  text-primary underline rounded-lg text-sm px-[4rem] py-3" onClick={handleReset}>
+          <button className="flex items-center gap-2  text-primary underline rounded-lg text-sm px-[4rem] py-3">
             Reset All
           </button>
         </div>

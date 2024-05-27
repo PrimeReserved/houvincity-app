@@ -12,13 +12,8 @@ import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { Suspense, useEffect, useState } from "react";
 import { Post, Category } from "@/typings";
 import Loading from "@/app/loading";
+import { urlForImage } from "@/sanity/lib/image";
 
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(client);
-
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 const ITEMS_PER_PAGE = 3;
 const MIN_LOAD_LINK_POSTS = 6;
@@ -118,7 +113,7 @@ export default function BlogDetailPost() {
               {post?.mainImage && (
                <Suspense fallback={<Loading />}>
                  <Image
-                  src={urlFor(post?.mainImage).url()}
+                  src={urlForImage(post?.mainImage)}
                   alt={`${post.slug?.current}`}
                   width={380}
                   height={500}

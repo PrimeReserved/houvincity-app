@@ -2,24 +2,12 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import YoutubeEmbed from "./YoutubeEmbed";
 import Calendar from "@/public/images/blog/Icon/Calendar2.svg";
-import ErrorBoundary from "../ErrorBoundary";
-import Header from "../Header/HeaderHome";
-import FooterHome from "../Footer/FooterHome";
-import imageUrlBuilder from "@sanity/image-url";
-import { client } from "@/sanity/client";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Property } from "@/typings";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "../Blog/Cards/RichTextComponents";
 import Loading from "@/app/loading";
 import Link from "next/link";
-
-export const revalidate = 30;
-const builder = imageUrlBuilder(client);
-
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
+import { urlForImage } from "@/sanity/lib/image";
 
 interface PropertyDetailedProps {
   property: Property;
@@ -27,39 +15,26 @@ interface PropertyDetailedProps {
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   return (
-    <>
-      <ErrorBoundary>
-        <Header />
-      </ErrorBoundary>
       <div className="wrapper mb-10">
         <div className="flex justify-center items-center px-10">
           {property?.fullPropertyImage && (
-            <Image src={builder
-              .image(property?.fullPropertyImage?.asset?._ref)
-              .quality(100)
-              .url()} alt="House1" width={1500} height={100} />
+            <Image src={urlForImage(property?.fullPropertyImage?.asset?._ref)} alt="House1" width={1500} height={100} />
           )}
         </div>
         <div className="grid grid-cols-3 px-10  gap-2 justify-center items-center mt-12 mx-auto">
           {property?.leftSidePropertyImage && (
-            <Image src={builder
-              .image(property?.leftSidePropertyImage?.asset?._ref)
-              .quality(100)
-              .url()} alt="House2" width={385} height={300} />
+            <Image src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)} alt="House2" width={385} height={300} />
           )}
           {property.middlePropertyImage && (
             <Suspense fallback={<Loading />}>
-              <Image src={builder
-                .image(property?.middlePropertyImage.asset._ref)
-                .quality(100)
-                .url()} alt="House3" width={385} height={300} />
+              <Image src={urlForImage
+(property?.middlePropertyImage.asset._ref)}
+
+ alt="House3" width={385} height={300} />
             </Suspense>
           )}
           {property.rightSidePropertyImage && (
-            <Image src={builder
-              .image(property?.rightSidePropertyImage.asset._ref)
-              .quality(100)
-              .url()} alt="House4" width={385} height={300} />
+            <Image src={urlForImage(property?.rightSidePropertyImage.asset._ref)} alt="House4" width={385} height={300} />
           )}
         </div>
         <div className="mt-10 px-10">
@@ -98,10 +73,6 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
           </Link>
         </div>
       </div>
-      <ErrorBoundary>
-        <FooterHome />
-      </ErrorBoundary>
-    </>
   );
 }
 

@@ -9,27 +9,22 @@ import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Author } from "@/typings";
 import Loading from "@/app/loading";
+import { urlForImage } from "@/sanity/lib/image";
 
 
-const builder = imageUrlBuilder(client);
-
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
-
-
-
-const AuthorProfile = ({ author }: Readonly<{ author: Author}>) => {
-
-
+const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>  {
   const { name, image } = author;
-  console.log(`Author: ${author}`)
-  if (!author || !author?.name || !author.image) {
+
+  if (!author?.name || !author.image) {
     // Handle the case where author or its properties are undefined
     return <div>Author information is missing</div>;
   }
 
-  console.log("Author data:", author);
+  function formatName(name: string) {
+    const parts = name.split('-');
+    const formattedName = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+    return formattedName;
+  }
 
 
   return (
@@ -40,7 +35,7 @@ const AuthorProfile = ({ author }: Readonly<{ author: Author}>) => {
           image ? (
             <Suspense fallback={<Loading />}>
               <Image
-              src={urlFor(image).url()}
+              src={urlForImage(image)}
               alt="Author"
               width={70}
               height={70}
@@ -65,7 +60,13 @@ const AuthorProfile = ({ author }: Readonly<{ author: Author}>) => {
             <div className="text-primary lg:text-[12px] xl:text-base">
               { name }
             </div>
-            <p className="font-light text-sm mt-1">on {formatDate(publishedAt)}</p>
+            <p className="font-light text-sm mt-1">on 
+              {new Date(publishedAt).toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                })}
+              </p>
           </div>
         </div>
       </figure>

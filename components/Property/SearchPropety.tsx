@@ -1,201 +1,130 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react";
-import { groq } from "next-sanity";
-import { client } from "@/sanity/client";
-import { Property } from "@/typings";
-import House from "./Houses";
-import Land from "./Land";
 
-const SearchProperty = () => {
-  const [allProperties, setAllProperties] = useState<Property[]>([]);
-  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
-  const [searchType, setSearchType] = useState('House');
-  const [searchLocation, setSearchLocation] = useState('');
-  const [searchSize, setSearchSize] = useState('');
-  const [searchBudget, setSearchBudget] = useState('');
-
-  // Filter data
-  const [filteredHouses, setFilteredHouses] = useState<Property[]>([]);
-  const [filteredLand, setFilteredLand] = useState<Property[]>([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = useMemo(() => 9, []);
-  const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
-  const [locations, setLocations] = useState<string[]>([]);
-  const [sizes, setSizes] = useState<number[]>([]);
-  const [budgets, setBudgets] = useState<number[]>([]);
-  const [showMore, setShowMore] = useState(false);
-
-  // Calculate the minimum and maximum property sizes
-  const minSize = Math.min(...sizes);
-  const maxSize = Math.max(...sizes);
-
-  // Calculate the minimum and maximum property prices
-  const minPrice = Math.min(...budgets);
-  const maxPrice = Math.max(...budgets);
-
-  // Define the step size for generating range intervals
-  const stepSize = 1000;
-  const stepPrice = 100000; // You can adjust this value based on your preference
+import { useState, useEffect } from "react";
+import Fuse from "fuse.js";
+import { HiSearch } from "react-icons/hi";
+import PropertyCard from "./PropertyCard";
 
 
-  // Generate range intervals dynamically
-  const sizeRanges = [];
-  const priceRanges = [];
-  for (let size = minSize; size <= maxSize; size += stepSize) {
-    const nextSize = size + stepSize <= maxSize ? size + stepSize : maxSize;
-    sizeRanges.push({ label: `${size} - ${nextSize}`, value: `${size}-${nextSize}` });
-  }
 
-  for (let price = minPrice; price <= maxPrice; price += stepPrice) {
-    const nextPrice = price + stepPrice <= maxPrice ? price + stepPrice : maxPrice;
-    priceRanges.push({ label: `${price} - ${nextPrice}`, value: `${price}-${nextPrice}` });
-  }
+
+
+const SearchProperty = ({ properties }:any ) => {
+  const [searchResults, setSearchResults] = useState(properties);
+  const [propertyType, setPropertyType] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [propertySize, setPropertySize] = useState("");
+  const [budget, setBudget] = useState("");
+
+
+  const fuse = new Fuse(properties, {
+    keys: ['propertyType', 'location', 'propertySize', 'budget'],
+    includeMatches: true,
+    threshold: 0.3, 
+  });
+
+  const handleSearch = () => {
+    let results: any = properties;
+
+    if (propertyType || location) {
+      const searchOptions: any = {};
+      if (propertyType) searchOptions.propertyType = propertyType;
+      if (location) searchOptions.location = location;
+
+      const fuseResults = fuse.search(searchOptions);
+      results = fuseResults.map(result => result.item);
+    }
+
+    if (propertySize) {
+      const [minSize, maxSize] = propertySize.split(" - ").map(size => parseInt(size.replace('sqft', '').trim()));
+      results = results.filter((property: any) => property.propertySize >= minSize && property.propertySize <= maxSize);
+    }
+
+    if (budget) {
+      const [minBudget, maxBudget] = budget.split(" - ").map(b => parseInt(b.replace('N', '').replace(',', '').trim()));
+      results = results.filter((property: any) => property.budget >= minBudget && property.budget <= maxBudget);
+    }
+
+    setSearchResults(results);
+  };
 
   useEffect(() => {
-    fetchAllProperties();
-  }, []);
+    handleSearch();
+  }, [propertyType, location, propertySize, budget]);
 
-  const fetchAllProperties = async () => {
-    const query = groq`*[_type == "property"]`;
-    const allProperties: Property[] = await client.fetch(query);
-    console.log(`ALL PROPERTIES: ${allProperties}`)
-    setAllProperties(allProperties);
-    // Populate data 
-    setPropertyTypes(Array.from(new Set(allProperties.map(property => property.propertyType))));
-    setLocations(Array.from(new Set(allProperties.map(property => property.location))));
-    setSizes(Array.from(new Set(allProperties.map(property => Number(property.propertySize)))));
-    setBudgets(Array.from(new Set(allProperties.map(property => property.budget))));
-
-    // Filter each data
-    setFilteredHouses(allProperties.filter(property => property.propertyType === 'House'));
-    setFilteredLand(allProperties.filter(property => property.propertyType === 'Land'));
-  };
-
-  const handleShowMore = () => {
-    setShowMore(true);
-  };
-  
-  const handleSearch = () => {
-    let filteredProperties = [...allProperties];
-
-    // Filter by property type if selected
-    if (searchType) {
-      filteredProperties = filteredProperties.filter(property => property.propertyType === searchType);
-    }
-
-    // Filter by location if selected
-    if (searchLocation) {
-      filteredProperties = filteredProperties.filter(property => property.location === searchLocation);
-    }
-
-    // Filter by property size range if selected
-    if (searchSize) {
-      const [minSize, maxSize] = searchSize.split("-");
-      filteredProperties = filteredProperties.filter(
-        (property) => {
-          const propertySize = Number(property.propertySize);
-          return propertySize >= Number(minSize) && propertySize <= Number(maxSize);
-        }
-      );
-    }
-
-    // Filter by budget range if selected
-    if (searchBudget) {
-      const [minPrice, maxPrice] = searchBudget.split("-");
-      filteredProperties = filteredProperties.filter(
-        (property) => {
-          const propertyBudget = Number(property.budget);
-          return propertyBudget >= Number(minPrice) && propertyBudget <= Number(maxPrice);
-        }
-      );
-    }
-
-    // Log filtered properties
-    console.log("Filtered Properties:", filteredProperties);
-
-    // Separate houses and land properties based on the filtered properties
-    const filteredHouses = filteredProperties.filter(property => property.propertyType === 'House');
-    const filteredLand = filteredProperties.filter(property => property.propertyType === 'Land');
-
-    // Update state variables
-    setFilteredHouses(filteredHouses);
-    setFilteredLand(filteredLand);
-    setFilteredProperties(filteredProperties);
-    setCurrentPage(1);
-  };
-  const currentProperties = filteredProperties.slice(0, showMore ? filteredProperties.length : propertiesPerPage);
-
+  if (!Array.isArray(searchResults) || searchResults.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-[20rem]">
+        <h1 className="text-customTextColor text-4xl px-10">
+          There is currently no available property listing for now, kindly check
+          back later
+        </h1>
+      </div>
+    );
+  }
 
   return (
+    <>
     <div className="flex flex-col justify-center items-center -mt-10 mx-2">
       <div className="w-[100%] md:w-[80%] lg:h-[117px] md:h-[90px] h-[80px] bg-white shadow-lg rounded-lg flex items-center justify-evenly gap-2 px-2 pr-5">
         <div className="relative">
           <select
             className="select select-bordered mx-2 py-2 w-full max-w-xs"
-            value={searchType}
-            onChange={(e) => setSearchType(e.target.value)}
+            value={propertyType}
+            onChange={(e) => setPropertyType(e.target.value)}
           >
             <option disabled value="">Property Type</option>
-            {uniqueTypes.map((propertyType: string) => (
-              <option key={propertyType} value={propertyType}>
-                {propertyType}
-              </option>
-            ))}
+            <option value="House">House</option>
+            <option value="Land">Land</option>
           </select>
         </div>
         <div className="relative">
           <select
             className="select select-bordered mx-2 py-2 w-full max-w-xs"
-            value={selectedLocation}
-            onChange={(e) => setSelectedLocation(e.target.value)}
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
           >
             <option disabled value="">Location</option>
-            {uniqueLocations.map((location: string) => (
-              <option key={location} value={location}>{location}</option>
-            ))}
+            <option value="Abuja">Abuja</option>
+            <option value="Port Harcourt">Port Harcourt</option>
+            <option value="Lagos">Lagos</option>
           </select>
         </div>
         <div className="relative">
           <select
             className="select select-bordered mx-2 py-2 w-full max-w-xs"
-            value={selectedSize}
-            onChange={(e) => setSelectedSize(e.target.value)}
+            value={propertySize}
+            onChange={(e) => setPropertySize(e.target.value)}
           >
             <option disabled value="">
               Property Size
             </option>
-            {sizeRanges.map((range) => (
-              <option key={range.value} value={range.value}>
-                {range.label}
-              </option>
-            ))}
+            <option value="200 - 500">200sqft - 500sqft</option>
+            <option value="500 - 1000">500sqft - 1000sqft</option>
+            <option value="1000 - 10000">1000sqft - 10000sqft</option>
           </select>
         </div>
         <div className="relative">
           <select
             className="select select-bordered select:bg-[#040A3B] mx-2 py-2 w-full max-w-xs"
-            value={searchBudget}
-            onChange={(e) => setSearchBudget(e.target.value)}
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
           >
             <option disabled value="">
               Budget
             </option>
-            {priceRanges.map((range) => (
-              <option key={range.value} value={range.value}>
-                {range.label}
-              </option>
-            ))}
+            <option value="200000 - 500000">N200,000 - N500,000</option>
+            <option value="500000 - 2000000">N500,000 - N2,000,000</option>
+            <option value="2000000 - 10000000">N2,000,000 - N10,000,000</option>
           </select>
         </div>
 
       </div>
 
-      <button className="flex gap-3 bg-primary hover:bg-primary/80 duration-300 ease-in- xl:w-[175px] md:w-[120px]  w-[100px] xl:h-[50px] md:h-[40px] h-[35px] rounded-lg items-center justify-center -mt-3 xl:-mt-6 md:-mt-3 lg:-mt-5" onClick={applyFilter}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 16 16">
-          <path fill="#fff" d="M11.063 9.75h-.692l-.245-.236A5.662 5.662 0 0011.5 5.813 5.687 5.687 0 105.812 11.5a5.662 5.662 0 003.702-1.374l.236.245v.691l4.375 4.367 1.304-1.304-4.367-4.375zm-5.25 0a3.932 3.932 0 01-3.938-3.938 3.932 3.932 0 013.938-3.937A3.932 3.932 0 019.75 5.813 3.932 3.932 0 015.812 9.75z"></path>
-        </svg>
+      <button className="flex gap-3 bg-primary hover:bg-primary/80 duration-300 ease-in- xl:w-[175px] md:w-[120px]  w-[100px] xl:h-[50px] md:h-[40px] h-[35px] rounded-lg items-center justify-center -mt-3 xl:-mt-6 md:-mt-3 lg:-mt-5"
+        onClick={handleSearch}>
+        <HiSearch className="h-5 w-5 text-white"/>
         <p className="xl:text-lg md:text-base text-white text-xs ">Search</p>
       </button>
 
@@ -226,6 +155,26 @@ const SearchProperty = () => {
 
       </div>
     </div>
+    <h1 className=" text-customPrimary font-bold text-4xl m-10">
+        {propertyType}
+      </h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
+        {searchResults.length > 0 ? (
+          searchResults.map((property: any) => (
+            <div key={property.id}>
+              <PropertyCard property={property} />
+            </div>
+          ))
+        ) : (
+          <div className="flex justify-center items-center h-[20rem]">
+          <h1 className="text-customTextColor text-4xl px-10">
+            There is currently no available property listing for now, kindly check
+            back later
+          </h1>
+        </div>
+        )}
+      </div>
+    </>
   );
 };
 

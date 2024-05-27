@@ -1,27 +1,41 @@
 import Hero from "./Hero";
 import AboutProperty from "@/components/LandingPage/AboutProperty";
-import BlogHomePage from "@/components/LandingPage/BlogHomePage";
-import Card from "@/components/LandingPage/Card";
+import PropertyHomeCard from "@/components/LandingPage/PropertyHomeCard";
 import Review from "@/components/LandingPage/Review";
 import Newsletter from "@/components/Newsletter/Newsletter";
-import { Post } from "@/typings";
-import { getPosts, getTestimony } from "@/lib/action";
+import { getPosts, getProperties, getTestimonies } from "@/lib/action";
 import ErrorBoundary from "../ErrorBoundary";
-import Loading from "@/app/loading";
 import PostCard from "../Blog/Cards/PostCard";
-
-
-
+import Link from "next/link";
+import PropertyToggle from "./PropertyToggle";
 
 export default async function Home() {
+  // Fetch data
+  const properties = await getProperties();
   const posts = await getPosts();
-  const reviews = await getTestimony();
+  const reviews = await getTestimonies();
 
-  if (!Array.isArray(posts) || posts.length === 0) {
+  // Limit the number of items to 4
+  const limitedProperties = properties.slice(0, 3);
+  const limitedPosts = posts.slice(0, 3);
+  const limitedReviews = reviews.slice(0, 4);
+
+  if (!Array.isArray(limitedProperties) || limitedProperties.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-[20rem]">
+        <h1 className="text-customTextColor text-4xl px-10">
+          There is currently no available property listing for now, kindly check
+          back later
+        </h1>
+      </div>
+    );
+  }
+
+  if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {
     return <p>No posts available</p>;
   }
 
-  if (!Array.isArray(reviews) || reviews.length === 0) {
+  if (!Array.isArray(limitedReviews) || limitedReviews.length === 0) {
     return <p>No reviews available</p>;
   }
 
@@ -41,37 +55,81 @@ export default async function Home() {
           </p>
           <div className="flex justify-center  ">
             <div className="flex justify-center">
-              <div className="flex gap-3 md:gap-5 justify-center bg-white drop-shadow-lg py-10 md:w-[400px] w-[350px] ">
-                {/* <button
-                  className={`py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ${isLandActive ? "bg-primary text-white" : "bg-white text-primary"
-                    }`}
-                  onClick={() => handlePropertyTypeChange('Land')}
-                >
-                  Land
-                </button>
-                <button
-                  className={`py-3 px-[3rem] border-[1px] border-primary rounded-md text-xs text-primary ${!isLandActive ? "bg-primary text-white" : "bg-white text-primary"
-                    }`}
-                  onClick={() => handlePropertyTypeChange('House')}
-                >
-                  Smart Homes
-                </button> */}
-              </div>
+              <PropertyToggle properties={limitedProperties} />
             </div>
           </div>
         </div>
       </div>
       {/* Land */}
-      <Card properties={[]} />
+      <div className="px-10">
+        <div className="wrapper mt-[3rem] mb-[5rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[5rem] ">
+            <ErrorBoundary>
+              {
+              limitedProperties.map((property: any) => (
+                <PropertyHomeCard key={property._id} property={property} />
+              ))
+              }
+            </ErrorBoundary>
+          </div>
+
+          <div className="flex justify-center mt-10">
+            <Link href="/property">
+              <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
+                View All
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
       <AboutProperty />
-      <ErrorBoundary>
-        {posts.map((post: any) => (
-          <PostCard key={post._id} post={post} />
-        ))}
-      </ErrorBoundary>
-      {reviews.map((review: any) => (
-        <Review key={review._id} review={review} />
-      ))}
+      {/* Blog section  */}
+      <div className="wrapper flex justify-center items-center  mb-[5rem] px-10">
+        <div className="flex flex-col items-center mt-10">
+          <h1 className="text-customSecondary text-4xl font-semibold">
+            Stay Updated from Our Blog
+          </h1>
+          <p className="text-base text-customTextColor mt-3 mb-[3rem] ">
+            Gather Infromation From Our Blog and Stay Updated
+          </p>
+          <div className="mb-10 flex justify-center items-center ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  md:space-y-0">
+              <ErrorBoundary>
+                {limitedPosts.map((post: any) => (
+                  <PostCard key={post._id} post={post} />
+                ))}
+              </ErrorBoundary>
+            </div>
+          </div>
+          <div className="flex justify-center mt-10">
+            <Link href={`/blog`}>
+              <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
+                View All
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* Blog section  */}
+      {/* Testimony section  */}
+      <div className="lg:wrapper mx-5  ">
+        <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
+          Our Happy Homeowners
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[5rem] gap-14 mt-[5rem] ">
+          <ErrorBoundary>
+            {limitedReviews.map((review: any) => (
+              <Review key={review._id} review={review} />
+            ))}
+          </ErrorBoundary>
+        </div>
+        <div className="flex justify-center mt-[5rem] ">
+          <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
+            Read More
+          </button>
+        </div>
+      </div>
+      {/* Testimony section  */}
       <Newsletter />
     </main>
   );

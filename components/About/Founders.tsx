@@ -11,25 +11,29 @@ interface Founder {
 const founders: Founder[] = [
   {
     id: 1,
-    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401926/houvincity/about/Frame_1000002841_pi7bwc.png",
+    image:
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401926/houvincity/about/Frame_1000002841_pi7bwc.png",
     name: "Emmanuel Hope. U.",
     position: "GMD/Founder",
   },
   {
     id: 2,
-    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716402028/houvincity/about/Frame_1000002842_2_igzrtx.png",
+    image:
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716402028/houvincity/about/Frame_1000002842_2_igzrtx.png",
     name: "Barr. Woryi Onyema",
     position: "Co-founder",
   },
   {
     id: 3,
-    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
+    image:
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
     name: "Enoma Osawemwenma .J",
     position: "CO-founder",
   },
   {
     id: 4,
-    image: "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
+    image:
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
     name: "Mr Jonah Ukoh",
     position: "Partner",
   },
@@ -43,18 +47,27 @@ export default function Founders() {
       <h1 className="mt-5 text-center text-4xl text-[#040A3B] font-bold">
         Founders
       </h1>
-      <div className="lg:wrapper flex flex-col md:flex-row justify-between items-center gap-10 md:gap-2 lg:gap-10 p-10  mb-[5rem]">
+      <div className="lg:wrapper flex flex-col md:flex-row flex-wrap justify-between items-center gap-10 md:gap-2 lg:gap-10 p-10 mb-[5rem]">
         {founders.map((founder) => (
-          <div className="card rounded bg-base-100 shadow-xl" key={founder.id}>
+          <div
+            className="card rounded bg-base-100 shadow-xl mb-10"
+            key={founder.id}
+            style={{ maxWidth: "300px" }}
+          >
             <figure>
-              <Image src={founder.image} alt={founder.name} width={400} />
+              <Image
+                src={founder.image}
+                alt={founder.name}
+                width={400}
+                height={400}
+              />
             </figure>
-            
+
             <div className="card-body text-center py-6">
               <h2 className="card-title md:text-xs lg:text-sm xl:text-xl space-y-4 flex justify-center text-center text-[#040A3B]">
                 {founder.name}
               </h2>
-              <p className="text-1xl text-[#79747E]  font-extralight">
+              <p className="text-1xl text-[#79747E] font-extralight">
                 ({founder.position})
               </p>
             </div>
@@ -97,12 +110,14 @@ export default function Founders() {
             <p>Viability, Innovativeness, Credibility and Excellence (VICE)</p>
           </section>
         </section>
-        <section className="">
-          <Image 
-            className="" 
-            src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1716401930/houvincity/about/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns_1_ds4c33.png`} 
-            alt="About section" />
-        </section>
+        <figure className="">
+          <Image
+            src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1716401930/houvincity/about/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns_1_ds4c33.png`}
+            alt="About figure"
+            width={500}
+            height={500}
+          />
+        </figure>
       </div>{" "}
       <div className="">
         <section className="text-center m-10 uppercase">

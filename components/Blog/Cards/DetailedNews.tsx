@@ -2,16 +2,13 @@
 
 import Houses from "@/public/images/blog/Rectangle 23861.svg";
 import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
-import { dataset, projectId } from "@/sanity/env";
 import { RichTextComponents } from "./RichTextComponents";
 import { PortableText } from "@portabletext/react";
 import { News } from "@/typings"
 import { Suspense } from "react";
 import Loading from "@/app/loading";
+import { urlForImage } from "@/sanity/lib/image";
 
-export const revalidate = 30;
-const builder = imageUrlBuilder({ projectId, dataset });
 
 
 interface DetailedNewsProps {
@@ -20,7 +17,6 @@ interface DetailedNewsProps {
 
 
 export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
-  console.log('Received article in DetailedNews:', article);
 
   return (
     <div className="w-[45.6rem]">
@@ -28,12 +24,7 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
         {article?.mainImage ? (
           <Suspense fallback={<Loading />}>
             <Image
-            src={builder
-              .image(article?.mainImage)
-              .width(697)
-              .height(600)
-              .quality(100)
-              .url()}
+            src={urlForImage(article?.mainImage)}
             alt={article?.title || "Houses"}
             width={697}
             height={600}

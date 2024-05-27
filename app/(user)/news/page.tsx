@@ -1,31 +1,37 @@
 import RecentPostCard from '@/components/Blog/Cards/RecentPostCard';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import FooterHome from '@/components/Footer/FooterHome';
-import Header from '@/components/Header/HeaderHome';
+
 import Hero from '@/components/Hero/Hero';
 import Newsletter from '@/components/Newsletter/Newsletter';
 import Loading from '@/app/loading'
 
-import NewsCard from '@/components/Blog/Cards/NewsCard';
 import { Suspense } from 'react';
-
-import { Metadata } from 'next'
-import NewsPost from '@/components/Blog/Cards/NewsPost';
+import { getNews, getPosts } from "@/lib/action";
+import PostCard from "@/components/Blog/Cards/PostCard";
+import { News, Post } from '@/typings';
+import RecentNewsCard from '@/components/Blog/Cards/RecentNewsCard';
  
-export const metadata: Metadata = {
-  title: 'News | Houvinvity Real Estate Property Management',
-  description: 'News on Real Estate Property Management'
-}
 
 
 
-function Page() {
+async function Page() {
+
+   // Fetch data
+   const posts = await getPosts();
+   const news = await getNews();
+ 
+   // Limit the number of items to 4
+   const limitedRecentPosts = posts.slice(0, 3);
+   const limitedNewsPosts = news.slice(0, 3);
+   const limitedNews = news.slice(0, 4);
+ 
+   if (!Array.isArray(limitedNewsPosts) || limitedNewsPosts.length === 0) {
+     return <p>No posts available</p>;
+   }
+ 
 
   return (
     <div>
-      <ErrorBoundary>
-        <Header />
-      </ErrorBoundary>
       <ErrorBoundary>
         <Hero
           title="News Update"
@@ -35,29 +41,46 @@ function Page() {
         />
       </ErrorBoundary>
       <ErrorBoundary>
-        <div className='grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5'>
-          <div className='col-span-1'>
-            <Suspense fallback={<Loading />}>
-              <RecentPostCard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <NewsCard  />
-            </Suspense>
-          </div>
-          <div className='col-span-2'>
+      <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
+        <div className="col-span-1">
+          <p className="sm:p-5 text-primary font-medium text-3xl">
+            Recent Posts
+          </p>
+          <ErrorBoundary>
+            {limitedRecentPosts.map((post: Post) => (
+              <div key={post._id}>
+                <RecentPostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
+          <div className="col-span-1">
+            <p className="sm:p-5 text-primary font-medium text-3xl">
+              Recent News
+            </p>
             <ErrorBoundary>
-              <Suspense fallback={<Loading />}>
-                <NewsPost  />
-              </Suspense>
-            </ErrorBoundary>
+            {limitedNewsPosts.map((post: Post) => (
+              <div key={post._id}>
+                <RecentNewsCard article={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
           </div>
         </div>
+        <div className="col-span-2">
+          <ErrorBoundary>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
+              {limitedNews.map((post: News) => (
+                <div key={post._id}>
+                  <PostCard post={post} />
+                </div>
+              ))}
+            </div>
+          </ErrorBoundary>
+        </div>
+      </div>
       </ErrorBoundary>
       <ErrorBoundary>
         <Newsletter />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <FooterHome />
       </ErrorBoundary>
     </div>
   )

@@ -1,110 +1,68 @@
 "use client";
 
+import Fuse from "fuse.js";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdLocationOn } from "react-icons/md";
 import { usePropertyContext } from "@/context/PropertyContext";
-import { useState } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import FilterSearchHomePage from "@/components/LandingPage/FilterSearchHomePage";
 import Link from "next/link";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from "next/navigation";
 
-
-interface SearchProps {
-  filterProperties: (
-    uniqueTypes: string,
-    uniqueLocations: string,
-    uniqueBudget: string
-  ) => void;
-  uniqueTypes: string[];
-  uniqueLocations: string[];
-  uniqueBudget: string[];
-}
-
-function SearchHomePage({
-  filterProperties,
-  uniqueTypes,
-  uniqueLocations,
-  uniqueBudget,
-}: Readonly<SearchProps>) {
-  const router = useRouter();
-  const pathname = usePathname();
+function SearchHomePage() {
   const { properties, setProperties } = usePropertyContext();
-  const [selectedType, setSelectedType] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedBudget, setSelectedBudget] = useState("");
-  const [savedSearchState, setSavedSearchState] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const router = useRouter();
+  const [propertyType, setPropertyType] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [budget, setBudget] = useState("");
 
+  const fuse = useMemo(() => {
+    return new Fuse(properties, {
+      keys: ["propertyType", "location", "budget"],
+      includeMatches: true,
+      threshold: 0.3,
+    });
+  }, [properties]);
 
-  const applyFilter = () => {
-    // Check if the savedSearchState string is not empty
-    if (savedSearchState !== "") {
-      // Extract the search criteria from the savedSearchState string
-      const savedSearchStateArray = savedSearchState.split(', ');
-      const uniqueTypes = savedSearchStateArray[0].split(': ')[1];
-      const uniqueLocations = savedSearchStateArray[1].split(': ')[1];
-      const uniqueBudget = savedSearchStateArray[2].split(': ')[1];
-  
-      // Call filterProperties function with extracted values
-      filterProperties(uniqueTypes, uniqueLocations, uniqueBudget);
-  
-      // Check if the current route is the home page
-      if (pathname === '/') {
-        // Navigate to the search landing page
-        router.push('/search-landing-page');
-      }
-    } else {
-      // Check if at least one filter criteria is selected
-      if (selectedType || selectedLocation || selectedBudget) {
-        // Call filterProperties function with selected values
-        filterProperties(selectedType, selectedLocation, selectedBudget);
-      } else {
-        setSelectedType("House");
-        setSelectedLocation("location");
-        setSelectedBudget("budget");
-        setProperties(properties);
-      }
-  
-      // Check if the current route is the home page
-      if (pathname === '/') {
-        // Navigate to the search landing page
-        router.push('/search-landing-page');
-      }
+  const handleSearch = useCallback(() => {
+    let results = properties;
+
+    if (propertyType || location) {
+      const searchOptions: any = {};
+      if (propertyType) searchOptions.propertyType = propertyType;
+      if (location) searchOptions.location = location;
+
+      const fuseResults = fuse.search(searchOptions);
+      results = fuseResults.map((result) => result.item);
     }
-  };
 
+    if (budget) {
+      const [minBudget, maxBudget] = budget
+        .split(" - ")
+        .map((b) => parseInt(b.replace("N", "").replace(",", "").trim()));
+      results = results.filter(
+        (property: any) =>
+          property.budget >= minBudget && property.budget <= maxBudget
+      );
+    }
 
-  const openModal = () => {
-    applyFilter();
-    setIsModalOpen(true);
-  };
+    setProperties(results);
+  }, [properties, propertyType, location, budget, setProperties, fuse]);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  useEffect(() => {
+    handleSearch();
+  }, [propertyType, location, budget, handleSearch]);
 
-  const saveSearchState = (uniqueTypes: string, uniqueLocations: string, uniqueBudget: string) => {
-    // Save the search state to local state
-    const searchState = `${uniqueTypes}, ${uniqueLocations}, ${uniqueBudget}`;
-    setSavedSearchState(searchState);
-
-    // Save the search state to local state or perform any necessary actions
-    // For example:
-    setSelectedType(uniqueTypes);
-    setSelectedLocation(uniqueLocations);
-    setSelectedBudget(uniqueBudget);
-  };
-
-  const resetSearchState = () => {
-    // Reset the search state to default values
-    setSelectedType("");
-    setSelectedLocation("");
-    setSelectedBudget("");
-  };
-
-  const handleRemoveLocation = (location: string) => {
-    setSelectedLocation("");
-  };
+  if (!Array.isArray(properties) || properties.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-[20rem]">
+        <h1 className="text-customTextColor text-4xl px-10">
+          There is currently no available property listing for now, kindly check
+          back later
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-[5rem]">
@@ -115,17 +73,16 @@ function SearchHomePage({
               <IoHomeOutline className="w-5 h-5" />
             </div>
             <div className="">
-              <p className="text-xs text-customTextColor">I&#39;m Looking to...</p>
+              <p className="text-xs text-customTextColor">
+                I&#39;m Looking to...
+              </p>
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
+                value={propertyType}
+                onChange={(e) => setPropertyType(e.target.value)}
               >
-                {uniqueTypes.map((propertyType: string) => (
-                  <option key={propertyType} value={propertyType}>
-                    {propertyType}
-                  </option>
-                ))}
+                <option value={`Buy a Land`}> Buy a Land</option>
+                <option value="Buy a House">buy a House</option>
               </select>
             </div>
           </div>
@@ -137,14 +94,14 @@ function SearchHomePage({
               <p className="text-xs text-customTextColor">Location</p>
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
-                value={selectedLocation}
-                onChange={(e) => setSelectedLocation(e.target.value)}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               >
-                {uniqueLocations.map((location: string) => (
-                  <option key={location} value={location}>
-                    {location}
-                  </option>
-                ))}
+                <option value={`Abuja, Nigeria`}> Abuja, Nigeria</option>
+                <option value="Port Harcourt, Nigeria">
+                  Port Harcourt, Nigeria
+                </option>
+                <option value="Lagos, Nigeria">Lagos, Nigeria</option>
               </select>
             </div>
           </div>
@@ -156,19 +113,15 @@ function SearchHomePage({
               <p className="text-xs text-customTextColor">Price Range</p>
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
-                value={selectedBudget}
-                onChange={(e) => setSelectedBudget(e.target.value)}
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
               >
-                {uniqueBudget.map((budget: string) => (
-                  <option key={budget} value={budget}>
-                    {budget}
-                  </option>
-                ))}
+                <option value={`#200,000-#500,000`}>#200,000-#500,000</option>
               </select>
             </div>
             <button
               className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[3rem] py-4 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
-              onClick={applyFilter}
+              onClick={() => router.push('search-landing-page')}
             >
               <span>Search</span>
             </button>
@@ -179,29 +132,20 @@ function SearchHomePage({
       <div className="lg:hidden">
         <div className="flex justify-center">
           <div className="flex w-[90%] bg-[#F1F1F1] justify-between items-center rounded-full opacity-80 py-2 px-4">
-            <p className="text-sm cursor-pointer" onClick={openModal}>{savedSearchState || "Property type, Location or Price"}</p>
-            <button
-              className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[2rem] py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
-              onClick={applyFilter}
-            >
+            <div className="text-sm cursor-pointer">
+              <input
+                type="text"
+                className="text-sm cursor-pointer"
+                placeholder="Property type, Location, or Price"
+              />
+            </div>
+            <button className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[2rem] py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary/80">
               <span>Search</span>
             </button>
           </div>
         </div>
       </div>
-      <FilterSearchHomePage 
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        selectedType={selectedType}
-        selectedLocation={selectedLocation}
-        selectedBudget={selectedBudget}
-        setSelectedType={setSelectedType}
-        setSelectedLocation={setSelectedLocation}
-        setSelectedBudget={setSelectedBudget}
-        handleRemoveLocation={handleRemoveLocation}
-        saveSearchState={saveSearchState}
-        resetSearchState={resetSearchState}
-      />
+      <FilterSearchHomePage />
     </div>
   );
 }

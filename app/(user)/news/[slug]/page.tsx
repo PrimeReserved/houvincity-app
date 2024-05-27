@@ -1,16 +1,16 @@
 // // app/(user)/blog/[slug]/page.tsx
-import { groq } from "next-sanity";
-import { News } from "../../../../typings"
-import { client } from "@/sanity/client";
+
+import { News, Post } from "@/typings"
 import DetailedNews from "@/components/Blog/Cards/DetailedNews";
-import Header from "@/components/Header/HeaderHome";
-import FooterHome from "@/components/Footer/FooterHome";
-import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Suspense } from "react";
 import NewsDetailPost from "@/components/Blog/Cards/NewsDetailPost";
 import Loading from "@/app/loading";
+import { getNews, getArticle, getPosts } from "@/lib/action";
+import PostCard from "@/components/Blog/Cards/PostCard";
+import SocialShare from "@/components/Blog/SocialShare";
+import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 
 interface Props {
   params: {
@@ -18,13 +18,8 @@ interface Props {
   }
 }
 
-export const revalidate = 30;
-
 export const generateStaticParams = async () => {
-  const query = groq`*[_type == 'news']{
-    slug
-  }`;
-  const slugs: News[] = await client.fetch(query);
+  const slugs: News[] =await getNews();
   const slugRoutes = slugs.map((slug) => slug?.slug?.current);
 
   return slugRoutes?.map((slug) => ({
@@ -33,53 +28,55 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Page({ params: { slug} }: Readonly<Props>){
-  const query = groq`*[_type == 'news' && slug.current == $slug][0]{
-    ...,
-    body,
-    author->{
-      slug{
-        current,
-      },
-      name,
-      image{
-        alt,
-        asset{
-          _ref,
-        },
-      },
-    },
-  }`;
-  const article: News = await client.fetch(query, { slug });
+  const article = await getArticle(slug);
+  const posts = await getPosts();
+  const news = await getNews();
+
+  const limitedRecentPosts = posts.slice(0, 3);
+  const limitedArticles = news.slice(0, 3);
 
   return (
     <>
-      <Header />
-      <div className="grid lg:grid-cols-3 grid-cols-1 mt-[5rem] xl:mx-10 justify-center mx-5">
-        <div className=" col-span-2">
+      <div className="md:flex flex-row mt-[5rem] xl:mx-10 justify-center md:mx-5">
+        <div className="basis-1/2">
           <Suspense fallback={<Loading />}>
             <DetailedNews article={article} />
           </Suspense>
         
         </div>
-        <div className="col-span-1">
+        <div className="basis-1/1">
           <Suspense fallback={<Loading />}>
-            <AuthorProfile author={article?.author} publishedAt={article.publishedAt} />
+            <AuthorProfile 
+              author={article.author} 
+              publishedAt={article?.publishedAt} />
           </Suspense>
-          <Suspense fallback={<Loading />}>
-            <RecentPostCard  />
-          </Suspense>
+          <ErrorBoundary>
+            {limitedRecentPosts.map((post: Post) => (
+              <div key={post._id}>
+                <RecentPostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
+          <div className="lg:mx-12">
+          <p className="text-primary font-medium mt-[2.6rem] text-3xl">Share</p>
+            <div className="p-5 bg-white rounded-md mt-5 drop-shadow-md">
+              <SocialShare />
+            </div>
+          </div>
         </div>
-        <div className="col-span-1"></div>
       </div>
       <div className="p-10">
         <h1 className="text-center text-4xl">More Like This</h1>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5  md:space-y-0">
         <ErrorBoundary>
-        <Suspense fallback={<p>Loading...</p>}>
-          <NewsDetailPost />
-        </Suspense>
-        </ErrorBoundary>
+            {limitedArticles.map((post: Post) => (
+              <div key={post._id}>
+                <PostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
+        </div>
       </div>
-      <FooterHome />
     </>
   );
 };

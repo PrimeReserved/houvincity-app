@@ -7,15 +7,33 @@ import Image from "next/image";
 import Link from "next/link";
 import NumberCount from "@/components/NumberCount/NumberCount";
 import { Suspense } from "react";
-import { Post, Category } from "@/typings";
+import { usePathname } from "next/navigation";
 import Loading from "@/app/loading";
 import { urlForImage } from "@/sanity/lib/image";
 
-const ITEMS_PER_PAGE = 4;
+
+
 
 export default function PostCard({ post }: Readonly<any>) {
+  const pathName = usePathname();
+  console.log(pathName)
 
-  console.log(post)
+  const isHomePage = pathName === "/";
+  // Determine if the current route is for blogs or news
+  const isBlogPage = pathName.startsWith("/blog");
+  const isNewsPage = pathName.startsWith("/news");
+
+  // Set the base path for the href attribute
+  let basePath = "";
+  if (isBlogPage) {
+    basePath = "/blog";
+  } else if (isNewsPage) {
+    basePath = "/news";
+  }
+
+  if (!post) {
+    return null;
+  }
   return (
     <div className="mt-5">
         <div
@@ -39,20 +57,26 @@ export default function PostCard({ post }: Readonly<any>) {
             <div className="flex items-center gap-2">
               <Image src={Calendar} alt="Calendar" width={13} height={13} />
               {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        })}
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </div>
 
             <h1 className="font-semibold text-lg mt-1">{post?.title}</h1>
+           {/* Render description only if not on the home page */}
+          {!isHomePage && (
             <p className="line-clamp-3 text-[12px]">
-              {post?.categories.map((category: Category, index: number) => (
-                <span key={category._id}>{category.description}</span>
+              {post?.body?.map((block: any) => (
+                <span key={block._key}>
+                  {
+                    block?.children?.map((child: any) => child.text)}
+                </span>
               ))}
             </p>
+          )}
             <div className="card-actions">
-              <Link href={`/blog/${post?.slug?.current}`}>
+            <Link href={`${basePath}/${post?.slug?.current}`}>
                 <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
                   Read more
                   <Image
