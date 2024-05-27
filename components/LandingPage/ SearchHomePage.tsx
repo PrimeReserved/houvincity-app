@@ -6,12 +6,11 @@ import { MdLocationOn } from "react-icons/md";
 import { usePropertyContext } from "@/context/PropertyContext";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import FilterSearchHomePage from "@/components/LandingPage/FilterSearchHomePage";
-import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function SearchHomePage() {
-  const { properties, setProperties } = usePropertyContext();
   const router = useRouter();
+  const { properties, setProperties } = usePropertyContext();
   const [propertyType, setPropertyType] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [budget, setBudget] = useState("");
@@ -39,7 +38,7 @@ function SearchHomePage() {
     if (budget) {
       const [minBudget, maxBudget] = budget
         .split(" - ")
-        .map((b) => parseInt(b.replace("N", "").replace(",", "").trim()));
+        .map((b) => parseInt(b.replace("#", "").replace(",", "").trim()));
       results = results.filter(
         (property: any) =>
           property.budget >= minBudget && property.budget <= maxBudget
@@ -81,8 +80,8 @@ function SearchHomePage() {
                 value={propertyType}
                 onChange={(e) => setPropertyType(e.target.value)}
               >
-                <option value={`Buy a Land`}> Buy a Land</option>
-                <option value="Buy a House">buy a House</option>
+                <option value="Land"> Buy a Land</option>
+                <option value="House">buy a House</option>
               </select>
             </div>
           </div>
@@ -97,11 +96,11 @@ function SearchHomePage() {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               >
-                <option value={`Abuja, Nigeria`}> Abuja, Nigeria</option>
-                <option value="Port Harcourt, Nigeria">
+                <option value="Abuja"> Abuja, Nigeria</option>
+                <option value="Port Harcourt">
                   Port Harcourt, Nigeria
                 </option>
-                <option value="Lagos, Nigeria">Lagos, Nigeria</option>
+                <option value="Lagos">Lagos, Nigeria</option>
               </select>
             </div>
           </div>
@@ -121,7 +120,7 @@ function SearchHomePage() {
             </div>
             <button
               className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[3rem] py-4 text-sm text-white duration-300 ease-in-out hover:bg-primary/80"
-              onClick={() => router.push('search-landing-page')}
+              onClick={() => router.push('/search-properties')}
             >
               <span>Search</span>
             </button>

@@ -7,8 +7,6 @@ import Loading from '@/app/loading';
 
 const Hero: React.FC = () => {
 
-  
-
 
   return (
     <section className="relative w-full mt-[6.5rem] overflow-hidden bg-center bg-cover py-20 md:py-28 " >

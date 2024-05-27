@@ -38,21 +38,14 @@ const FilterSearchHomePage = () => {
             Property type
           </p>
 
-          {/* <div className="flex gap-3 mt-3 text-white border-b-[1px] border-customTextColor/50 pb-5 ">
-            <button
-              className={`flex items-center gap-2 rounded-lg text-sm px-2 py-1.5 ${selectedType === 'Land' ? 'bg-primary text-white' : 'border-[1px] border-primary text-primary'}`}
-             >
+          <div className="flex gap-3 mt-3 text-white border-b-[1px] border-customTextColor/50 pb-5">
+            <button className="flex items-center gap-2 rounded-lg text-sm px-2 py-1.5 border-[1px] border-primary text-primary">
               <p>Land</p>
-              {selectedType === 'Land' && <IoMdCheckmark />}
             </button>
-            <button
-              className={`flex items-center gap-2 rounded-lg text-sm px-2 py-1.5 ${selectedType === 'House' ? 'bg-primary text-white' : 'border-[1px] border-primary text-primary'}`}
-              
-            >
+            <button className="flex items-center gap-2 rounded-lg text-sm px-2 py-1.5 border-[1px] border-primary text-primary">
               <p>Smart Home</p>
-              {selectedType === 'House' && <IoMdCheckmark />}
             </button>
-          </div> */}
+          </div>
         </div>
 
         <div className="mt-3">
@@ -69,17 +62,30 @@ const FilterSearchHomePage = () => {
             <label htmlFor="priceRange">Price Range</label>
           </div>
 
-          <div className="flex items-center mt-3 gap-3">
-            <div className=" border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
-              <p className="text-xs mb-1.5">From</p>
-              <p>N250,000</p>
-            </div>
-            <p>-</p>
-            <div className=" border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
-              <p className="text-xs mb-1.5">To</p>
-              <p>N500,000</p>
-            </div>
-          </div>
+          <form className="flex items-center mt-3 gap-3">
+  <div className="border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
+    <label htmlFor="from" className="text-xs mb-1.5 block">From</label>
+    <input
+      type="text"
+      id="from"
+      name="from"
+      placeholder="N250,000"
+      className="bg-transparent border-none outline-none w-full"
+    />
+  </div>
+  <p>-</p>
+  <div className="border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
+    <label htmlFor="to" className="text-xs mb-1.5 block">To</label>
+    <input
+      type="text"
+      id="to"
+      name="to"
+      placeholder="N500,000"
+      className="bg-transparent border-none outline-none w-full"
+    />
+  </div>
+</form>
+
         </div>
 
         <div className="flex justify-between mt-5">

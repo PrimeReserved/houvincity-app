@@ -1,12 +1,9 @@
 "use client"
 
-
 import { useState, useEffect } from "react";
 import Fuse from "fuse.js";
 import { HiSearch } from "react-icons/hi";
 import PropertyCard from "./PropertyCard";
-
-
 
 
 

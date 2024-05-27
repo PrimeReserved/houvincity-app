@@ -9,7 +9,9 @@ export default async function PropertyListing() {
   return (
     <div>
       <ErrorBoundary>
-        <SearchProperty properties={properties}/>
+        <Suspense fallback={<Loading />}>
+          <SearchProperty properties={properties}/>
+        </Suspense>
       </ErrorBoundary>
     </div>
   );
