@@ -63,29 +63,32 @@ const FilterSearchHomePage = () => {
           </div>
 
           <form className="flex items-center mt-3 gap-3">
-  <div className="border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
-    <label htmlFor="from" className="text-xs mb-1.5 block">From</label>
-    <input
-      type="text"
-      id="from"
-      name="from"
-      placeholder="N250,000"
-      className="bg-transparent border-none outline-none w-full"
-    />
-  </div>
-  <p>-</p>
-  <div className="border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
-    <label htmlFor="to" className="text-xs mb-1.5 block">To</label>
-    <input
-      type="text"
-      id="to"
-      name="to"
-      placeholder="N500,000"
-      className="bg-transparent border-none outline-none w-full"
-    />
-  </div>
-</form>
-
+            <div className="border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
+              <label htmlFor="from" className="text-xs mb-1.5 block">
+                From
+              </label>
+              <input
+                type="text"
+                id="from"
+                name="from"
+                placeholder="N250,000"
+                className="bg-transparent border-none outline-none w-full"
+              />
+            </div>
+            <p>-</p>
+            <div className="border-[1px] border-customPrimary text-customPrimary rounded-lg text-sm pr-10 pl-3 py-1.5">
+              <label htmlFor="to" className="text-xs mb-1.5 block">
+                To
+              </label>
+              <input
+                type="text"
+                id="to"
+                name="to"
+                placeholder="N500,000"
+                className="bg-transparent border-none outline-none w-full"
+              />
+            </div>
+          </form>
         </div>
 
         <div className="flex justify-between mt-5">

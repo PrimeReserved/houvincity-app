@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 import SearchHomePage from "./ SearchHomePage";
@@ -9,14 +9,56 @@ import { usePropertyContext } from "@/context/PropertyContext";
 import Loading from "@/app/loading";
 import PropertyCard from "@/components/Property/PropertyCard"
 import Link from "next/link";
+import Fuse from "fuse.js";
 
 const SearchLandingPage: React.FC = () => {
-  const { properties, setProperties } = usePropertyContext();
+  const { properties } = usePropertyContext();
+  const [searchResults, setSearchResults] = useState(properties);
+  const [sortCriteria, setSortCriteria] = useState<string>("Relevant Listing");
+  const [propertyType, setPropertyType] = useState<string>("Lands");
+  const [location, setLocation] = useState<string>("Abuja, Nigeria");
   const [error, setError] = useState<Error | null>(null);
 
-  const limitedProperties = properties.slice(0, 12);
+  const fuse = useMemo(() => {
+    return new Fuse(properties, {
+      keys: ["propertyType", "location", "budget"],
+      includeMatches: true,
+      threshold: 0.3,
+    });
+  }, [properties]);
 
-  console.log(properties);
+  const handleSearch = useCallback(() => {
+    const results = fuse.search(""); // Initially search with an empty string to get all results
+    setSearchResults(results.map(result => result.item));
+  }, [fuse]);
+
+  const handleSort = useCallback((criteria: string) => {
+    let sortedResults = [...searchResults];
+    switch (criteria) {
+      case "Newest Listings":
+        sortedResults.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        break;
+      case "Lowest Pricing":
+        sortedResults.sort((a, b) => a.budget - b.budget);
+        break;
+      case "Highest Pricing":
+        sortedResults.sort((a, b) => b.budget - a.budget);
+        break;
+      default:
+        // Relevant Listing or any other default sort criteria
+        break;
+    }
+    setSearchResults(sortedResults);
+  }, [searchResults]);
+  
+  useEffect(() => {
+    handleSearch();
+  }, [properties, handleSearch]);
+
+  useEffect(() => {
+    handleSort(sortCriteria);
+  }, [sortCriteria, handleSort]);
+  const limitedProperties = properties.slice(0, 12);
 
   return (
     <div className="mt-[10rem]">
@@ -24,12 +66,12 @@ const SearchLandingPage: React.FC = () => {
 
       <div className="mt-12 mx-[1.5rem] md:mx-[5rem]">
         <h1 className="text-base md:text-2xl">
-          {`lands for Sale in Abuja, Nigeria`}
+        {`${propertyType} for Sale in ${location}`}
         </h1>
 
         <div className="flex gap-5 mt-4 justify-between lg:justify-normal">
           <p className="text-customTextColor text-sm md:text-base">
-            {`50 Lands Available`}
+          {`${searchResults.length} ${propertyType} Available`}
           </p>
 
           <div className="flex gap-1">
@@ -38,8 +80,10 @@ const SearchLandingPage: React.FC = () => {
               name="sort-by"
               id="sort-by"
               className="text-sm md:text-base"
+              onChange={(e) => setSortCriteria(e.target.value)}
             >
               <option value={`Land`}>Land</option>
+              <option value={`House`}>House</option>
             </select>
 
             <select name="" id="" className="text-sm md:text-base">

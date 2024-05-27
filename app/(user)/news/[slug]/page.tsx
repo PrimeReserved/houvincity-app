@@ -45,11 +45,11 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
         
         </div>
         <div className="basis-1/1">
-          <Suspense fallback={<Loading />}>
+          {/* <Suspense fallback={<Loading />}>
             <AuthorProfile 
               author={article.author} 
               publishedAt={article?.publishedAt} />
-          </Suspense>
+          </Suspense> */}
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (
               <div key={post._id}>

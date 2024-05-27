@@ -7,7 +7,7 @@ import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
 import { QueryParams } from "next-sanity";
 import { Post } from "@/typings"
 
-import DetailedCard from "@/components/Blog/Cards/DetailedCard";
+import PostDetailedCard from "@/components/Blog/Cards/PostDetailedCard";
 
 export default function PostPreview({
   initial,
@@ -23,7 +23,7 @@ export default function PostPreview({
   );
 
   return data ? (
-    <DetailedCard post={data} />
+    <PostDetailedCard post={data} />
   ) : (
     <div className="bg-red-100">Post not found</div>
   );
