@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-<<<<<<< HEAD
 const nextConfig = {
     images: {
         remotePatterns: [
@@ -17,8 +16,5 @@ const nextConfig = {
         taint: true,
     }
 };
-=======
-const nextConfig = {};
->>>>>>> b361d4b (I worked on the Property Listing Card)
 
 export default nextConfig;

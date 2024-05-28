@@ -5,7 +5,6 @@ import DetailedNews from "@/components/Blog/Cards/DetailedNews";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Suspense } from "react";
-import NewsDetailPost from "@/components/Blog/Cards/NewsDetailPost";
 import Loading from "@/app/loading";
 import { getNews, getArticle, getPosts } from "@/lib/action";
 import PostCard from "@/components/Blog/Cards/PostCard";
@@ -48,7 +47,7 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
           {/* <Suspense fallback={<Loading />}>
             <AuthorProfile 
               author={article.author} 
-              publishedAt={article?.publishedAt} />
+              publishedAt={article?.createdAt} />
           </Suspense> */}
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (

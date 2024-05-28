@@ -4,9 +4,6 @@ export type Menu = {
     path?: string;
     newTab: boolean;
     submenu?: Menu[];
-<<<<<<< HEAD
     next?: Menu; 
-=======
->>>>>>> b361d4b (I worked on the Property Listing Card)
 };
 

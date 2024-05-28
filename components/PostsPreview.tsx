@@ -6,7 +6,7 @@ import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
 import { Post } from "@/typings"
 
-import BlogCard from "@/components/Blog/Cards/BlogCard";
+import PostCard from "@/components/Blog/Cards/PostCard";
 
 export default function PostsPreview({
   initial,
@@ -20,7 +20,7 @@ export default function PostsPreview({
   );
 
   return data ? (
-    <BlogCard />
+    <PostCard post={data} />
   ) : (
     <div className="bg-red-100">No posts found</div>
   );

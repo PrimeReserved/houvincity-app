@@ -75,7 +75,7 @@ const BlogHomePage = ({ posts }: Props) => {
                         height={13}
                       />
                       <p className="text-xs">
-                        {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                        {new Date(post._createAt).toLocaleDateString("en-US", {
                           day: "numeric",
                           month: "long",
                           year: "numeric",

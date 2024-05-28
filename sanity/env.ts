@@ -1,21 +1,17 @@
 export const apiVersion =
-<<<<<<< HEAD
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION ?? '2024-01-01'
-=======
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-04-05'
->>>>>>> b361d4b (I worked on the Property Listing Card)
+  `${process.env.SANITY_STUDIO_API_VERSION}` ?? '2024-01-01'
 
 export const dataset = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_DATASET'
+  `${process.env.SANITY_STUDIO_DATASET}`,
+  'Missing environment variable: SANITY_STUDIO_DATASET'
 )
 
 export const projectId = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
+  `${process.env.SANITY_STUDIO_PROJECT_ID}`,
+  'Missing environment variable: SANITY_STUDIO_PROJECT_ID'
 )
 
-export const useCdn = false
+export const useCdn = true
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {

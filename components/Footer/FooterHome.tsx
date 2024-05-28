@@ -136,6 +136,7 @@ const QuickLinks = () => (
           className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary">
           About
         </Link>
+      </li>
       <li>
         <Link
           href="/blog"

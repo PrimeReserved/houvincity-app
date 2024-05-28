@@ -12,7 +12,7 @@ import Loading from "@/app/loading";
 import { urlForImage } from "@/sanity/lib/image";
 
 
-const AuthorProfile: React.FC<AuthorProfileProps> = ({ author, publishedAt }) =>  {
+const AuthorProfile: React.FC<any> = ({ author, publishedAt }) =>  {
   const { name, image } = author;
 
   if (!author?.name || !author.image) {

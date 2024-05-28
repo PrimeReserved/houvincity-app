@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-<<<<<<< HEAD
     "types": ["babel__generator"],
-=======
->>>>>>> b361d4b (I worked on the Property Listing Card)
     "lib": [
       "dom",
       "dom.iterable",

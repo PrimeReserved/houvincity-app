@@ -36,7 +36,6 @@ const config: Config = {
         transparent: "transparent",
         white: "#FFFFFF",
         black: "#121723",
-        dark: "#1D2430",
         heroText: "#CDD0CB",
         // primary: "#4A6CF7",
         primary: "#6DBA3A",
@@ -47,22 +46,16 @@ const config: Config = {
         customSecondary: "#0E0014",
         // BODY TEXT COLOR
         customTextColor: "#79747E",
-        customDarkTextColor: "#ccc",
-        customDarkBg: "#121723",
         customBg: "#F9ECFF",
         customError: "#B3261E",
         customSuccess: "#21B31E",
         "body-color": "#788293",
-        "body-color-dark": "#959CB1",
         "gray-dark": "#1E232E",
         "gray-light": "#F0F2F9",
         stroke: "#E3E8EF",
-        "stroke-dark": "#353943",
-        "bg-color-dark": "#171C28",
       },
     },
   },
-<<<<<<< HEAD
   
   daisyui: {
     themes: false,
@@ -73,9 +66,6 @@ const config: Config = {
     require("daisyui"),
     require('tailwindcss-animated'),
   ],
-=======
-  plugins: [],
->>>>>>> b361d4b (I worked on the Property Listing Card)
 };
 
 export default config;

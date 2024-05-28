@@ -1,5 +1,6 @@
 "use server";
 
+
 export async function getPosts() {
   try {
     const response = await fetch(`${process.env.BLOG_API_URI}`);

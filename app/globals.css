@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
-=======
-
-
->>>>>>> b361d4b (I worked on the Property Listing Card)
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,10 +8,7 @@
     font-family: "Josefin San", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-<<<<<<< HEAD
     background-color: #fff !important;
-=======
->>>>>>> b361d4b (I worked on the Property Listing Card)
   }
 }
 
@@ -41,13 +33,3 @@
     @apply opacity-100;
   }
 }
-<<<<<<< HEAD
-=======
-
-.wrapper {
-  @apply container mx-auto xl:max-w-screen-xl max-w-screen-lg px-14 lg:px-5 xl:px-0;
-}
-
-
-
->>>>>>> b361d4b (I worked on the Property Listing Card)

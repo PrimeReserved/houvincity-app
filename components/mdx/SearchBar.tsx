@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from 'react';
 import Fuse from 'fuse.js';
+import { useState, useEffect } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 import Modal from 'react-modal';
 import { FaSearch } from 'react-icons/fa';
 import { SearchItem } from '@/typings';
@@ -42,7 +43,7 @@ export default function SearchBar({ data }: Readonly<SearchComponentProps>) {
     });
   }, [data]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setQuery(value);
 
@@ -54,7 +55,7 @@ export default function SearchBar({ data }: Readonly<SearchComponentProps>) {
       setResults([]);
       setIsModalOpen(false);
     }
-  };
+  }, 300);
   
 
   return (

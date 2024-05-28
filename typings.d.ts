@@ -63,11 +63,14 @@ export interface MainImage {
     current: string;
 }
 
-export interface News {
-    title: string;
+export interface News extends Base {
+    author: Author;
+    body: Block[];
+    categories: Category[];
+    mainImage: Image;
     slug: Slug;
-    image: Image;
-    description: string;
+    title: string;
+    description: string
   }
 
 export interface Property extends Base {
@@ -88,4 +91,10 @@ export interface Property extends Base {
     bathrooms: number;
     slug?: Slug;
     body: BlockContent;
+  }
+
+  export interface SearchItem {
+    title: string;
+    path: string;
+    content: string;
   }

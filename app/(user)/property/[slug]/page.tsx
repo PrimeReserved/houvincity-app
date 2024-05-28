@@ -1,10 +1,9 @@
 import PropertyDetailed from '@/components/Property/PropertyDetailed';
-import { groq } from "next-sanity";
 import { client } from "@/sanity/client";
 import { Property } from '@/typings';
-import { PROPERTY_LISTING } from '@/sanity/lib/queries';
 import { Suspense } from 'react';
 import Loading from '@/app/loading';
+import { getProperties, getProperty } from '@/lib/action';
 
 interface Props {
   params: {
@@ -15,10 +14,7 @@ interface Props {
 export const revalidate = 30;
 
 export const generateStaticParams = async () => {
-  const query = groq`*[_type == 'property']{
-    'slug': slug.current
-  }`;
-  const slugs: Property[] = await client.fetch(query);
+  const slugs: Property[] = await getProperties();
   const slugRoutes = slugs.map((slug) => slug?.slug?.current);
  
   return slugRoutes?.map((slug) => ({
@@ -28,8 +24,7 @@ export const generateStaticParams = async () => {
 
  const page = async ({ params: { slug } }: Readonly<Props>) => {
 
-  const query = PROPERTY_LISTING;
-  const property: Property = await client.fetch(query, { slug });
+  const property = await getProperty(slug);
 
   return (
     <div>

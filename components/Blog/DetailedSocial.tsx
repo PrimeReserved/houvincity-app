@@ -1,8 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-=======
-import SocialLink from "../Socials/SocialLink";
->>>>>>> b361d4b (I worked on the Property Listing Card)
 import Instagram from "@/public/images/blog/Icon/path1165.svg";
 import Twitter from "@/public/images/blog/Icon/path1009.svg";
 import Facebook from "@/public/images/blog/Icon/Vector.svg";

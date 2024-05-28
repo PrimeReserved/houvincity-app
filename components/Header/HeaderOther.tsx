@@ -3,7 +3,6 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-// import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import IconButton from "../Buttons/IconButton";
 import BtnArrowIcon from "../Buttons/BtnArrowIcon";
@@ -43,7 +42,6 @@ const HeaderOther = () => {
           "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition":
             sticky,
           "absolute bg-transparent": !sticky,
->>>>>>> b361d4b (I worked on the Property Listing Card)
         }
       )}
     >
@@ -92,11 +90,7 @@ const HeaderOther = () => {
               <nav
                 id="navbarCollapse"
                 className={classNames(
-<<<<<<< HEAD
                   "navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100",
-=======
-                  "navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100",
->>>>>>> b361d4b (I worked on the Property Listing Card)
                   {
                     "visibility top-full opacity-100": navbarOpen,
                     "invisible top-[120%] opacity-0": !navbarOpen,
@@ -111,13 +105,8 @@ const HeaderOther = () => {
                           href={menuItem.path}
                           className={`flex py-4 text-base lg:mr-0 lg:inline-flex lg:px-1 lg:py-8 ${
                             usePathName === menuItem.path
-<<<<<<< HEAD
                               ? "text-primary "
                               : "text-primary"
-=======
-                              ? "text-primary dark:text-white"
-                              : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
->>>>>>> b361d4b (I worked on the Property Listing Card)
                           }`}
                         >
                           {menuItem.title}
@@ -126,11 +115,7 @@ const HeaderOther = () => {
                         <>
                           <p
                             onClick={() => handleSubmenu(index)}
-<<<<<<< HEAD
                             className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary /70 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
-=======
-                            className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
->>>>>>> b361d4b (I worked on the Property Listing Card)
                           >
                             {menuItem.title}
                             <span className="pl-3">
@@ -176,12 +161,6 @@ const HeaderOther = () => {
               <div className="my-2 hidden lg:flex">
                 <IconButton text="Contact Us" icon={<BtnArrowIcon />} />
               </div>
-<<<<<<< HEAD
-=======
-              {/* <div>
-                <ThemeToggler />
-              </div> */}
->>>>>>> b361d4b (I worked on the Property Listing Card)
             </div>
           </div>
         </div>

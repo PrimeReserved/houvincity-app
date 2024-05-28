@@ -64,7 +64,6 @@ function Newsletter() {
         </div>
       </div>
     </div>
-  </div>
   )};
 
 export default Newsletter;

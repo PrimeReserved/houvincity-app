@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const query = groq`*[_type == "post"]`;
+    const query = groq`*[_type == "post"]| order(_id) [0...100]`;
     const response = await client.fetch(query);
     if (!response) {
       throw new Error(`Could not fetch properties`);

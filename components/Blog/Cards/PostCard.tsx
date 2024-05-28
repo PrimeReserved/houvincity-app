@@ -16,7 +16,6 @@ import { urlForImage } from "@/sanity/lib/image";
 
 export default function PostCard({ post }: Readonly<any>) {
   const pathName = usePathname();
-  console.log(pathName)
 
   const isHomePage = pathName === "/";
   // Determine if the current route is for blogs or news
@@ -29,6 +28,8 @@ export default function PostCard({ post }: Readonly<any>) {
     basePath = "/blog";
   } else if (isNewsPage) {
     basePath = "/news";
+  } else if (isHomePage) {
+    basePath = "/blog"
   }
 
   if (!post) {

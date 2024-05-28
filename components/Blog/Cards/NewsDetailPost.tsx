@@ -126,8 +126,8 @@ export default function NewsDetailPost() {
             <div className="card-body items-start mt-1">
               <div className="flex items-center gap-2">
                 <Image src={Calendar} alt="Calendar" width={13} height={13} />
-                {post?.publishedAt && (
-                  <p className="text-xs">{formatDate(post?.publishedAt)}</p>
+                {post?._createAt && (
+                  <p className="text-xs">{formatDate(post?._createAt)}</p>
                 )}
               </div>
 

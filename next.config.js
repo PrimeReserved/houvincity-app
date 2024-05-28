@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -27,12 +26,3 @@ module.exports = withMDX({
 });
 
 
-=======
-module.exports = {
-    images: {
-        domains: [
-            "cdn.sanity.io",
-        ]
-    }
-}
->>>>>>> b361d4b (I worked on the Property Listing Card)

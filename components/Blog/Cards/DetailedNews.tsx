@@ -12,7 +12,7 @@ import { urlForImage } from "@/sanity/lib/image";
 
 
 interface DetailedNewsProps {
-  article: News;
+  article: any;
 }
 
 
@@ -21,10 +21,10 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
   return (
     <div className="w-[45.6rem]">
       <div className="relative">
-        {article?.mainImage ? (
+        {article?.image ? (
           <Suspense fallback={<Loading />}>
             <Image
-            src={urlForImage(article?.mainImage)}
+            src={urlForImage(article?.image)}
             alt={article?.title || "Houses"}
             width={697}
             height={600}
@@ -46,8 +46,8 @@ export default function DetailedNews({ article }: Readonly<DetailedNewsProps>) {
         </div>
       </div>
       <div className="pb-10">
-      {article?.body ? (
-          <PortableText value={article?.body} components={RichTextComponents} />
+      {article?.description ? (
+          <PortableText value={article?.description} components={RichTextComponents} />
         ) : null}
       </div>
     </div>

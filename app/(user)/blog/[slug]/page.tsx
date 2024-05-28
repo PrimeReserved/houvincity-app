@@ -4,11 +4,11 @@ import PostDetailedCard from "@/components/Blog/Cards/PostDetailedCard";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import BlogDetailPost from "@/components/Blog/Cards/BlogDetailPost";
 import SocialShare from "@/components/Blog/SocialShare";
 import { Suspense } from "react";
 import { getPost, getPosts } from "@/lib/action";
 import Loading from "@/app/loading";
+import PostCard from "@/components/Blog/Cards/PostCard";
 
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 export const generateStaticParams = async () => {
   const slugs: Post[] = await getPosts();
   const slugRoutes = slugs.map((slug) => slug?.slug?.current);
-  console.log(`Slug Routes: ${slugRoutes}`);
+
   return slugRoutes?.map((slug) => ({
     slug,
   }));
@@ -31,6 +31,7 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
   const posts = await getPosts();
 
   const limitedRecentPosts = posts.slice(0, 3);
+  const limitedPosts = posts.slice(0, 3);
 
   return (
     <>
@@ -64,11 +65,15 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
       </div>
       <div className="p-10">
         <h1 className="text-center text-4xl">More Like This</h1>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5  md:space-y-0">
         <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
-            <BlogDetailPost />
-          </Suspense>
-        </ErrorBoundary>
+            {limitedPosts.map((post: Post) => (
+              <div key={post._id}>
+                <PostCard post={post} />
+              </div>
+            ))}
+          </ErrorBoundary>
+        </div>
       </div>
     </>
   );

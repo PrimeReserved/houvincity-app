@@ -69,8 +69,8 @@ async function Page() {
         <div className="col-span-2">
           <ErrorBoundary>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
-              {limitedNews.map((post: News) => (
-                <div key={post._id}>
+              {limitedNews.map((post: any) => (
+                <div key={post.slug}>
                   <PostCard post={post} />
                 </div>
               ))}

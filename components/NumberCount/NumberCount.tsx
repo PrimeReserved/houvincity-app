@@ -1,46 +1,66 @@
-"use client"
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface PaginationProps {
-  totalPages: number;
-  currentPage: number;
-  onPageChange?: (pageNumber: number) => void;
+  totalPosts: number;
+  onPageChange: (pageNumber: number) => void;
+}
+
+interface Node {
+  pageNumber: number;
+  next: Node | null;
 }
 
 const NumberCount: React.FC<PaginationProps> = ({
-  totalPages,
-  currentPage,
+  totalPosts,
   onPageChange
 }) => {
-  // Handle previous/next button clicks
+  const [currentPage, setCurrentPage] = useState(1);
+  const [head, setHead] = useState<Node | null>(null);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    const pageSize = 4; // Adjust this value as needed
+    const totalPagesCount = Math.ceil(totalPosts / pageSize);
+    setTotalPages(totalPagesCount);
+
+    const newNode = (pageNumber: number) => ({ pageNumber, next: null });
+    let current: any = newNode(1);
+    setHead(current);
+
+    for (let i = 2; i <= totalPagesCount; i++) {
+      const node = newNode(i);
+      current.next = node;
+      current = node;
+    }
+  }, [totalPosts]);
+
   const handlePageChange = (pageNumber: number) => {
-    if (onPageChange && pageNumber > 0 && pageNumber <= totalPages) {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
       onPageChange(pageNumber);
     }
   };
 
   // Render page numbers with active state
   const pageNumbers = [];
-  for (let i = 1; i <= Math.min(totalPages, 3); i++) {
-    // Show max 3 pages
+  let current: any = head;
+  while (current) {
     pageNumbers.push(
-      <p
-        key={i}
-        className={`w-9 h-10 flex items-center justify-center ${currentPage === i ? 'bg-primary text-white' : 'hover:bg-gray-100'
-          }`}
-        onClick={() => handlePageChange(i)}
-      >
-        {i}
-      </p>
+      <button
+  key={current.pageNumber}
+  className={`w-9 h-10 flex items-center justify-center ${currentPage === current.pageNumber ? 'bg-primary text-white' : 'hover:bg-gray-100'
+  }`}
+  onClick={() => handlePageChange(current.pageNumber)}
+  onKeyUp={(event) => {
+    if (event.key === 'Enter') {
+      handlePageChange(current.pageNumber);
+    }
+  }}
+>
+  {current.pageNumber}
+</button>
     );
-  }
-
-  // Render ellipsis (...) if there are more pages
-  if (totalPages > 3) {
-    pageNumbers.push(
-      <p className="w-9 h-10 flex items-center justify-center mb-3">...</p>
-    );
+    current = current.next;
   }
 
   return (
@@ -54,15 +74,16 @@ const NumberCount: React.FC<PaginationProps> = ({
         </button>
       )}
       {pageNumbers}
-      <button
-        className="w-15 h-10 flex items-center justify-center hover:bg-gray-100"
-        onClick={() => handlePageChange(currentPage + 1)}
-      >
-        Next
-      </button>
+      {currentPage < totalPages && ( // Only show next button if not on last page
+        <button
+          className="w-15 h-10 flex items-center justify-center hover:bg-gray-100"
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 };
-
 
 export default NumberCount;

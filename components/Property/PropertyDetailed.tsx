@@ -15,64 +15,84 @@ interface PropertyDetailedProps {
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   return (
-      <div className="wrapper mb-10">
-        <div className="flex justify-center items-center px-10">
-          {property?.fullPropertyImage && (
-            <Image src={urlForImage(property?.fullPropertyImage?.asset?._ref)} alt="House1" width={1500} height={100} />
-          )}
-        </div>
-        <div className="grid grid-cols-3 px-10  gap-2 justify-center items-center mt-12 mx-auto">
-          {property?.leftSidePropertyImage && (
-            <Image src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)} alt="House2" width={385} height={300} />
-          )}
-          {property.middlePropertyImage && (
-            <Suspense fallback={<Loading />}>
-              <Image src={urlForImage
-(property?.middlePropertyImage.asset._ref)}
-
- alt="House3" width={385} height={300} />
-            </Suspense>
-          )}
-          {property.rightSidePropertyImage && (
-            <Image src={urlForImage(property?.rightSidePropertyImage.asset._ref)} alt="House4" width={385} height={300} />
-          )}
-        </div>
-        <div className="mt-10 px-10">
-          <p className=" text-customPrimary text-base font-semibold border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] pb-5">
-            {property.location}
-          </p>
-          <p className=" text-customPrimary text-sm border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] py-6">
-            Asking Price - N{property.budget} (Open for slight negotiation)
-          </p>
-          <p className=" text-customPrimary text-sm border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] py-6">
-            Legal | Survey N{property.legalSurvey}
-          </p>
-          <p className=" text-customPrimary text-sm border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] py-6">
-            Plot Size - {property.propertySize} sqft
-          </p>
-        </div>
-
-        <p className="text-customTextColor text-base leading-loose my-10 px-10">
-          {property?.body ? (
-            <PortableText value={property?.body} components={RichTextComponents} />
-          ) : null}
+    <div className="wrapper mb-10">
+      <div className="flex justify-center items-center px-10">
+        {property?.fullPropertyImage && (
+          <Image
+            src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
+            alt="House1"
+            width={1500}
+            height={100}
+          />
+        )}
+      </div>
+      <div className="grid grid-cols-3 px-10  gap-2 justify-center items-center mt-12 mx-auto">
+        {property?.leftSidePropertyImage && (
+          <Image
+            src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
+            alt="House2"
+            width={385}
+            height={300}
+          />
+        )}
+        {property.middlePropertyImage && (
+          <Suspense fallback={<Loading />}>
+            <Image
+              src={urlForImage(property?.middlePropertyImage.asset._ref)}
+              alt="House3"
+              width={385}
+              height={300}
+            />
+          </Suspense>
+        )}
+        {property.rightSidePropertyImage && (
+          <Image
+            src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
+            alt="House4"
+            width={385}
+            height={300}
+          />
+        )}
+      </div>
+      <div className="mt-10 px-10">
+        <p className=" text-customPrimary text-base font-semibold border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] pb-5">
+          {property.location}
         </p>
+        <p className=" text-customPrimary text-sm border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] py-6">
+          Asking Price - N{property.budget} (Open for slight negotiation)
+        </p>
+        <p className=" text-customPrimary text-sm border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] py-6">
+          Legal | Survey N{property.legalSurvey}
+        </p>
+        <p className=" text-customPrimary text-sm border-b-[1px] lg:w-[50%] md:w-[60%] w-[75%] py-6">
+          Plot Size - {property.propertySize} sqft
+        </p>
+      </div>
 
-        <div className="flex justify-center my-10">
-          <YoutubeEmbed source={property.youtubeLink} />
-        </div>
+      <p className="text-customTextColor text-base leading-loose my-10 px-10">
+        {property?.body ? (
+          <PortableText
+            value={property?.body}
+            components={RichTextComponents}
+          />
+        ) : null}
+      </p>
 
-        <div className="flex justify-center my-20">
-          <Link href="#contact">
+      <div className="flex justify-center my-10">
+        <YoutubeEmbed source={property.youtubeLink} />
+      </div>
+
+      <div className="flex justify-center my-20">
+        <Link href="#contact">
           <button className="flex gap-2 items-center px-6 py-5 bg-primary rounded-md ">
             <Image src={Calendar} alt="Calendar" width={13} height={13} />
             <p className="text-sm font-semibold text-white">
               Contact Us For an Inspection Today
             </p>
           </button>
-          </Link>
-        </div>
+        </Link>
       </div>
+    </div>
   );
 }
 
