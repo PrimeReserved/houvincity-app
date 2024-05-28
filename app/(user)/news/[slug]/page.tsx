@@ -52,7 +52,9 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (
               <div key={post._id}>
-                <RecentPostCard post={post} />
+                <Suspense fallback={<Loading />}>
+                  <RecentPostCard post={post} />
+                </Suspense>
               </div>
             ))}
           </ErrorBoundary>

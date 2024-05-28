@@ -100,9 +100,11 @@ const SearchLandingPage: React.FC = () => {
         <div className="wrapper mt-[3rem] mb-[5rem]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[5rem] ">
             <ErrorBoundary>
-              {limitedProperties.map((property: any) => (
+             <Suspense fallback={<Loading />}>
+             {limitedProperties.map((property: any) => (
                 <PropertyCard key={property._id} property={property} />
               ))}
+             </Suspense>
             </ErrorBoundary>
           </div>
 

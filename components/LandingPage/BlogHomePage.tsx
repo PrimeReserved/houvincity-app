@@ -55,14 +55,14 @@ const BlogHomePage = ({ posts }: Props) => {
                 <div className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col">
                   <div className="relative overflow-hidden rounded-t-lg h-72">
                     <Suspense fallback={<Loading />}>
-                    <Image
-                      src={urlFor(post.mainImage).url()}
-                      alt={post.title}
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
-                      layout="responsive"
-                      loading="lazy"
+                      <Image
+                        src={urlFor(post.mainImage).url()}
+                        alt={post.title}
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-cover"
+                        layout="responsive"
+                        loading="lazy"
                     />
                     </Suspense>
                   </div>

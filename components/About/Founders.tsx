@@ -1,5 +1,7 @@
 import Image from "next/image";
 import About_section from "@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.png";
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 
 interface Founder {
   id: number;
@@ -55,12 +57,14 @@ export default function Founders() {
             style={{ maxWidth: "300px" }}
           >
             <figure>
+             <Suspense fallback={<Loading/>}>
               <Image
-                src={founder.image}
-                alt={founder.name}
-                width={400}
-                height={400}
-              />
+                  src={founder.image}
+                  alt={founder.name}
+                  width={400}
+                  height={400}
+                />
+             </Suspense>
             </figure>
 
             <div className="card-body text-center py-6">

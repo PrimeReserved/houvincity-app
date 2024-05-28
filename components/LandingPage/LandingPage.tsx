@@ -8,6 +8,8 @@ import ErrorBoundary from "../ErrorBoundary";
 import PostCard from "../Blog/Cards/PostCard";
 import Link from "next/link";
 import PropertyToggle from "./PropertyToggle";
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 
 export default async function Home() {
   // Fetch data
@@ -65,14 +67,13 @@ export default async function Home() {
         <div className="wrapper mt-[3rem] mb-[5rem]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[5rem] ">
             <ErrorBoundary>
-              {
-              limitedProperties.map((property: any) => (
-                <PropertyHomeCard key={property._id} property={property} />
-              ))
-              }
+              <Suspense fallback={<Loading />}>
+                {limitedProperties.map((property: any) => (
+                  <PropertyHomeCard key={property._id} property={property} />
+                ))}
+              </Suspense>
             </ErrorBoundary>
           </div>
-
           <div className="flex justify-center mt-10">
             <Link href="/property">
               <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
@@ -94,10 +95,12 @@ export default async function Home() {
           </p>
           <div className="mb-10 flex justify-center items-center ">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  md:space-y-0">
-              <ErrorBoundary>
-                {limitedPosts.map((post: any) => (
+             <ErrorBoundary>
+               <Suspense fallback={<Loading />}>
+               {limitedPosts.map((post: any) => (
                   <PostCard key={post._id} post={post} />
                 ))}
+               </Suspense>
               </ErrorBoundary>
             </div>
           </div>
@@ -117,11 +120,15 @@ export default async function Home() {
           Our Happy Homeowners
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[5rem] gap-14 mt-[5rem] ">
-          <ErrorBoundary>
+         
+         <ErrorBoundary>
+         <Suspense fallback={<Loading />}>
             {limitedReviews.map((review: any) => (
               <Review key={review._id} review={review} />
             ))}
+            </Suspense>
           </ErrorBoundary>
+         
         </div>
         <div className="flex justify-center mt-[5rem] ">
           <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">

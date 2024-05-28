@@ -76,15 +76,15 @@ function AboutProperty() {
       </div>
       <div>
         <Suspense fallback={<Loading />}>
-        <Image
-          src="https://res.cloudinary.com/dzd51q99i/image/upload/v1716690096/houvincity/landing-page/Union_chih6l.png"
-          alt="Luxury Home"
-          width={407}
-          height={390.39}
-          style={{
-            clipPath: "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
-          }}
-        />
+          <Image
+            src="https://res.cloudinary.com/dzd51q99i/image/upload/v1716690096/houvincity/landing-page/Union_chih6l.png"
+            alt="Luxury Home"
+            width={407}
+            height={390.39}
+            style={{
+              clipPath: "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
+            }}
+          />
         </Suspense>
       </div>
     </div>

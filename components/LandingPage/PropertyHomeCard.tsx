@@ -4,6 +4,8 @@ import { Property } from "@/typings";
 import House1 from "@/public/images/property/house1.svg";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 
 const PAGE_SIZE = 3;
 
@@ -13,6 +15,7 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
   return (
     <div key={property._id}>
       <div className="">
+        <Suspense fallback={<Loading />}>
         <Image
           src={
             property?.propertyImage
@@ -29,6 +32,7 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
           layout="responsive"
           loading="lazy"
         />
+        </Suspense>
       </div>
       <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">
         <div className="card-body mx-5 mt-5">
