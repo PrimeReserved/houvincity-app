@@ -1,5 +1,5 @@
 // // app/(user)/blog/[slug]/page.tsx
-import { Post } from "../../../../typings";
+import { Post } from '@/typings'
 import PostDetailedCard from "@/components/Blog/Cards/PostDetailedCard";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";

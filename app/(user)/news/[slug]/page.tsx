@@ -1,7 +1,7 @@
 // // app/(user)/blog/[slug]/page.tsx
 
 import { News, Post } from "@/typings"
-import DetailedNews from "@/components/Blog/Cards/DetailedNews";
+import PostDetailedCard from "@/components/Blog/Cards/PostDetailedCard"
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Suspense } from "react";
@@ -39,16 +39,16 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
       <div className="md:flex flex-row mt-[5rem] xl:mx-10 justify-center md:mx-5">
         <div className="basis-1/2">
           <Suspense fallback={<Loading />}>
-            <DetailedNews article={article} />
+            <PostDetailedCard post={article} />
           </Suspense>
         
         </div>
         <div className="basis-1/1">
-          {/* <Suspense fallback={<Loading />}>
+          <Suspense fallback={<Loading />}>
             <AuthorProfile 
-              author={article.author} 
-              publishedAt={article?.createdAt} />
-          </Suspense> */}
+              author={article._ref} 
+              publishedAt={article?.publishedAt} />
+          </Suspense>
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (
               <div key={post._id}>
@@ -68,9 +68,11 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
         <h1 className="text-center text-4xl">More Like This</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5  md:space-y-0">
         <ErrorBoundary>
-            {limitedArticles.map((post: Post) => (
-              <div key={post._id}>
-                <PostCard post={post} />
+            {limitedArticles.map((article: News) => (
+              <div key={article._id}>
+                <Suspense fallback={<Loading />}>
+                  <PostCard post={article} />
+                </Suspense>
               </div>
             ))}
           </ErrorBoundary>
