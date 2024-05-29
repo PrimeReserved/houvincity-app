@@ -14,26 +14,35 @@ interface PropertyDetailedProps {
 }
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
+
+  if (!property) {
+    return null;
+  }
+
   return (
     <div className="wrapper mb-10">
       <div className="flex justify-center items-center px-10">
         {property?.fullPropertyImage && (
+          <Suspense fallback={<Loading />}>
           <Image
             src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
             alt="House1"
             width={1500}
             height={100}
           />
+          </Suspense>
         )}
       </div>
       <div className="grid grid-cols-3 px-10  gap-2 justify-center items-center mt-12 mx-auto">
         {property?.leftSidePropertyImage && (
+          <Suspense fallback={<Loading />}>
           <Image
             src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
             alt="House2"
             width={385}
             height={300}
           />
+          </Suspense>
         )}
         {property.middlePropertyImage && (
           <Suspense fallback={<Loading />}>
@@ -46,12 +55,14 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
           </Suspense>
         )}
         {property.rightSidePropertyImage && (
+          <Suspense fallback={<Loading />}>
           <Image
             src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
             alt="House4"
             width={385}
             height={300}
           />
+          </Suspense>
         )}
       </div>
       <div className="mt-10 px-10">

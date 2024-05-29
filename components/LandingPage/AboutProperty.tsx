@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { FaCheck } from "react-icons/fa";
 import Image from "next/image";
-import LuxuryHome from "@/public/images/landingPage/Union.png";
 import Loading from "@/app/loading";
 
 function AboutProperty() {

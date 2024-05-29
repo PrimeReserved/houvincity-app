@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import Image from 'next/image';
 import IconButtonHref from '../Buttons/IconButtonHref';
 import SearchHomePage from './ SearchHomePage';
-import { usePropertyContext } from "@/context/PropertyContext";
 import Loading from '@/app/loading';
 
 const Hero: React.FC = () => {

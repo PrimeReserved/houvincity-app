@@ -52,16 +52,16 @@ function SearchHomePage() {
     handleSearch();
   }, [propertyType, location, budget, handleSearch]);
 
-  if (!Array.isArray(properties) || properties.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-[20rem]">
-        <h1 className="text-customTextColor text-4xl px-10">
-          There is currently no available property listing for now, kindly check
-          back later
-        </h1>
-      </div>
-    );
-  }
+  // if (!Array.isArray(properties) || properties.length === 0) {
+  //   return (
+  //     <div className="flex justify-center items-center h-[20rem]">
+  //       <h1 className="text-customTextColor text-4xl px-10">
+  //         There is currently no available property listing for now, kindly check
+  //         back later
+  //       </h1>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="mt-[5rem]">

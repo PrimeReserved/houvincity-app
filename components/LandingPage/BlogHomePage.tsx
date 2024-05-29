@@ -1,22 +1,15 @@
 "use client";
-import imageUrlBuilder from "@sanity/image-url";
+
 import Link from "next/link";
 import { Post } from "@/typings";
-import { client } from "@/sanity/client";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import { useState, useEffect, Suspense } from "react";
 import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 import Loading from "@/app/loading";
+import { urlForImage } from "@/sanity/lib/image";
 
 // Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(client);
-
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
-
 
 interface Props {
   posts: Post[];
@@ -56,12 +49,11 @@ const BlogHomePage = ({ posts }: Props) => {
                   <div className="relative overflow-hidden rounded-t-lg h-72">
                     <Suspense fallback={<Loading />}>
                       <Image
-                        src={urlFor(post.mainImage).url()}
+                        src={urlForImage(post.mainImage)}
                         alt={post.title}
                         width={500}
                         height={500}
                         className="w-full h-full object-cover"
-                        layout="responsive"
                         loading="lazy"
                     />
                     </Suspense>

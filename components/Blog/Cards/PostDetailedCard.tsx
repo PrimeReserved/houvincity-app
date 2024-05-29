@@ -28,7 +28,6 @@ export default async function PostDetailedCard({ post }: Readonly<PostDetailedCa
               alt={post?.title || "Houses"}
               width={697}
               height={600}
-              layout="responsive"
               loading="lazy"
             />
           </Suspense>

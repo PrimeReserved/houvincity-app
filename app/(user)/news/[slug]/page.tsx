@@ -11,28 +11,33 @@ import PostCard from "@/components/Blog/Cards/PostCard";
 import SocialShare from "@/components/Blog/SocialShare";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 
-interface Props {
-  params: {
-    slug: string;
+
+export const generateMetadata = async ({ params }: any) => {
+  const { slug } = params;
+  const article = await getArticle(slug);
+
+  if (!article) {
+    return {
+      name: "News article Not Found",
+      description: "The News article you are looking for does not exist."
+    };
+  }
+
+  return {
+    title: article.title,
+    content: article.description
   }
 }
 
-export const generateStaticParams = async () => {
-  const slugs: News[] =await getNews();
-  const slugRoutes = slugs.map((slug) => slug?.slug?.current);
-
-  return slugRoutes?.map((slug) => ({
-    slug,
-  }));
-};
-
-export default async function Page({ params: { slug} }: Readonly<Props>){
+export default async function Page({ params}: any){
+  const { slug } = params;
+  
   const article = await getArticle(slug);
   const posts = await getPosts();
   const news = await getNews();
 
-  const limitedRecentPosts = posts.slice(0, 3);
-  const limitedArticles = news.slice(0, 3);
+  const limitedRecentPosts = Array.isArray(posts) ? posts.slice(0, 3) : [];
+const limitedArticles = Array.isArray(news) ? news.slice(0, 3) : [];
 
   return (
     <>
@@ -46,8 +51,8 @@ export default async function Page({ params: { slug} }: Readonly<Props>){
         <div className="basis-1/1">
           <Suspense fallback={<Loading />}>
             <AuthorProfile 
-              author={article._ref} 
-              publishedAt={article?.publishedAt} />
+              author={article} 
+              publishedAt={article} />
           </Suspense>
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (

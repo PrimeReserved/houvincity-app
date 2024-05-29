@@ -21,6 +21,7 @@ module.exports = withMDX({
   },
   experimental: {
     forceSwcTransforms: true,
+    taint: true,
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 });

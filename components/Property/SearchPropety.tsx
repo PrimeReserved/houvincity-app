@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import Fuse from "fuse.js";
 import { HiSearch } from "react-icons/hi";
 import PropertyCard from "./PropertyCard";
+import { Property } from "@/typings";
 
 
 
@@ -132,8 +133,8 @@ const SearchProperty = ({ properties }:any ) => {
       </h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
         {searchResults.length > 0 ? (
-          searchResults.map((property: any) => (
-            <div key={property.id}>
+          searchResults.map((property: Property) => (
+            <div key={property.slug?.current}>
               <PropertyCard property={property} />
             </div>
           ))

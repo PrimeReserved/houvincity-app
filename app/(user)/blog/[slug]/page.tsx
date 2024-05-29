@@ -9,32 +9,36 @@ import { Suspense } from "react";
 import { getPost, getPosts } from "@/lib/action";
 import Loading from "@/app/loading";
 import PostCard from "@/components/Blog/Cards/PostCard";
+import FooterHome from '@/components/Footer/FooterHome';
+import Header from '@/components/Header/HeaderHome';
+
+export const revalidate = 30;
 
 
-interface Props {
-  params: {
-    slug: string;
+export const generateMetadata = async ({ params }: any) => {
+
+  const { slug } = params;
+  const post = await getPost(slug);
+  return {
+    title: post.title,
+    content: post.description
   }
 }
 
-export const generateStaticParams = async () => {
-  const slugs: Post[] = await getPosts();
-  const slugRoutes = slugs.map((slug) => slug?.slug?.current);
+export default async function Page({ params} : any) {
 
-  return slugRoutes?.map((slug) => ({
-    slug,
-  }));
-};
-
-export default async function Page({ params: { slug } }: Readonly<Props>) {
+  const { slug } = params;
   const post = await getPost(slug);
   const posts = await getPosts();
 
-  const limitedRecentPosts = posts.slice(0, 3);
-  const limitedPosts = posts.slice(0, 3);
+  const limitedRecentPosts = Array.isArray(posts) ? posts.slice(0, 3) : [];
+  const limitedPosts = Array.isArray(posts) ? posts.slice(0, 3) : [];;
 
   return (
     <>
+    <ErrorBoundary>
+      <Header />
+    </ErrorBoundary>
       <div className="md:flex flex-row mt-[5rem] xl:mx-10 justify-center md:mx-5">
         <div className="basis-1/2">
           <Suspense fallback={<Loading />}>
@@ -44,14 +48,16 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
         <div className="basis-1/1">
           <Suspense fallback={<Loading />}>
             <AuthorProfile
-              author={post.author}
-              publishedAt={post.publishedAt}
+              author={post}
+              publishedAt={post}
             />
           </Suspense>
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (
               <div key={post._id}>
-                <RecentPostCard post={post} />
+                <Suspense fallback={<Loading />}>
+                  <RecentPostCard post={post} />
+                </Suspense>
               </div>
             ))}
           </ErrorBoundary>
@@ -69,12 +75,17 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
         <ErrorBoundary>
             {limitedPosts.map((post: Post) => (
               <div key={post._id}>
-                <PostCard post={post} />
+                <Suspense fallback={<Loading />}>
+                  <PostCard post={post} />
+                </Suspense>
               </div>
             ))}
           </ErrorBoundary>
         </div>
       </div>
+      <ErrorBoundary>
+        <FooterHome />
+      </ErrorBoundary>
     </>
   );
 };

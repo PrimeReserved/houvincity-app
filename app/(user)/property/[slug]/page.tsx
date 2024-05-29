@@ -1,36 +1,45 @@
 import PropertyDetailed from '@/components/Property/PropertyDetailed';
-import { client } from "@/sanity/client";
 import { Property } from '@/typings';
 import { Suspense } from 'react';
 import Loading from '@/app/loading';
 import { getProperties, getProperty } from '@/lib/action';
+import Header from '@/components/Header/HeaderHome';
+import FooterHome from '@/components/Footer/FooterHome';
 
-interface Props {
-  params: {
-    slug: string;
-  }
-}
 
 export const revalidate = 30;
 
-export const generateStaticParams = async () => {
-  const slugs: Property[] = await getProperties();
-  const slugRoutes = slugs.map((slug) => slug?.slug?.current);
- 
-  return slugRoutes?.map((slug) => ({
-    slug,
-  }));
-};
 
- const page = async ({ params: { slug } }: Readonly<Props>) => {
+export const generateMetadata = async ({ params }: any) => {
 
+  const { slug } = params;
+  const property = await getProperty(slug);
+  
+  if (!property) {
+    return {
+      title: "Property Not Found",
+      content: "The Property you are looking for does not exist, please contact us directly via phone" 
+    };
+  }
+
+  return {
+    title: property.title,
+    content: property.description
+  };
+}
+
+ const page = async ({ params  }: any) => {
+
+  const { slug } = params;
   const property = await getProperty(slug);
 
   return (
     <div>
+      <Header />
         <Suspense fallback={<Loading/>}>
           <PropertyDetailed property={property} />
         </Suspense>
+        <FooterHome />
     </div>
   )
 }

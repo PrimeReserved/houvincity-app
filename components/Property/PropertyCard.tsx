@@ -25,9 +25,8 @@ export default function PropertyCard({ property }: any) {
                       : Houses1
                   }
                   alt={property?.title}
-                  width={355}
-                  height={285}
-                  layout="responsive"
+                  width={500}
+                  height={500}
                   loading="lazy"
                 />
               </Suspense>

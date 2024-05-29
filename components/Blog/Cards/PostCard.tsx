@@ -48,7 +48,6 @@ export default function PostCard({ post }: Readonly<any>) {
                 alt={`${post.slug?.current}`}
                 width={380}
                 height={500}
-                layout="responsive"
                 loading="lazy"
                 className="w-full h-full object-cover"
               />
@@ -77,17 +76,17 @@ export default function PostCard({ post }: Readonly<any>) {
             </p>
           )}
             <div className="card-actions">
-            <Link href={`${basePath}/${post?.slug?.current}`}>
-                <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
-                  Read more
-                  <Image
-                    src={ArrowRightWhite}
-                    alt="Arrow Right"
-                    width={12}
-                    height={12}
-                  />
-                </button>
-              </Link>
+              <Link href={`${basePath}/${post?.slug?.current || ''}`}>
+                  <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
+                    Read more
+                    <Image
+                      src={ArrowRightWhite}
+                      alt="Arrow Right"
+                      width={12}
+                      height={12}
+                    />
+                  </button>
+                </Link>
             </div>
           </div>
         </div>

@@ -23,14 +23,7 @@ export default async function Home() {
   const limitedReviews = reviews.slice(0, 4);
 
   if (!Array.isArray(limitedProperties) || limitedProperties.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-[20rem]">
-        <h1 className="text-customTextColor text-4xl px-10">
-          There is currently no available property listing for now, kindly check
-          back later
-        </h1>
-      </div>
-    );
+    return null;
   }
 
   if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {

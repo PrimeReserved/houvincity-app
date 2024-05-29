@@ -6,6 +6,10 @@ import PostCard from "@/components/Blog/Cards/PostCard";
 import { getNews, getPosts } from "@/lib/action";
 import { Post } from "@/typings";
 import RecentNewsCard from "@/components/Blog/Cards/RecentNewsCard";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
+import Header from "@/components/Header/HeaderHome";
+import FooterHome from "@/components/Footer/FooterHome";
 
 async function Page() {
   // Fetch data
@@ -23,6 +27,7 @@ async function Page() {
 
   return (
     <div>
+      <Header />
       <ErrorBoundary>
         <Hero
           title="Welcome to Our Blog"
@@ -40,7 +45,9 @@ async function Page() {
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (
               <div key={post._id}>
-                <RecentPostCard post={post} />
+                <Suspense fallback={<Loading />}>
+                  <RecentPostCard post={post} />
+                </Suspense>
               </div>
             ))}
           </ErrorBoundary>
@@ -51,7 +58,9 @@ async function Page() {
             <ErrorBoundary>
             {limitedNewsPosts.map((post: Post) => (
               <div key={post._id}>
-                <RecentNewsCard article={post} />
+                <Suspense fallback={<Loading />}>
+                  <RecentNewsCard article={post} />
+                </Suspense>
               </div>
             ))}
           </ErrorBoundary>
@@ -62,7 +71,9 @@ async function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
               {limitedPosts.map((post: Post) => (
                 <div key={post._id}>
-                  <PostCard post={post} />
+                  <Suspense fallback={<Loading />}>
+                    <PostCard post={post} />
+                  </Suspense>
                 </div>
               ))}
             </div>
@@ -73,6 +84,7 @@ async function Page() {
       <ErrorBoundary>
         <Newsletter />
       </ErrorBoundary>
+      <FooterHome />
     </div>
   );
 }

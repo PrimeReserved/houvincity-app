@@ -4,8 +4,7 @@ import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 import Logo from "@/public/logo.svg";
-import Header from "@/components/Header/HeaderHome";
-import FooterHome from "@/components/Footer/FooterHome";
+
 
 export const revalidate = 30;
 
@@ -42,10 +41,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={josefinSans.className}>
-        <Header />
         {children}
         {draftMode().isEnabled && <LiveVisualEditing />}
-        <FooterHome />
       </body>
     </html>
   );

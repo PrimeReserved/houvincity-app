@@ -1,25 +1,35 @@
 "use server";
 
+import { client } from "@/sanity/lib/client";
+import { groq } from "next-sanity";
+
 
 export async function getPosts() {
   try {
-    const response = await fetch(`${process.env.BLOG_API_URI}`);
-    if (!response) {
-      throw new Error(`Could not fetch properties`);
+    const query = groq`*[_type == 'post']`;
+    if (!query) {
+      throw new Error(`Could not fetch blog post`);
     }
-    return response.json();
+    const posts = await client.fetch(query);
+    return posts;
   } catch (error) {
-    console.log(`An Error occurred while fetching properties: ${error}`);
+    console.log(`An Error occurred while fetching blog post: ${error}`);
   }
 }
 
 export async function getPost(slug: string) {
   try {
-    const response = await fetch(`${process.env.BLOG_API_URI}/${slug}`);
-    if (!response.ok) {
+    const query = groq`*[_type == 'post' && slug.current == $slug][0]{
+      ...,
+      body,
+      author->
+  }`;
+
+    if (!query) {
       throw new Error(`Could not fetch post with ID: ${slug}`);
     }
-    return response.json();
+    const post = await client.fetch(query, { slug });
+    return post;
   } catch (error) {
     console.log(`An error occurred while fetching the post: ${error}`);
     return null;
@@ -29,23 +39,30 @@ export async function getPost(slug: string) {
 // Get news
 export async function getNews() {
   try {
-    const response = await fetch(`${process.env.NEWS_API_URI}`);
-    if (!response) {
-      throw new Error(`Could not fetch properties`);
+    const query = groq`*[_type == 'news']`;
+    if (!query) {
+      throw new Error(`Could not fetch news post`);
     }
-    return response.json();
+    const posts = await client.fetch(query);
+    return posts;
   } catch (error) {
-    console.log(`An Error occurred while fetching properties: ${error}`);
+    console.log(`An Error occurred while fetching News: ${error}`);
   }
 }
 
 export async function getArticle(slug: string) {
-  try {
-    const response = await fetch(`${process.env.NEWS_API_URI}/${slug}`);
-    if (!response.ok) {
-      throw new Error(`Could not fetch News article with slug: ${slug}`);
-    }
-    return response.json();
+    try {
+      const query = groq`*[_type == 'news' && slug.current == $slug][0]{
+        ...,
+        body,
+        author->
+    }`;
+  
+      if (!query) {
+        throw new Error(`Could not fetch news article with ID: ${slug}`);
+      }
+      const post = await client.fetch(query, { slug });
+      return post;
   } catch (error) {
     console.log(`An error occurred while fetching the News article: ${error}`);
     return null;
@@ -56,23 +73,29 @@ export async function getArticle(slug: string) {
 
 export async function getProperties() {
   try {
-    const response = await fetch(`${process.env.PROPERTY_API_URI}`);
-    if (!response) {
+    const query = groq`*[_type == 'property']`;
+    if (!query) {
       throw new Error(`Could not fetch properties`);
     }
-    return response.json();
+    const properties = await client.fetch(query);
+    return properties;
   } catch (error) {
     console.log(`An Error occurred while fetching properties: ${error}`);
+    return []; // Return an empty array or a default value
   }
 }
 
 export async function getProperty(slug: string) {
-  try {
-    const response = await fetch(`${process.env.PROPERTY_API_URI}/${slug}`);
-    if (!response.ok) {
-      throw new Error(`Could not fetch SINGLE property with slug: ${slug}`);
-    }
-    return response.json();
+   try {
+      const query = groq`*[_type == 'property' && slug.current == $slug][0]{
+        ...
+    }`;
+  
+      if (!query) {
+        throw new Error(`Could not fetch news article with ID: ${slug}`);
+      }
+      const post = await client.fetch(query, { slug });
+      return post;
   } catch (error) {
     console.log(`An error occurred while fetching a  SINGLE property: ${error}`);
     return null;
@@ -85,26 +108,33 @@ export async function getProperty(slug: string) {
 
 export async function getTestimonies() {
   try {
-    const response = await fetch(`${process.env.TESTIMONY_API_URI}`);
-    if (!response) {
-      throw new Error(`Could not fetch testimony`);
+    const query = groq`*[_type == 'testimony']`;
+    if (!query) {
+      throw new Error(`Could not fetch testimony review`);
     }
-    return response.json();
+    const review = await client.fetch(query);
+    return review;
   } catch (error) {
     console.log(`An Error occurred while fetching testimony: ${error}`);
   }
 }
 
 export async function getTestimony(slug: string) {
-  try {
-    const response = await fetch(`${process.env.TESTIMONY_API_URI}/${slug}`);
-    if (!response.ok) {
-      throw new Error(`Could not fetch SINGLE testimony with slug: ${slug}`);
-    }
-    return response.json();
+    try {
+      const query = groq`*[_type == 'testimony' && slug.current == $slug][0]{
+        ...,
+        body,
+        author->
+    }`;
+  
+      if (!query) {
+        throw new Error(`Could not fetch testimony review with ID: ${slug}`);
+      }
+      const review = await client.fetch(query, { slug });
+      return review;
   } catch (error) {
     console.log(`An error occurred while fetching the single testimony: ${error}`);
-    return null;
+    return `An error occurred while fetching the single testimony: ${error}`;
   }
 }
 
@@ -112,7 +142,7 @@ export async function getTestimony(slug: string) {
 // Newsletter subscription
 export async function subscribe(email: string) {
   try {
-    const response = await fetch(`${process.env.SUBSCRIBE_API_URI}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SUBSCRIBE_API_URI}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

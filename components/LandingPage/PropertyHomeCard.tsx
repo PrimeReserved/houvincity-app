@@ -29,7 +29,6 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
             clipPath: "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
           }}
           className=" rounded-t-lg"
-          layout="responsive"
           loading="lazy"
         />
         </Suspense>
