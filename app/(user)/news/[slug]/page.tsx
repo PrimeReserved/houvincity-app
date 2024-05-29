@@ -12,6 +12,7 @@ import SocialShare from "@/components/Blog/SocialShare";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
 import FooterHome from "@/components/Footer/FooterHome";
 import Header from "@/components/Header/HeaderHome";
+import Link from "next/link";
 
 
 export const generateMetadata = async ({ params }: any) => {
@@ -88,6 +89,11 @@ const limitedArticles = Array.isArray(news) ? news.slice(0, 3) : [];
             ))}
           </ErrorBoundary>
         </div>
+        <Link href='/news'>
+         <button className="py-3 px-[3.5rem] font-bold border-[1px] border-primary rounded-md text-xs text-primary hover:bg-primary hover:outline hover:outline-primary hover:text-white">
+            More News
+          </button>
+         </Link>
       </div>
       <FooterHome />
     </>

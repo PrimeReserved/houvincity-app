@@ -11,6 +11,7 @@ import Loading from "@/app/loading";
 import PostCard from "@/components/Blog/Cards/PostCard";
 import FooterHome from '@/components/Footer/FooterHome';
 import Header from '@/components/Header/HeaderHome';
+import Link from 'next/link';
 
 export const revalidate = 30;
 
@@ -81,6 +82,13 @@ export default async function Page({ params} : any) {
               </div>
             ))}
           </ErrorBoundary>
+        </div>
+        <div className="flex justify-center mt-10">
+         <Link href='/blog'>
+         <button className="py-3 px-[3.5rem] font-bold border-[1px] border-primary rounded-md text-xs text-primary hover:bg-primary hover:outline hover:outline-primary hover:text-white">
+            More Blog
+          </button>
+         </Link>
         </div>
       </div>
       <ErrorBoundary>
