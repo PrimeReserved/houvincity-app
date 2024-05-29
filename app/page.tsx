@@ -5,20 +5,42 @@ import Loading from "./loading";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
 import Head from "next/head";
+import { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Houvincity Real Estate and Property Management',
+    default: 'Houvincity | Real Estate and Property Management',
+  },
+  description: 'Real Estate and Property Managment',
+  openGraph: {
+    title: 'Houvincity Real Estate and Property Management',
+    description: 'Real Estate and Property Managment',
+    url: 'https://houvincity-app.vercel.app/',
+    siteName: 'Houvincity.com',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dzd51q99i/image/upload/v1716690156/houvincity/services/HCL_Logo_1_k5l61c.png',
+        width: 800,
+        height: 600,
+      },
+      {
+        url: 'https://res.cloudinary.com/dzd51q99i/image/upload/v1716690096/houvincity/landing-page/Union_chih6l.png',
+        width: 1800,
+        height: 1600,
+        alt: 'Houvincity Real Estate',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+}
 
 
 const Page: React.FC = () => {
 
   return (
     <>
-    <Head>
-      <title>ouvincity | Real Estate and Property Management </title>
-      <meta name="description" content="A short description of your page's content"/>
-      <meta property="og:title" content="Houvincity | Real Estate and Property Management" />
-      <meta property="og:description" content="Real Estate and Property Managment" />
-      <meta property="og:image" content="https://res.cloudinary.com/dzd51q99i/image/upload/v1716690156/houvincity/services/HCL_Logo_1_k5l61c.png" />
-      <meta name="twitter:card" content="https://res.cloudinary.com/dzd51q99i/image/upload/v1716690096/houvincity/landing-page/Union_chih6l.png" />
-    </Head>
      <Header />
         <PropertyProvider>
          <Suspense fallback={<Loading />}>

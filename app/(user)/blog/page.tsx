@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import Loading from "@/app/loading";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
+import NumberCount from "@/components/NumberCount/NumberCount";
 
 async function Page() {
   // Fetch data
@@ -80,7 +81,7 @@ async function Page() {
           </ErrorBoundary>
         </div>
       </div>
-
+      <NumberCount />
       <ErrorBoundary>
         <Newsletter />
       </ErrorBoundary>

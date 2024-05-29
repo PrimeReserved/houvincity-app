@@ -12,6 +12,7 @@ import { News, Post } from '@/typings';
 import RecentNewsCard from '@/components/Blog/Cards/RecentNewsCard';
 import FooterHome from '@/components/Footer/FooterHome';
 import Header from '@/components/Header/HeaderHome';
+import NumberCount from '@/components/NumberCount/NumberCount';
  
 
 
@@ -89,6 +90,9 @@ async function Page() {
           </ErrorBoundary>
         </div>
       </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+      <NumberCount />
       </ErrorBoundary>
       <ErrorBoundary>
         <Newsletter />
