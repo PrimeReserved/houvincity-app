@@ -114,32 +114,17 @@ export default async function Home() {
         </div>
       </div>
       {/* Blog section  */}
+      
       {/* Testimony section  */}
       <div className="lg:wrapper mx-5  ">
         <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
           Our Happy Homeowners
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[5rem] gap-14 mt-[5rem] ">
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              {limitedReviews.map((review: any) => (
-                <Review key={review._id} review={review} />
-              ))}
-            </Suspense>
-          </ErrorBoundary>
-        </div>
-        <div className="flex justify-center mt-[5rem] ">
-          <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
-            Read More
-          </button>
-        </div>
       </div>
 
       <ErrorBoundary>
         <Suspense fallback={<Loading />}>
-          {limitedTestiomony.map((review: any) => (
-            <Testimony key={review._id} review={review} />
-          ))}
+            <Testimony reviews={reviews} />
         </Suspense>
       </ErrorBoundary>
 
