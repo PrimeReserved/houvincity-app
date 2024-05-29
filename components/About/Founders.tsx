@@ -2,6 +2,7 @@ import Image from "next/image";
 import About_section from "@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.png";
 import Loading from "@/app/loading";
 import { Suspense } from "react";
+import Link from "next/link";
 
 interface Founder {
   id: number;
@@ -57,14 +58,14 @@ export default function Founders() {
             style={{ maxWidth: "300px" }}
           >
             <figure>
-             <Suspense fallback={<Loading/>}>
-              <Image
+              <Suspense fallback={<Loading />}>
+                <Image
                   src={founder.image}
                   alt={founder.name}
                   width={400}
                   height={400}
                 />
-             </Suspense>
+              </Suspense>
             </figure>
 
             <div className="card-body text-center py-6">
@@ -171,12 +172,17 @@ export default function Founders() {
       </div>{" "}
       {/* Buttons  */}
       <div className="flex flex-col md:flex-row mt-10 md:mt-0 mx-8 justify-center gap-3 mb-20 relative md:bottom-5">
-        <button className="btn rounded-md bg-primary text-white py-4 px-5">
-          Have a Question
-        </button>
-        <button className="btn rounded-md bg-[#040A3B] text-white py-4 px-6">
-          Find Property
-        </button>
+        <Link href="/faqs">
+          <button className="btn rounded-md bg-primary text-white py-4 px-5">
+            Have a Question
+          </button>
+        </Link>
+
+        <Link href="/property">
+          <button className="btn rounded-md bg-[#040A3B] text-white py-4 px-6">
+            Find Property
+          </button>
+        </Link>
       </div>
     </div>
   );
