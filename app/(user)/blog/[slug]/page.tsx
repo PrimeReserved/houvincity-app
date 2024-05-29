@@ -48,8 +48,8 @@ export default async function Page({ params} : any) {
         <div className="basis-1/1">
           <Suspense fallback={<Loading />}>
             <AuthorProfile
-              author={post}
-              publishedAt={post}
+              author={post.author}
+              publishedAt={post.publishedAt}
             />
           </Suspense>
           <ErrorBoundary>

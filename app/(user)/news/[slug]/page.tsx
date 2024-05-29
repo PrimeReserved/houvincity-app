@@ -10,6 +10,8 @@ import { getNews, getArticle, getPosts } from "@/lib/action";
 import PostCard from "@/components/Blog/Cards/PostCard";
 import SocialShare from "@/components/Blog/SocialShare";
 import AuthorProfile from "@/components/Blog/Cards/AuthorProfile";
+import FooterHome from "@/components/Footer/FooterHome";
+import Header from "@/components/Header/HeaderHome";
 
 
 export const generateMetadata = async ({ params }: any) => {
@@ -36,11 +38,13 @@ export default async function Page({ params}: any){
   const posts = await getPosts();
   const news = await getNews();
 
+
   const limitedRecentPosts = Array.isArray(posts) ? posts.slice(0, 3) : [];
 const limitedArticles = Array.isArray(news) ? news.slice(0, 3) : [];
 
   return (
     <>
+    <Header />
       <div className="md:flex flex-row mt-[5rem] xl:mx-10 justify-center md:mx-5">
         <div className="basis-1/2">
           <Suspense fallback={<Loading />}>
@@ -51,8 +55,8 @@ const limitedArticles = Array.isArray(news) ? news.slice(0, 3) : [];
         <div className="basis-1/1">
           <Suspense fallback={<Loading />}>
             <AuthorProfile 
-              author={article} 
-              publishedAt={article} />
+              author={article.author} 
+              publishedAt={article.publishedAt} />
           </Suspense>
           <ErrorBoundary>
             {limitedRecentPosts.map((post: Post) => (
@@ -85,6 +89,7 @@ const limitedArticles = Array.isArray(news) ? news.slice(0, 3) : [];
           </ErrorBoundary>
         </div>
       </div>
+      <FooterHome />
     </>
   );
 };
