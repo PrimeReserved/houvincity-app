@@ -1,7 +1,10 @@
 "use client"
 
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { subscribe } from "@/lib/action";
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+
 
 function Newsletter() {
 
@@ -14,10 +17,15 @@ function Newsletter() {
     setError(null);
 
     try {
+      Loading.standard('Loading...');
       await subscribe(email);
       setSubmitted(true);
+      Loading.remove(); // Hide loading indicator
+      Report.success('Newsletter Subscription', 'Great! You have been subscribed to our newsletter.', 'close'); // Show success notification
     } catch (error: any) {
       setError(error.message || 'An unexpected error occurred');
+      Loading.remove(); // Hide loading indicator
+      Report.failure('Newsletter Subscription', 'Error! Something happened while submitting, please try again or contact our support team.', 'close')
     }
   };
 
@@ -45,20 +53,15 @@ function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {submitted ? (
-              <p className="text-3xl mt-3 text-primary">Great! You have been Subscribed!</p>
-            ) : (
-              <>
-              {error ? (
-                <p className="text-red-500">{error}</p>
-              ) : (
-               <Suspense fallback={<p>Please wait...</p>}>
-                  <button className="btn border-none absolute text-white -ml-[8rem] md:-ml-[10rem] mt-2 md:mt-5 text-[12px] w-[7rem] md:w-[8rem]  h-[2.5rem] bg-[#6DBA3A] rounded-md hover:border-primary hover:text-primary hover:bg-white hover:border-2"
-                      type="submit"
-                      >Subscribe</button>
-               </Suspense>
-              )}
-              </>
+           {error && (
+              <p className="text-red-500">{error}</p>
+            )}
+            {!submitted && (
+              <button className="btn border-none absolute text-white -ml-[8rem] md:-ml-[10rem] mt-2 md:mt-5 text-[12px] w-[7rem] md:w-[8rem]  h-[2.5rem] bg-[#6DBA3A] rounded-md hover:border-primary hover:bg-white hover:text-primary hover:outline hover:outline-primary hover:border-2"
+                type="submit"
+              >
+                Subscribe
+              </button>
             )}
           </form>
         </div>
