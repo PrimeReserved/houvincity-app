@@ -58,7 +58,7 @@ export default function EventForm({ event, onClose }: any) {
                 placeholder="Property Showcase"
                 className="input input-bordered w-full max-w-xs"
                 value={title}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </label>
           </div>
