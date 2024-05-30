@@ -28,24 +28,24 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
       <div className="flex justify-center items-center px-10">
         {property?.fullPropertyImage && (
           <Suspense fallback={<Loading />}>
-          <Image
-            src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
-            alt="House1"
-            width={1500}
-            height={100}
-          />
+            <Image
+              src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
+              alt="House1"
+              width={1500}
+              height={100}
+            />
           </Suspense>
         )}
       </div>
       <div className="grid grid-cols-3 px-10  gap-2 justify-center items-center mt-12 mx-auto">
         {property?.leftSidePropertyImage && (
           <Suspense fallback={<Loading />}>
-          <Image
-            src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
-            alt="House2"
-            width={385}
-            height={300}
-          />
+            <Image
+              src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
+              alt="House2"
+              width={385}
+              height={300}
+            />
           </Suspense>
         )}
         {property.middlePropertyImage && (
@@ -60,12 +60,12 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         )}
         {property.rightSidePropertyImage && (
           <Suspense fallback={<Loading />}>
-          <Image
-            src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
-            alt="House4"
-            width={385}
-            height={300}
-          />
+            <Image
+              src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
+              alt="House4"
+              width={385}
+              height={300}
+            />
           </Suspense>
         )}
       </div>
@@ -94,7 +94,11 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
       </p>
 
       <div className="flex justify-center my-10">
-        <YoutubeEmbed source={property.youtubeLink} />
+        {property.youtubeLink ? (
+          <YoutubeEmbed source={property.youtubeLink} />
+        ) : (
+          <div>No video available</div>
+        )}
       </div>
 
       <div className="flex justify-center my-20 gap-10">
@@ -106,14 +110,14 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             </p>
           </button>
         </Link>
-          <button className="flex gap-2 items-center px-6 py-5 bg-primary rounded-md"
-          onClick={() => router.push(`${process.env.NEXT_PUBLIC_PAYSTACK_URL}`) }
-          >
-            <Image src={Calendar} alt="Calendar" width={13} height={13} />
-            <p className="text-sm font-semibold text-white">
-              Buy this property
-            </p>
-          </button>
+        <button className="flex gap-2 items-center px-6 py-5 bg-primary rounded-md"
+          onClick={() => router.push(`${process.env.NEXT_PUBLIC_PAYSTACK_URL}`)}
+        >
+          <Image src={Calendar} alt="Calendar" width={13} height={13} />
+          <p className="text-sm font-semibold text-white">
+            Buy this property
+          </p>
+        </button>
       </div>
     </div>
   );

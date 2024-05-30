@@ -54,7 +54,7 @@ const Header = () => {
                 } `}
             >
               <Image
-                src={Logo}
+                src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1717075112/houvincity/navbar/HCL_Logo_1_1_hibdys.png`}
                 alt="logo"
                 width={140}
                 height={30}

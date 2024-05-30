@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialLink from "../Socials/SocialLink";
 
-import Logo from "@/public/logo.svg";
 import Instagram from "@/public/images/socials/path1165.svg";
 import Twitter from "@/public/images/socials/path1009.svg";
 import Facebook from "@/public/images/socials/Vector.svg";
@@ -25,7 +24,7 @@ const FooterHome = () => {
               <div className="mb-12 lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src={Logo}
+                    src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1717074807/houvincity/HCL_Logo_new_1_auxiao.png`}
                     alt="logo"
                     className="block"
                     width={140}
