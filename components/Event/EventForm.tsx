@@ -40,15 +40,15 @@ export default function EventForm({ event, onClose }: any) {
 
   return (
     <div className="fixed inset-0 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
-     
-      
-      <div className="card bg-base-100 shadow-xl w-96">
-      <div>
-        <h1>Create Email Reminder</h1>
+      <div className="card bg-base-100 shadow-xl w-6/12 p-10">
+        <div className="flex justify-end">
         <button onClick={onClose}>X</button>
+        </div>
+      <div className="p-5">
+        <h1 className="text-3xl">Create Email Reminder</h1>
       </div>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="">
             <label htmlFor="event" className="form-control w-full max-w-xs">
               <div className="label">
                 <span className="label-text">Event</span>

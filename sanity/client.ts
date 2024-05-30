@@ -1,10 +1,10 @@
 import { createClient } from "next-sanity";
 
 export const client = createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
-    token: process.env.NEXT_PUBLIC_SANITY_API_READ_TOKEN,
+    projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+    dataset: process.env.SANITY_STUDIO_DATASET,
+    apiVersion: process.env.SANITY_STUDIO_API_VERSION,
+    token: process.env.SANITY_STUDIO_API_READ_TOKEN,
     ignoreBrowserTokenWarning: true,
     useCdn: false, 
 })

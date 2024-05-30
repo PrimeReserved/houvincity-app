@@ -72,16 +72,41 @@ export default function EventList({ events }: any) {
 
   return (
     <>
-      <div className="h-50 bg-primary text-white">Upcoming Events</div>
+    <div className="mt-[6rem]"></div>
+      <div className="h-40 bg-primary text-white">
+        <h1 className="md:text-4xl p-10">
+          Upcoming Events
+        </h1>
+      </div>
       {/* this month section  */}
       <h1 className="text-2xl md:text-4xl">Upcoming Events: This Month</h1>
 
        {thisMonthEvents?.length > 0 ? (
         thisMonthEvents?.map((event: any) => (
-          <div className="flex justify-center items-center gap-10" key={event._id}>
-            <div>
+          <div className="md:flex justify-center items-center gap-10 md:my-10 md:mx-20 shadow-2xl" key={event._id}>
+            <div className="p-5">
               <Suspense fallback={<Loading />}>
-                <Image src={urlForImage(event.thumbnail)} alt={event.name} width={800} height={800} />
+              <div
+              className=""
+              style={{
+                width: "358px",
+                height: "280px",
+                overflow: "hidden"
+              }}
+            >
+                <Image 
+                  src={urlForImage(event.thumbnail)} 
+                  alt={event.name}
+                  width={800}
+                  height={800}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  loading="lazy"
+                   />
+                </div>
               </Suspense>
             </div>
             <div>
@@ -91,7 +116,8 @@ export default function EventList({ events }: any) {
                   {event.summary}
                 </p>
               </div>
-              <div className="flex justify-center items-center gap-10">
+             <div className="py-10 pr-40">
+             <div className="md:only-of-type:flex justify-between items-center">
                 <button
                   className={`btn text-white ${reminders[event._id] ? 'bg-customPrimary' : 'bg-primary'}`}
                   onClick={() => {
@@ -101,10 +127,14 @@ export default function EventList({ events }: any) {
                 >
                   <FaRegBell /> Remind me
                 </button>
-                <button className="btn text-white bg-primary"><IoTimeOutline />
-                {`${event.date}T${event.start}`}, {event.start} - {event.end}
+                <button className="btn text-primary"><IoTimeOutline />
+                {`${new Date(event.date).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "long"
+                })}`}, {event.start} - {event.end}
                 </button>
               </div>
+             </div>
             </div>
           </div>
         ))
@@ -118,10 +148,28 @@ export default function EventList({ events }: any) {
 
       {nextMonthEvents.length > 0 ? (
         nextMonthEvents.map((event: any) => (
-          <div className="flex justify-center items-center gap-10" key={event._id}>
+          <div className="md:flex justify-center items-center gap-10 md:my-10 md:mx-20 shadow-2xl" key={event._id}>
             <div>
               <Suspense fallback={<Loading />}>
-                <Image src={urlForImage(event.thumbnail)} alt={event.name} width={800} height={800} />
+              <div
+              className=""
+              style={{
+                width: "358px",
+                height: "280px",
+                overflow: "hidden", // Ensures that anything outside the clipping path is hidden
+              }}
+            >
+                <Image 
+                  src={urlForImage(event.thumbnail)} 
+                  alt={event.name} width={800} height={800}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  loading="lazy"
+                  />
+              </div>
               </Suspense>
             </div>
             <div>
@@ -131,20 +179,25 @@ export default function EventList({ events }: any) {
                   {event.summary}
                 </p>
               </div>
-              <div className="flex justify-center items-center gap-10">
+              <div className="py-10 pr-40">
+             <div className="md:flex justify-between items-center">
                 <button
                   className={`btn text-white ${reminders[event._id] ? 'bg-customPrimary' : 'bg-primary'}`}
                   onClick={() => {
-                    setReminder(event);
                     openModal(event);
+                    setReminder(event);
                   }}
                 >
                   <FaRegBell /> Remind me
                 </button>
-                <button className="btn text-white bg-primary"><IoTimeOutline />
-                  {`${event.date}T${event.start}`}, {event.start} - {event.end}
+                <button className="btn text-primary"><IoTimeOutline />
+                {`${new Date(event.date).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "long"
+                })}`}, {event.start} - {event.end}
                 </button>
               </div>
+             </div>
             </div>
           </div>
         ))
