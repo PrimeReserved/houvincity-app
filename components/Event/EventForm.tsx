@@ -21,15 +21,15 @@ export default function EventForm({ event, onClose }: any) {
       setSubmitted(true);
       Loading.remove(); // Hide loading indicator
       Report.success(
-        "Newsletter Subscription",
-        "Great! You have been subscribed to our newsletter.",
+        "Email Reminder",
+        "Great! Your request was sent.",
         "close"
       ); // Show success notification
     } catch (error: any) {
       setError(error.message || "An unexpected error occurred");
       Loading.remove(); // Hide loading indicator
       Report.failure(
-        "Newsletter Subscription",
+        "Email Reminder",
         "Error! Something happened while submitting, please try again or contact our support team.",
         "close"
       );
@@ -76,9 +76,7 @@ export default function EventForm({ event, onClose }: any) {
               />
             </label>
           </div>
-        </form>
-
-        <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-10">
           {error && <p className="text-red-500">{error}</p>}
           {!submitted && (
             <button
@@ -89,6 +87,7 @@ export default function EventForm({ event, onClose }: any) {
             </button>
           )}
         </div>
+        </form>
       </div>
     </div>
   );
