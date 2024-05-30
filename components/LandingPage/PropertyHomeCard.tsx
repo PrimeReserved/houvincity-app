@@ -7,14 +7,17 @@ import { urlForImage } from "@/sanity/lib/image";
 import Loading from "@/app/loading";
 import { Suspense } from "react";
 
-const PAGE_SIZE = 3;
-
 
 function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
   
   return (
     <div key={property._id}>
-      <div className="">
+      <div className=""
+      style={{
+        width: "358px",
+        height: "358px",
+        overflow: "hidden", // Ensures that anything outside the clipping path is hidden
+      }}>
         <Suspense fallback={<Loading />}>
         <Image
           src={
@@ -26,6 +29,9 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
           width={420}
           height={496.93}
           style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // Ensures the image covers the entire container without distortion
             clipPath: "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
           }}
           className=" rounded-t-lg"
@@ -34,7 +40,7 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
         </Suspense>
       </div>
       <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">
-        <div className="card-body mx-5 mt-5">
+        <div className="card-body mx-5 mt-5 w-full">
           <p className="card-title text-sm text-customSecondary font-semibold">
             {property?.title}
           </p>

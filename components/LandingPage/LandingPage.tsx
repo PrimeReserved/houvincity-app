@@ -49,10 +49,9 @@ export default async function Home() {
             of your unique story. Your next home is not just a space , it a
             canvas inviting you to paint the chapters of your life
           </p>
-          <div className="flex justify-center  ">
-            <div className="flex justify-center">
+         
+          <div className="flex justify-center">
               <PropertyToggle properties={limitedProperties} />
-            </div>
           </div>
         </div>
       </div>
