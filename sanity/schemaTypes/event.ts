@@ -5,7 +5,15 @@ export default defineType({
   title: "Event",
   type: "document",
   description: "Live Property Streaming",
-  fields: [
+  fields: [defineField({
+    name: "slug",
+    title: "Slug",
+    type: "slug",
+    options: {
+        source: 'title',
+        maxLength: 96,
+      },
+  }),
     defineField({
       name: "name",
       title: "Name",
@@ -32,15 +40,24 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "date",
+      title: "Date",
+      type: "date",
+      options: {
+        dateFormat: 'YYYY-MM-DD',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "start",
-      title: "Start date",
-      type: "datetime",
+      title: "Start time",
+      type: "string",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "end",
-      title: "End date",
-      type: "datetime",
+      title: "End time",
+      type: "string",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -68,8 +85,8 @@ export default defineType({
 
   preview: {
     select: {
-      title: "title",
-      media: "authorImage",
+      title: "name",
+      media: "thumbnail",
     },
   },
 });

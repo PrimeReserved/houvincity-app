@@ -157,7 +157,7 @@ const Services = () => (
     <ul>
       <li>
         <Link
-          href="/contact#contact"
+          href="/contact"
           className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
           Contact Us

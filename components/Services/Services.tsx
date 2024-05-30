@@ -52,8 +52,8 @@ export default function Service() {
                      <div>
                       <div className="absolute inset-0 bg-white flex justify-center items-center">
                        <div className="px-4">
-                       <h2 className="text-primary text-3xl pb-2 underline pr-5">{service.title}</h2>
-                       <p className="text-center line-clamp-6">
+                       <h2 className="text-primary text-center text-3xl pb-2 underline pr-5">{service.title}</h2>
+                       <p className="text-center text-justify line-clamp-6">
                           {service.description}
                         </p>
                        </div>

@@ -63,7 +63,7 @@ const Page = ({ params }: { params: Services })  => {
           <h3 className="pl-20 mt-6 font-bold break-normal md:break-all inline-block align-middle">Service: <span className="font-normal">{title}</span></h3>
         </div>
 
-        <section className="md:px-20 px-9 pb-20 text-justify break-normal md:break-all inline-block align-middle whitespace-pre-line">
+        <section className="md:px-20 px-9 pb-20 text-justify break-normal text-justify md:break-all inline-block align-middle whitespace-pre-line">
           { modifiedContent }
         </section>
 

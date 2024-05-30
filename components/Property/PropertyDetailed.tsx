@@ -1,4 +1,7 @@
-import React, { Suspense } from "react";
+"use client"
+
+import { Suspense } from "react";
+import { useRouter } from "next/navigation"
 import Image from "next/image";
 import YoutubeEmbed from "./YoutubeEmbed";
 import Calendar from "@/public/images/blog/Icon/Calendar2.svg";
@@ -14,6 +17,7 @@ interface PropertyDetailedProps {
 }
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
+  const router = useRouter();
 
   if (!property) {
     return null;
@@ -102,6 +106,14 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             </p>
           </button>
         </Link>
+          <button className="flex gap-2 items-center px-6 py-5 bg-primary rounded-md"
+          onClick={() => router.push(`${process.env.NEXT_PUBLIC_PAYSTACK_URL}`) }
+          >
+            <Image src={Calendar} alt="Calendar" width={13} height={13} />
+            <p className="text-sm font-semibold text-white">
+              Buy this property
+            </p>
+          </button>
       </div>
     </div>
   );

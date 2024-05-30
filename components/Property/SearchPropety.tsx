@@ -147,6 +147,11 @@ const SearchProperty = ({ properties }:any ) => {
         </div>
         )}
       </div>
+      <div className="flex justify-center mt-10">
+         <button className="py-3 px-[3.5rem] font-bold border-[1px] bg-primary rounded-md text-xs text-white">
+            Load More
+          </button>
+        </div>
     </>
   );
 };

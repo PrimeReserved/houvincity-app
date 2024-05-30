@@ -36,7 +36,7 @@ const founders: Founder[] = [
   {
     id: 4,
     image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716689767/houvincity/about/Frame_1000002841_aypxvq.png",
     name: "Mr Jonah Ukoh",
     position: "Partner",
   },

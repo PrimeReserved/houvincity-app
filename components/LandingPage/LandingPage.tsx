@@ -10,20 +10,18 @@ import Link from "next/link";
 import PropertyToggle from "./PropertyToggle";
 import Loading from "@/app/loading";
 import { Suspense } from "react";
-import Testimony from "./Testimony";
 
 export default async function Home() {
   // Fetch data
   const properties = await getProperties();
   const posts = await getPosts();
   const reviews = await getTestimonies();
-  const testimony = await getTestimonies();
+  
 
   // Limit the number of items to 4
   const limitedProperties = properties.slice(0, 3);
   const limitedPosts = posts.slice(0, 3);
   const limitedReviews = reviews.slice(0, 4);
-  const limitedTestiomony = testimony.slice(0, 1);
 
   if (!Array.isArray(limitedProperties) || limitedProperties.length === 0) {
     return null;
@@ -34,10 +32,6 @@ export default async function Home() {
   }
 
   if (!Array.isArray(limitedReviews) || limitedReviews.length === 0) {
-    return <p>No reviews available</p>;
-  }
-
-  if (!Array.isArray(limitedTestiomony) || limitedTestiomony.length === 0) {
     return <p>No reviews available</p>;
   }
 
@@ -117,16 +111,27 @@ export default async function Home() {
       
       {/* Testimony section  */}
       <div className="lg:wrapper mx-5  ">
-        <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
+      <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
           Our Happy Homeowners
         </h1>
       </div>
 
-      <ErrorBoundary>
-        <Suspense fallback={<Loading />}>
-            <Testimony reviews={reviews} />
-        </Suspense>
-      </ErrorBoundary>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[5rem] gap-14 mt-[5rem] m-10">
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              {limitedReviews.map((review: any) => (
+                <Review key={review._id} review={review} />
+              ))}
+            </Suspense>
+          </ErrorBoundary>
+        </div>
+        <div className="flex justify-center mt-[5rem] ">
+          <Link href="/customer-testimonials">
+          <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
+            Read More
+          </button>
+          </Link>
+        </div>
 
       {/* Testimony section  */}
       <Newsletter />

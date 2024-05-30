@@ -9,6 +9,7 @@ import propertyListing from './schemaTypes/property'
 import subscription from './schemaTypes/subscription'
 import testimony from './schemaTypes/testimony'
 import event from './schemaTypes/event'
+import contact from './schemaTypes/contact'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -21,6 +22,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     propertyListing,
     subscription,
     testimony,
-    event
+    event,
+    contact
   ],
 }

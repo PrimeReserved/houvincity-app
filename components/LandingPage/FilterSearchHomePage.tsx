@@ -1,10 +1,29 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState, useCallback, useMemo } from "react";
+import { usePropertyContext } from "@/context/PropertyContext";
 import { FaSearch } from "react-icons/fa";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
 
-const FilterSearchHomePage = () => {
+const FilterSearchHomePage = ({ onClose }: any) => {
+  const { properties, setProperties } = usePropertyContext();
+  const [location, setLocation] = useState<string>("");
+  const [budget, setBudget] = useState("");
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (!event.target.closest('.modal-content')) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
+  
   return (
     <div className="fixed bottom-10 left-0 w-full h-full flex items-center justify-center bg-opacity-50 z-40 lg:hidden mt-10">
       <div className="bg-white p-5 rounded-lg">
@@ -95,7 +114,8 @@ const FilterSearchHomePage = () => {
           <button className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-[4rem] py-3">
             Save
           </button>
-          <button className="flex items-center gap-2  text-primary underline rounded-lg text-sm px-[4rem] py-3">
+          <button className="flex items-center gap-2  text-primary underline rounded-lg text-sm px-[4rem] py-3"
+            onClick={onClose}>
             Reset All
           </button>
         </div>

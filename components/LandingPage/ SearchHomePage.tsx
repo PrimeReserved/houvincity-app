@@ -14,6 +14,15 @@ function SearchHomePage() {
   const [propertyType, setPropertyType] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [budget, setBudget] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleInputClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const fuse = useMemo(() => {
     return new Fuse(properties, {
@@ -136,6 +145,7 @@ function SearchHomePage() {
                 type="text"
                 className="text-sm cursor-pointer"
                 placeholder="Property type, Location, or Price"
+                onClick={handleInputClick}
               />
             </div>
             <button className="inline-flex items-center justify-center rounded-xl border border-transparent bg-primary px-[2rem] py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary/80">
@@ -144,7 +154,7 @@ function SearchHomePage() {
           </div>
         </div>
       </div>
-      <FilterSearchHomePage />
+      {isModalOpen && <FilterSearchHomePage onClose={handleCloseModal} />}
     </div>
   );
 }

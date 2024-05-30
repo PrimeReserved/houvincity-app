@@ -1,13 +1,17 @@
 import ErrorBoundary from '@/components/ErrorBoundary'
 import FooterHome from '@/components/Footer/FooterHome'
-import Founders from '@/components/About/Founders'
 import React from 'react'
+import Contact from '@/components/Contact/Contact'
+import Header from '@/components/Header/HeaderHome'
 
 function page() {
   return (
     <>
       <ErrorBoundary>
-        <Founders />
+        <Header />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Contact />
       </ErrorBoundary>
       <ErrorBoundary>
         <FooterHome />
