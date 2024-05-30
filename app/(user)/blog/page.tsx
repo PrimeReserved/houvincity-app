@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import Loading from "@/app/loading";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
+import Pagination from "@/components/Blog/Pagination"
 import NumberCount from "@/components/NumberCount/NumberCount";
 
 async function Page() {
@@ -81,7 +82,10 @@ async function Page() {
           </ErrorBoundary>
         </div>
       </div>
-      <NumberCount />
+      <div className="flex justify-center items-center mt-[5rem] text-center text-[#040A3B] text-xl gap-2">
+        <Pagination />
+      </div>
+      {/* <NumberCount /> */}
       <ErrorBoundary>
         <Newsletter />
       </ErrorBoundary>
