@@ -97,7 +97,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         <YoutubeEmbed source={property.youtubeLink} />
       </div>
 
-      <div className="flex justify-center my-20">
+      <div className="flex justify-center my-20 gap-10">
         <Link href="#contact">
           <button className="flex gap-2 items-center px-6 py-5 bg-primary rounded-md ">
             <Image src={Calendar} alt="Calendar" width={13} height={13} />
