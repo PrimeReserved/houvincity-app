@@ -13,6 +13,7 @@ import RecentNewsCard from '@/components/Blog/Cards/RecentNewsCard';
 import FooterHome from '@/components/Footer/FooterHome';
 import Header from '@/components/Header/HeaderHome';
 import NumberCount from '@/components/NumberCount/NumberCount';
+import Link from 'next/link';
  
 
 
@@ -31,7 +32,21 @@ async function Page() {
    const limitedNews = Array.isArray(news) ? news.slice(0, 3) : [];
  
    if (!limitedNewsPosts || limitedNewsPosts.length === 0) {
-     return <p>No posts available</p>;
+    return (
+      <div
+        className="flex h-screen justify-center items-center"
+      >
+        <div
+          className=" rounded-lg border w-96 h-64 border-gray-200 bg-base-100 shadow-xl"
+        >
+          <div className="">
+            <p className="p-20 text-2xl text-gray-600 text-center">
+              No News Article Available. <span className="text-primary"><Link href={`/`}>Go Home</Link></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
    }
  
 

@@ -56,7 +56,7 @@ const SearchProperty = ({ properties }:any ) => {
   if (!Array.isArray(searchResults) || searchResults.length === 0) {
     return (
       <div className="flex justify-center items-center h-[20rem]">
-        <h1 className="text-customTextColor text-4xl px-10">
+        <h1 className="text-customTextColor text-4xl p-10 text-center">
           There is currently no available property listing for now, kindly check
           back later
         </h1>

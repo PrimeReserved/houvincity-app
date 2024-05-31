@@ -12,6 +12,10 @@ import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
 import Pagination from "@/components/Blog/Pagination"
 import NumberCount from "@/components/NumberCount/NumberCount";
+import Image from "next/image"
+import NotFound from "@/public/not-found.png"
+import Link from "next/link";
+
 
 async function Page() {
   // Fetch data
@@ -24,7 +28,21 @@ async function Page() {
   const limitedPosts = posts.slice(0, 4);
 
   if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {
-    return <p>No posts available</p>;
+    return (
+      <div
+        className="flex h-screen justify-center items-center"
+      >
+        <div
+          className=" rounded-lg border w-96 h-64 border-gray-200 bg-base-100 shadow-xl image-full"
+        >
+          <div className="">
+            <p className="p-20 text-2xl text-gray-600 text-center">
+              No posts available. <span className="text-primary"><Link href={`/`}>Go Home</Link></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

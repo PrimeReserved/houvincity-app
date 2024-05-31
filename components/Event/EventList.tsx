@@ -58,7 +58,7 @@ export default function EventList({ events }: any) {
 
   if (!Array.isArray(events) || events.length === 0) {
     return (
-      <div className="flex justify-center items-center h-[20rem]">
+      <div className="glass flex justify-center items-center h-[20rem]">
         <h1 className="text-customTextColor text-3xl px-10">
           There is no event 
         </h1>

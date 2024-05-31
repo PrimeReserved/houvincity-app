@@ -1,0 +1,102 @@
+[
+    {
+        "name": "John Doe",
+        "slug": "john-doe",
+        "image": {
+          "alt": "John Doe profile picture",
+          "asset": {
+            "_ref": "image-1234567890"
+          }
+        },
+        "bio": [
+          {
+            "children": [
+              {
+                "text": "John Doe is a writer and editor with over 10 years of experience."
+              }
+            ]
+          }
+        ],
+        "publishedAt": "2022-01-01T12:00:00.000Z"
+    },
+    {
+        "name": "Jane Smith",
+        "slug": "jane-smith",
+        "image": {
+          "alt": "Jane Smith profile picture",
+          "asset": {
+            "_ref": "image-2345678901"
+          }
+        },
+        "bio": [
+          {
+            "children": [
+              {
+                "text": "Jane Smith is a journalist and author with a focus on technology."
+              }
+            ]
+          }
+        ],
+        "publishedAt": "2022-02-02T13:00:00.000Z"
+      },
+      {
+        "name": "Bob Johnson",
+        "slug": "bob-johnson",
+        "image": {
+          "alt": "Bob Johnson profile picture",
+          "asset": {
+            "_ref": "image-3456789012"
+          }
+        },
+        "bio": [
+          {
+            "children": [
+              {
+                "text": "Bob Johnson is a writer and editor with a background in marketing."
+              }
+            ]
+          }
+        ],
+        "publishedAt": "2022-03-03T14:00:00.000Z"
+    },
+    {
+        "name": "Alice Brown",
+        "slug": "alice-brown",
+        "image": {
+          "alt": "Alice Brown profile picture",
+          "asset": {
+            "_ref": "image-4567890123"
+          }
+        },
+        "bio": [
+          {
+            "children": [
+              {
+                "text": "Alice Brown is a journalist and author with a focus on social justice."
+              }
+            ]
+          }
+        ],
+        "publishedAt": "2022-04-04T15:00:00.000Z"
+    },
+    {
+        "name": "Mike Davis",
+        "slug": "mike-davis",
+        "image": {
+          "alt": "Mike Davis profile picture",
+          "asset": {
+            "_ref": "image-5678901234"
+          }
+        },
+        "bio": [
+          {
+            "children": [
+              {
+                "text": "Mike Davis is a writer and editor with a background in finance."
+              }
+            ]
+          }
+        ],
+        "publishedAt": "2022-05-05T16:00:00.000Z"
+    }
+]

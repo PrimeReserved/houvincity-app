@@ -20,19 +20,19 @@ export default async function Home() {
 
   // Limit the number of items to 4
   const limitedProperties = properties.slice(0, 3);
-  const limitedPosts = posts.slice(0, 3);
+  const limitedPosts = posts.slice(0, 6);
   const limitedReviews = reviews.slice(0, 4);
 
   if (!Array.isArray(limitedProperties) || limitedProperties.length === 0) {
-    return null;
+    return <p>No Property Available</p>;
   }
 
   if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {
-    return <p>No posts available</p>;
+    return <p>No Blog Post Available</p>;
   }
 
   if (!Array.isArray(limitedReviews) || limitedReviews.length === 0) {
-    return <p>No reviews available</p>;
+    return <p>No Yestimony Review Available</p>;
   }
 
   return (
