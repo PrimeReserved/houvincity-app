@@ -53,12 +53,15 @@ const config: Config = {
         "gray-dark": "#1E232E",
         "gray-light": "#F0F2F9",
         stroke: "#E3E8EF",
+        anotherGray: "#717171",
+        anotherBlack: "#000528",
+        anotherwhite: "#F4F4F4"
       },
     },
   },
   
   daisyui: {
-    themes: false,
+    themes: [],
   },
 
   plugins: [
