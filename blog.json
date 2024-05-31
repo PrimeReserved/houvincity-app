@@ -1,0 +1,152 @@
+[
+    {
+        "title": "The Benefits of Investing in Real Estate",
+        "slug": "the-benefits-of-investing-in-real-estate",
+        "author": {
+          "_ref": "author-1234567890",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Real Estate Investing Image",
+          "asset": {
+            "_ref": "image-1234567890"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-1234567890",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-03-18T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Learn about the benefits of investing in real estate and how it can help you achieve your financial goals"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Top Tips for Property Management",
+        "slug": "top-tips-for-property-management",
+        "author": {
+          "_ref": "author-2345678901",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Property Management Tips Image",
+          "asset": {
+            "_ref": "image-2345678901"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-2345678901",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-04-15T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Get expert advice on property management and learn how to maximize your returns"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "The Future of Real Estate: Trends and Insights",
+        "slug": "the-future-of-real-estate-trends-and-insights",
+        "author": {
+          "_ref": "author-3456789012",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Real Estate Trends Image",
+          "asset": {
+            "_ref": "image-3456789012"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-3456789012",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-05-20T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Stay up-to-date with the latest real estate trends and insights from industry experts"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "How to Choose the Right Property Investment",
+        "slug": "how-to-choose-the-right-property-investment",
+        "author": {
+          "_ref": "author-4567890123",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Property Investment Image",
+          "asset": {
+            "_ref": "image-4567890123"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-4567890123",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-06-17T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Learn how to choose the right property investment for your portfolio and achieve long-term success"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Real Estate Investing for Beginners",
+        "slug": "real-estate-investing-for-beginners",
+        "author": {
+          "_ref": "author-5678901234",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Real Estate Investing for Beginners Image",
+          "asset": {
+            "_ref": "image-5678901234"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-5678901234",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-07-22T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Learn the basics of real estate investing and how to get started with your first property investment"
+              }
+            ]
+          }
+        ]
+      }
+]

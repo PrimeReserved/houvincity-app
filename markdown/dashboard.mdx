@@ -1,0 +1,185 @@
+# Houvincity Real Estate Management Application Documentation Overview
+
+## Introduction
+
+Houvincity is a comprehensive real estate management application designed to streamline the processes of property management, tenant management, lease agreements, maintenance requests, and financial tracking. This documentation provides an overview of the features, setup instructions, and usage guidelines to help users effectively utilize the application.
+
+## Table of Contents
+
+1. [Features](#features)
+2. [System Requirements](#system-requirements)
+3. [Installation](#installation)
+4. [Configuration](#configuration)
+5. [User Guide](#user-guide)
+   - [Dashboard](#dashboard)
+   - [Property Management](#property-management)
+   - [Tenant Management](#tenant-management)
+   - [Lease Management](#lease-management)
+   - [Maintenance Requests](#maintenance-requests)
+   - [Financial Tracking](#financial-tracking)
+6. [Advanced Topics](#advanced-topics)
+   - [Customizing Themes](#customizing-themes)
+   - [API Integration](#api-integration)
+7. [Troubleshooting](#troubleshooting)
+8. [FAQ](#faq)
+9. [Support](#support)
+
+## Features
+
+- **Property Management**: Add, update, and delete property listings. View detailed information about each property, including location, size, amenities, and current status.
+- **Tenant Management**: Manage tenant information, including personal details, contact information, and lease agreements.
+- **Lease Management**: Create and manage lease agreements. Track lease terms, rental amounts, and payment schedules.
+- **Maintenance Requests**: Submit and track maintenance requests. Assign tasks to maintenance personnel and monitor the status of each request.
+- **Financial Tracking**: Monitor rental income, expenses, and generate financial reports. Integrate with payment gateways for online rent collection.
+
+## System Requirements
+
+- **Node.js**: Version 14.x or higher
+- **NPM or Yarn**: Latest stable version
+- **Database**: PostgreSQL or MySQL
+- **Browser**: Latest version of Chrome, Firefox, or Edge
+
+## Installation
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/houvincity.git
+   cd houvincity
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set Up Environment Variables**:
+   Create a `.env` file in the root directory and configure the necessary environment variables. Example:
+   ```env
+   DATABASE_URL=postgres://user:password@localhost:5432/houvincity
+   NEXT_PUBLIC_API_URL=https://api.houvincity.com
+   ```
+
+4. **Run Database Migrations**:
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+5. **Start the Development Server**:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+## Configuration
+
+### Next.js Configuration
+
+Ensure your `next.config.js` is set up correctly with any necessary custom configurations.
+
+Example:
+```typescript
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.jsx'
+});
+
+module.exports = withNextra({
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
+  experimental: {
+    forceSwcTransforms: true,
+  },
+});
+```
+
+### Theme Configuration
+
+Edit the `theme.config.jsx` file to customize the look and feel of your application.
+
+Example:
+```jsx
+export default {
+  logo: <span>Houvincity</span>,
+  project: {
+    link: 'https://github.com/your-username/houvincity',
+  },
+  docsRepositoryBase: 'https://github.com/your-username/houvincity/blob/main/docs',
+  footer: {
+    text: 'Houvincity © 2024',
+  },
+};
+```
+
+## User Guide
+
+### Dashboard
+
+The dashboard provides an overview of your properties, tenants, lease agreements, and financial summaries. 
+
+- **Properties Summary**: Overview of all managed properties.
+- **Tenant Summary**: Quick access to tenant information.
+- **Financial Summary**: Snapshot of income and expenses.
+
+### Property Management
+
+- **Add Property**: Navigate to the properties section and click on "Add Property". Fill in the details and save.
+- **Edit Property**: Select a property from the list, make the necessary changes, and save.
+- **Delete Property**: Select a property and click on "Delete".
+
+### Tenant Management
+
+- **Add Tenant**: Go to the tenants section, click "Add Tenant", enter the details, and save.
+- **Edit Tenant**: Select a tenant, update the information, and save.
+- **Delete Tenant**: Select a tenant and click "Delete".
+
+### Lease Management
+
+- **Create Lease**: Navigate to the leases section, click "Create Lease", fill in the lease details, and save.
+- **Edit Lease**: Select a lease, make changes, and save.
+- **Delete Lease**: Select a lease and click "Delete".
+
+### Maintenance Requests
+
+- **Submit Request**: Go to the maintenance section, click "Submit Request", provide details, and submit.
+- **Track Requests**: View the status of all maintenance requests.
+- **Assign Tasks**: Assign maintenance tasks to personnel.
+
+### Financial Tracking
+
+- **Income Tracking**: Record rental income and view income reports.
+- **Expense Tracking**: Log expenses and generate expense reports.
+- **Generate Reports**: Create financial reports for analysis.
+
+## Advanced Topics
+
+### Customizing Themes
+
+Refer to the `theme.config.jsx` file to customize the application's appearance. Modify colors, logos, and other UI elements as needed.
+
+### API Integration
+
+Houvincity provides APIs for integrating with other systems. Refer to the API documentation for details on available endpoints and usage.
+
+## Troubleshooting
+
+- **Common Errors**: Solutions for common setup and runtime errors.
+- **Debugging Tips**: Tips for debugging issues in the application.
+
+## FAQ
+
+- **How to reset my password?**
+- **How to add a new property?**
+- **How to generate financial reports?**
+
+## Support
+
+For additional help, please contact our support team at support@houvincity.com or visit our [support page](https://houvincity.com/support).

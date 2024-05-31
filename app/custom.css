@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+Custom variables
+=======
+/* Custom variables */
+>>>>>>> b361d4b (I worked on the Property Listing Card)
+:root {
+    /* color styles */
+    --customPrimary: #ac04ff;
+    --customSecondary: #0e0014;
+    --customTextColor: #79747e;
+  }

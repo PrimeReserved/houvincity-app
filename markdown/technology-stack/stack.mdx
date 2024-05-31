@@ -1,0 +1,52 @@
+
+import Body from "@/components/mdx/Body"
+import Title from "@/components/mdx/Title"
+import SubTitle from "@/components/mdx/SubTitle"
+import Link from "next/link"
+
+<Body>
+  <Title>Technology Stack</Title>
+    <section>
+        Technologies used in building this platform
+    </section>
+
+
+    <SubTitle>Frontend</SubTitle>
+     <ul className="px-5">
+        <li>- <strong>Next.js</strong>: Framework for server-side rendering and static site generation, ensuring fast load times and improved SEO.</li>
+        <li>- <strong>Tailwind CSS</strong>: Utility-first CSS framework for styling, providing a highly customizable and responsive design.</li>
+        <li>- <strong>DaisyUI</strong>: Component library for Tailwind CSS, offering pre-designed components to speed up development.</li>
+        <li>- <strong>AOS</strong>: Animation library for React, enabling smooth and interactive animations to enhance user experience.</li>
+        <li>- <strong>@heroicons/react</strong>: A set of free, MIT-licensed high-quality SVG icons for React.</li>
+        <li>- <strong>styled-components</strong>: Utilized for writing CSS-in-JS, allowing for scoped and dynamic styling within React components.</li>
+    </ul>
+
+    <SubTitle>Backend</SubTitle>
+    <ul className="px-5">
+        <li>- <strong>Next.js API routes</strong>: For handling backend logic and API endpoints, ensuring seamless integration between frontend and backend.</li>
+        <li>- <strong>Sanity</strong>: A headless CMS used to manage and store content, providing a flexible and scalable backend solution.</li>
+        <li>- <strong>Sanity client libraries</strong>: Including @sanity/client, @sanity/image-url, and next-sanity for seamless integration with Sanity's content APIs.</li>
+    </ul>
+
+    <SubTitle>Database</SubTitle>
+    <Link href="https://www.sanity.io/" className="tooltip font-bold text-customPrimary" data-tip="Learn more">Sanity</Link> uses a proprietary, hosted database infrastructure to manage and store content. Unlike traditional databases that you might manage yourself, Sanity's backend is entirely managed by Sanity.io. This managed service is optimized for real-time collaborative editing and querying, offering high performance and scalability without requiring users to handle database operations directly.
+
+Here are a few key points about Sanity's backend:
+
+- **Managed Service**: Sanity provides a fully managed backend, meaning you don't have to set up, maintain, or scale the database infrastructure yourself.
+- **GROQ**: Sanity uses GROQ (Graph-Relational Object Queries) as its query language, allowing for flexible and powerful data retrieval.
+- **Real-Time Collaboration**: The backend supports real-time updates and collaborative editing, making it ideal for dynamic content management needs.
+- **Scalability and Performance**: Sanity's infrastructure is designed to handle large-scale applications, offering high availability and fast response times.
+
+This approach allows developers to focus on building their applications without worrying about the complexities of database management.
+  
+
+    <SubTitle>Other Dependencies and Libraries</SubTitle>
+    <ul className="px-5">
+        <li>- <strong>Fetch</strong>: A promise-based HTTP client for making API requests.</li>
+        <li>- <strong>React Icons</strong>: A popular library providing a wide range of customizable icons for React applications.</li>
+        <li>- <strong>Classnames</strong>: A utility for conditionally joining classNames together.</li>
+        <li>- Various NPM packages for additional functionality, ensuring a robust and feature-rich platform.</li>
+    </ul>
+
+</Body>

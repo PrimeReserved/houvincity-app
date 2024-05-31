@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero Component matches snapshot with children 1`] = `
+<DocumentFragment>
+  <div
+    class="hero min-h-[20rem] flex items-center justify-center"
+    data-background-image="url('./images/blog/Hero section.png')"
+    data-testid="hero"
+  >
+    <div
+      class="hero-content text-center"
+    >
+      <div
+        class="max-w-md md:max-w-[48rem]"
+      >
+        <h1
+          class="mb-7 text-white text-4xl md:text-5xl font-semibold"
+        >
+          Sample Title
+        </h1>
+        <p
+          class="mt-5 text-heroText text-[17px] px-8 font-medium"
+        >
+          Sample Description
+        </p>
+        <div>
+          Child Component
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Hero Component matches snapshot with default image if image prop is not provided 1`] = `
+<DocumentFragment>
+  <div
+    class="hero min-h-[20rem] flex items-center justify-center"
+    data-background-image="url('./images/blog/Hero section.png')"
+    data-testid="hero"
+  >
+    <div
+      class="hero-content text-center"
+    >
+      <div
+        class="max-w-md md:max-w-[48rem]"
+      >
+        <h1
+          class="mb-7 text-white text-4xl md:text-5xl font-semibold"
+        >
+          Sample Title
+        </h1>
+        <p
+          class="mt-5 text-heroText text-[17px] px-8 font-medium"
+        >
+          Sample Description
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Hero Component matches snapshot with provided props 1`] = `
+<DocumentFragment>
+  <div
+    class="hero min-h-[20rem] flex items-center justify-center"
+    data-background-image="url(./images/blog/Hero section.png)"
+    data-testid="hero"
+  >
+    <div
+      class="hero-content text-center"
+    >
+      <div
+        class="max-w-md md:max-w-[48rem]"
+      >
+        <h1
+          class="mb-7 text-white text-4xl md:text-5xl font-semibold"
+        >
+          Sample Title
+        </h1>
+        <p
+          class="mt-5 text-heroText text-[17px] px-8 font-medium"
+        >
+          Sample Description
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

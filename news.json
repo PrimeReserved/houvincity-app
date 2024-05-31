@@ -1,0 +1,152 @@
+[
+    {
+        "title": "New Property Listings Released",
+        "slug": "new-property-listings-released",
+        "author": {
+          "_ref": "author-1234567890",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "New Property Listings Image",
+          "asset": {
+            "_ref": "image-1234567890"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-1234567890",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-03-18T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Check out our latest property listings and find your dream home!"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Real Estate Market Update",
+        "slug": "real-estate-market-update",
+        "author": {
+          "_ref": "author-2345678901",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Real Estate Market Update Image",
+          "asset": {
+            "_ref": "image-2345678901"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-2345678901",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-04-15T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Stay up-to-date with the latest real estate market trends and insights"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "New Property Development Announced",
+        "slug": "new-property-development-announced",
+        "author": {
+          "_ref": "author-3456789012",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "New Property Development Image",
+          "asset": {
+            "_ref": "image-3456789012"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-3456789012",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-05-20T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Learn more about our latest property development and its features"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Property Management Tips and Advice",
+        "slug": "property-management-tips-and-advice",
+        "author": {
+          "_ref": "author-4567890123",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Property Management Tips Image",
+          "asset": {
+            "_ref": "image-4567890123"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-4567890123",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-06-17T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Get expert advice on property management and maintenance"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Real Estate Investing Strategies",
+        "slug": "real-estate-investing-strategies",
+        "author": {
+          "_ref": "author-5678901234",
+          "_type": "reference"
+        },
+        "image": {
+          "alt": "Real Estate Investing Image",
+          "asset": {
+            "_ref": "image-5678901234"
+          }
+        },
+        "categories": [
+          {
+            "_ref": "category-5678901234",
+            "_type": "reference"
+          }
+        ],
+        "publishedAt": "2023-07-22T12:00:00.000Z",
+        "body": [
+          {
+            "children": [
+              {
+                "text": "Learn about the latest real estate investing strategies and trends"
+              }
+            ]
+          }
+        ]
+      }
+]

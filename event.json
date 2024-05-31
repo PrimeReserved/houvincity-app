@@ -1,0 +1,121 @@
+[{
+        "slug": "open-house-event",
+        "name": "Open House Event",
+        "summary": "Join us for an open house event at our latest property listing",
+        "description": [{
+            "children": [{
+                "text": "Come see the latest property listing and meet our team of experts"
+            }]
+        }],
+        "date": "2023-03-18",
+        "start": "10:00 AM",
+        "end": "1:00 PM",
+        "thumbnail": {
+            "alt": "Open House Event Image",
+            "asset": {
+                "_ref": "image-1234567890"
+            }
+        },
+        "body": [{
+            "children": [{
+                "text": "Don't miss out on this opportunity to see the property and ask questions"
+            }]
+        }]
+    },
+    {
+        "slug": "property-seminar",
+        "name": "Property Seminar",
+        "summary": "Learn about the latest trends and strategies in property management",
+        "description": [{
+            "children": [{
+                "text": "Join our expert panel for a discussion on the latest property management trends"
+            }]
+        }],
+        "date": "2023-04-15",
+        "start": "9:00 AM",
+        "end": "12:00 PM",
+        "thumbnail": {
+            "alt": "Property Seminar Image",
+            "asset": {
+                "_ref": "image-2345678901"
+            }
+        },
+        "body": [{
+            "children": [{
+                "text": "Network with other professionals and learn about new strategies for managing your properties"
+            }]
+        }]
+    },
+    {
+        "slug": "property-tour",
+        "name": "Property Tour",
+        "summary": "Join us for a tour of our latest property listings",
+        "description": [{
+            "children": [{
+                "text": "See the latest properties and meet our team of experts"
+            }]
+        }],
+        "date": "2023-05-20",
+        "start": "1:00 PM",
+        "end": "4:00 PM",
+        "thumbnail": {
+            "alt": "Property Tour Image",
+            "asset": {
+                "_ref": "image-3456789012"
+            }
+        },
+        "body": [{
+            "children": [{
+                "text": "Don't miss out on this opportunity to see the properties and ask questions"
+            }]
+        }]
+    },
+    {
+        "slug": "real-estate-workshop",
+        "name": "Real Estate Workshop",
+        "summary": "Learn about the latest strategies and trends in real estate investing",
+        "description": [{
+            "children": [{
+                "text": "Join our expert panel for a discussion on the latest real estate investing trends"
+            }]
+        }],
+        "date": "2023-06-17",
+        "start": "9:00 AM",
+        "end": "12:00 PM",
+        "thumbnail": {
+            "alt": "Real Estate Workshop Image",
+            "asset": {
+                "_ref": "image-4567890123"
+            }
+        },
+        "body": [{
+            "children": [{
+                "text": "Network with other professionals and learn about new strategies for investing in real estate"
+            }]
+        }]
+    },
+    {
+        "slug": "property-awards",
+        "name": "Property Awards",
+        "summary": "Join us for the annual property awards ceremony",
+        "description": [{
+            "children": [{
+                "text": "Celebrate the best in property management and real estate investing"
+            }]
+        }],
+        "date": "2023-07-22",
+        "start": "6:00 PM",
+        "end": "9:00 PM",
+        "thumbnail": {
+            "alt": "Property Awards Image",
+            "asset": {
+                "_ref": "image-5678901234"
+            }
+        },
+        "body": [{
+            "children": [{
+                "text": "Meet the winners and learn about the latest trends in property management"
+            }]
+        }]
+    }
+]
