@@ -7,7 +7,7 @@ import Loading from "@/app/loading";
 
 function Review({ review }: any) {
   return (
-    <div key={review.name} className="bg-primary rounded-3xl text-white">
+    <div key={review?.name} className="bg-primary rounded-3xl text-white">
       <div className="ml-12 lg:-mt-[4rem] -mt-[2.8rem]">
        <Suspense fallback={<Loading />}>
        {review?.authorImage ? (

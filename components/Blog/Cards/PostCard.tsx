@@ -5,7 +5,6 @@ import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
-import NumberCount from "@/components/NumberCount/NumberCount";
 import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Loading from "@/app/loading";
@@ -14,19 +13,17 @@ import { urlForImage } from "@/sanity/lib/image";
 export default function PostCard({ post }: Readonly<any>) {
   const pathName = usePathname();
 
+
   const isHomePage = pathName === "/";
   // Determine if the current route is for blogs or news
   const isBlogPage = pathName.startsWith("/blog");
-  const isNewsPage = pathName.startsWith("/news");
 
   // Set the base path for the href attribute
   let basePath = "";
   if (isBlogPage) {
     basePath = "/blog";
-  } else if (isNewsPage) {
-    basePath = "/news";
   } else if (isHomePage) {
-    basePath = "/blog";
+    basePath = "/";
   }
 
   if (!post) {
@@ -51,7 +48,7 @@ export default function PostCard({ post }: Readonly<any>) {
               }}
             >
               <Image
-                src={urlForImage(post?.mainImage)}
+                src={urlForImage(post?.mainImage?.asset?._ref)}
                 alt={`${post.slug?.current}`}
                 width={380}
                 height={500}
@@ -99,11 +96,6 @@ export default function PostCard({ post }: Readonly<any>) {
           </div>
         </div>
       </div>
-      {/* <NumberCount
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      /> */}
     </div>
   );
 }

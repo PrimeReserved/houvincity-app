@@ -68,7 +68,7 @@ export interface News extends Base {
     author: Author;
     body: Block[];
     categories: Category[];
-    mainImage: Image;
+    image: Image;
     slug: Slug;
     title: string;
     description: string;

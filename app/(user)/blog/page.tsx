@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect, useCallback } from 'react';
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Hero from "@/components/Hero/Hero";
@@ -10,34 +13,41 @@ import { Suspense } from "react";
 import Loading from "@/app/loading";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
-import Pagination from "@/components/Blog/Pagination"
-import NumberCount from "@/components/NumberCount/NumberCount";
-import Image from "next/image"
-import NotFound from "@/public/not-found.png"
+import Pagination from "@/components/Blog/Pagination";
 import Link from "next/link";
 
+function Page() {
+  const [posts, setPosts] = useState([]);
+  const [news, setNews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-async function Page() {
-  // Fetch data
-  const posts = await getPosts();
-  const news = await getNews();
+  useEffect(() => {
+    async function fetchData() {
+      const postsData = await getPosts();
+      const newsData = await getNews();
+      setPosts(postsData);
+      setNews(newsData);
+      setTotalPages(Math.ceil(newsData.length / 4));
+    }
+    fetchData();
+  }, []);
 
-  // Limit the number of items to 4
-  const limitedRecentPosts = posts.slice(0, 3);
-  const limitedNewsPosts = news.slice(0, 3);
-  const limitedPosts = posts.slice(0, 4);
+  const onPageChange = useCallback((page: any) => {
+    setCurrentPage(page);
+  }, []);
+  const limitedPosts = posts.slice((currentPage - 1) * 4, currentPage * 4);
 
   if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {
     return (
-      <div
-        className="flex h-screen justify-center items-center"
-      >
-        <div
-          className=" rounded-lg border w-96 h-64 border-gray-200 bg-base-100 shadow-xl image-full"
-        >
+      <div className="flex h-screen justify-center items-center">
+        <div className=" rounded-lg border w-96 h-64 border-gray-200 bg-base-100 shadow-xl image-full">
           <div className="">
             <p className="p-20 text-2xl text-gray-600 text-center">
-              No posts available. <span className="text-primary"><Link href={`/`}>Go Home</Link></span>
+              No posts available.{" "}
+              <span className="text-primary">
+                <Link href={`/`}>Go Home</Link>
+              </span>
             </p>
           </div>
         </div>
@@ -63,7 +73,7 @@ async function Page() {
             Recent Posts
           </p>
           <ErrorBoundary>
-            {limitedRecentPosts.map((post: Post) => (
+          {posts.slice(0, 3).map((post: Post) => (
               <div key={post._id}>
                 <Suspense fallback={<Loading />}>
                   <RecentPostCard post={post} />
@@ -76,14 +86,14 @@ async function Page() {
               Recent News
             </p>
             <ErrorBoundary>
-            {limitedNewsPosts.map((post: Post) => (
-              <div key={post._id}>
-                <Suspense fallback={<Loading />}>
-                  <RecentNewsCard article={post} />
-                </Suspense>
-              </div>
-            ))}
-          </ErrorBoundary>
+            {news.slice(0, 3).map((post: Post) => (
+                <div key={post._id}>
+                  <Suspense fallback={<Loading />}>
+                    <RecentNewsCard article={post} />
+                  </Suspense>
+                </div>
+              ))}
+            </ErrorBoundary>
           </div>
         </div>
         <div className="col-span-2">
@@ -101,7 +111,7 @@ async function Page() {
         </div>
       </div>
       <div className="flex justify-center items-center mt-[5rem] text-center text-[#040A3B] text-xl gap-2">
-        <Pagination />
+        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={onPageChange}/>
       </div>
       {/* <NumberCount /> */}
       <ErrorBoundary>
