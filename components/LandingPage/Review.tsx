@@ -2,18 +2,17 @@ import React, { Suspense } from "react";
 import ProfilePic from "@/public/images/landingPage/woman.jpeg";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
-import { FaStarHalf } from "react-icons/fa";
 import { urlForImage } from "@/sanity/lib/image";
 import Loading from "@/app/loading";
 
 function Review({ review }: any) {
   return (
-    <div key={review._id} className="bg-primary rounded-3xl text-white">
+    <div key={review.name} className="bg-primary rounded-3xl text-white">
       <div className="ml-12 lg:-mt-[4rem] -mt-[2.8rem]">
        <Suspense fallback={<Loading />}>
-       {review.authorImage ? (
+       {review?.authorImage ? (
           <Image
-            src={urlForImage(review.authorImage.asset._ref)}
+            src={urlForImage(review?.authorImage?.asset?._ref)}
             alt="Profile Pic"
             width={90}
             height={90}

@@ -9,6 +9,7 @@ import { Suspense } from "react";
 
 
 function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
+  console.log({ property })
   
   return (
     <div key={property._id}>
@@ -22,7 +23,7 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
         <Image
           src={
             property?.propertyImage
-              ? urlForImage(property.propertyImage)
+              ? urlForImage(property?.propertyImage?.asset?._ref)
               : House1
           }
           alt={property?.slug}
