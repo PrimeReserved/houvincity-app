@@ -14,8 +14,8 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
     <div key={property._id}>
       <div className=""
       style={{
-        width: "358px",
-        height: "358px",
+        width: "100%",
+        height: "70%",
         overflow: "hidden", // Ensures that anything outside the clipping path is hidden
       }}>
         <Suspense fallback={<Loading />}>
@@ -39,8 +39,8 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
         />
         </Suspense>
       </div>
-      <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">
-        <div className="card-body mx-5 mt-5 w-full">
+      <div className="transition duration-300 bg-white drop-shadow-xl rounded-b-md h-[13rem] ">
+        <div className="card-body p-3 xl:p-4  ">
           <p className="card-title text-sm text-customSecondary font-semibold">
             {property?.title}
           </p>

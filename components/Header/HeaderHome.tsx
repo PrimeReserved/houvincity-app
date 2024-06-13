@@ -142,8 +142,8 @@ const Header = () => {
                   ))}
                   <div className="flex lg:hidden">
                     <IconButtonHref
-                      text="Property listing"
-                      href="/property"
+                      text="Watch Live"
+                      href="/livestream"
                       icon={<BtnArrowIcon />}
                     />
                   </div>
@@ -154,8 +154,8 @@ const Header = () => {
             <div className="flex items-center justify-end gap-4 pr-16 lg:pr-0">
               <div className="my-2 hidden lg:flex">
                 <IconButtonHref
-                  text="Find Property"
-                  href="/property"
+                      text="Watch Live"
+                      href="/livestream"
                 />
               </div>
             </div>

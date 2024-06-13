@@ -100,3 +100,14 @@ export interface Property extends Base {
     path: string;
     content: string;
   }
+
+  export interface UpcomingEvent {
+    _id: string;
+    title: string;
+    description: string;
+    date: string;
+    thumbnail: {
+      asset: SanityImageSource;
+    };
+  }
+  

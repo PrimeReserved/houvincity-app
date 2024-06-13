@@ -154,6 +154,15 @@ const Services = () => (
       SUPPORT
     </h2>
     <ul>
+    <li>
+        <Link
+          href="/news"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
+        >
+          News
+        </Link>
+      </li>
+
       <li>
         <Link
           href="/contact"
