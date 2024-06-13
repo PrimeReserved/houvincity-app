@@ -36,13 +36,13 @@ const SearchLandingPage: React.FC = () => {
     let sortedResults = [...searchResults];
     switch (criteria) {
       case "Newest Listings":
-        sortedResults.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        sortedResults.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
         break;
       case "Lowest Pricing":
-        sortedResults.sort((a, b) => a.budget - b.budget);
+        sortedResults.sort((a: any, b: any) => a.budget - b.budget);
         break;
       case "Highest Pricing":
-        sortedResults.sort((a, b) => b.budget - a.budget);
+        sortedResults.sort((a: any, b: any) => b.budget - a.budget);
         break;
       default:
         // Relevant Listing or any other default sort criteria
