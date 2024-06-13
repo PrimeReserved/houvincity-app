@@ -61,11 +61,6 @@ const Home: React.FC = () => {
   if (!limitedPosts.length) return <p>No Blog Post Available</p>;
   if (!limitedReviews.length) return <p>No Testimony Review Available</p>;
 
-  const testimonies = await getTestimonies();
-
-  if (!Array.isArray(testimonies) || testimonies.length === 0) {
-    return <p>No testimony available</p>;
-  }
 
   return (
     <main>
