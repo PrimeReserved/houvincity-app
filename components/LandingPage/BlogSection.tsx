@@ -1,13 +1,13 @@
 import { Post } from "@/typings";
 import PostCard from "../Blog/Cards/PostCard";
-import { ViewAllButton } from "./ViewAllButton";
+import ViewAllButton from "./ViewAllButton";
 
 
 interface BlogSectionProps {
     posts: Post[]
 }
 
-export const BlogSection = ({ posts }: Readonly<BlogSectionProps>) => {
+export default function BlogSection({ posts }: Readonly<BlogSectionProps>) {
     return (
       <div className="wrapper flex justify-center items-center mb-[5rem] px-10">
         <div className="flex flex-col items-center mt-10">

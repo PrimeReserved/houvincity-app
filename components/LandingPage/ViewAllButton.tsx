@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-export const ViewAllButton = ({ href }: any) => {
+export default function ViewAllButton({ href }: any){
     return (
       <div className="flex justify-center mt-10">
         <Link href={href}>

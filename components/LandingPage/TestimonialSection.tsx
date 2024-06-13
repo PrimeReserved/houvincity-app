@@ -1,13 +1,13 @@
 import { Testimony } from "../Services/data/testimony";
 import Review from "./Review";
-import { ViewAllButton } from "./ViewAllButton";
+import ViewAllButton from "./ViewAllButton";
 
 interface TestimonialSectionProps {
     reviews: Testimony[];
 }
 
 
-export const TestimonialSection = ({ reviews }: Readonly<TestimonialSectionProps>) =>  {
+export default function TestimonialSection({ reviews }: Readonly<TestimonialSectionProps>) {
     return (
         <div className="lg:wrapper mx-5">
             <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">

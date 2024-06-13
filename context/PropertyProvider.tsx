@@ -1,35 +1,34 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react";
-import { PropertyContext } from "./PropertyContext";
+import { useState, useEffect, useMemo, ReactNode } from "react";
 import { getProperties } from "@/lib/action";
+import { Property } from "@/typings";
+import { PropertyContext } from "./PropertyContext";
 
-const PropertyProvider = ({ children }: { children: React.ReactNode }) => {
-  const [properties, setProperties] = useState<any[]>([]);
+
+
+export default function PropertyProvider({ children }: Readonly<{ children: ReactNode }>){
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [searchResults, setSearchResults] = useState<Property[]>([]);
+  const [searchPerformed, setSearchPerformed] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchInitialProperties = async () => {
       try {
-        const fetchedProperties: any = await getProperties();
-        if (!Array.isArray(fetchedProperties) || fetchedProperties.length === 0) {
-          return null;
-        }
+        const fetchedProperties = await getProperties();
         setProperties(fetchedProperties);
       } catch (error) {
-        console.error(`Error fetching properties:`, error);
+        console.error("Error fetching properties:", error);
       }
     };
 
     fetchInitialProperties();
   }, []);
 
-  const value = useMemo(() => ({ properties, setProperties }), [properties, setProperties]);
-
-  return (
-    <PropertyContext.Provider value={value}>
-      {children}
-    </PropertyContext.Provider>
+  const value = useMemo(
+    () => ({ properties, setProperties, searchResults, setSearchResults, searchPerformed, setSearchPerformed }),
+    [properties, searchResults, searchPerformed]
   );
-};
 
-export default PropertyProvider;
+  return <PropertyContext.Provider value={value}>{children}</PropertyContext.Provider>;
+};
