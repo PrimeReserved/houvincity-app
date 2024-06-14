@@ -78,8 +78,7 @@ function ContactForm() {
   ];
 
   return (
-    <>
-      <div className="grid lg:grid-cols-2 grid-cols-1 lg:flex-row items-center justify-between md:mx-8 shadow-md rounded-lg p-2 mx-[1rem]  ">
+    <div className="grid lg:grid-cols-2 grid-cols-1 lg:flex-row items-center justify-between md:mx-8 shadow-md rounded-lg p-2 mx-[1rem]  ">
         <section className="md:px-10 md:py-5 text-white bg-anotherBlack  w-[100%] rounded-lg h-[647px]  ">
           <section className=" lg:mb-5 p-5 flex flex-col justify-center items-center lg:justify-normal lg:items-start pt-6">
             <h3 className=" text-[25px] md:text-[38px] ">Contact Information</h3>
@@ -179,6 +178,5 @@ function ContactForm() {
           )}
         </form>
       </div>
-    </>
   );
 }

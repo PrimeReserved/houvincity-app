@@ -11,6 +11,15 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'string',
@@ -101,26 +110,24 @@ export default defineType({
       title: 'Bathrooms',
       type: 'number',
     }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-    }),
+    
     defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+    }),
+    defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'boolean'
     }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      media: 'propertyImage'
+      media: 'propertyImage',
+      status: 'status'
     },
   },
 });

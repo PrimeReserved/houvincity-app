@@ -7,19 +7,19 @@ export default defineType({
   description: "Website Contact Us",
   fields: [
     defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: 'name',
-        maxLength: 96,
-      },
-    }),
-    defineField({
       name: "firstName",
       title: "Firstname",
       type: "string",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: 'firstName',
+        maxLength: 96,
+      },
     }),
     defineField({
       name: "lastName",

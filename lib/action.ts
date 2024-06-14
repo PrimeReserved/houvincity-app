@@ -183,7 +183,7 @@ export async function eventForm({ title, email}: any) {
   }
 }
 
-// Newsletter subscription
+// Contact 
 export async function contact({ firstName, lastName, email, phoneNumber, message}: any) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_CONTACT_API_URI}`, {
@@ -203,8 +203,29 @@ export async function contact({ firstName, lastName, email, phoneNumber, message
     console.log(`An Error occurred while submitting contact form: ${error}`);
     return `An Error occurred while submitting contact form: ${error}`;
   }
-}
+};
 
+// Payment
+export async function payment({ fullname, email, address, city, state, company, phoneNumber}: any) {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_API_URI}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fullname, email, address, city, state, company, phoneNumber }),
+    });
+    if (!response.ok) {
+      throw new Error(`Could not make payment. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(`An Error occurred while submitting payment form: ${error}`);
+    return `An Error occurred while submitting payment form: ${error}`;
+  }
+}
 // Get Events
 
 export async function getEvents() {

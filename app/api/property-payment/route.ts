@@ -1,26 +1,29 @@
 // pages/api/subscribe/route.ts
 
 import { client } from "@/sanity/client";
-import { validateFields } from "@/utils/helper-functions/validateFields";
 import { NextRequest, NextResponse } from "next/server";
+import { validateFields } from "@/utils/helper-functions/validateFields";
 
 // Define the schema for the incoming data
 interface FormData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    message: string;
+  fullname: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+  company: string;
+  phoneNumber: string;
 }
 
+// Required fields mapping
 const requiredFields: { [key in keyof FormData]?: string } = {
-  firstName: "firstName",
-  lastName: "lastName",
+  fullname: "Full name",
   email: "Email",
-  phoneNumber: "PhoneNumber",
-  message: "Message",
+  address: "Address",
+  city: "City",
+  state: "State",
+  company: "Company",
 };
-
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,18 +33,20 @@ export async function POST(request: NextRequest) {
     // Validate the incoming data
     const validationError = validateFields(formData, requiredFields);
     if (validationError) {
-        return NextResponse.json({ error: validationError }, { status: 400 });
+      return NextResponse.json({ error: validationError }, { status: 400 });
     }
 
-    const { firstName, lastName, email, phoneNumber, message } = formData;
+    const { fullname, email, address, city, state, company, phoneNumber } = formData;
 
     const data = {
-      _type: 'contact',
-      firstName,
-      lastName,
+      _type: "status",
+      fullname,
       email,
+      address,
+      city,
+      state,
+      company,
       phoneNumber,
-      message
     };
 
     // Create the new subscription in Sanity
@@ -50,7 +55,10 @@ export async function POST(request: NextRequest) {
     // Respond with the created subscription
     return NextResponse.json(result, { status: 201 });
   } catch (error: unknown) {
-    console.error("Error creating subscription:", error);
-    return NextResponse.json({ error: (error as Error).message || "Internal Server Error" }, { status: 500 });
+    console.error("Error processing request:", error);
+    return NextResponse.json(
+      { error: (error as Error).message || "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
