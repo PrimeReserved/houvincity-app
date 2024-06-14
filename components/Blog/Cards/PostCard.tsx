@@ -58,7 +58,7 @@ export default function PostCard({ post }: Readonly<any>) {
             </div>
           </Suspense>
         </div>
-        <div className="card-body items-start h-[12rem]">
+        <div className="card-body h-[12rem]">
           <div className="flex items-center gap-2">
             <Image src={Calendar} alt="Calendar" width={13} height={13} />
             {new Date(post.publishedAt).toLocaleDateString("en-US", {
@@ -68,7 +68,7 @@ export default function PostCard({ post }: Readonly<any>) {
             })}
           </div>
 
-          <h1 className="font-semibold text-lg mt-1 line-clamp-1">
+          <h1 className="font-semibold text-base mt-1 line-clamp-2">
             {post?.title}
           </h1>
           {/* Render description only if not on the home page */}
@@ -81,9 +81,9 @@ export default function PostCard({ post }: Readonly<any>) {
               ))}
             </p>
           )}
-          <div className="card-actions items-end">
+          <div className="card-actions flex justify-end mt-5 items-end ">
             <Link href={`${basePath}/${post?.slug?.current || ""}`}>
-              <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
+              <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 ">
                 Read more
                 <Image
                   src={ArrowRightWhite}

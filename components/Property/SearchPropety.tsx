@@ -131,7 +131,7 @@ const SearchProperty = ({ properties }:any ) => {
     <h1 className=" text-customPrimary font-bold text-4xl m-10">
         {propertyType}
       </h1>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center items-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-3 xl:gap-5 mx-5 lg:mx-2 xl:mx-10">
         {searchResults.length > 0 ? (
           searchResults.map((property: Property) => (
             <div key={property.slug?.current}>

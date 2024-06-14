@@ -15,7 +15,7 @@ const founders: Founder[] = [
   {
     id: 1,
     image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401926/houvincity/about/Frame_1000002841_pi7bwc.png",
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1718318625/houvincity/about/Untitled_design_ljqbij.png",
     name: "Emmanuel Hope. U.",
     position: "GMD/Founder",
   },
@@ -30,13 +30,13 @@ const founders: Founder[] = [
     id: 3,
     image:
       "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
-    name: "Enoma Osawemwenma .J",
+    name: "Enoma Osawemwenma",
     position: "CO-founder",
   },
   {
     id: 4,
     image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716689767/houvincity/about/Frame_1000002841_aypxvq.png",
+      "https://res.cloudinary.com/dzd51q99i/image/upload/v1718318757/houvincity/about/Untitled_design_hwdfs6.png",
     name: "Mr Jonah Ukoh",
     position: "Partner",
   },
@@ -50,34 +50,36 @@ export default function Founders() {
       <h1 className="mt-5 text-center text-4xl text-[#040A3B] font-bold">
         Founders
       </h1>
-      <div className="lg:wrapper flex flex-col md:flex-row flex-wrap justify-between items-center gap-10 md:gap-2 lg:gap-10 p-10 mb-[5rem]">
-        {founders.map((founder) => (
-          <div
-            className="card rounded bg-base-100 shadow-xl mb-10"
-            key={founder.id}
-            style={{ maxWidth: "300px" }}
-          >
-            <figure>
-              <Suspense fallback={<Loading />}>
-                <Image
-                  src={founder.image}
-                  alt={founder.name}
-                  width={400}
-                  height={400}
-                />
-              </Suspense>
-            </figure>
+      <div className="flex justify-center items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-2 lg:gap-10 p-10 mb-[5rem]">
+          {founders.map((founder) => (
+            <div
+              className="card rounded bg-base-100 shadow-xl mb-10"
+              key={founder.id}
+              style={{ maxWidth: "300px" }}
+            >
+              <figure>
+                <Suspense fallback={<Loading />}>
+                  <Image
+                    src={founder.image}
+                    alt={founder.name}
+                    width={400}
+                    height={400}
+                  />
+                </Suspense>
+              </figure>
 
-            <div className="card-body text-center py-6">
-              <h2 className="card-title md:text-xs lg:text-sm xl:text-xl space-y-4 flex justify-center text-center text-[#040A3B]">
-                {founder.name}
-              </h2>
-              <p className="text-1xl text-[#79747E] font-extralight">
-                ({founder.position})
-              </p>
+              <div className="card-body text-center py-6">
+                <h2 className="card-title md:text-xs lg:text-sm xl:text-xl space-y-4 flex justify-center text-center text-[#040A3B]">
+                  {founder.name}
+                </h2>
+                <p className="text-1xl text-[#79747E] font-extralight">
+                  ({founder.position})
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       {/* About Section  */}
       <div className="flex flex-col lg:flex-row gap-4 items-center justify-center md:mx-8">
@@ -172,14 +174,14 @@ export default function Founders() {
       </div>{" "}
       {/* Buttons  */}
       <div className="flex flex-col md:flex-row mt-10 md:mt-0 mx-8 justify-center gap-3 mb-20 relative md:bottom-5">
-        <Link href="/faqs">
-          <button className="btn rounded-md bg-primary text-white py-4 px-5">
+        <Link href="/faqs" className="btn rounded-md bg-primary text-white py-4 px-5">
+          <button >
             Have a Question
           </button>
         </Link>
 
-        <Link href="/property">
-          <button className="btn rounded-md bg-[#040A3B] text-white py-4 px-6">
+        <Link href="/property" className="btn rounded-md bg-[#040A3B] text-white py-4 px-6">
+          <button >
             Find Property
           </button>
         </Link>

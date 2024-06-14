@@ -12,11 +12,11 @@ const PropertyToggle = ({ properties }: any) => {
   };
 
   return (
-    <>
-      <div className="flex gap-3 md:gap-5 justify-center bg-white drop-shadow-lg py-10 md:w-[400px] w-[350px]">
+    <div className="">
+      <div className="flex gap-5 justify-center bg-white drop-shadow-lg px-5 py-5 md:py-10 md:px-5">
         <button
           className={clsx(
-            "py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs",
+            "  w-[130px] md:w-[200px] px-2 py-2 md:py-3 md:px-[3.5rem] border-[1px]  rounded-md text-xs  ",
             {
               "bg-primary text-white": isLandActive,
               "bg-white text-primary": !isLandActive,
@@ -28,7 +28,7 @@ const PropertyToggle = ({ properties }: any) => {
         </button>
         <button
           className={clsx(
-            "py-3 px-[3rem] border-[1px] border-primary rounded-md text-xs",
+            " w-[130px] md:w-[200px] px-2 py-2 md:py-3 md:px-[3.5rem] border-[1px]  rounded-md text-xs  ",
             {
               "bg-primary text-white": !isLandActive,
               "bg-white text-primary": isLandActive,
@@ -48,7 +48,7 @@ const PropertyToggle = ({ properties }: any) => {
             <PropertyHomeCard key={property._id} property={property} />
           ))}
       </div>
-    </>
+    </div>
   );
 };
 

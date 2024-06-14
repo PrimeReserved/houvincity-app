@@ -5,6 +5,7 @@ import { getPosts, getProperties, getTestimonies } from "@/lib/action";
 import { usePropertyContext } from "@/context/PropertyContext";
 import ErrorBoundary from "../ErrorBoundary";
 import PropertyProvider from "@/context/PropertyProvider";
+import LiveTour from "../Blog/Cards/LiveTour";
 
 // Lazy loading components
 const Hero = lazy(() => import("./Hero"));
@@ -97,6 +98,14 @@ const Home: React.FC = () => {
               <BlogSection posts={limitedPosts} />
             </Suspense>
           </ErrorBoundary>
+          {/* LiveTour section */}
+          <ErrorBoundary>
+            <Suspense fallback={<p>Loading...</p>}>
+              <LiveTour />
+            </Suspense>
+          </ErrorBoundary>
+
+
           {/* Testimony section */}
           <ErrorBoundary>
             <Suspense fallback={<p>Loading...</p>}>
