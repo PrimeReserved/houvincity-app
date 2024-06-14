@@ -14,7 +14,8 @@ const Hero: React.FC = () => {
           alt="Hero Image"
           layout="fill"
           objectFit="cover"
-          className="absolute inset-0  bg-top  "
+          priority={true}
+          className="absolute inset-0  bg-top"
         />
       </Suspense>
 

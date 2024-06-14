@@ -5,6 +5,7 @@ import { getPosts, getProperties, getTestimonies } from "@/lib/action";
 import { usePropertyContext } from "@/context/PropertyContext";
 import ErrorBoundary from "../ErrorBoundary";
 import PropertyProvider from "@/context/PropertyProvider";
+import SearchLandingPageResult from "./SearchLandingPageResult";
 import LiveTour from "../Blog/Cards/LiveTour";
 
 // Lazy loading components
@@ -21,7 +22,7 @@ const TestimonialSection = lazy(() => import("./TestimonialSection"));
 const Home: React.FC = () => {
   const { properties, searchResults, searchPerformed, setProperties, setSearchPerformed } = usePropertyContext();
   const [posts, setPosts] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -66,7 +67,7 @@ const Home: React.FC = () => {
   return (
     <main>
       {searchPerformed && searchResults.length > 0 ? (
-        <PropertyGrid properties={searchResults} />
+        <SearchLandingPageResult searchResults={searchResults} />
       ) : (
         <>
           <Suspense fallback={<p>Loading...</p>}>
