@@ -208,10 +208,12 @@ export async function contact({ firstName, lastName, email, phoneNumber, message
 // Payment
 export async function payment({ fullname, email, address, city, state, company, phoneNumber}: any) {
   try {
+    const publicKey = `${process.env.NEXT_PUBLIC_PAYSTACK_URL}`; 
     const response = await fetch(`${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_API_URI}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${publicKey}`,
       },
       body: JSON.stringify({ fullname, email, address, city, state, company, phoneNumber }),
     });
