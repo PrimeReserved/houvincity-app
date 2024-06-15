@@ -74,14 +74,14 @@ function Page() {
           </p>
           <ErrorBoundary>
           {posts.slice(0, 3).map((post: Post) => (
-              <div key={post._id}>
+              <div key={post._id} className=''>
                 <Suspense fallback={<Loading />}>
                   <RecentPostCard post={post} />
                 </Suspense>
               </div>
             ))}
           </ErrorBoundary>
-          <div className="col-span-1">
+          <div className="col-span-1 mt-10">
             <p className="sm:p-5 text-primary font-medium text-3xl">
               Recent News
             </p>
@@ -96,7 +96,7 @@ function Page() {
             </ErrorBoundary>
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 mt-10 lg:mt-0">
           <ErrorBoundary>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5  md:space-y-0">
               {limitedPosts.map((post: Post) => (

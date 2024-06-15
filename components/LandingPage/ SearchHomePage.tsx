@@ -58,10 +58,22 @@ function SearchHomePage() {
     }
   }, [properties, propertyType, location, budget, setSearchResults, setSearchPerformed, fuse]);
 
-
   useEffect(() => {
     handleSearch();
   }, [propertyType, location, budget, handleSearch]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isModalOpen]);
 
   return (
     <div className="mt-[5rem]">

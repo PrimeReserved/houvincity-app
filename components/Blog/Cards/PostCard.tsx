@@ -58,7 +58,7 @@ export default function PostCard({ post }: Readonly<any>) {
             </div>
           </Suspense>
         </div>
-        <div className="card-body h-[12rem]">
+        <div className="card-body h-[17rem] ">
           <div className="flex items-center gap-2">
             <Image src={Calendar} alt="Calendar" width={13} height={13} />
             {new Date(post.publishedAt).toLocaleDateString("en-US", {

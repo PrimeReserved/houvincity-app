@@ -40,7 +40,7 @@ export default async function Page({ params} : any) {
     <ErrorBoundary>
       <Header />
     </ErrorBoundary>
-      <div className="md:flex flex-row mt-[5rem] xl:mx-10 justify-center md:mx-5">
+      <div className="md:flex flex-row mt-[8rem] xl:mx-10 justify-center md:mx-5">
         <div className="basis-1/2">
           <Suspense fallback={<Loading />}>
             <PostDetailedCard post={post} />
@@ -70,9 +70,9 @@ export default async function Page({ params} : any) {
           </div>
         </div>
       </div>
-      <div className="p-10">
+      <div className="p-10 mt-10">
         <h1 className="text-center text-4xl">More Like This</h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-5  md:space-y-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5  md:space-y-0 mt-5">
         <ErrorBoundary>
             {limitedPosts.map((post: Post) => (
               <div key={post._id}>
