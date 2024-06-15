@@ -1,4 +1,4 @@
-// pages/api/subscribe/route.ts
+// app/api/subscribe/route.ts
 
 import { client } from "@/sanity/client";
 import { validateFields } from "@/utils/helper-functions/validateFields";

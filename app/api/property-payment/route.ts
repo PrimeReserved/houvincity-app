@@ -1,4 +1,4 @@
-// pages/api/subscribe/route.ts
+// app/api/subscribe/route.ts
 
 import { client } from "@/sanity/client";
 import { NextRequest, NextResponse } from "next/server";
