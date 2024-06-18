@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import { HiOutlineCube } from "react-icons/hi";
 import { Property } from "@/typings";
@@ -5,11 +7,10 @@ import House1 from "@/public/images/property/house1.svg";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
 import Loading from "@/app/loading";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 
 
-function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
-  console.log({ property })
+function PropertyHomeCard({ property }: Readonly<{ property: Property }>) {
   
   return (
     <div key={property._id}>
@@ -70,4 +71,4 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
   );
 }
 
-export default PropertyHomeCard;
+export default React.memo(PropertyHomeCard);

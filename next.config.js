@@ -11,7 +11,7 @@ module.exports = withMDX({
     return [
       {
         source: '/api/:path*', // Match any /api/* request
-        destination: 'https://checkout.paystack.com'
+        destination: 'https://api.paystack.co'
       },
     ];
   },

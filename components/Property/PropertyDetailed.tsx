@@ -22,11 +22,15 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   const router = useRouter();
 
   const handleNavigateToPayment = () => {
-    const budget = parseFloat(property.budget.replace(/,/g, "")); // Convert budget to a number after removing commas
-    if (!isNaN(budget)) {
-      router.push(`/property-payment?amount=${property.budget}`);
+    if (property.budget !== undefined) {
+      const budget = parseFloat(property.budget.replace(/,/g, ""));
+      if (!isNaN(budget)) {
+        router.push(`/property-payment?amount=${property.budget}`);
+      } else {
+        console.error("Invalid budget value");
+      }
     } else {
-      console.error("Invalid budget value");
+      console.error("Budget is undefined");
     }
   };
 

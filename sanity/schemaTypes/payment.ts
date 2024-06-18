@@ -45,12 +45,6 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "state",
-      title: "State",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: "company",
       title: "Company",
       type: "string",

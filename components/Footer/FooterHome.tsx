@@ -123,10 +123,10 @@ const QuickLinks = () => (
       </li>
       <li>
         <Link
-          href="/services"
+          href="/events"
           className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
-          Services
+          Events
         </Link>
       </li>
       <li>

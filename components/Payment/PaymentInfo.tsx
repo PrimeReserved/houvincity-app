@@ -28,7 +28,7 @@ const PaymentInfo = () => {
   useEffect(() => {
     // Get amount from query param
     const urlParams = new URLSearchParams(window.location.search);
-    const amountFromParam = urlParams.get("amount") || "";
+    const amountFromParam = urlParams.get("amount") ?? "";
     const amountNumber = parseFloat(amountFromParam.replace(/,/g, ""));
   
   if (!isNaN(amountNumber)) {
@@ -42,58 +42,26 @@ const PaymentInfo = () => {
     setter(event.target.value);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError(null);
-
-    const formData = {
-      fullname: name,
-      email,
-      address,
-      city,
-      state,
-      company,
-      phoneNumber: phone,
-    };
-
-    try {
-      Loading.standard("Loading...");
-      await payment(formData);
-      setSubmitted(true);
-      Loading.remove();
-      Report.success(
-        "Property Payment Form",
-        "Payment was successful, one of our agents would contact you shortly.",
-        "close"
-      ); // Show success notification
-    } catch (error: any) {
-      setError(error.message || "An unexpected error occurred");
-      Loading.remove(); // Hide loading indicator
-      Report.failure(
-        "Property Payment",
-        "Error! Something happened while submitting, please try again or contact our support team.",
-        "close"
-      );
-    }
-  };
-
   const componentProps = {
     email,
-    amount,
+    amount: Number(amount) * 100,
     metadata: {
       custom_fields: [
-        { display_name: "Name", variable_name: "name", value: name },
-        { display_name: "Phone", variable_name: "phone", value: phone },
-        { display_name: "Company", variable_name: "company", value: company },
-        { display_name: "Address", variable_name: "address", value: address },
+        { display_name: 'Name', variable_name: 'name', value: name },
+        { display_name: 'Phone', variable_name: 'phone', value: phone },
+        { display_name: 'Company', variable_name: 'company', value: company }, // Added Company field
+        { display_name: 'Address', variable_name: 'address', value: address },
       ],
     },
     publicKey,
-    text: "Pay Now",
-    onSuccess: handleSubmit,
+    text: 'Pay Now',
+    onSuccess: () =>
+      alert('Your payment was successful! Thank you for your support.'),
     onClose: () =>
       alert("Are you sure you don't want to complete your payment?"),
   };
+
+  
 
   const fields = [
     {
@@ -137,6 +105,13 @@ const PaymentInfo = () => {
       placeholder: "Your company",
       value: company,
       setter: setCompany,
+    },
+    {
+      id: "7",
+      title: "PhoneNumber",
+      placeholder: "+2348112345555",
+      value: phone,
+      setter: setPhone,
     },
   ];
 

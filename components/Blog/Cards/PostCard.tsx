@@ -20,10 +20,8 @@ export default function PostCard({ post }: Readonly<any>) {
 
   // Set the base path for the href attribute
   let basePath = "";
-  if (isBlogPage) {
+  if (isBlogPage || isHomePage) {
     basePath = "/blog";
-  } else if (isHomePage) {
-    basePath = "/";
   }
 
   if (!post) {

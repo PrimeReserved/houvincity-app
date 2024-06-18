@@ -208,7 +208,8 @@ export async function contact({ firstName, lastName, email, phoneNumber, message
 // Payment
 export async function payment({ fullname, email, address, city, state, company, phoneNumber}: any) {
   try {
-    const publicKey = `${process.env.NEXT_PUBLIC_PAYSTACK_URL}`; 
+    const publicKey = `sk_test_86eb821508b0f6f7bcc07f76ce261530fa2b7991`
+    // const publicKey = `${process.env.NEXT_PUBLIC_PAYSTACK_URL}`; 
     const response = await fetch(`${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_API_URI}`, {
       method: "POST",
       headers: {

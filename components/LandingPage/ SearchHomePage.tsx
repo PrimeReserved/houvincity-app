@@ -1,79 +1,161 @@
 "use client";
 
-import Fuse from "fuse.js";
+// import Fuse from "fuse.js";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store'
 import { IoHomeOutline } from "react-icons/io5";
 import { MdLocationOn } from "react-icons/md";
-import { usePropertyContext } from "@/context/PropertyContext";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import FilterSearchHomePage from "@/components/LandingPage/FilterSearchHomePage";
+import { Loading } from "notiflix/build/notiflix-loading-aio";
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import {
+  fetchProperties,
+  setSearchQuery,
+  setPropertyType,
+  setLocation,
+  setSize,
+  setBudget,
+  setSortCriteria,
+} from '@/features/properties/propertiesSlice';
+import { Property } from '@/typings';
 
 function SearchHomePage() {
-  const { properties, setSearchResults, setSearchPerformed } = usePropertyContext();
-  const [propertyType, setPropertyType] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
-  const [budget, setBudget] = useState("");
+  const dispatch = useDispatch();
+  const {
+    properties,
+    searchQuery,
+    propertyType,
+    location,
+    sortCriteria,
+    searchPerformed,
+    propertySize,
+    budget,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.properties);
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleInputClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const fuse = useMemo(() => {
-    return new Fuse(properties, {
-      keys: ["propertyType", "location", "budget"],
-      includeMatches: true,
-      threshold: 0.3,
-    });
-  }, [properties]);
-
-  const handleSearch = useCallback(() => {
-    let results = properties;
-
-    if (propertyType || location || budget) {
-      const searchOptions: any = {};
-      if (propertyType) searchOptions.propertyType = propertyType;
-      if (location) searchOptions.location = location;
-
-      const fuseResults = fuse.search(searchOptions);
-      results = fuseResults.map((result) => result.item);
-
-      if (budget) {
-        const [minBudget, maxBudget] = budget
-          .split(" - ")
-          .map((b) => parseInt(b.replace("#", "").replace(",", "").trim()));
-        results = results.filter(
-          (property: any) => property.budget >= minBudget && property.budget <= maxBudget
-        );
-      }
-
-      setSearchResults(results);
-      setSearchPerformed(true);
-    } else {
-      setSearchResults([]);
-      setSearchPerformed(false);
+  const handleScroll = useCallback(() => {
+    if (isModalOpen) {
+      setIsModalOpen(false);
     }
-  }, [properties, propertyType, location, budget, setSearchResults, setSearchPerformed, fuse]);
+  }, [isModalOpen]);
 
   useEffect(() => {
-    handleSearch();
-  }, [propertyType, location, budget, handleSearch]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isModalOpen) {
-        setIsModalOpen(false);
-      }
-    };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isModalOpen]);
+  }, [handleScroll]);
+
+  useEffect(() => {
+    dispatch(fetchProperties());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (loading) {
+      Loading.pulse();
+    } else {
+      Loading.remove();
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    const filtered = filterProperties(
+      properties,
+      propertyType,
+      location,
+      propertySize,
+      budget,
+      searchQuery
+    );
+    setFilteredProperties(filtered);
+  }, [properties, propertyType, location, propertySize, budget, searchQuery]);
+
+  const handleSearch = useCallback((event: any) => {
+    dispatch(setSearchQuery(event.target.value));
+  }, [dispatch]);
+
+  const handlePropertyType = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setPropertyType(event.target.value));
+  }, [dispatch]);
+
+  const handleLocation = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setLocation(event.target.value));
+  }, [dispatch]);
+
+
+  const handleBudget = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value: any = event.target.value ? parseInt(event.target.value, 10) : undefined;
+    dispatch(setBudget(value));
+  }, [dispatch]);
+
+  const handleSort = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setSortCriteria(event.target.value));
+  }, [dispatch]);
+
+  const handleInputClick = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const filterProperties = (
+    properties: Property[],
+    propertyType: string,
+    location: string,
+    propertySize: string,
+    budget: string,
+    searchQuery: string
+  ): Property[] => {
+    let filteredProperties = [...properties];
+
+    if (propertyType) {
+      filteredProperties = filteredProperties.filter(
+        (property) => property.propertyType === propertyType
+      );
+    }
+
+    if (location) {
+      filteredProperties = filteredProperties.filter(
+        (property) => property.location === location
+      );
+    }
+
+    if (propertySize) {
+      filteredProperties = filteredProperties.filter(
+        (property: any) =>
+          property?.propertySize >= propertySize[0] && property?.propertySize <= propertySize[1]
+      );
+    }
+
+    if (budget) {
+      filteredProperties = filteredProperties.filter(
+        (property: any) =>
+          property.budget >= budget[0] && property.budget <= budget[1]
+      );
+    }
+
+    if (searchQuery) {
+      filteredProperties = filteredProperties.filter((property) =>
+        property.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    return filteredProperties;
+  };
+
+  if (error) {
+    Report.warning('An Error Occurred', error, 'close', { width: '360px' });
+    return null;
+  }
+ 
+  
 
   return (
     <div className="mt-[5rem]">
@@ -88,7 +170,7 @@ function SearchHomePage() {
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={propertyType}
-                onChange={(e) => setPropertyType(e.target.value)}
+                onChange={handlePropertyType}
               >
                 <option value="Land"> Buy a Land</option>
                 <option value="House">buy a House</option>
@@ -104,7 +186,7 @@ function SearchHomePage() {
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={handleLocation}
               >
                 <option value="Abuja"> Abuja, Nigeria</option>
                 <option value="Port Harcourt">Port Harcourt, Nigeria</option>
@@ -121,7 +203,7 @@ function SearchHomePage() {
               <select
                 className="text-xs -ml-1 bg-[#F1F1F1]"
                 value={budget}
-                onChange={(e) => setBudget(e.target.value)}
+                onChange={handleBudget}
               >
                 <option value={`#200,000-#500,000`}>#200,000-#500,000</option>
               </select>

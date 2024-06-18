@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState, lazy, Suspense } from "react";
-import { getPosts, getProperties, getTestimonies } from "@/lib/action";
-import { usePropertyContext } from "@/context/PropertyContext";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProperties, setSearchPerformed, setSearchQuery } from "@/features/properties/propertiesSlice";
+import { fetchBlogs } from "@/features/blogs/blogsSlice";
+import { fetchReviews } from "@/features/reviews/reviewsSlice";
+import { RootState, AppDispatch  } from "@/store";
 import ErrorBoundary from "../ErrorBoundary";
-import PropertyProvider from "@/context/PropertyProvider";
 import SearchLandingPageResult from "./SearchLandingPageResult";
 import LiveTour from "../Blog/Cards/LiveTour";
+import isEmptyArray from '@/utils/helper-functions/isEmptyArray';
 
 // Lazy loading components
 const Hero = lazy(() => import("./Hero"));
@@ -20,48 +23,33 @@ const BlogSection = lazy(() => import("./BlogSection"));
 const TestimonialSection = lazy(() => import("./TestimonialSection"));
 
 const Home: React.FC = () => {
-  const { properties, searchResults, searchPerformed, setProperties, setSearchPerformed } = usePropertyContext();
-  const [posts, setPosts] = useState([]);
-  const [reviews, setReviews] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const { properties, searchPerformed, searchQuery, searchResults, loading, error } = useSelector((state: RootState) => state.properties);
+  const { blogs } = useSelector((state: RootState) => state.blogs);
+  const { reviews } = useSelector((state: RootState) => state.reviews);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [fetchedProperties, fetchedPosts, fetchedReviews] = await Promise.all([
-          getProperties(),
-          getPosts(),
-          getTestimonies(),
-        ]);
+    dispatch(fetchProperties());
+    dispatch(fetchBlogs());
+    dispatch(fetchReviews());
 
-        setProperties(fetchedProperties);
-        setPosts(fetchedPosts);
-        setReviews(fetchedReviews);
-        setIsLoading(false);
+    // Updated state management for searchPerformed
+    if (searchQuery) {
+      dispatch(setSearchPerformed(true));
+    } else {
+      dispatch(setSearchPerformed(false));
+    }
+  }, [dispatch, searchQuery]);
 
-        // Updated state management for searchPerformed
-        if (searchQuery) {
-          setSearchPerformed(true);
-        } else {
-          setSearchPerformed(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [setProperties, searchQuery, setSearchPerformed]);
+  isEmptyArray({
+    properties,
+    loading,
+    error
+  })
 
   const limitedProperties = useMemo(() => properties.slice(0, 3), [properties]);
-  const limitedPosts = useMemo(() => posts.slice(0, 6), [posts]);
+  const limitedPosts = useMemo(() => blogs.slice(0, 3), [blogs]);
   const limitedReviews = useMemo(() => reviews.slice(0, 4), [reviews]);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (!limitedProperties.length) return <p>No Property Available</p>;
-  if (!limitedPosts.length) return <p>No Blog Post Available</p>;
-  if (!limitedReviews.length) return <p>No Testimony Review Available</p>;
 
 
   return (
@@ -70,38 +58,38 @@ const Home: React.FC = () => {
         <SearchLandingPageResult searchResults={searchResults} />
       ) : (
         <>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense>
             <Hero />
           </Suspense>
           {/* Discover Property */}
           <ErrorBoundary>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense>
               <DiscoverProperty properties={limitedProperties} />
             </Suspense>
           </ErrorBoundary>
           {/* Land */}
           <LandingSection>
             <ErrorBoundary>
-              <Suspense fallback={<p>Loading...</p>}>
-                <PropertyGrid properties={limitedProperties} />
+              <Suspense>
+                <PropertyGrid properties={properties} />
               </Suspense>
-              <Suspense fallback={<p>Loading...</p>}>
+              <Suspense>
                 <ViewAllButton href="/property" />
               </Suspense>
             </ErrorBoundary>
           </LandingSection>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense>
             <AboutProperty />
           </Suspense>
           {/* Blog section */}
           <ErrorBoundary>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense>
               <BlogSection posts={limitedPosts} />
             </Suspense>
           </ErrorBoundary>
           {/* LiveTour section */}
           <ErrorBoundary>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense>
               <LiveTour />
             </Suspense>
           </ErrorBoundary>
@@ -109,13 +97,13 @@ const Home: React.FC = () => {
 
           {/* Testimony section */}
           <ErrorBoundary>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense>
               <TestimonialSection reviews={limitedReviews} />
             </Suspense>
           </ErrorBoundary>
           {/* Newsletter section */}
           <ErrorBoundary>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense>
               <Newsletter />
             </Suspense>
           </ErrorBoundary>
@@ -128,8 +116,6 @@ const Home: React.FC = () => {
 // Wrap Home component with PropertyProvider
 export default function HomeWrapper() {
   return (
-    <PropertyProvider>
       <Home />
-    </PropertyProvider>
   );
 }

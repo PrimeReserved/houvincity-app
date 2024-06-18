@@ -9,7 +9,7 @@ import { urlForImage } from "@/sanity/lib/image";
 
 export default function RecentNewsCard({ article }: any) {
 
-  console.log({ article })
+  // console.log({ article })
   
   if (!article) {
     return <div>Loading news...</div>;

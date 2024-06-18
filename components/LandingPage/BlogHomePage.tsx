@@ -31,10 +31,6 @@ const BlogHomePage = ({ posts }: Props) => {
   const endIndex = currentPage * PAGE_SIZE;
   const displayedPosts = posts.slice(startIndex, endIndex);
 
-  // Filter other posts
-  // const otherPosts = posts.filter(
-  //   (post) => !post.categories.find((category) => category.title === "Featured")
-  // );
 
   return (
     <div className="wrapper flex justify-center items-center  mb-[5rem] px-10">
@@ -44,7 +40,7 @@ const BlogHomePage = ({ posts }: Props) => {
         <div className="mb-10 flex justify-center items-center ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  md:space-y-0">
             {displayedPosts.map((post, idx) => (
-              <Link href={`/post/${post.slug.current}`} key={post.slug.current}>
+              <Link href={`/blog/${post.slug.current}`} key={post.slug.current}>
                 <div className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col">
                   <div className="relative overflow-hidden rounded-t-lg h-72">
                     <Suspense fallback={<Loading />}>

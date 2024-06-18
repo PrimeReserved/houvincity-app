@@ -1,4 +1,3 @@
-import PropertyToggle from "./PropertyToggle";
 
 export default function DiscoverProperty({ properties }: any) {
     return (
@@ -12,9 +11,6 @@ export default function DiscoverProperty({ properties }: any) {
             of your unique story. Your next home is not just a space, it&apos;s a
             canvas inviting you to paint the chapters of your life
           </p>
-          <div className="flex justify-center">
-            <PropertyToggle properties={properties} />
-          </div>
         </div>
       </div>
     );
