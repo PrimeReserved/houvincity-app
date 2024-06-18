@@ -97,24 +97,18 @@ export default function Founders() {
           <section className="mb-5 p-5">
             <h3 className="mb-5 text-2xl">Mission</h3>
             <p>
-              To be the leading real estate company that promotes the safety of
-              clients’ investments through an automated property insurance
-              system.
+              Through an automated property insurance system promote the safety of clients investments.
             </p>
           </section>
           <section className="mb-5 p-5">
             <h3 className="mb-5 text-2xl">Vision</h3>
             <p>
-              LTo revolutionize the real estate system of operation by
-              introducing a viable system that eliminates fraud, property theft,
-              or land grabbing through adequate safety measures, and building
-              smart cities that meet international standards, in real estate and
-              housing.
+            To revolutionize the real estate sector with veritable tools that eliminates fraud, property theft, or land grabbing.
             </p>
           </section>
           <section className="mb-5 p-5">
-            <h3 className="mb-5 text-2xl">Value</h3>
-            <p>Viability, Innovativeness, Credibility and Excellence (VICE)</p>
+            <h3 className="mb-5 text-2xl">Core Value</h3>
+            <p>Innovativeness, Credibility, Viability, & Excellence</p>
           </section>
         </section>
         <figure className="">
