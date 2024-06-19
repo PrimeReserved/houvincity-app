@@ -51,7 +51,7 @@ export default function Founders() {
         Founders
       </h1>
       <div className="flex justify-center items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-2 lg:gap-10 p-10 mb-[5rem]">
+        <div className="grid grid-cols-1 xl:mx-[20rem] lg:mx-[10rem] md:mx-[5rem] mx-[0.3rem] gap-10 md:gap-2 lg:gap-10 p-10 mb-[5rem]">
           {founders.map((founder) => (
             <div
               className="card rounded bg-base-100 shadow-xl mb-10"

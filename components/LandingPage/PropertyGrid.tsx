@@ -54,7 +54,7 @@ export default function PropertyGrid({
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[6rem] lg:gap-10 mt-[5rem] ">
+      <div className="grid grid-cols-1 xl:mx-[20rem] lg:mx-[10rem] md:mx-[5rem] mx-[0.3rem]  gap-[6rem] lg:gap-10 mt-[5rem] ">
         {filteredProperties?.map((property: Property) => (
             <PropertyHomeCard key={property._id} property={property} />
           ))}
