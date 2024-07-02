@@ -1,6 +1,5 @@
 "use client"
 
-
 import ErrorBoundary from "@/components/ErrorBoundary";
 import PostList from '@/components/Blog/PostList';
 
