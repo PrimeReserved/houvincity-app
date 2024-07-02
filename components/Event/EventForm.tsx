@@ -39,38 +39,38 @@ export default function EventForm({ event, onClose }: any) {
   if (!event) return null;
 
   return (
-    <div className="fixed inset-0 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 overflow-auto bg-white flex items-center justify-center">
       <div className="card bg-base-100 shadow-xl w-6/12 p-10">
         <div className="flex justify-end">
         <button onClick={onClose}>X</button>
         </div>
       <div className="p-5">
-        <h1 className="text-3xl">Create Email Reminder</h1>
+        <h1 className="text-3xl text-center">Create Email Reminder</h1>
       </div>
         <form onSubmit={handleSubmit}>
           <div className="">
-            <label htmlFor="event" className="form-control w-full max-w-xs">
+            <label htmlFor="event" className="form-control">
               <div className="label">
                 <span className="label-text">Event</span>
               </div>
               <input
                 type="text"
                 placeholder="Property Showcase"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </label>
           </div>
           <div>
-            <label htmlFor="event" className="form-control w-full max-w-xs">
+            <label htmlFor="event" className="form-control">
               <div className="label">
                 <span className="label-text">Email</span>
               </div>
               <input
                 type="email"
                 placeholder="serinawechie@gmail.com"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

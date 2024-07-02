@@ -10,9 +10,11 @@ function page() {
       <ErrorBoundary>
         <Header />
       </ErrorBoundary>
+
       <ErrorBoundary>
         <Contact />
       </ErrorBoundary>
+      
       <ErrorBoundary>
         <FooterHome />
       </ErrorBoundary>

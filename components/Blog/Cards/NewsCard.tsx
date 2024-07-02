@@ -1,63 +1,81 @@
-"uses client"
+// pages/index.tsx
+"use client";
 
-import Link from "next/link";
-import { client } from "@/sanity/client";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Calendar from "@/public/images/blog/Calendar.svg";
+import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 import Image from "next/image";
-import ArrowRight from "@/public/images/blog/Vector.svg";
-import imageUrlBuilder from "@sanity/image-url";
-import { groq } from "next-sanity";
-import { News } from "@/typings";
+import Link from "next/link";
 import { Suspense } from "react";
 import Loading from "@/app/loading";
-import { getNews } from "@/lib/action";
 import { urlForImage } from "@/sanity/lib/image";
 
+export default function NewsCard({ article }: Readonly<any>) {
 
-export default async function NewsCard() {
-
-  const news: News[] = await getNews();
-
-  if (!news || !Array.isArray(news)) {
-    return <h1>Fetching News, please be still..</h1>
+  if (!article) {
+    return null;
   }
   return (
-    <div className="lg:mx-12">
-      <p className="text-primary font-medium mt-[2.6rem] text-3xl">News</p>
-      {news?.map((article) => (
-        <Link href={`/news/${article.slug?.current}`} key={article._id}>
-          <div className="flex bg-white rounded-md mt-5 drop-shadow-md">
-            {article?.mainImage && (
-              <Suspense fallback={<Loading />}>
-                 <Image
-                src={urlForImage(article?.mainImage)}
+    <div className="mt-5">
+      <div
+        key={article._id}
+        className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col"
+      >
+        <div className="relative overflow-hidden rounded-t-lg h-100">
+          <Suspense fallback={<Loading />}>
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "380px",
+                height: "auto",
+                aspectRatio: "380 / 280",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <Image
+                src={urlForImage(article?.image?.asset?._ref)}
                 alt={`${article.slug?.current}`}
-                width={100}
-                height={100}
+                width={380}
+                height={500}
                 loading="lazy"
+                className="w-full h-full object-cover"
               />
-              </Suspense>
-            )}
-            <div className="flex flex-col justify-center m-5">
-              <blockquote>
-                <p className="text-sm lg:text-[10px] xl:text-sm font-medium">{article?.title}</p>
-              </blockquote>
-              <div className="text-[16px] font-medium flex gap-3 mt-3">
-                <Link className="flex space-x-2" href={`/news/${article?.slug.current}`}>
-                  <p className="text-primary lg:text-[12px] xl:text-base">Read More</p>
-                  <Image
-                    src={ArrowRight}
-                    alt="Arrow Right"
-                    width={12}
-                    height={12}
-                    loading="lazy"
-                  />
-                </Link>
-              </div>
             </div>
+          </Suspense>
+        </div>
+        <div className="card-body items-start mt-1 ">
+          <div className="flex items-center gap-2">
+            <Image src={Calendar} alt="Calendar" width={13} height={13} />
+            {new Date(article.publishedAt).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
           </div>
-        </Link>
-      ))}
+
+          <h1 className="font-semibold text-lg mt-1 line-clamp-1">{article?.title}</h1>
+            <p className="line-clamp-3 text-[12px]">
+              {article?.body?.map((block: any) => (
+                <span key={block._key}>
+                  {block?.children?.map((child: any) => child.text)}
+                </span>
+              ))}
+            </p>
+          <div className="card-actions">
+            <Link href={`/news/${article?.slug?.current || ""}`}>
+              <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
+                Read more
+                <Image
+                  src={ArrowRightWhite}
+                  alt="Arrow Right"
+                  width={12}
+                  height={12}
+                />
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
+}

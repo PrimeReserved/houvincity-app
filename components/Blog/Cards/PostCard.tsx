@@ -5,7 +5,6 @@ import Calendar from "@/public/images/blog/Calendar.svg";
 import ArrowRightWhite from "@/public/images/blog/ArrowRightWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
-import NumberCount from "@/components/NumberCount/NumberCount";
 import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Loading from "@/app/loading";
@@ -14,18 +13,14 @@ import { urlForImage } from "@/sanity/lib/image";
 export default function PostCard({ post }: Readonly<any>) {
   const pathName = usePathname();
 
+
   const isHomePage = pathName === "/";
   // Determine if the current route is for blogs or news
   const isBlogPage = pathName.startsWith("/blog");
-  const isNewsPage = pathName.startsWith("/news");
 
   // Set the base path for the href attribute
   let basePath = "";
-  if (isBlogPage) {
-    basePath = "/blog";
-  } else if (isNewsPage) {
-    basePath = "/news";
-  } else if (isHomePage) {
+  if (isBlogPage || isHomePage) {
     basePath = "/blog";
   }
 
@@ -33,7 +28,7 @@ export default function PostCard({ post }: Readonly<any>) {
     return null;
   }
   return (
-    <div className="mt-5">
+    <div className="">
       <div
         key={post._id}
         className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col"
@@ -43,7 +38,7 @@ export default function PostCard({ post }: Readonly<any>) {
             <div
               style={{
                 width: "100%",
-                maxWidth: "380px",
+                maxWidth: "100%",
                 height: "auto",
                 aspectRatio: "380 / 280",
                 overflow: "hidden",
@@ -51,7 +46,7 @@ export default function PostCard({ post }: Readonly<any>) {
               }}
             >
               <Image
-                src={urlForImage(post?.mainImage)}
+                src={urlForImage(post?.mainImage?.asset?._ref)}
                 alt={`${post.slug?.current}`}
                 width={380}
                 height={500}
@@ -61,7 +56,7 @@ export default function PostCard({ post }: Readonly<any>) {
             </div>
           </Suspense>
         </div>
-        <div className="card-body items-start mt-1 ">
+        <div className="card-body h-[17rem] ">
           <div className="flex items-center gap-2">
             <Image src={Calendar} alt="Calendar" width={13} height={13} />
             {new Date(post.publishedAt).toLocaleDateString("en-US", {
@@ -71,7 +66,9 @@ export default function PostCard({ post }: Readonly<any>) {
             })}
           </div>
 
-          <h1 className="font-semibold text-lg mt-1 line-clamp-1">{post?.title}</h1>
+          <h1 className="font-semibold text-base mt-1 line-clamp-2">
+            {post?.title}
+          </h1>
           {/* Render description only if not on the home page */}
           {!isHomePage && (
             <p className="line-clamp-3 text-[12px]">
@@ -82,9 +79,9 @@ export default function PostCard({ post }: Readonly<any>) {
               ))}
             </p>
           )}
-          <div className="card-actions">
+          <div className="card-actions flex justify-end mt-5 items-end ">
             <Link href={`${basePath}/${post?.slug?.current || ""}`}>
-              <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 items-center">
+              <button className="btn bg-primary text-white text-xs rounded-md hover:text-primary hover:bg-white hover:border-[1px] hover:border-primary flex gap-3 ">
                 Read more
                 <Image
                   src={ArrowRightWhite}
@@ -97,11 +94,6 @@ export default function PostCard({ post }: Readonly<any>) {
           </div>
         </div>
       </div>
-      {/* <NumberCount
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      /> */}
     </div>
   );
 }

@@ -111,9 +111,9 @@ export default function NewsDetailPost() {
             className="border rounded-lg overflow-hidden bg-white shadow-md  transition duration-300 transform hover:scale-105 flex flex-col"
           >
             <div className="relative overflow-hidden rounded-t-lg h-100">
-              {post?.mainImage && (
+              {post?.image && (
                 <Image
-                  src={urlForImage(post?.mainImage)}
+                  src={urlForImage(post?.image)}
                   alt={`${post.slug?.current}`}
                   width={380}
                   height={500}

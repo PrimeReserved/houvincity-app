@@ -8,6 +8,13 @@ import Loading from "@/app/loading";
 import { urlForImage } from "@/sanity/lib/image";
 
 export default function RecentNewsCard({ article }: any) {
+
+  // console.log({ article })
+  
+  if (!article) {
+    return <div>Loading news...</div>;
+  }
+
   return (
     <div className="xl:mx-12 lg:mx-6">
       <div
@@ -16,7 +23,7 @@ export default function RecentNewsCard({ article }: any) {
       >
         <Suspense fallback={<Loading />}>
           <Image
-            src={urlForImage(article?.mainImage)}
+            src={urlForImage(article?.image?.asset?._ref)}
             alt={`${article?.slug?.current}`}
             width={100}
             height={100}

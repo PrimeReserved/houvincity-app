@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import { HiOutlineCube } from "react-icons/hi";
 import { Property } from "@/typings";
@@ -5,24 +7,24 @@ import House1 from "@/public/images/property/house1.svg";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
 import Loading from "@/app/loading";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 
 
-function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
+function PropertyHomeCard({ property }: Readonly<{ property: Property }>) {
   
   return (
     <div key={property._id}>
       <div className=""
       style={{
-        width: "358px",
-        height: "358px",
+        width: "100%",
+        height: "70%",
         overflow: "hidden", // Ensures that anything outside the clipping path is hidden
       }}>
         <Suspense fallback={<Loading />}>
         <Image
           src={
             property?.propertyImage
-              ? urlForImage(property.propertyImage)
+              ? urlForImage(property?.propertyImage?.asset?._ref)
               : House1
           }
           alt={property?.slug}
@@ -39,8 +41,8 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
         />
         </Suspense>
       </div>
-      <div className="rounded-lg transition duration-300  bg-base-100 drop-shadow-xl rounded-b-md">
-        <div className="card-body mx-5 mt-5 w-full">
+      <div className="transition duration-300 bg-white drop-shadow-xl rounded-b-md h-[13rem] ">
+        <div className="card-body p-3 xl:p-4  ">
           <p className="card-title text-sm text-customSecondary font-semibold">
             {property?.title}
           </p>
@@ -69,4 +71,4 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
   );
 }
 
-export default PropertyHomeCard;
+export default React.memo(PropertyHomeCard);
