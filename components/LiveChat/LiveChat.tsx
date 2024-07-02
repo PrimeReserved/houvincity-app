@@ -6,7 +6,7 @@ export default function LiveChat () {
     return (
         <Script
             strategy="lazyOnload"
-            src={`${process.env.NEXT_PUBLIC_LIVE_CHAT_API}`}
+            src={`https://embed.tawk.to/66846ebe9d7f358570d6513d/1i1ql168j`}
          />
     );
 }
