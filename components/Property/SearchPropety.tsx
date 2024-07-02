@@ -60,6 +60,13 @@ export const SearchProperty = (): any => {
       searchQuery
     );
     setFilteredProperties(filtered as any);
+    if (filtered.length === 0) {
+      const timer = setTimeout(() => {
+        resetFields();
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
   }, [properties, propertyType, location, propertySize, budget, searchQuery]);
 
   const handleSearch = (event: any) => {
@@ -96,6 +103,13 @@ export const SearchProperty = (): any => {
   // const handleSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
   //   dispatch(setSortCriteria(event.target.value));
   // };
+  const resetFields = () => {
+    dispatch(setSearchQuery(''));
+    dispatch(setPropertyType(''));
+    dispatch(setLocation(''));
+    dispatch(setSize(''));
+    dispatch(setBudget(''));
+  };
 
   const filterProperties = (
     properties: Property[],
@@ -220,8 +234,7 @@ export const SearchProperty = (): any => {
         </button>
       </div>
       <h1 className=" text-customPrimary font-bold text-4xl m-10">
-        Land
-        {/* {propertyType} */}
+      {propertyType || "Properties"}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-3 xl:gap-5 mx-5 lg:mx-2 xl:mx-10">
         {filteredProperties?.length > 0 ? (
@@ -231,7 +244,7 @@ export const SearchProperty = (): any => {
             </div>
           ))
         ) : (
-          <div className="w-full">
+          <div className="w-full col-span-3">
             <h1 className="text-customTextColor text-4xl px-10">
               There is currently no available property listing for now, kindly
               check back later
@@ -239,11 +252,13 @@ export const SearchProperty = (): any => {
           </div>
         )}
       </div>
-      <div className="flex justify-center mt-10">
+      {filteredProperties?.length > 0 ? (
+        <div className="flex justify-center mt-10">
         <button className="py-3 px-[3.5rem] font-bold border-[1px] bg-primary rounded-md text-xs text-white">
           Load More
         </button>
       </div>
+      ) : null}
     </>
   );
 };

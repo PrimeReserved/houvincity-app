@@ -1,6 +1,7 @@
 "use client";
 
 // import Fuse from "fuse.js";
+import { useRouter } from "next/navigation"
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store'
 import { IoHomeOutline } from "react-icons/io5";
@@ -22,6 +23,8 @@ import { Property } from '@/typings';
 
 function SearchHomePage() {
   const dispatch = useDispatch();
+  const router = useRouter();
+  
   const {
     properties,
     searchQuery,
@@ -75,9 +78,13 @@ function SearchHomePage() {
     setFilteredProperties(filtered);
   }, [properties, propertyType, location, propertySize, budget, searchQuery]);
 
-  const handleSearch = useCallback((event: any) => {
-    dispatch(setSearchQuery(event.target.value));
-  }, [dispatch]);
+  // const handleSearch = useCallback((event: any) => {
+  //   dispatch(setSearchQuery(event.target.value));
+  // }, [dispatch]);
+
+  const handleSearch = (e: any) => {
+    router.push('/property')
+  }
 
   const handlePropertyType = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setPropertyType(event.target.value));

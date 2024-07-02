@@ -10,22 +10,22 @@ function SocialLogos() {
     <div>
       <div className="flex md:space-x-14">
         <SocialLink
-          href="https://www.linkedin.com/company/primereserved"
+          href={`${process.env.NEXT_PUBLIC_INSTAGRAM_URL}`}
           image={Instagram}
           alt="Instagram"
         />
         <SocialLink
-          href="https://www.instagram.com/primereservedtech"
+          href={`${process.env.NEXT_PUBLIC_TWITTER_URL}`}
           image={Twitter}
           alt="Twitter"
         />
         <SocialLink
-          href="https://www.facebook.com/groups/1554028415142497/"
+          href={`${process.env.NEXT_PUBLIC_FACEBOOK_URL}`}
           image={Facebook}
           alt="Facebook"
         />
         <SocialLink
-          href="https://www.youtube.com/@primereservedtech"
+          href={`${process.env.NEXT_PUBLIC_YOUTUBE_URL}`}
           image={Youtube}
           alt="Youtube"
         />

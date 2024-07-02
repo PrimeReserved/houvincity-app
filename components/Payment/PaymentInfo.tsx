@@ -1,6 +1,5 @@
 "use client";
-import { payment } from "@/lib/action";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PaystackButton } from "react-paystack";
 import "react-phone-number-input/style.css";
 import { Loading } from "notiflix/build/notiflix-loading-aio";
@@ -22,9 +21,7 @@ const PaymentInfo = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [amount, setAmount] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(null);
-
+  const [propertyPrice, setPropertyPrice] = useState(0);
   useEffect(() => {
     // Get amount from query param
     const urlParams = new URLSearchParams(window.location.search);
@@ -32,13 +29,14 @@ const PaymentInfo = () => {
     const amountNumber = parseFloat(amountFromParam.replace(/,/g, ""));
   
   if (!isNaN(amountNumber)) {
-    setAmount(amountNumber * 100); // Convert to kobo and set as amount
+    setPropertyPrice(amountNumber * 100); // Convert to kobo and set as amount
   } else {
     console.error("Invalid amount value");
   }
   }, []); // Run only once on component mount
 
-  const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement>) => {
+ 
+  const handleInputChange = (setter: React.Dispatch<React.SetStateAction<any>>) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setter(event.target.value);
   };
 
@@ -113,6 +111,13 @@ const PaymentInfo = () => {
       value: phone,
       setter: setPhone,
     },
+    {
+      id: "8",
+      title: "Amount",
+      placeholder: "20,000,000",
+      value: amount,
+      setter: setAmount,
+    },
   ];
 
   return (
@@ -123,7 +128,7 @@ const PaymentInfo = () => {
         </h1>
         <div className="flex flex-col gap-3 md:gap-5 w-[100%] px-20 justify-center items-center lg:items-start h-[157px] md:h-[340px] font-medium mt-5 text-[20px] md:text-[40px] rounded-xl bg-anotherBlack text-white">
           <h5 className="text-[12px] md:text-[28px]">Total Amount</h5>
-          <p>{`N${(amount / 100).toLocaleString()}`}</p>
+          <p>{`N${(propertyPrice / 100).toLocaleString()}`}</p>
         </div>
 
         <div className="w-[100%] grid grid-cols-1 md:grid-cols-2 gap-5 xl:gap-10 mt-5 xl:mt-10">
@@ -133,7 +138,7 @@ const PaymentInfo = () => {
                 {field.title}
               </p>
               <input
-                type="text"
+                type={field.id === "8" ? "number" : "text"}
                 placeholder={field.placeholder}
                 className="outline-none border-[1px] text-xs font-medium rounded-md text-customSecondary p-4 w-[100%] border-[#8D8D8D]"
                 value={field.value}

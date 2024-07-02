@@ -18,6 +18,7 @@ function Newsletter() {
       Loading.standard("Loading...");
       await subscribe(email);
       setSubmitted(true);
+      setEmail("");  // Reset the input field
       Loading.remove(); // Hide loading indicator
       Report.success(
         "Newsletter Subscription",

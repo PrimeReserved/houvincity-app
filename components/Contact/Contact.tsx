@@ -144,7 +144,7 @@ function ContactForm() {
               </div>
               <input
                 type="text"
-                placeholder="Wechie"
+                placeholder="+2348119955595"
                 className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}

@@ -18,7 +18,7 @@ const initialState: BlogsState = {
 
 export const fetchBlogs = createAsyncThunk('blogs/fetchBlogs', async () => {
   const response = await getPosts();
-  console.log(`Reducer blogs: ${response}}`)
+  // console.log(`Reducer blogs: ${response}}`)
   return response;
 });
 

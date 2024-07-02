@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import YoutubeEmbed from "./YoutubeEmbed";
-import Calendar from "@/public/images/blog/Icon/Calendar2.svg";
 import { Property } from "@/typings";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "../Blog/Cards/RichTextComponents";
@@ -20,7 +19,6 @@ interface PropertyDetailedProps {
 
 function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   const router = useRouter();
-
   const handleNavigateToPayment = () => {
     if (property.budget !== undefined) {
       const budget = parseFloat(property.budget.replace(/,/g, ""));
@@ -37,7 +35,6 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   if (!property) {
     return null;
   }
-
   return (
     <div className="wrapper mb-10">
       <div className="flex justify-center items-center px-10 mt-[10rem] ">

@@ -5,6 +5,7 @@ import "./globals.css";
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 import Logo from "@/public/logo.svg";
 import Providers from "@/context/Providers";
+import LiveChat from "@/components/LiveChat/LiveChat";
 
 
 export const revalidate = 30;
@@ -63,6 +64,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <LiveChat />
         {draftMode().isEnabled && <LiveVisualEditing />}
       </body>
     </html>

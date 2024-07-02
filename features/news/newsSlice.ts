@@ -24,7 +24,7 @@ const initialState: NewsState = {
 
 export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   const response = await getNews();
-  console.log(`Reducer news: ${response}}`)
+  // console.log(`Reducer news: ${response}}`)
   return response;
 });
 
