@@ -1,29 +1,29 @@
-"use client"
+'use client';
 
-import {useState, useEffect, useCallback, Suspense  } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
-import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
-import ErrorBoundary from "@/components/ErrorBoundary";
-import Hero from "@/components/Hero/Hero";
-import Newsletter from "@/components/Newsletter/Newsletter__old";
-import PostCard from "@/components/Blog/Cards/PostCard";
-import { News, Post } from "@/typings";
-import RecentNewsCard from "@/components/Blog/Cards/RecentNewsCard";
-import Header from "@/components/Header/HeaderHome";
-import FooterHome from "@/components/Footer/FooterHome";
-import Pagination from "@/components/Blog/Pagination";
+import RecentPostCard from '@/components/Blog/Cards/RecentPostCard';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import Hero from '@/components/Hero/Hero';
+import Newsletter from '@/components/Newsletter/Newsletter';
+import PostCard from '@/components/Blog/Cards/PostCard';
+import { News, Post } from '@/typings';
+import RecentNewsCard from '@/components/Blog/Cards/RecentNewsCard';
+import Header from '@/components/Header/HeaderHome';
+import FooterHome from '@/components/Footer/FooterHome';
+import Pagination from '@/components/Blog/Pagination';
 import { fetchBlogs } from '@/features/blogs/blogsSlice';
 import { fetchNews } from '@/features/news/newsSlice';
 import isEmptyArray from '@/utils/helper-functions/isEmptyArray';
-import { Loading } from "notiflix/build/notiflix-loading-aio";
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-
-
 
 const PostList: any = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { blogs, loading, error } = useSelector((state: RootState) => state.blogs);
+  const { blogs, loading, error } = useSelector(
+    (state: RootState) => state.blogs
+  );
   const { news } = useSelector((state: RootState) => state.news);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -54,12 +54,14 @@ const PostList: any = () => {
     news,
     currentPage,
     loading,
-    error
+    error,
   });
   const limitedPosts = blogs.slice((currentPage - 1) * 4, currentPage * 4);
 
   if (error) {
-    return Report.warning('An Error Occured', error, 'close', {width: '360px',});
+    return Report.warning('An Error Occured', error, 'close', {
+      width: '360px',
+    });
   }
 
   return (
@@ -80,8 +82,8 @@ const PostList: any = () => {
             Recent Posts
           </p>
           <ErrorBoundary>
-          {blogs.slice(0, 3).map((post: Post) => (
-              <div key={post._id} className=''>
+            {blogs.slice(0, 3).map((post: Post) => (
+              <div key={post._id} className="">
                 <Suspense>
                   <RecentPostCard post={post} />
                 </Suspense>
@@ -93,7 +95,7 @@ const PostList: any = () => {
               Recent News
             </p>
             <ErrorBoundary>
-            {news.slice(0, 3).map((post: any) => (
+              {news.slice(0, 3).map((post: any) => (
                 <div key={post._id}>
                   <Suspense>
                     <RecentNewsCard article={post} />
@@ -118,7 +120,11 @@ const PostList: any = () => {
         </div>
       </div>
       <div className="flex justify-center items-center mt-[5rem] text-center text-[#040A3B] text-xl gap-2">
-        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={onPageChange}/>
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
       </div>
       <ErrorBoundary>
         <Newsletter />
@@ -126,6 +132,6 @@ const PostList: any = () => {
       <FooterHome />
     </div>
   );
-}
+};
 
 export default PostList;

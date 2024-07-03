@@ -1,14 +1,29 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
+
 interface MailchimpNewsletterProps {
   id?: string;
 }
 
 const Newsletter = ({ id }: MailchimpNewsletterProps) => {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    // Reset the email input field
+    setEmail('');
+
+    // Submit the form
+    form.submit();
+  };
+
   return (
     <div id="mailchimpNewsletter" className="newsletter-section">
       <div>
-        <div className="hero min-h-[30rem] bg-[#FAFAFA] ">
-          <div className="z-0 flex flex-col items-center mt-[5rem] justify-center w-full gap-4 p-4 text-center ">
+        <div className="hero min-h-[30rem] bg-[#FAFAFA]">
+          <div className="z-0 flex flex-col items-center mt-[5rem] justify-center w-full gap-4 p-4 text-center">
             <div className="md:max-w-[38rem] mt-[4rem]">
               <h1 className="text-[28px] md:text-[50px] text-[#040A3B] font-medium md:font-semibold">
                 Never Miss A Beat
@@ -28,12 +43,15 @@ const Newsletter = ({ id }: MailchimpNewsletterProps) => {
                 name="mc-embedded-subscribe-form"
                 className="validate"
                 target="_blank"
+                onSubmit={handleSubmit}
               >
                 <input
                   type="email"
                   placeholder="Enter your email Address"
                   name="EMAIL"
-                  className="p-4 bg-white rounded-full w-full border-[1px] h-[4rem] md:h-[5rem] relative shadow-md text-[14px] "
+                  className="p-4 bg-white rounded-full w-full border-[1px] h-[4rem] md:h-[5rem] relative shadow-md text-[14px]"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <button
