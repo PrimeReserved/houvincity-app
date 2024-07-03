@@ -186,7 +186,7 @@ const handleCancelReminder = (event: any) => {
               <div className="py-10 pr-40">
                 <div className="md:only-of-type:flex justify-between items-center">
                 <button
-                  className={`btn text-white ${reminders[event._id] ? "bg-customPrimary" : "bg-primary"}`}
+                  className={`btn text-white ${reminders[event._id] ? "bg-customPrimary" : "bg-primary hover:bg-primary/80"}`}
                   onClick={() => {
                     if (reminders[event._id]) {
                       handleCancelReminder(event);

@@ -6,7 +6,7 @@ import { RootState, AppDispatch } from '@/store';
 import RecentPostCard from "@/components/Blog/Cards/RecentPostCard";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Hero from "@/components/Hero/Hero";
-import Newsletter from "@/components/Newsletter/Newsletter";
+import Newsletter from "@/components/Newsletter/Newsletter__old";
 import { getNews, getPosts } from "@/lib/action";
 import { News, Post } from "@/typings";
 import RecentNewsCard from "@/components/Blog/Cards/RecentNewsCard";

@@ -168,13 +168,13 @@ export default function Founders() {
       </div>{" "}
       {/* Buttons  */}
       <div className="flex flex-col md:flex-row mt-10 md:mt-0 mx-8 justify-center gap-3 mb-20 relative md:bottom-5">
-        <Link href="/faqs" className="btn rounded-md bg-primary text-white py-4 px-5">
+        <Link href="/faqs" className="btn rounded-md bg-primary hover:bg-primary/80 text-white py-4 px-5">
           <button >
             Have a Question
           </button>
         </Link>
 
-        <Link href="/property" className="btn rounded-md bg-[#040A3B] text-white py-4 px-6">
+        <Link href="/property" className="btn rounded-md bg-[#040A3B] hover:bg-[#040A3B] text-white py-4 px-6">
           <button >
             Find Property
           </button>

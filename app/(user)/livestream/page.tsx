@@ -5,7 +5,7 @@ import Header from "@/components/Header/HeaderHome";
 import EventList from "@/components/Event/EventList";
 import Contact from "@/components/Contact/Contact";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import Newsletter from "@/components/Newsletter/Newsletter";
+import Newsletter from "@/components/Newsletter/Newsletter__old";
 import FooterHome from "@/components/Footer/FooterHome";
 import { Suspense } from "react";
 import Loading from "@/app/loading";

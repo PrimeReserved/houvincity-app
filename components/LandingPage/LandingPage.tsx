@@ -14,7 +14,7 @@ import isEmptyArray from '@/utils/helper-functions/isEmptyArray';
 // Lazy loading components
 const Hero = lazy(() => import("./Hero"));
 const AboutProperty = lazy(() => import("@/components/LandingPage/AboutProperty"));
-const Newsletter = lazy(() => import("@/components/Newsletter/Newsletter"));
+const Newsletter = lazy(() => import("@/components/Newsletter/Newsletter__old"));
 const DiscoverProperty = lazy(() => import("./DiscoverProperty"));
 const LandingSection = lazy(() => import("./LandingSection"));
 const PropertyGrid = lazy(() => import("./PropertyGrid"));

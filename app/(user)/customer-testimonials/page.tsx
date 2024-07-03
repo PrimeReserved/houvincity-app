@@ -26,7 +26,9 @@ export default async function Page() {
       </div>
 
       <Suspense fallback={<Loading />}>
+        <div className="py-8">
         <Testimony reviews={testimonies} />
+        </div>
       </Suspense>
       <ErrorBoundary>
         <FooterHome />

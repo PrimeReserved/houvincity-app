@@ -106,7 +106,7 @@ function ContactForm() {
               </div>
               <input
                 type="text"
-                placeholder="Serina"
+                placeholder="First name"
                 className=" mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D] "
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -118,7 +118,7 @@ function ContactForm() {
               </div>
               <input
                 type="text"
-                placeholder="Doe"
+                placeholder="Last name"
                 className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -132,7 +132,7 @@ function ContactForm() {
               </div>
               <input
                 type="email"
-                placeholder="serinawill-i-am@gmail.com"
+                placeholder="Email address"
                 className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -144,7 +144,7 @@ function ContactForm() {
               </div>
               <input
                 type="text"
-                placeholder="+2348119955595"
+                placeholder="Phone number"
                 className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -158,7 +158,7 @@ function ContactForm() {
             </div>
             <textarea
               className="mt-3 outline-none border-b-[1px] border-[#8D8D8D]"
-              placeholder="Bio"
+              placeholder="Please write down your message here."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
