@@ -41,13 +41,19 @@ function ContactForm() {
     try {
       Loading.standard("Loading...");
       await contact({ firstName, lastName, email, phoneNumber, message });
-      setSubmitted(true);
       Loading.remove();
       Report.success(
         "Contact Form",
         "Thank you for your feeback, one of our agents would contact you shortly.",
         "close"
       ); // Show success notification
+       // Clear the form fields
+       setFirstName("");
+       setLastName("");
+       setEmail("");
+       setPhoneNumber("");
+       setMessage("");
+       setSubmitted(true);
     } catch (error: any) {
       setError(error.message || "An unexpected error occurred");
       Loading.remove(); // Hide loading indicator
