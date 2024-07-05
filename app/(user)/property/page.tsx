@@ -1,9 +1,9 @@
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Hero from "@/components/Hero/Hero";
 import ContactUsBtn from "@/components/Property/ContactUsBtn";
-import PropertyListing from "@/components/Property/PropertyListing";
 import Header from "@/components/Header/HeaderHome";
 import FooterHome from "@/components/Footer/FooterHome";
+import { SearchProperty } from "@/components/Property/SearchPropety";
 
 function page() {
   return (
@@ -17,7 +17,7 @@ function page() {
       </ErrorBoundary>
 
       <ErrorBoundary>
-        <PropertyListing />
+        <SearchProperty />
       </ErrorBoundary>
 
       <ErrorBoundary>

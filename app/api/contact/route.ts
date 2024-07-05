@@ -1,6 +1,7 @@
-// pages/api/subscribe/route.ts
+// app/api/contact/route.ts
 
 import { client } from "@/sanity/client";
+import { validateFields } from "@/utils/helper-functions/validateFields";
 import { NextRequest, NextResponse } from "next/server";
 
 // Define the schema for the incoming data
@@ -12,36 +13,35 @@ interface FormData {
     message: string;
 }
 
+const requiredFields: { [key in keyof FormData]?: string } = {
+  firstName: "firstName",
+  lastName: "lastName",
+  email: "Email",
+  phoneNumber: "PhoneNumber",
+  message: "Message",
+};
+
+
 export async function POST(request: NextRequest) {
   try {
     // Parse the incoming request body
-    const {firstName, lastName, email, phoneNumber, message }: FormData = await request.json();
+    const formData: FormData = await request.json();
 
     // Validate the incoming data
-    if (!firstName) {
-        return NextResponse.json({ error: "Firstname is required" }, { status: 400 });
-      }
-      if (!lastName) {
-        return NextResponse.json({ error: "Lastname is required" }, { status: 400 });
-      }
+    const validationError = validateFields(formData, requiredFields);
+    if (validationError) {
+        return NextResponse.json({ error: validationError }, { status: 400 });
+    }
 
-    if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
-    }
-    if (!phoneNumber) {
-        return NextResponse.json({ error: "Phone number is required" }, { status: 400 });
-      }
-    if (!message) {
-      return NextResponse.json({ error: "Message is required" }, { status: 400 });
-    }
+    const { firstName, lastName, email, phoneNumber, message } = formData;
 
     const data = {
       _type: 'contact',
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phoneNumber: phoneNumber,
-      message: message
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      message
     };
 
     // Create the new subscription in Sanity
@@ -49,8 +49,8 @@ export async function POST(request: NextRequest) {
 
     // Respond with the created subscription
     return NextResponse.json(result, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating subscription:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ error: (error as Error).message || "Internal Server Error" }, { status: 500 });
   }
 }

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import menuData from './menuData';
 import BtnArrowIcon from '../Buttons/BtnArrowIcon';
 import IconButtonHref from '../Buttons/IconButtonHref';
-import Logo from "@/public/logo.svg"
+import Logo from "@/public/HCL Logo.png"
 
 const Header = () => {
   // Navbar toggle
@@ -47,14 +47,14 @@ const Header = () => {
     >
       <div className="container">
         <div className="relative flex items-center justify-between">
-          <div className="w-60 max-w-full px-4 xl:mr-12">
+          <div className="w-60 max-w-full px-4 ">
             <Link
               href="/"
               className={`header-logo block w-full ${sticky ? 'py-5 lg:py-2' : 'py-8'
                 } `}
             >
               <Image
-                src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1717075112/houvincity/navbar/HCL_Logo_1_1_hibdys.png`}
+                src={Logo}
                 alt="logo"
                 width={140}
                 height={30}
@@ -64,7 +64,7 @@ const Header = () => {
           </div>
           <div className="flex w-full items-center justify-between px-4">
             <div>
-              <button
+              <button 
                 onClick={navbarToggleHandler}
                 id="navbarToggler"
                 aria-label="Mobile Menu"
@@ -90,7 +90,7 @@ const Header = () => {
                     : 'invisible top-[120%] opacity-0'
                   }`}
               >
-                <ul className="block lg:flex xl:space-x-[5rem] lg:space-x-10  xl:pl-[5rem] lg:pl-[2rem] ">
+                <ul className="block lg:flex xl:space-x-[5rem] lg:space-x-10   lg:pl-[2rem] ">
                   {menuData.map((menuItem, index) => (
                     <li key={index} className="group relative">
                       {menuItem.path ? (
@@ -142,8 +142,8 @@ const Header = () => {
                   ))}
                   <div className="flex lg:hidden">
                     <IconButtonHref
-                      text="Property listing"
-                      href="/property"
+                      text="Watch Live"
+                      href="/livestream"
                       icon={<BtnArrowIcon />}
                     />
                   </div>
@@ -154,8 +154,8 @@ const Header = () => {
             <div className="flex items-center justify-end gap-4 pr-16 lg:pr-0">
               <div className="my-2 hidden lg:flex">
                 <IconButtonHref
-                  text="Find Property"
-                  href="/property"
+                      text="Watch Live"
+                      href="/livestream"
                 />
               </div>
             </div>

@@ -1,139 +1,130 @@
-import Hero from "./Hero";
-import AboutProperty from "@/components/LandingPage/AboutProperty";
-import PropertyHomeCard from "@/components/LandingPage/PropertyHomeCard";
-import Review from "@/components/LandingPage/Review";
-import Newsletter from "@/components/Newsletter/Newsletter";
-import { getPosts, getProperties, getTestimonies } from "@/lib/action";
-import ErrorBoundary from "../ErrorBoundary";
-import PostCard from "../Blog/Cards/PostCard";
-import Link from "next/link";
-import PropertyToggle from "./PropertyToggle";
-import Loading from "@/app/loading";
-import { Suspense } from "react";
+'use client';
 
-export default async function Home() {
-  // Fetch data
-  const properties = await getProperties();
-  const posts = await getPosts();
-  const reviews = await getTestimonies();
-  
+import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchProperties,
+  setSearchPerformed,
+  setSearchQuery,
+} from '@/features/properties/propertiesSlice';
+import { fetchBlogs } from '@/features/blogs/blogsSlice';
+import { fetchReviews } from '@/features/reviews/reviewsSlice';
+import { RootState, AppDispatch } from '@/store';
+import ErrorBoundary from '../ErrorBoundary';
+import SearchLandingPageResult from './SearchLandingPageResult';
+import LiveTour from '../Blog/Cards/LiveTour';
+import isEmptyArray from '@/utils/helper-functions/isEmptyArray';
 
-  // Limit the number of items to 4
-  const limitedProperties = properties.slice(0, 3);
-  const limitedPosts = posts.slice(0, 6);
-  const limitedReviews = reviews.slice(0, 4);
+// Lazy loading components
+const Hero = lazy(() => import('./Hero'));
+const AboutProperty = lazy(
+  () => import('@/components/LandingPage/AboutProperty')
+);
+const Newsletter = lazy(() => import('@/components/Newsletter/Newsletter'));
+const DiscoverProperty = lazy(() => import('./DiscoverProperty'));
+const LandingSection = lazy(() => import('./LandingSection'));
+const PropertyGrid = lazy(() => import('./PropertyGrid'));
+const ViewAllButton = lazy(() => import('./ViewAllButton'));
+const BlogSection = lazy(() => import('./BlogSection'));
+const TestimonialSection = lazy(() => import('./TestimonialSection'));
 
-  if (!Array.isArray(limitedProperties) || limitedProperties.length === 0) {
-    return <p>No Property Available</p>;
-  }
+const Home: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const {
+    properties,
+    searchPerformed,
+    searchQuery,
+    searchResults,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.properties);
+  const { blogs } = useSelector((state: RootState) => state.blogs);
+  const { reviews } = useSelector((state: RootState) => state.reviews);
 
-  if (!Array.isArray(limitedPosts) || limitedPosts.length === 0) {
-    return <p>No Blog Post Available</p>;
-  }
+  useEffect(() => {
+    dispatch(fetchProperties());
+    dispatch(fetchBlogs());
+    dispatch(fetchReviews());
 
-  if (!Array.isArray(limitedReviews) || limitedReviews.length === 0) {
-    return <p>No Yestimony Review Available</p>;
-  }
+    // Updated state management for searchPerformed
+    if (searchQuery) {
+      dispatch(setSearchPerformed(true));
+    } else {
+      dispatch(setSearchPerformed(false));
+    }
+  }, [dispatch, searchQuery]);
+
+  isEmptyArray({
+    properties,
+    loading,
+    error,
+  });
+
+  const limitedProperties = useMemo(() => properties.slice(0, 3), [properties]);
+  const limitedPosts = useMemo(() => blogs.slice(0, 3), [blogs]);
+  const limitedReviews = useMemo(() => reviews.slice(0, 4), [reviews]);
 
   return (
     <main>
-      <Hero />
-      {/* Discover Property */}
-      <div className=" wrapper flex justify-center my-[6rem] ">
-        <div className="flex flex-col xl:w-[40%] md:mx-20 mx-32  text-center ">
-          <h1 className="text-2xl font-medium px-[3rem]">
-            Effortless Property Dicovery, Just For You
-          </h1>
-          <p className="text-sm px-[3rem] font-medium my-5 text-customTextColor leading-loose">
-            Dive into a realm where walls and roofs transform into the backdrop
-            of your unique story. Your next home is not just a space , it a
-            canvas inviting you to paint the chapters of your life
-          </p>
-         
-          <div className="flex justify-center">
-              <PropertyToggle properties={limitedProperties} />
-          </div>
-        </div>
-      </div>
-      {/* Land */}
-      <div className="px-10">
-        <div className="wrapper mt-[3rem] mb-[5rem]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[5rem] ">
-            <ErrorBoundary>
-              <Suspense fallback={<Loading />}>
-                {limitedProperties.map((property: any) => (
-                  <PropertyHomeCard key={property._id} property={property} />
-                ))}
-              </Suspense>
-            </ErrorBoundary>
-          </div>
-          <div className="flex justify-center mt-10">
-            <Link href="/property">
-              <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
-                View All
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-      <AboutProperty />
-      {/* Blog section  */}
-      <div className="wrapper flex justify-center items-center  mb-[5rem] px-10">
-        <div className="flex flex-col items-center mt-10">
-          <h1 className="text-customSecondary text-4xl font-semibold">
-            Stay Updated from Our Blog
-          </h1>
-          <p className="text-base text-customTextColor mt-3 mb-[3rem] ">
-            Gather Infromation From Our Blog and Stay Updated
-          </p>
-          <div className="mb-10 flex justify-center items-center ">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  md:space-y-0">
-              <ErrorBoundary>
-                <Suspense fallback={<Loading />}>
-                  {limitedPosts.map((post: any) => (
-                    <PostCard key={post._id} post={post} />
-                  ))}
-                </Suspense>
-              </ErrorBoundary>
-            </div>
-          </div>
-          <div className="flex justify-center mt-10">
-            <Link href={`/blog`}>
-              <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
-                View All
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* Blog section  */}
-      
-      {/* Testimony section  */}
-      <div className="lg:wrapper mx-5  ">
-      <h1 className="text-customSecondary text-3xl font-semibold my-[7rem] flex justify-center">
-          Our Happy Homeowners
-        </h1>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[5rem] gap-14 mt-[5rem] m-10">
+      {searchPerformed && searchResults.length > 0 ? (
+        <SearchLandingPageResult searchResults={searchResults} />
+      ) : (
+        <>
+          <Suspense>
+            <Hero />
+          </Suspense>
+          {/* Discover Property */}
           <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              {limitedReviews.map((review: any) => (
-                <Review key={review._id} review={review} />
-              ))}
+            <Suspense>
+              <DiscoverProperty properties={limitedProperties} />
             </Suspense>
           </ErrorBoundary>
-        </div>
-        <div className="flex justify-center mt-[5rem] ">
-          <Link href="/customer-testimonials">
-          <button className="py-3 px-[3.5rem] border-[1px] border-primary rounded-md text-xs text-primary ">
-            Read More
-          </button>
-          </Link>
-        </div>
+          {/* Land */}
+          <LandingSection>
+            <ErrorBoundary>
+              <Suspense>
+                <PropertyGrid properties={properties} />
+              </Suspense>
+              <Suspense>
+                <ViewAllButton href="/property" />
+              </Suspense>
+            </ErrorBoundary>
+          </LandingSection>
+          <Suspense>
+            <AboutProperty />
+          </Suspense>
+          {/* Blog section */}
+          <ErrorBoundary>
+            <Suspense>
+              <BlogSection posts={limitedPosts} />
+            </Suspense>
+          </ErrorBoundary>
+          {/* LiveTour section */}
+          <ErrorBoundary>
+            <Suspense>
+              <LiveTour />
+            </Suspense>
+          </ErrorBoundary>
 
-      {/* Testimony section  */}
-      <Newsletter />
+          {/* Testimony section */}
+          <ErrorBoundary>
+            <Suspense>
+              <TestimonialSection reviews={limitedReviews} />
+            </Suspense>
+          </ErrorBoundary>
+          {/* Newsletter section */}
+          <ErrorBoundary>
+            <Suspense>
+              <Newsletter />
+            </Suspense>
+          </ErrorBoundary>
+        </>
+      )}
     </main>
   );
+};
+
+// Wrap Home component with PropertyProvider
+export default function HomeWrapper() {
+  return <Home />;
 }

@@ -11,7 +11,7 @@ export interface Post extends Base {
     body: Block[];
     categories: Category[];
     mainImage: Image;
-    slug: Slug;
+    slug: slug;
     title: string;
     description: string;
     publishedAt: string;
@@ -68,8 +68,8 @@ export interface News extends Base {
     author: Author;
     body: Block[];
     categories: Category[];
-    mainImage: Image;
-    slug: Slug;
+    image: Image;
+    slug: slug;
     title: string;
     description: string;
     publishedAt: string;
@@ -87,11 +87,11 @@ export interface Property extends Base {
     youtubeLink: string;
     legalSurvey: string;
     location: string;
-    propertySize: string;
-    budget: string;
+    propertySize?: string;
+    budget?: string;
     bedrooms: number;
     bathrooms: number;
-    slug?: Slug;
+    slug?: slug;
     body: BlockContent;
   }
 
@@ -100,3 +100,17 @@ export interface Property extends Base {
     path: string;
     content: string;
   }
+
+  export interface UpcomingEvent extends Base {
+    slug?: string;
+    name: string;
+    summary: string;
+    description: string;
+    date: string;
+    start: string;
+    end: string;
+    thumbnail: Image;
+    livestreamURL: string;
+    body: BlockContent;
+  }
+  

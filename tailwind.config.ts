@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -28,8 +28,9 @@ const config: Config = {
         xl: "1200px",
         // => @media (min-width: 1200px) { ... }
   
-        "2xl": "1400px",
-        // => @media (min-width: 1400px) { ... }
+        '2xl': '1536px',
+                // => @media (min-width: 1200px) { ... }
+
       },
       colors: {
         current: "currentColor",
@@ -53,12 +54,15 @@ const config: Config = {
         "gray-dark": "#1E232E",
         "gray-light": "#F0F2F9",
         stroke: "#E3E8EF",
+        anotherGray: "#717171",
+        anotherBlack: "#000528",
+        anotherwhite: "#F4F4F4"
       },
     },
   },
   
   daisyui: {
-    themes: false,
+    themes: [],
   },
 
   plugins: [

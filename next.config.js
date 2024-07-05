@@ -7,6 +7,14 @@ const withMDX = require('@next/mdx')({
 
 
 module.exports = withMDX({
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*', // Match any /api/* request
+        destination: 'https://api.paystack.co'
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

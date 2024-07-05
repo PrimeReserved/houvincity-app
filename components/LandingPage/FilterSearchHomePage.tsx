@@ -1,14 +1,36 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState, useCallback, useMemo } from "react";
-import { usePropertyContext } from "@/context/PropertyContext";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { RootState, AppDispatch  } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProperties } from "../../features/properties/propertiesSlice"
 import { FaSearch } from "react-icons/fa";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
 
 const FilterSearchHomePage = ({ onClose }: any) => {
-  const { properties, setProperties } = usePropertyContext();
-  const [location, setLocation] = useState<string>("");
-  const [budget, setBudget] = useState("");
+  const dispatch = useDispatch();
+  const { properties, searchQuery } = useSelector((state: RootState) => state.properties);
+  const [filterState, setFilterState] = useState({
+    location: '',
+    budget: '',
+    propertyType: '',
+    // ... other filters ...
+  });
+
+  const debouncedSearch = useMemo(() => {
+    let timeoutId: any = null;
+    return (searchQuery: any) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        dispatch(fetchProperties(searchQuery));
+      }, 500); // debounce for 500ms
+    };
+  }, [dispatch]);
+
+
+  const handleSearch = useCallback((searchQuery: any) => {
+    debouncedSearch(searchQuery);
+  }, [debouncedSearch]);
 
 
   useEffect(() => {
@@ -39,6 +61,8 @@ const FilterSearchHomePage = ({ onClose }: any) => {
             <FaSearch className="text-customTextColor text-sm font-medium" />
             <input
               type="text"
+              value={filterState.location}
+              onChange={(e) => setFilterState({ ...filterState, location: e.target.value })}
               placeholder="Add a location"
               className="text-sm font-medium text-customTextColor focus:outline-none bg-white"
             />
@@ -90,6 +114,8 @@ const FilterSearchHomePage = ({ onClose }: any) => {
                 type="text"
                 id="from"
                 name="from"
+                value={filterState.budget}
+                onChange={(e) => setFilterState({ ...filterState, budget: e.target.value })}
                 placeholder="N250,000"
                 className="bg-transparent border-none outline-none w-full"
               />
@@ -103,6 +129,8 @@ const FilterSearchHomePage = ({ onClose }: any) => {
                 type="text"
                 id="to"
                 name="to"
+                value={filterState.budget}
+                onChange={(e) => setFilterState({ ...filterState, budget: e.target.value })}
                 placeholder="N500,000"
                 className="bg-transparent border-none outline-none w-full"
               />
@@ -111,7 +139,8 @@ const FilterSearchHomePage = ({ onClose }: any) => {
         </div>
 
         <div className="flex justify-between mt-5">
-          <button className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-[4rem] py-3">
+          <button className="flex items-center gap-2 bg-primary text-white rounded-lg text-sm px-[4rem] py-3"
+          onClick={() => handleSearch(filterState.location)}>
             Save
           </button>
           <button className="flex items-center gap-2  text-primary underline rounded-lg text-sm px-[4rem] py-3"

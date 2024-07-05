@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SocialLink from "../Socials/SocialLink";
-
+import Logo from "@/public/HCL Logo.png"
 import Instagram from "@/public/images/socials/path1165.svg";
 import Twitter from "@/public/images/socials/path1009.svg";
 import Facebook from "@/public/images/socials/Vector.svg";
@@ -24,7 +24,7 @@ const FooterHome = () => {
               <div className="mb-12 lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src={`https://res.cloudinary.com/dzd51q99i/image/upload/v1717074807/houvincity/HCL_Logo_new_1_auxiao.png`}
+                    src={Logo}
                     alt="logo"
                     className="block"
                     width={140}
@@ -67,22 +67,22 @@ const FooterHome = () => {
               </span>
               <div className="flex md:space-x-14">
                 <SocialLink
-                  href={`${process.env.NEXT_PUBLIC_INSTAGRAM_URL}`}
+                  href="https://www.instagram.com/hauvincitylimited?igsh=bm80bm5yYnlyaTc3"
                   image={Instagram}
                   alt="Instagram"
                 />
                 <SocialLink
-                  href={`${process.env.NEXT_PUBLIC_TWITTER_URL}`}
+                  href={`https://www.twitter.com/`}
                   image={Twitter}
                   alt="Twitter"
                 />
                 <SocialLink
-                  href={`${process.env.NEXT_PUBLIC_FACEBOOK_URL}`}
+                  href={`https://web.facebook.com/profile.php?id=100090655972772&mibextid=ZbWKwL&_rdc=1&_rdr`}
                   image={Facebook}
                   alt="Facebook"
                 />
                 <SocialLink
-                  href={`${process.env.NEXT_PUBLIC_YOUTUBE_URL}`}
+                  href={`https://www.youtube.com/@houvincitylimited?si=qkgeXk4KUHDTzyvF`}
                   image={Youtube}
                   alt="Youtube"
                 />
@@ -123,10 +123,10 @@ const QuickLinks = () => (
       </li>
       <li>
         <Link
-          href="/services"
+          href="/events"
           className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
         >
-          Services
+          Events
         </Link>
       </li>
       <li>
@@ -154,6 +154,15 @@ const Services = () => (
       SUPPORT
     </h2>
     <ul>
+    <li>
+        <Link
+          href="/news"
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
+        >
+          News
+        </Link>
+      </li>
+
       <li>
         <Link
           href="/contact"

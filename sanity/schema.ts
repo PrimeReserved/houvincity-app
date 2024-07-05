@@ -10,6 +10,7 @@ import subscription from './schemaTypes/subscription'
 import testimony from './schemaTypes/testimony'
 import event from './schemaTypes/event'
 import contact from './schemaTypes/contact'
+import payment from './schemaTypes/payment'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -23,6 +24,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     subscription,
     testimony,
     event,
-    contact
+    contact,
+    payment
   ],
 }
