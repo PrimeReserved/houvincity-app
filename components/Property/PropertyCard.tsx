@@ -1,10 +1,10 @@
-import Houses1 from "@/public/images/property/house1.svg";
-import { Property } from "@/typings";
-import Image from "next/image";
-import Link from "next/link";
-import { Suspense } from "react";
-import { urlForImage } from "@/sanity/lib/image";
-import Loading from "@/app/loading";
+import Houses1 from '@/public/images/property/house1.svg';
+import { Property } from '@/typings';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Suspense } from 'react';
+import { urlForImage } from '@/sanity/lib/image';
+import Loading from '@/app/loading';
 
 export default function PropertyCard({ property }: any) {
   return (
@@ -18,9 +18,9 @@ export default function PropertyCard({ property }: any) {
             <div
               className=""
               style={{
-                width: "100%",
-                height: "100%",
-                overflow: "hidden", // Ensures that anything outside the clipping path is hidden
+                width: '100%',
+                height: '100%',
+                overflow: 'hidden', // Ensures that anything outside the clipping path is hidden
               }}
             >
               <Image
@@ -33,9 +33,9 @@ export default function PropertyCard({ property }: any) {
                 width={500}
                 height={500}
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
                 }}
                 loading="lazy"
               />
@@ -77,7 +77,10 @@ export default function PropertyCard({ property }: any) {
               </div>
             </div>
           </div>
-          <p className="text-xs font-medium mt-4">{property.location}</p>
+          <p className="text-xs font-medium mt-4">
+            {property.street}
+            {property.location}
+          </p>
           <div className="mt-2 flex justify-between">
             <p className="text-customPrimary font-semibold ">
               &#x20A6; {property.budget}

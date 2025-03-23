@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import SocialLink from "../Socials/SocialLink";
-import Logo from "@/public/HCL Logo.png"
-import Instagram from "@/public/images/socials/path1165.svg";
-import Twitter from "@/public/images/socials/path1009.svg";
-import Facebook from "@/public/images/socials/Vector.svg";
-import Youtube from "@/public/images/socials/youtube.png";
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import SocialLink from '../Socials/SocialLink';
+import Logo from '@/public/HCL Logo.png';
+import Instagram from '@/public/images/socials/path1165.svg';
+import Twitter from '@/public/images/socials/path1009.svg';
+import Facebook from '@/public/images/socials/Vector.svg';
+import Youtube from '@/public/images/socials/youtube.png';
 
 const getCurrentYear = () => {
   return new Date().getFullYear();
@@ -40,14 +40,17 @@ const FooterHome = () => {
                 </p>
               </div>
               {/* Contact Us Section */}
-              <div id="contact" className="w-[100%] pl-4 mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16 -mt-4">
+              <div
+                id="contact"
+                className="w-[100%] pl-4 mb-12 max-w-[95%] md:max-w-[85%] lg:mb-16 -mt-4"
+              >
                 <div className="mb-9 text-[14px] font-semibold leading-relaxed text-white">
                   <h1 className="text-[18px]">Contact Us:</h1>
                   <p className="pt-3">Phone Number: +2348034652178</p>
                   <p className="py-2">
                     Address: 31C Rumuola Road by Rumuola Junction.
                   </p>
-                  <p className="pt">Email: info@houvincityltd.com</p>
+                  <p className="pt">Email: info@houvincty.com</p>
                 </div>
               </div>
             </div>
@@ -101,9 +104,7 @@ const FooterHome = () => {
 
 const QuickLinks = () => (
   <div className="mb-12 lg:mb-16">
-    <h2 className="mb-10 text-2xl font-semibold text-white ">
-      NAVIGATION
-    </h2>
+    <h2 className="mb-10 text-2xl font-semibold text-white ">NAVIGATION</h2>
     <ul>
       <li>
         <Link
@@ -132,7 +133,8 @@ const QuickLinks = () => (
       <li>
         <Link
           href="/about"
-          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary">
+          className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"
+        >
           About
         </Link>
       </li>
@@ -145,16 +147,14 @@ const QuickLinks = () => (
         </Link>
       </li>
     </ul>
-    </div>
+  </div>
 );
 
 const Services = () => (
   <div className="mb-12 mr-4 lg:mb-16 lg:mr-2">
-    <h2 className="mb-10 text-2xl font-semibold text-white ">
-      SUPPORT
-    </h2>
+    <h2 className="mb-10 text-2xl font-semibold text-white ">SUPPORT</h2>
     <ul>
-    <li>
+      <li>
         <Link
           href="/news"
           className="mb-4 inline-block text-base font-semibold text-white duration-300 hover:text-primary"

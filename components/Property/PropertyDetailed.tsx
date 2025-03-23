@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Suspense } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import YoutubeEmbed from "./YoutubeEmbed";
-import { Property } from "@/typings";
-import { PortableText } from "@portabletext/react";
-import { RichTextComponents } from "../Blog/Cards/RichTextComponents";
-import Loading from "@/app/loading";
-import Link from "next/link";
-import { urlForImage } from "@/sanity/lib/image";
-import { FiDownload } from "react-icons/fi";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { Suspense } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import YoutubeEmbed from './YoutubeEmbed';
+import { Property } from '@/typings';
+import { PortableText } from '@portabletext/react';
+import { RichTextComponents } from '../Blog/Cards/RichTextComponents';
+import Loading from '@/app/loading';
+import Link from 'next/link';
+import { urlForImage } from '@/sanity/lib/image';
+import { FiDownload } from 'react-icons/fi';
+import { FaRegCalendarAlt } from 'react-icons/fa';
 
 interface PropertyDetailedProps {
   property: Property;
@@ -21,14 +21,14 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   const router = useRouter();
   const handleNavigateToPayment = () => {
     if (property.budget !== undefined) {
-      const budget = parseFloat(property.budget.replace(/,/g, ""));
+      const budget = parseFloat(property.budget.replace(/,/g, ''));
       if (!isNaN(budget)) {
         router.push(`/property-payment?amount=${property.budget}`);
       } else {
-        console.error("Invalid budget value");
+        console.error('Invalid budget value');
       }
     } else {
-      console.error("Budget is undefined");
+      console.error('Budget is undefined');
     }
   };
 
@@ -82,26 +82,31 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         )}
       </div>
       <div className="mt-10 px-10">
-        <p className=" text-customPrimary text-base font-semibold  lg:w-[50%] md:w-[60%] w-[75%] pb-5">
+        <p className=" text-customPrimary font-semibold leading-relaxed my-8 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
           {property.location}
         </p>
-        <p className=" text-primary text-sm lg:w-[50%] md:w-[60%] w-[75%] ">
-          {property.propertySize} plots
+        <p className=" text-primary text-sm leading-relaxed my-8 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto ">
+          {property.propertySize} sqm
         </p>
 
-        <p className=" text-customPrimary text-lg lg:w-[50%] md:w-[60%] w-[75%] py-6">
+        {/* <p className=" text-customPrimary text-lg lg:w-[50%] md:w-[60%] w-[75%] py-6">
           Select Plots to Purchase
-        </p>
+        </p> */}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 mx-10 gap-5 lg:gap-10">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 mx-10 gap-5 lg:gap-10">
         <div className="border-2 p-4 rounded-lg border-primary cursor-pointer">
           <p className="font-medium">{property.propertySize} SQM. (AE-H 69)</p>
           <p className="text-lg">N{property.budget}</p>
-          <button className="text-sm text-primary" onClick={handleNavigateToPayment}>Click to purchase</button>
+          <button
+            className="text-sm text-primary"
+            onClick={handleNavigateToPayment}
+          >
+            Click to purchase
+          </button>
         </div>
         <div
           className="border-2 p-4 rounded-lg border-red-500"
-          style={{ pointerEvents: "none" }}
+          style={{ pointerEvents: 'none' }}
         >
           <p className="font-medium">{property.propertySize} SQM. (AE-H 69)</p>
           <p className="text-lg">N{property.budget}</p>
@@ -117,9 +122,25 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
           <p className="text-lg">N{property.budget}</p>
           <p className="text-sm text-primary">Click to purchase</p>
         </div>
-      </div>
+      </div> */}
 
-      <div className="flex justify-center my-20">
+      <div className="flex gap-4 justify-center my-20">
+        <button
+          className=" bg-primary hover:border-customSecondary hover:text-white text-white font-medium text-sm shadow-sm px-10 py-3 rounded-md flex items-center gap-3"
+          onClick={() =>
+            router.push(`${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_URL}`)
+          }
+        >
+          <p className="text-sm font-semibold ">Proceed to Payment</p>
+        </button>
+        <Link href="/contact">
+          <button className="border-primary border-[1px] hover:border-customSecondary hover:text-primary text-customSecondary font-medium text-sm shadow-sm px-10 py-3 rounded-md flex items-center gap-3">
+            <FaRegCalendarAlt />
+            Contact Us to Pay in Person
+          </button>
+        </Link>
+      </div>
+      {/* <div className="flex flex-col justify-center items-center mt-16 gap-5 ">
         <Link
           href="/files/SILVER PARK_Subdivision-Model-1.pdf"
           target="_blank"
@@ -130,15 +151,16 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             Download Layout
           </button>
         </Link>
-      </div>
+      </div> */}
 
       <div className="mx-10">
-        <h1 className=" text-customSecondary font-medium text-2xl">
+        <h1 className=" text-black text-2xl leading-relaxed my-8 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
           About Property
-        </h1>
-      </div> 
+        </h1>{' '}
+        <hr />
+      </div>
 
-      <p className="text-customTextColor text-base leading-loose my-10 px-10">
+      <p className="text-gray-700 text-lg leading-relaxed my-8 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
         {property?.body ? (
           <PortableText
             value={property?.body}
@@ -162,14 +184,6 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             Contact Us For an Inspection Today
           </button>
         </Link>
-        <button
-          className=" bg-primary hover:border-customSecondary hover:text-white text-white font-medium text-sm shadow-sm px-10 py-3 rounded-md flex items-center gap-3"
-          onClick={() => router.push(`${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_URL}`)}
-        >
-          <p className="text-sm font-semibold ">
-            Continue
-          </p>
-        </button>
       </div>
     </div>
   );
