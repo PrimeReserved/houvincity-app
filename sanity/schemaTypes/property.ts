@@ -29,7 +29,7 @@ export default defineType({
       title: 'Property Type',
       type: 'string',
       options: {
-        list: ['House', 'Land'],
+        list: ['House', 'Estate', 'Land'],
       },
     }),
     defineField({
@@ -92,7 +92,7 @@ export default defineType({
       title: 'Location',
       type: 'string',
       options: {
-        list: ['Port Harcourt', 'Lagos', 'Abuja'],
+        list: ['Rivers State', 'Lagos', 'Abuja'],
       },
     }),
     defineField({

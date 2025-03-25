@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store";
-import { quickSort, binarySearch } from "@/utils/searchAndSort";
-import { HiSearch } from "react-icons/hi";
-import PropertyCard from "./PropertyCard";
-import { Property } from "@/typings";
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { quickSort, binarySearch } from '@/utils/searchAndSort';
+import { HiSearch } from 'react-icons/hi';
+import PropertyCard from './PropertyCard';
+import { Property } from '@/typings';
 import {
   fetchProperties,
   setSearchQuery,
@@ -15,11 +15,11 @@ import {
   setSize,
   setBudget,
   setSortCriteria,
-} from "@/features/properties/propertiesSlice";
+} from '@/features/properties/propertiesSlice';
 
 // import { selectFilteredAndSortedProperties } from '@/features/properties/selectors'
-import { Loading } from "notiflix/build/notiflix-loading-aio";
-import { Report } from "notiflix/build/notiflix-report-aio";
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 export const SearchProperty = (): any => {
   const dispatch = useDispatch();
@@ -136,7 +136,8 @@ export const SearchProperty = (): any => {
     if (propertySize) {
       filteredProperties = filteredProperties.filter(
         (property: any) =>
-          property?.propertySize >= propertySize[0] && property?.propertySize <= propertySize[1]
+          property?.propertySize >= propertySize[0] &&
+          property?.propertySize <= propertySize[1]
       );
     }
 
@@ -157,8 +158,8 @@ export const SearchProperty = (): any => {
   };
 
   if (error) {
-    return Report.warning("An Error Occured", error, "close", {
-      width: "360px",
+    return Report.warning('An Error Occured', error, 'close', {
+      width: '360px',
     });
   }
 
@@ -177,6 +178,7 @@ export const SearchProperty = (): any => {
               </option>
               <option value="House">House</option>
               <option value="Land">Land</option>
+              <option value="Estate">Estate</option>
             </select>
           </div>
           <div className="relative">
@@ -189,7 +191,7 @@ export const SearchProperty = (): any => {
                 Location
               </option>
               <option value="Abuja">Abuja</option>
-              <option value="Port Harcourt">Port Harcourt</option>
+              <option value="Rivers State">Rivers State</option>
               <option value="Lagos">Lagos</option>
             </select>
           </div>
@@ -202,9 +204,9 @@ export const SearchProperty = (): any => {
               <option disabled value="">
                 Property Size
               </option>
-              <option value="200 - 500">200sqft - 500sqft</option>
-              <option value="500 - 1000">500sqft - 1000sqft</option>
-              <option value="1000 - 10000">1000sqft - 10000sqft</option>
+              <option value="200 - 500">200sqm - 500sqm</option>
+              <option value="500 - 1000">500sqm - 1000sqm</option>
+              <option value="1000 - 10000">1000sqm - 10000sqm</option>
             </select>
           </div>
           <div className="relative">
@@ -218,8 +220,8 @@ export const SearchProperty = (): any => {
               </option>
               <option value="200000 - 500000">N200,000 - N500,000</option>
               <option value="500000 - 2000000">N500,000 - N2,000,000</option>
-              <option value="2000000 - 10000000">
-                N2,000,000 - N10,000,000
+              <option value="2000000 - 50000000">
+                N2,000,000 - N50,000,000
               </option>
             </select>
           </div>
@@ -234,7 +236,7 @@ export const SearchProperty = (): any => {
         </button>
       </div>
       <h1 className=" text-customPrimary font-bold text-4xl m-10">
-      {propertyType || "Properties"}
+        {propertyType || 'Properties'}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-3 xl:gap-5 mx-5 lg:mx-2 xl:mx-10">
         {filteredProperties?.length > 0 ? (
@@ -254,10 +256,10 @@ export const SearchProperty = (): any => {
       </div>
       {filteredProperties?.length > 0 ? (
         <div className="flex justify-center mt-10">
-        <button className="py-3 px-[3.5rem] font-bold border-[1px] bg-primary rounded-md text-xs text-white">
-          Load More
-        </button>
-      </div>
+          <button className="py-3 px-[3.5rem] font-bold border-[1px] bg-primary rounded-md text-xs text-white">
+            Load More
+          </button>
+        </div>
       ) : null}
     </>
   );
