@@ -1,8 +1,8 @@
-import Image from "next/image";
-import About_section from "@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.png";
-import Loading from "@/app/loading";
-import { Suspense } from "react";
-import Link from "next/link";
+import Image from 'next/image';
+import About_section from '@/public/images/about/founders/Challenges-and-Opportunities-in-Civil-Engineering-Addressing-Environmental-and-Safety-Concerns 1.png';
+import Loading from '@/app/loading';
+import { Suspense } from 'react';
+import Link from 'next/link';
 
 interface Founder {
   id: number;
@@ -15,37 +15,37 @@ const founders: Founder[] = [
   {
     id: 1,
     image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1718318625/houvincity/about/Untitled_design_ljqbij.png",
-    name: "Emmanuel Hope. U.",
-    position: "GMD/Founder",
+      'https://res.cloudinary.com/dzd51q99i/image/upload/v1718318625/houvincity/about/Untitled_design_ljqbij.png',
+    name: 'Emmanuel Hope. U.',
+    position: 'GMD/Founder',
   },
   {
     id: 2,
     image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716402028/houvincity/about/Frame_1000002842_2_igzrtx.png",
-    name: "Barr. Woryi Onyema",
-    position: "Co-founder",
+      'https://res.cloudinary.com/dzd51q99i/image/upload/v1716402028/houvincity/about/Frame_1000002842_2_igzrtx.png',
+    name: 'Barr. Woryi Onyema',
+    position: 'Partner',
   },
-  {
-    id: 3,
-    image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
-    name: "Enoma Osawemwenma",
-    position: "CO-founder",
-  },
+  // {
+  //   id: 3,
+  //   image:
+  //     "https://res.cloudinary.com/dzd51q99i/image/upload/v1716401927/houvincity/about/Frame_1000002843_lqi2uf.png",
+  //   name: "Enoma Osawemwenma",
+  //   position: "CO-founder",
+  // },
   {
     id: 4,
     image:
-      "https://res.cloudinary.com/dzd51q99i/image/upload/v1718318757/houvincity/about/Untitled_design_hwdfs6.png",
-    name: "Mr Jonah Ukoh",
-    position: "Partner",
+      'https://res.cloudinary.com/dzd51q99i/image/upload/v1718318757/houvincity/about/Untitled_design_hwdfs6.png',
+    name: 'Mr Jonah Ukoh',
+    position: 'Partner',
   },
 ];
 
 export default function Founders() {
   return (
     <div className=" ">
-      {" "}
+      {' '}
       {/* Founder section  */}
       <h1 className="mt-5 text-center text-4xl text-[#040A3B] font-bold">
         Founders
@@ -56,7 +56,7 @@ export default function Founders() {
             <div
               className="card rounded bg-base-100 shadow-xl mb-10"
               key={founder.id}
-              style={{ maxWidth: "300px" }}
+              style={{ maxWidth: '300px' }}
             >
               <figure>
                 <Suspense fallback={<Loading />}>
@@ -97,13 +97,15 @@ export default function Founders() {
           <section className="mb-5 p-5">
             <h3 className="mb-5 text-2xl">Mission</h3>
             <p>
-              Through an automated property insurance system promote the safety of clients investments.
+              Through an automated property insurance system promote the safety
+              of clients investments.
             </p>
           </section>
           <section className="mb-5 p-5">
             <h3 className="mb-5 text-2xl">Vision</h3>
             <p>
-            To revolutionize the real estate sector with veritable tools that eliminates fraud, property theft, or land grabbing.
+              To revolutionize the real estate sector with veritable tools that
+              eliminates fraud, property theft, or land grabbing.
             </p>
           </section>
           <section className="mb-5 p-5">
@@ -119,7 +121,7 @@ export default function Founders() {
             height={500}
           />
         </figure>
-      </div>{" "}
+      </div>{' '}
       <div className="">
         <section className="text-center m-10 uppercase">
           <h3 className=" text-xl md:text-3xl text-primary font pb-2">
@@ -165,19 +167,21 @@ export default function Founders() {
           </section>
         </div>
         <hr className="border-solid border-1 border-primary" />
-      </div>{" "}
+      </div>{' '}
       {/* Buttons  */}
       <div className="flex flex-col md:flex-row mt-10 md:mt-0 mx-8 justify-center gap-3 mb-20 relative md:bottom-5">
-        <Link href="/faqs" className="btn rounded-md bg-primary hover:bg-primary/80 text-white py-4 px-5">
-          <button >
-            Have a Question
-          </button>
+        <Link
+          href="/faqs"
+          className="btn rounded-md bg-primary hover:bg-primary/80 text-white py-4 px-5"
+        >
+          <button>Have a Question</button>
         </Link>
 
-        <Link href="/property" className="btn rounded-md bg-[#040A3B] hover:bg-[#040A3B] text-white py-4 px-6">
-          <button >
-            Find Property
-          </button>
+        <Link
+          href="/property"
+          className="btn rounded-md bg-[#040A3B] hover:bg-[#040A3B] text-white py-4 px-6"
+        >
+          <button>Find Property</button>
         </Link>
       </div>
     </div>

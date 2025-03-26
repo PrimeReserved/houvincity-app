@@ -63,7 +63,7 @@ function ContactForm() {
     {
       id: '1',
       logo: BiSolidPhoneCall,
-      details: '+234 803 465 2178',
+      details: '+2347074693320, +2347074693321',
     },
     {
       id: '2',
@@ -73,7 +73,8 @@ function ContactForm() {
     {
       id: '3',
       logo: FaLocationDot,
-      details: '31C Rumuola Road by Rumuola Junction',
+      details:
+        "#36b Ada-George Road, First Floor, Helen's Plaza. By Peperoni Junction, Rumepirikom, Port Harcourt.",
     },
   ];
 
