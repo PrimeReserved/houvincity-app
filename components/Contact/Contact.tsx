@@ -63,7 +63,7 @@ function ContactForm() {
     {
       id: '1',
       logo: BiSolidPhoneCall,
-      details: '+2347074693320, +2347074693321',
+      details: '07074693320, 07074693321',
     },
     {
       id: '2',

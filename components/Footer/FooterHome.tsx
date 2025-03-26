@@ -46,9 +46,7 @@ const FooterHome = () => {
               >
                 <div className="mb-9 text-[14px] font-semibold leading-relaxed text-white">
                   <h1 className="text-[18px]">Contact Us:</h1>
-                  <p className="pt-3">
-                    Phone Number: +2347074693320, +2347074693321
-                  </p>
+                  <p className="pt-3">Phone Number: 07074693320, 07074693321</p>
                   <p className="py-2">
                     Address: #36b Ada-George Road, First Floor, Helen&apos;s
                     Plaza. By Peperoni Junction, Rumepirikom, Port Harcourt.
