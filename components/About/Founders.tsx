@@ -135,7 +135,7 @@ export default function Founders() {
         <div className="flex flex-row md:items-center justify-evenly p-10 gap-5 md:gap-0">
           <section className="text-center">
             <div className="text-primary md:text-3xl text-lg  font-semibold">
-              1
+              7
             </div>
             <div className="text-[#040A3B] text-sm md:text-base font-semibold">
               Years of Experience
