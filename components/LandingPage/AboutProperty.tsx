@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
-import { FaCheck } from "react-icons/fa";
-import Image from "next/image";
-import Loading from "@/app/loading";
+import React, { Suspense } from 'react';
+import { FaCheck } from 'react-icons/fa';
+import Image from 'next/image';
+import Loading from '@/app/loading';
 
 function AboutProperty() {
   return (
@@ -13,7 +13,7 @@ function AboutProperty() {
         <div className="mt-5 md:w-[453px]  ">
           <div className="flex items-start gap-4">
             <div className="p-2 rounded-full bg-primary text-white">
-            <FaCheck />
+              <FaCheck />
             </div>
             <div className="">
               <h2 className="font-semibold text-xl md:text-2xl text-customSecondary">
@@ -28,46 +28,46 @@ function AboutProperty() {
           </div>
           <div className="flex items-start gap-4 mt-5">
             <div className="p-2 rounded-full bg-primary text-white">
-            <FaCheck />
+              <FaCheck />
             </div>
             <div className="">
               <h1 className="font-semibold text-xl md:text-2xl text-customSecondary">
                 High Quality Properties
               </h1>
               <p className="text-sm text-customTextColor mt-2">
-                Experience the luxury of affordability with our best prices on
-                top-tier properties, making upscale living accessible to all, ur
-                commitment to competitive prices ensures...
+                Discover meticulously curated homes and commercial spaces that
+                exceed industry standards, featuring premium finishes and modern
+                amenities that define contemporary living excellence...
               </p>
             </div>
           </div>
           <div className="flex items-start gap-4 mt-5">
             <div className="p-2 rounded-full bg-primary text-white">
-            <FaCheck />
+              <FaCheck />
             </div>
             <div className="">
               <h1 className="font-semibold text-xl md:text-2xl text-customSecondary">
                 Local Market Insight
               </h1>
               <p className="text-sm text-customTextColor mt-2">
-                Experience the luxury of affordability with our best prices on
-                top-tier properties, making upscale living accessible to all, ur
-                commitment to competitive prices ensures...
+                Leverage our deep understanding of neighborhood trends and
+                property values to make informed decisions, backed by years of
+                local expertise and comprehensive market analysis...
               </p>
             </div>
           </div>
           <div className="flex items-start gap-4 mt-5">
             <div className="p-2 rounded-full bg-primary text-white">
-            <FaCheck />
+              <FaCheck />
             </div>
             <div className="">
               <h1 className="font-semibold text-xl md:text-2xl text-customSecondary">
                 Trusted Reputation
               </h1>
               <p className="text-sm text-customTextColor mt-2">
-                Experience the luxury of affordability with our best prices on
-                top-tier properties, making upscale living accessible to all, ur
-                commitment to competitive prices ensures...
+                Built on decades of successful transactions and satisfied
+                clients, our sterling reputation reflects unwavering commitment
+                to integrity, transparency, and exceptional service delivery...
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ function AboutProperty() {
             width={407}
             height={390.39}
             style={{
-              clipPath: "polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)",
+              clipPath: 'polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)',
             }}
           />
         </Suspense>
