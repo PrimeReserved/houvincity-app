@@ -143,7 +143,7 @@ export default function Founders() {
           </section>
           <section className="text-center">
             <div className="text-primary md:text-3xl text-lg font-semibold">
-              12
+              5
             </div>
             <div className="text-[#040A3B] text-sm md:text-base font-semibold mt-3 md:mt-0">
               Services
@@ -151,7 +151,7 @@ export default function Founders() {
           </section>
           <section className="text-center">
             <div className="text-primary md:text-3xl text-lg font-semibold">
-              80%
+              90%
             </div>
             <div className="text-[#040A3B] text-sm md:text-base font-semibold">
               Happy Clients
@@ -159,7 +159,7 @@ export default function Founders() {
           </section>
           <section className="text-center">
             <div className="text-primary md:text-3xl text-lg font-semibold">
-              3
+              200
             </div>
             <div className="text-[#040A3B] text-sm md:text-base font-semibold">
               Skilled Agents
