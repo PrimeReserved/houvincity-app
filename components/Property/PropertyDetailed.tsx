@@ -169,12 +169,8 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         ) : null}
       </p>
 
-      <div className="flex justify-center my-10">
-        {property.youtubeLink ? (
-          <YoutubeEmbed source={property.youtubeLink} />
-        ) : (
-          <div>No video available</div>
-        )}
+      <div className="my-10">
+        {property.youtubeLink && <YoutubeEmbed source={property.youtubeLink} />}
       </div>
 
       <div className="flex flex-col justify-center items-center mt-16 gap-5 ">
