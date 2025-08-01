@@ -29,7 +29,7 @@ export default defineType({
       title: 'Property Type',
       type: 'string',
       options: {
-        list: ['House', 'Estate', 'Land'],
+        list: ['House', 'Estate', 'Land', 'Commercial Property'],
       },
     }),
     defineField({
