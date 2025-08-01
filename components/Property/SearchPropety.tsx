@@ -59,7 +59,14 @@ export const SearchProperty = (): any => {
       budget,
       searchQuery
     );
-    setFilteredProperties(filtered as any);
+
+    // Sort filtered properties to show available ones first
+    const sortedFiltered = filtered.sort((a: any, b: any) => {
+      return (a.soldOut || false) - (b.soldOut || false);
+    });
+
+    setFilteredProperties(sortedFiltered as any);
+
     if (filtered.length === 0) {
       const timer = setTimeout(() => {
         resetFields();
@@ -179,6 +186,7 @@ export const SearchProperty = (): any => {
               <option value="House">House</option>
               <option value="Land">Land</option>
               <option value="Estate">Estate</option>
+              <option value="Commercial Property">Commercial Property</option>
             </select>
           </div>
           <div className="relative">

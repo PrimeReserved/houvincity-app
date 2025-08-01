@@ -1,8 +1,7 @@
-"use server";
+'use server';
 
-import { client } from "@/sanity/lib/client";
-import { groq } from "next-sanity";
-
+import { client } from '@/sanity/lib/client';
+import { groq } from 'next-sanity';
 
 export async function getPosts() {
   try {
@@ -51,18 +50,18 @@ export async function getNews() {
 }
 
 export async function getArticle(slug: string) {
-    try {
-      const query = groq`*[_type == 'news' && slug.current == $slug][0]{
+  try {
+    const query = groq`*[_type == 'news' && slug.current == $slug][0]{
         ...,
         body,
         author->
     }`;
-  
-      if (!query) {
-        throw new Error(`Could not fetch news article with ID: ${slug}`);
-      }
-      const post = await client.fetch(query, { slug });
-      return post;
+
+    if (!query) {
+      throw new Error(`Could not fetch news article with ID: ${slug}`);
+    }
+    const post = await client.fetch(query, { slug });
+    return post;
   } catch (error) {
     console.log(`An error occurred while fetching the News article: ${error}`);
     return null;
@@ -86,23 +85,23 @@ export async function getProperties() {
 }
 
 export async function getProperty(slug: string) {
-   try {
-      const query = groq`*[_type == 'property' && slug.current == $slug][0]{
+  try {
+    const query = groq`*[_type == 'property' && slug.current == $slug][0]{
         ...
     }`;
-  
-      if (!query) {
-        throw new Error(`Could not fetch news article with ID: ${slug}`);
-      }
-      const post = await client.fetch(query, { slug });
-      return post;
+
+    if (!query) {
+      throw new Error(`Could not fetch news article with ID: ${slug}`);
+    }
+    const post = await client.fetch(query, { slug });
+    return post;
   } catch (error) {
-    console.log(`An error occurred while fetching a  SINGLE property: ${error}`);
+    console.log(
+      `An error occurred while fetching a  SINGLE property: ${error}`
+    );
     return null;
   }
 }
-
-
 
 // Get testimony
 
@@ -120,35 +119,39 @@ export async function getTestimonies() {
 }
 
 export async function getTestimony(slug: string) {
-    try {
-      const query = groq`*[_type == 'testimony' && slug.current == $slug][0]{
+  try {
+    const query = groq`*[_type == 'testimony' && slug.current == $slug][0]{
         ...,
         body,
         author->
     }`;
-  
-      if (!query) {
-        throw new Error(`Could not fetch testimony review with ID: ${slug}`);
-      }
-      const review = await client.fetch(query, { slug });
-      return review;
+
+    if (!query) {
+      throw new Error(`Could not fetch testimony review with ID: ${slug}`);
+    }
+    const review = await client.fetch(query, { slug });
+    return review;
   } catch (error) {
-    console.log(`An error occurred while fetching the single testimony: ${error}`);
+    console.log(
+      `An error occurred while fetching the single testimony: ${error}`
+    );
     return `An error occurred while fetching the single testimony: ${error}`;
   }
 }
 
-
 // Newsletter subscription
 export async function subscribe(email: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SUBSCRIBE_API_URI}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SUBSCRIBE_API_URI}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
     if (!response.ok) {
       throw new Error(`Could not subscribe. Status: ${response.status}`);
     }
@@ -162,36 +165,52 @@ export async function subscribe(email: string) {
 }
 
 // Property Event
-export async function eventForm({ title, email}: any) {
+export async function eventForm({ title, email }: any) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_EVENT_API_URI}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ title, email }),
     });
     if (!response.ok) {
-      throw new Error(`Could not subscribe to event. Status: ${response.status}`);
+      throw new Error(
+        `Could not subscribe to event. Status: ${response.status}`
+      );
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(`An Error occurred while subscribing to Property event: ${error}`);
+    console.log(
+      `An Error occurred while subscribing to Property event: ${error}`
+    );
     return `An Error occurred while subscribing to Property event: ${error}`;
   }
 }
 
-// Contact 
-export async function contact({ firstName, lastName, email, phoneNumber, message}: any) {
+// Contact
+export async function contact({
+  firstName,
+  lastName,
+  email,
+  phoneNumber,
+  message,
+}: any) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_CONTACT_API_URI}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ firstName, lastName, email, phoneNumber, message }),
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        message,
+      }),
     });
     if (!response.ok) {
       throw new Error(`Could not contact us. Status: ${response.status}`);
@@ -203,21 +222,39 @@ export async function contact({ firstName, lastName, email, phoneNumber, message
     console.log(`An Error occurred while submitting contact form: ${error}`);
     return `An Error occurred while submitting contact form: ${error}`;
   }
-};
+}
 
 // Payment
-export async function payment({ fullname, email, address, city, state, company, phoneNumber}: any) {
+export async function payment({
+  fullname,
+  email,
+  address,
+  city,
+  state,
+  company,
+  phoneNumber,
+}: any) {
   try {
-    const publicKey = `sk_test_86eb821508b0f6f7bcc07f76ce261530fa2b7991`
-    // const publicKey = `${process.env.NEXT_PUBLIC_PAYSTACK_URL}`; 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_API_URI}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${publicKey}`,
-      },
-      body: JSON.stringify({ fullname, email, address, city, state, company, phoneNumber }),
-    });
+    const publicKey = `${process.env.NEXT_PUBLIC_PAYSTACK_URL}`;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PROPERTY_PAYMENT_API_URI}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${publicKey}`,
+        },
+        body: JSON.stringify({
+          fullname,
+          email,
+          address,
+          city,
+          state,
+          company,
+          phoneNumber,
+        }),
+      }
+    );
     if (!response.ok) {
       throw new Error(`Could not make payment. Status: ${response.status}`);
     }
@@ -246,16 +283,16 @@ export async function getEvents() {
 }
 
 export async function getEvent(slug: string) {
-   try {
-      const query = groq`*[_type == 'event' && slug.current == $slug][0]{
+  try {
+    const query = groq`*[_type == 'event' && slug.current == $slug][0]{
         ...
     }`;
-  
-      if (!query) {
-        throw new Error(`Could not fetch news article with ID: ${slug}`);
-      }
-      const post = await client.fetch(query, { slug });
-      return post;
+
+    if (!query) {
+      throw new Error(`Could not fetch news article with ID: ${slug}`);
+    }
+    const post = await client.fetch(query, { slug });
+    return post;
   } catch (error) {
     console.log(`An error occurred while fetching a  SINGLE event: ${error}`);
     return null;

@@ -1,25 +1,24 @@
-import type { Metadata } from "next";
-import { draftMode } from "next/headers";
-import { Josefin_Sans } from "next/font/google";
-import "./globals.css";
-import LiveVisualEditing from "@/components/LiveVisualEditing";
-import Logo from "@/public/logo.svg";
-import Providers from "@/context/Providers";
-import LiveChat from "@/components/LiveChat/LiveChat";
-
+import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
+import { Josefin_Sans } from 'next/font/google';
+import './globals.css';
+import LiveVisualEditing from '@/components/LiveVisualEditing';
+import Logo from '@/public/logo.svg';
+import Providers from '@/context/Providers';
+import ConditionalLiveChat from '@/components/ConditionalLiveChat/ConditionalLiveChat';
 
 export const revalidate = 30;
 
 const josefinSans = Josefin_Sans({
-  weight: ["300", "400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
+  weight: ['300', '400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Houvincity Real Estate and Propety Management Website",
+    default: 'Houvincity Real Estate and Propety Management Website',
     template: `%s | Houvincity Real Estate and Propety Management Website`,
   },
   description: 'Real Estate and Property Managment',
@@ -45,11 +44,11 @@ export const metadata: Metadata = {
     type: 'website',
   },
   keywords: [
-    "Houvincity Real Estate and Propety Management Website",
-    "Houvincity",
-    "Houvincity Real Estate",
-    "Houvincity Property Management",
-    "Houvincity Website",
+    'Houvincity Real Estate and Propety Management Website',
+    'Houvincity',
+    'Houvincity Real Estate',
+    'Houvincity Property Management',
+    'Houvincity Website',
   ],
 };
 
@@ -61,10 +60,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={josefinSans.className}>
-        <Providers>
-          {children}
-        </Providers>
-        <LiveChat />
+        <Providers>{children}</Providers>
+        <ConditionalLiveChat />
         {draftMode().isEnabled && <LiveVisualEditing />}
       </body>
     </html>

@@ -31,8 +31,16 @@ function ContactForm() {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
+
+  const clearForm = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPhoneNumber('');
+    setMessage('');
+    setError(null);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,16 +49,16 @@ function ContactForm() {
     try {
       Loading.standard('Loading...');
       await contact({ firstName, lastName, email, phoneNumber, message });
-      setSubmitted(true);
       Loading.remove();
+      clearForm(); // Clear the form after successful submission
       Report.success(
         'Contact Form',
-        'Thank you for your feeback, one of our agents would contact you shortly.',
+        'Thank you for your feedback, one of our agents would contact you shortly.',
         'close'
-      ); // Show success notification
+      );
     } catch (error: any) {
       setError(error.message || 'An unexpected error occurred');
-      Loading.remove(); // Hide loading indicator
+      Loading.remove();
       Report.failure(
         'Newsletter Subscription',
         'Error! Something happened while submitting, please try again or contact our support team.',
@@ -103,24 +111,26 @@ function ContactForm() {
       </section>
       <form onSubmit={handleSubmit} className="p-5">
         <div className="flex justify-between items-center gap-5 mt-10">
-          <label htmlFor="event" className="form-control w-full max-w-xs">
+          <label htmlFor="firstName" className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">First Name</span>
             </div>
             <input
               type="text"
+              id="firstName"
               placeholder="First name"
               className=" mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D] "
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </label>
-          <label htmlFor="event" className="form-control w-full max-w-xs">
+          <label htmlFor="lastName" className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Last Name</span>
             </div>
             <input
               type="text"
+              id="lastName"
               placeholder="Last name"
               className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
               value={lastName}
@@ -129,24 +139,26 @@ function ContactForm() {
           </label>
         </div>
         <div className="flex  justify-between items-center gap-5 mt-10">
-          <label htmlFor="event" className="form-control w-full max-w-xs">
+          <label htmlFor="email" className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Email</span>
             </div>
             <input
               type="email"
+              id="email"
               placeholder="Email address"
               className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label htmlFor="event" className="form-control w-full max-w-xs">
+          <label htmlFor="phoneNumber" className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Phone Number</span>
             </div>
             <input
               type="text"
+              id="phoneNumber"
               placeholder="Phone number"
               className="mt-5 outline-none border-b-[1px] w-full max-w-xs border-[#8D8D8D]"
               value={phoneNumber}
@@ -155,11 +167,12 @@ function ContactForm() {
           </label>
         </div>
         <div className="mt-10">
-          <label className="form-control">
+          <label htmlFor="message" className="form-control">
             <div className="label">
               <span className="label-text">Message</span>
             </div>
             <textarea
+              id="message"
               className="mt-3 outline-none border-b-[1px] border-[#8D8D8D]"
               placeholder="Please write down your message here."
               value={message}
@@ -168,16 +181,14 @@ function ContactForm() {
           </label>
         </div>
         {error && <p className="text-red-500">{error}</p>}
-        {!submitted && (
-          <div className="flex justify-center mt-10">
-            <button
-              className="btn bg-primary text-white font-bold px-10"
-              type="submit"
-            >
-              Send message
-            </button>
-          </div>
-        )}
+        <div className="flex justify-center mt-10">
+          <button
+            className="bg-primary text-white font-bold px-10 py-3 rounded-lg hover:bg-primary/90 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+            type="submit"
+          >
+            Send message
+          </button>
+        </div>
       </form>
     </div>
   );

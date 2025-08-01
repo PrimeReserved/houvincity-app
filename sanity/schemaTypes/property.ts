@@ -179,7 +179,6 @@ export default defineType({
       title: 'Bathrooms',
       type: 'number',
     }),
-
     defineField({
       name: 'body',
       title: 'Body',
@@ -205,6 +204,23 @@ export default defineType({
       title: 'Status',
       type: 'boolean',
     }),
+    // 🔥 NEW SOLD OUT FIELD
+    defineField({
+      name: 'soldOut',
+      title: 'Sold Out',
+      type: 'boolean',
+      description:
+        'Mark this property as sold out. Users will not be able to view details or interact with it.',
+      initialValue: false,
+    }),
+    // Optional: Add sold date for tracking
+    defineField({
+      name: 'soldDate',
+      title: 'Date Sold',
+      type: 'datetime',
+      description: 'When was this property sold? (Optional)',
+      hidden: ({ document }) => !document?.soldOut,
+    }),
   ],
 
   preview: {
@@ -212,6 +228,26 @@ export default defineType({
       title: 'title',
       media: 'propertyImage',
       status: 'status',
+      soldOut: 'soldOut',
+    },
+    prepare({ title, media, status, soldOut }) {
+      let subtitle = '';
+
+      if (soldOut) {
+        subtitle = '🔴 SOLD OUT';
+      } else if (status === true) {
+        subtitle = '🟢 Active';
+      } else if (status === false) {
+        subtitle = '🟡 Inactive';
+      } else {
+        subtitle = '⚪ Status not set';
+      }
+
+      return {
+        title: soldOut ? `${title} (SOLD OUT)` : title,
+        media,
+        subtitle,
+      };
     },
   },
 });
