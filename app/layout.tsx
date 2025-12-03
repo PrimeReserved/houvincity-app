@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { Josefin_Sans } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import LiveVisualEditing from '@/components/LiveVisualEditing';
 import Logo from '@/public/logo.svg';
@@ -59,6 +60,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Paystack Script - Load before interactive */}
+        <Script
+          src="https://js.paystack.co/v1/inline.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className={josefinSans.className}>
         <Providers>{children}</Providers>
         <ConditionalLiveChat />

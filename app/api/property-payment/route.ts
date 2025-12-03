@@ -1,45 +1,12 @@
-// app/api/subscribe/route.ts
-
-import { client } from "@/sanity/client";
-import { NextRequest, NextResponse } from "next/server";
-import { validateFields } from "@/utils/helper-functions/validateFields";
-
-// Define the schema for the incoming data
-interface FormData {
-  fullname: string;
-  email: string;
-  address: string;
-  city: string;
-  state: string;
-  company: string;
-  phoneNumber: string;
-}
-
-// Required fields mapping
-const requiredFields: { [key in keyof FormData]?: string } = {
-  fullname: "Full name",
-  email: "Email",
-  address: "Address",
-  city: "City",
-  state: "State",
-  company: "Company",
-};
+// app/api/property-payment/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { client } from '@/sanity/client';
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse the incoming request body
-    const formData: FormData = await request.json();
+    const body = await request.json();
 
-    // Validate the incoming data
-    const validationError = validateFields(formData, requiredFields);
-    if (validationError) {
-      return NextResponse.json({ error: validationError }, { status: 400 });
-    }
-
-    const { fullname, email, address, city, state, company, phoneNumber } = formData;
-
-    const data = {
-      _type: "status",
+    const {
       fullname,
       email,
       address,
@@ -47,17 +14,76 @@ export async function POST(request: NextRequest) {
       state,
       company,
       phoneNumber,
-    };
+      propertyId,
+      propertyTitle,
+      propertyLocation,
+      propertySize,
+      totalPropertyPrice,
+      amountPaid,
+      remainingBalance,
+      paymentType,
+      reference,
+      status,
+      paymentDate,
+      // NEW fields for tracking
+      previousTotalPaid,
+      hasExistingPayments,
+      paymentNumber,
+    } = body;
 
-    // Create the new subscription in Sanity
-    const result = await client.create(data);
+    // Validate required fields
+    if (!email || !fullname || !propertyId || !amountPaid || !reference) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
 
-    // Respond with the created subscription
-    return NextResponse.json(result, { status: 201 });
-  } catch (error: unknown) {
-    console.error("Error processing request:", error);
+    // Create payment document in Sanity
+    const paymentDoc = await client.create({
+      _type: 'propertyPayment',
+      fullname,
+      email,
+      phoneNumber,
+      company: company || '',
+      address,
+      city,
+      state,
+      propertyReference: {
+        _type: 'reference',
+        _ref: propertyId,
+      },
+      propertyTitle,
+      propertyLocation,
+      propertySize,
+      totalPropertyPrice,
+      amountPaid,
+      remainingBalance,
+      paymentType,
+      paymentReference: reference,
+      paymentDate,
+      status,
+      verified: false, // Admin will verify later
+      // NEW: Add metadata about previous payments
+      adminNotes: hasExistingPayments
+        ? `Payment #${paymentNumber}. Customer had previously paid ₦${previousTotalPaid?.toLocaleString()}. This is an installment payment.`
+        : `Payment #1. This is the customer's first payment for this property.`,
+      followUpRequired: remainingBalance > 0, // Auto-flag if balance remains
+    });
+
+    console.log('✅ Payment saved to Sanity:', paymentDoc);
+
     return NextResponse.json(
-      { error: (error as Error).message || "Internal Server Error" },
+      {
+        message: 'Payment saved successfully',
+        payment: paymentDoc,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('❌ Error saving payment:', error);
+    return NextResponse.json(
+      { error: 'Failed to save payment', details: error },
       { status: 500 }
     );
   }

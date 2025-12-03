@@ -233,15 +233,17 @@ export const SearchProperty = (): any => {
               </option>
             </select>
           </div>
-        </div>
 
-        <button
-          className="flex gap-3 bg-primary hover:bg-primary/80 duration-300 ease-in- xl:w-[175px] md:w-[120px]  w-[100px] xl:h-[50px] md:h-[40px] h-[35px] rounded-lg items-center justify-center -mt-3 xl:-mt-6 md:-mt-3 lg:-mt-5"
-          onClick={handleSearch}
-        >
-          <HiSearch className="h-5 w-5 text-white" />
-          <p className="xl:text-lg md:text-base text-white text-xs ">Search</p>
-        </button>
+          <button
+            className="flex gap-3 bg-primary hover:bg-primary/80 duration-300 ease-in- xl:w-[175px] md:w-[120px]  w-[100px] xl:h-[50px] md:h-[40px] h-[35px] rounded-lg items-center justify-center"
+            onClick={handleSearch}
+          >
+            <HiSearch className="h-5 w-5 text-white" />
+            <p className="xl:text-lg md:text-base text-white text-xs ">
+              Search
+            </p>
+          </button>
+        </div>
       </div>
       <h1 className=" text-customPrimary font-bold text-4xl m-10">
         {propertyType || 'Properties'}

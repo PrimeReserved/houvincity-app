@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import classNames from "classnames";
-import Image from "next/image";
-import Link from "next/link";
-import menuData from "./menuData";
-import IconButton from "../Buttons/IconButton";
-import BtnArrowIcon from "../Buttons/BtnArrowIcon";
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import classNames from 'classnames';
+import Image from 'next/image';
+import Link from 'next/link';
+import menuData from './menuData';
+import IconButton from '../Buttons/IconButton';
+import BtnArrowIcon from '../Buttons/BtnArrowIcon';
 
 const HeaderOther = () => {
   // Navbar toggle
@@ -20,9 +20,9 @@ const HeaderOther = () => {
     setSticky(window.scrollY >= 80);
   };
   useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar);
+    window.addEventListener('scroll', handleStickyNavbar);
     return () => {
-      window.removeEventListener("scroll", handleStickyNavbar);
+      window.removeEventListener('scroll', handleStickyNavbar);
     };
   }, []);
 
@@ -37,18 +37,21 @@ const HeaderOther = () => {
   return (
     <header
       className={classNames(
-        "header left-0 top-0 z-40 flex w-full items-center border-b-2 border-gray-100",
+        'header left-0 top-0 z-40 flex w-full items-center border-b-2 border-gray-100',
         {
-          "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition":
+          'fixed z-[9000] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition':
             sticky,
-          "absolute bg-transparent": !sticky,
+          'absolute bg-transparent': !sticky,
         }
       )}
     >
       <div className="container">
         <div className="relative -mx-4 flex items-center justify-between">
           <div className="w-60 max-w-full px-4 xl:mr-12">
-            <Link href="/" className={`header-logo block w-full ${sticky ? "py-5 lg:py-2" : "py-8"}`}>
+            <Link
+              href="/"
+              className={`header-logo block w-full ${sticky ? 'py-5 lg:py-2' : 'py-8'}`}
+            >
               <Image
                 src="/images/logo/primereservedlogo.png"
                 alt="logo"
@@ -75,25 +78,28 @@ const HeaderOther = () => {
               >
                 <span
                   className={classNames(
-                    "relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300",
-                    { "top-[7px] rotate-45": navbarOpen, "opacity-0": navbarOpen }
+                    'relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300',
+                    {
+                      'top-[7px] rotate-45': navbarOpen,
+                      'opacity-0': navbarOpen,
+                    }
                   )}
                 />
                 <span className="relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300" />
                 <span
                   className={classNames(
-                    "relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300",
-                    { "top-[-8px] -rotate-45": navbarOpen }
+                    'relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300',
+                    { 'top-[-8px] -rotate-45': navbarOpen }
                   )}
                 />
               </button>
               <nav
                 id="navbarCollapse"
                 className={classNames(
-                  "navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100",
+                  'navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100',
                   {
-                    "visibility top-full opacity-100": navbarOpen,
-                    "invisible top-[120%] opacity-0": !navbarOpen,
+                    'visibility top-full opacity-100': navbarOpen,
+                    'invisible top-[120%] opacity-0': !navbarOpen,
                   }
                 )}
               >
@@ -105,8 +111,8 @@ const HeaderOther = () => {
                           href={menuItem.path}
                           className={`flex py-4 text-base lg:mr-0 lg:inline-flex lg:px-1 lg:py-8 ${
                             usePathName === menuItem.path
-                              ? "text-primary "
-                              : "text-primary"
+                              ? 'text-primary '
+                              : 'text-primary'
                           }`}
                         >
                           {menuItem.title}
@@ -131,8 +137,11 @@ const HeaderOther = () => {
                           </p>
                           <div
                             className={classNames(
-                              "submenu? relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full",
-                              { block: openIndex === index, hidden: openIndex !== index }
+                              'submenu? relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full',
+                              {
+                                block: openIndex === index,
+                                hidden: openIndex !== index,
+                              }
                             )}
                           >
                             {menuItem.submenu?.map((submenuItem, subIndex) =>

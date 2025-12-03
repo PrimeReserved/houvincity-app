@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import menuData from './menuData';
 import BtnArrowIcon from '../Buttons/BtnArrowIcon';
 import IconButtonHref from '../Buttons/IconButtonHref';
-import Logo from "@/public/HCL Logo.png"
+import Logo from '@/public/HCL Logo.png';
 
 const Header = () => {
   // Navbar toggle
@@ -36,22 +36,25 @@ const Header = () => {
     } else {
       setOpenIndex(index);
     }
-  }; const usePathName = usePathname();
+  };
+  const usePathName = usePathname();
 
   return (
     <header
-      className={`header left-0 top-0 z-40 flex w-full items-center border-b-2 bg-white border-gray-100 ${sticky
-          ? 'fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition'
+      className={`header left-0 top-0 z-40 flex w-full items-center border-b-2 bg-white border-gray-100 ${
+        sticky
+          ? 'fixed z-[9000] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition'
           : 'absolute bg-transparent'
-        }`}
+      }`}
     >
       <div className="container">
         <div className="relative flex items-center justify-between">
           <div className="w-60 max-w-full px-4 ">
             <Link
               href="/"
-              className={`header-logo block w-full ${sticky ? 'py-5 lg:py-2' : 'py-8'
-                } `}
+              className={`header-logo block w-full ${
+                sticky ? 'py-5 lg:py-2' : 'py-8'
+              } `}
             >
               <Image
                 src={Logo}
@@ -64,31 +67,35 @@ const Header = () => {
           </div>
           <div className="flex w-full items-center justify-between px-4">
             <div>
-              <button 
+              <button
                 onClick={navbarToggleHandler}
                 id="navbarToggler"
                 aria-label="Mobile Menu"
                 className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
               >
                 <span
-                  className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300  ${navbarOpen ? ' top-[7px] rotate-45' : ' '
-                    }`}
+                  className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300  ${
+                    navbarOpen ? ' top-[7px] rotate-45' : ' '
+                  }`}
                 />
                 <span
-                  className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300  ${navbarOpen ? 'opacity-0 ' : ' '
-                    }`}
+                  className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300  ${
+                    navbarOpen ? 'opacity-0 ' : ' '
+                  }`}
                 />
                 <span
-                  className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300  ${navbarOpen ? ' top-[-8px] -rotate-45' : ' '
-                    }`}
+                  className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300  ${
+                    navbarOpen ? ' top-[-8px] -rotate-45' : ' '
+                  }`}
                 />
               </button>
               <nav
                 id="navbarCollapse"
-                className={`navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300  lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${navbarOpen
+                className={`navbar absolute right-0 z-30 w-full rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300  lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
+                  navbarOpen
                     ? 'visibility top-full opacity-100'
                     : 'invisible top-[120%] opacity-0'
-                  }`}
+                }`}
               >
                 <ul className="block lg:flex xl:space-x-[5rem] lg:space-x-10   lg:pl-[2rem] ">
                   {menuData.map((menuItem, index) => (
@@ -96,10 +103,11 @@ const Header = () => {
                       {menuItem.path ? (
                         <Link
                           href={menuItem.path}
-                          className={`flex py-4 text-base lg:mr-0 lg:inline-flex lg:px-1 lg:py-8 ${usePathName === menuItem.path
+                          className={`flex py-4 text-base lg:mr-0 lg:inline-flex lg:px-1 lg:py-8 ${
+                            usePathName === menuItem.path
                               ? 'text-primary'
                               : 'text-dark hover:text-primary'
-                            }`}
+                          }`}
                         >
                           {menuItem.title}
                         </Link>
@@ -122,19 +130,19 @@ const Header = () => {
                             </span>
                           </p>
                           <div
-                            className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${openIndex === index ? 'block' : 'hidden'
-                              }`}
+                            className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${
+                              openIndex === index ? 'block' : 'hidden'
+                            }`}
                           >
-                            {
-                              menuItem?.submenu?.map((submenuItem, index) => (
-                                <Link
-                                  href={submenuItem.path as string}
-                                  key={index}
-                                  className="block rounded py-2.5 text-sm text-dark hover:text-primary lg:px-3"
-                                >
-                                  {submenuItem.title}
-                                </Link>
-                              ))}
+                            {menuItem?.submenu?.map((submenuItem, index) => (
+                              <Link
+                                href={submenuItem.path as string}
+                                key={index}
+                                className="block rounded py-2.5 text-sm text-dark hover:text-primary lg:px-3"
+                              >
+                                {submenuItem.title}
+                              </Link>
+                            ))}
                           </div>
                         </>
                       )}
@@ -148,15 +156,11 @@ const Header = () => {
                     />
                   </div>
                 </ul>
-
               </nav>
             </div>
             <div className="flex items-center justify-end gap-4 pr-16 lg:pr-0">
               <div className="my-2 hidden lg:flex">
-                <IconButtonHref
-                      text="Watch Live"
-                      href="/livestream"
-                />
+                <IconButtonHref text="Watch Live" href="/livestream" />
               </div>
             </div>
           </div>

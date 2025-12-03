@@ -1,17 +1,18 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { type SchemaTypeDefinition } from 'sanity';
 
-import blockContent from './schemaTypes/blockContent'
-import category from './schemaTypes/category'
-import post from './schemaTypes/post'
-import author from './schemaTypes/author'
-import news from './schemaTypes/news'
-import propertyListing from './schemaTypes/property'
-import subscription from './schemaTypes/subscription'
-import testimony from './schemaTypes/testimony'
-import event from './schemaTypes/event'
-import contact from './schemaTypes/contact'
-import payment from './schemaTypes/payment'
-
+import blockContent from './schemaTypes/blockContent';
+import category from './schemaTypes/category';
+import post from './schemaTypes/post';
+import author from './schemaTypes/author';
+import news from './schemaTypes/news';
+import propertyListing from './schemaTypes/property';
+import subscription from './schemaTypes/subscription';
+import testimony from './schemaTypes/testimony';
+import event from './schemaTypes/event';
+import contact from './schemaTypes/contact';
+import payment from './schemaTypes/payment';
+import paystackData from './schemaTypes/paystackData';
+import propertyPayment from './schemaTypes/propertyPayment';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -25,6 +26,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimony,
     event,
     contact,
-    payment
+    payment,
+    paystackData,
+    propertyPayment, // Changed from 'status'
   ],
-}
+};
