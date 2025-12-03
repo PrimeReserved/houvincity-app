@@ -13,8 +13,8 @@ function SuccessContent() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 mt-[5.5rem] ">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center max-h-[85vh]">
           {/* Success Icon */}
           <div className="mb-6">
             <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
