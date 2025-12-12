@@ -16,6 +16,9 @@ import {
   FiAlertCircle,
   FiX,
   FiInfo,
+  FiChevronLeft,
+  FiChevronRight,
+  FiMaximize2,
 } from 'react-icons/fi';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import {
@@ -115,6 +118,15 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
     message: string;
   } | null>(null);
 
+  // Fullscreen image viewer state
+  const [fullscreenImage, setFullscreenImage] = useState<{
+    isOpen: boolean;
+    currentIndex: number;
+  }>({
+    isOpen: false,
+    currentIndex: 0,
+  });
+
   // NEW: Payment tracking state
   const [paymentStatus, setPaymentStatus] = useState<{
     totalPaid: number;
@@ -156,6 +168,64 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
   ) => {
     setAlert({ type, message });
     setTimeout(() => setAlert(null), 5000);
+  };
+
+  // Get all available images for fullscreen viewer
+  const getAllImages = () => {
+    const images = [];
+    if (property?.fullPropertyImage) {
+      images.push({
+        url: urlForImage(property.fullPropertyImage.asset._ref),
+        alt: 'Full Property Image',
+      });
+    }
+    if (property?.leftSidePropertyImage) {
+      images.push({
+        url: urlForImage(property.leftSidePropertyImage.asset._ref),
+        alt: 'Left Side View',
+      });
+    }
+    if (property?.middlePropertyImage) {
+      images.push({
+        url: urlForImage(property.middlePropertyImage.asset._ref),
+        alt: 'Middle View',
+      });
+    }
+    if (property?.rightSidePropertyImage) {
+      images.push({
+        url: urlForImage(property.rightSidePropertyImage.asset._ref),
+        alt: 'Right Side View',
+      });
+    }
+    return images;
+  };
+
+  // Fullscreen image handlers
+  const openFullscreen = (index: number) => {
+    setFullscreenImage({ isOpen: true, currentIndex: index });
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenImage({ isOpen: false, currentIndex: 0 });
+    document.body.style.overflow = 'unset';
+  };
+
+  const nextImage = () => {
+    const images = getAllImages();
+    setFullscreenImage((prev) => ({
+      ...prev,
+      currentIndex: (prev.currentIndex + 1) % images.length,
+    }));
+  };
+
+  const prevImage = () => {
+    const images = getAllImages();
+    setFullscreenImage((prev) => ({
+      ...prev,
+      currentIndex:
+        prev.currentIndex === 0 ? images.length - 1 : prev.currentIndex - 1,
+    }));
   };
 
   // NEW: Fetch payment status when email is entered
@@ -510,17 +580,72 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         />
       )}
 
+      {/* Fullscreen Image Viewer */}
+      {fullscreenImage.isOpen && (
+        <div className="fixed inset-0 z-[9999] bg-black bg-opacity-95 flex items-center justify-center">
+          <button
+            onClick={closeFullscreen}
+            className="absolute top-4 right-4 z-[10000] bg-white rounded-full p-3 hover:bg-gray-200 transition"
+            aria-label="Close fullscreen"
+          >
+            <FiX className="w-6 h-6 text-gray-800" />
+          </button>
+
+          <button
+            onClick={prevImage}
+            className="absolute left-4 z-[10000] bg-white rounded-full p-3 hover:bg-gray-200 transition"
+            aria-label="Previous image"
+          >
+            <FiChevronLeft className="w-6 h-6 text-gray-800" />
+          </button>
+
+          <div className="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center px-20">
+            {getAllImages()[fullscreenImage.currentIndex] && (
+              <div className="relative">
+                <Image
+                  src={getAllImages()[fullscreenImage.currentIndex].url}
+                  alt={getAllImages()[fullscreenImage.currentIndex].alt}
+                  width={1920}
+                  height={1080}
+                  className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
+                />
+                <p className="text-white text-center mt-4 text-lg">
+                  {getAllImages()[fullscreenImage.currentIndex].alt} (
+                  {fullscreenImage.currentIndex + 1} / {getAllImages().length})
+                </p>
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={nextImage}
+            className="absolute right-4 z-[10000] bg-white rounded-full p-3 hover:bg-gray-200 transition"
+            aria-label="Next image"
+          >
+            <FiChevronRight className="w-6 h-6 text-gray-800" />
+          </button>
+        </div>
+      )}
+
       {/* Add top padding to account for fixed header */}
       <div className="pt-24">
-        <div className="flex justify-center items-center px-10">
+        <div className="flex justify-center items-center px-10 relative group">
           {property?.fullPropertyImage && (
             <Suspense fallback={<Loading />}>
-              <Image
-                src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
-                alt="House1"
-                width={1500}
-                height={100}
-              />
+              <div className="relative cursor-pointer" onClick={() => openFullscreen(0)}>
+                <Image
+                  src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
+                  alt="House1"
+                  width={1500}
+                  height={100}
+                  className="transition-opacity group-hover:opacity-90"
+                />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
+                  <div className="bg-white rounded-full p-3 shadow-lg">
+                    <FiMaximize2 className="w-6 h-6 text-gray-800" />
+                  </div>
+                </div>
+              </div>
             </Suspense>
           )}
         </div>
@@ -529,32 +654,56 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
       <div className="grid grid-cols-3 px-10 gap-2 justify-center items-center mt-12 mx-auto">
         {property?.leftSidePropertyImage && (
           <Suspense fallback={<Loading />}>
-            <Image
-              src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
-              alt="House2"
-              width={385}
-              height={300}
-            />
+            <div className="relative group cursor-pointer" onClick={() => openFullscreen(1)}>
+              <Image
+                src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
+                alt="House2"
+                width={385}
+                height={300}
+                className="transition-opacity group-hover:opacity-90"
+              />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
+                <div className="bg-white rounded-full p-2 shadow-lg">
+                  <FiMaximize2 className="w-5 h-5 text-gray-800" />
+                </div>
+              </div>
+            </div>
           </Suspense>
         )}
         {property.middlePropertyImage && (
           <Suspense fallback={<Loading />}>
-            <Image
-              src={urlForImage(property?.middlePropertyImage.asset._ref)}
-              alt="House3"
-              width={385}
-              height={300}
-            />
+            <div className="relative group cursor-pointer" onClick={() => openFullscreen(2)}>
+              <Image
+                src={urlForImage(property?.middlePropertyImage.asset._ref)}
+                alt="House3"
+                width={385}
+                height={300}
+                className="transition-opacity group-hover:opacity-90"
+              />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
+                <div className="bg-white rounded-full p-2 shadow-lg">
+                  <FiMaximize2 className="w-5 h-5 text-gray-800" />
+                </div>
+              </div>
+            </div>
           </Suspense>
         )}
         {property.rightSidePropertyImage && (
           <Suspense fallback={<Loading />}>
-            <Image
-              src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
-              alt="House4"
-              width={385}
-              height={300}
-            />
+            <div className="relative group cursor-pointer" onClick={() => openFullscreen(3)}>
+              <Image
+                src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
+                alt="House4"
+                width={385}
+                height={300}
+                className="transition-opacity group-hover:opacity-90"
+              />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
+                <div className="bg-white rounded-full p-2 shadow-lg">
+                  <FiMaximize2 className="w-5 h-5 text-gray-800" />
+                </div>
+              </div>
+            </div>
           </Suspense>
         )}
       </div>
@@ -960,6 +1109,55 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
       <div className="my-10">
         {property.youtubeLink && <YoutubeEmbed source={property.youtubeLink} />}
       </div>
+
+      {/* Property Layout Section */}
+      {property.layout && (
+        <div className="mx-10 my-16">
+          <div className="px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-black text-2xl font-semibold">Property Layout</h2>
+              <a
+                href={
+                  property.layout.asset.url ||
+                  `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${property.layout.asset._ref.replace('file-', '').replace('-pdf', '.pdf').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg').replace('-png', '.png')}`
+                }
+                download
+                className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md transition"
+              >
+                <FiDownload className="w-4 h-4" />
+                Download Layout
+              </a>
+            </div>
+            <hr className="mb-6" />
+            <div className="bg-gray-100 rounded-lg p-4">
+              {property.layout.asset._ref.includes('pdf') ||
+              property.layout.asset.extension === 'pdf' ? (
+                <iframe
+                  src={
+                    property.layout.asset.url ||
+                    `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${property.layout.asset._ref.replace('file-', '').replace('-pdf', '.pdf')}`
+                  }
+                  className="w-full h-[600px] border-0 rounded"
+                  title="Property Layout PDF"
+                />
+              ) : (
+                <div className="flex justify-center">
+                  <Image
+                    src={
+                      property.layout.asset.url ||
+                      `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${property.layout.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg').replace('-png', '.png')}`
+                    }
+                    alt="Property Layout"
+                    width={800}
+                    height={600}
+                    className="rounded-lg"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col justify-center items-center mt-16 gap-5">
         <Link href="/contact">

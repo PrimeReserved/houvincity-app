@@ -11,28 +11,11 @@ export default function PropertyCard({ property }: any) {
 
   // Component for the card content
   const CardContent = () => (
-    <div className={`relative ${isSoldOut ? 'pointer-events-none' : ''}`}>
+    <div className="relative">
       <div
-        className={`bg-white rounded-lg transition duration-300 shadow-xl rounded-b-md h-[100%] ${
-          isSoldOut ? 'opacity-75' : ''
-        }`}
+        className={`bg-white rounded-lg transition duration-300 shadow-xl rounded-b-md h-[100%]`}
         key={property._id}
       >
-        {/* Sold Out Overlay */}
-        {isSoldOut && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
-            <div className="text-center">
-              <div className="bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg transform rotate-12">
-                <p className="text-xl font-bold uppercase tracking-wider">
-                  SOLD OUT
-                </p>
-              </div>
-              <p className="text-white text-sm mt-2 font-medium">
-                This property is no longer available
-              </p>
-            </div>
-          </div>
-        )}
 
         <figure className="relative">
           <Suspense fallback={<Loading />}>
@@ -141,24 +124,12 @@ export default function PropertyCard({ property }: any) {
             </p>
           </div>
 
-          {/* Conditional Button */}
-          {isSoldOut ? (
-            <div className="text-center mt-4">
-              <button
-                className="text-gray-500 bg-gray-200 text-base px-3 py-2 rounded-br-md cursor-not-allowed opacity-60"
-                disabled
-                title="This property is sold out"
-              >
-                Sold Out
-              </button>
-            </div>
-          ) : (
-            <Link href={`/property/${property.slug?.current}`}>
-              <button className="text-white bg-primary text-base px-3 py-2 -mr-3 rounded-br-md flex float-end -mb-8 hover:bg-primary/90 transition-colors">
-                View Full Details
-              </button>
-            </Link>
-          )}
+          {/* View Details Button - Always Clickable */}
+          <Link href={`/property/${property.slug?.current}`}>
+            <button className={`text-white ${isSoldOut ? 'bg-gray-600 hover:bg-gray-700' : 'bg-primary hover:bg-primary/90'} text-base px-3 py-2 -mr-3 rounded-br-md flex float-end -mb-8 transition-colors`}>
+              {isSoldOut ? 'View Details (Sold)' : 'View Full Details'}
+            </button>
+          </Link>
         </div>
       </div>
     </div>

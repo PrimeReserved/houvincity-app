@@ -95,6 +95,14 @@ export interface Property extends Base {
   body: BlockContent;
   soldOut?: boolean;
   soldDate?: string;
+  layout?: {
+    asset: {
+      _ref: string;
+      _type: string;
+      url?: string;
+      extension?: string;
+    };
+  };
 }
 
 export interface SearchItem {
