@@ -185,6 +185,15 @@ export default defineType({
       type: 'blockContent',
     }),
     defineField({
+      name: 'layout',
+      title: 'Property Layout',
+      type: 'file',
+      description: 'Upload property layout (PDF, JPG, or PNG)',
+      options: {
+        accept: '.pdf,.jpg,.jpeg,.png',
+      },
+    }),
+    defineField({
       name: 'plots',
       title: 'Plots',
       type: 'array',

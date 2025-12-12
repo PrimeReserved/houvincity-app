@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import StyledHeading from '../Typography/StyledHeading';
 import StyledText from '../Typography/StyledText';
 import IHeroProps from '@/interfaces/IHeroProps';
@@ -15,6 +16,13 @@ const Hero: React.FC<IHeroProps> = ({
       ? `url(${image})`
       : `url('./images/blog/Hero section.png')`,
   };
+
+  // Preload the background image
+  useEffect(() => {
+    const imageUrl = image || './images/blog/Hero section.png';
+    const img = new window.Image();
+    img.src = imageUrl;
+  }, [image]);
 
   return (
     <div

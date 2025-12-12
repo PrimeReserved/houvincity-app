@@ -13,6 +13,7 @@ import contact from './schemaTypes/contact';
 import payment from './schemaTypes/payment';
 import paystackData from './schemaTypes/paystackData';
 import propertyPayment from './schemaTypes/propertyPayment';
+import livestream from './schemaTypes/livestream';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -28,6 +29,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contact,
     payment,
     paystackData,
-    propertyPayment, // Changed from 'status'
+    propertyPayment,
+    livestream,
   ],
 };

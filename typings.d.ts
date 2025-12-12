@@ -123,3 +123,11 @@ export interface UpcomingEvent extends Base {
   livestreamURL: string;
   body: BlockContent;
 }
+
+export interface Livestream extends Base {
+  description?: string;
+  videoUrl: string;
+  isActive: boolean;
+  scheduledDate?: string;
+  thumbnail?: Image;
+}

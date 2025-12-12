@@ -9,7 +9,7 @@ import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '../Blog/Cards/RichTextComponents';
 import Loading from '@/app/loading';
 import Link from 'next/link';
-import { urlForImage } from '@/sanity/lib/image';
+import { urlForImage, urlForFile } from '@/sanity/lib/image';
 import {
   FiDownload,
   FiCheckCircle,
@@ -609,9 +609,8 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
                   height={1080}
                   className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
                 />
-                <p className="text-white text-center mt-4 text-lg">
-                  {getAllImages()[fullscreenImage.currentIndex].alt} (
-                  {fullscreenImage.currentIndex + 1} / {getAllImages().length})
+                <p className="text-white text-center mt-4 text-lg font-semibold">
+                  {fullscreenImage.currentIndex + 1} / {getAllImages().length}
                 </p>
               </div>
             )}
@@ -638,11 +637,15 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
                   alt="House1"
                   width={1500}
                   height={100}
-                  className="transition-opacity group-hover:opacity-90"
                 />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
-                  <div className="bg-white rounded-full p-3 shadow-lg">
-                    <FiMaximize2 className="w-6 h-6 text-gray-800" />
+                <div className="absolute bottom-6 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div
+                    className="bg-primary rounded-full p-3"
+                    style={{
+                      boxShadow: '0 0 0 3px rgba(255,255,255,0.9), 0 0 20px rgba(0,0,0,0.5), 0 10px 40px rgba(0,0,0,0.6), 0 0 60px rgba(34, 197, 94, 0.4)'
+                    }}
+                  >
+                    <FiMaximize2 className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
@@ -660,11 +663,15 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
                 alt="House2"
                 width={385}
                 height={300}
-                className="transition-opacity group-hover:opacity-90"
               />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
-                <div className="bg-white rounded-full p-2 shadow-lg">
-                  <FiMaximize2 className="w-5 h-5 text-gray-800" />
+              <div className="absolute bottom-4 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div
+                  className="bg-primary rounded-full p-2"
+                  style={{
+                    boxShadow: '0 0 0 3px rgba(255,255,255,0.9), 0 0 20px rgba(0,0,0,0.5), 0 10px 40px rgba(0,0,0,0.6), 0 0 60px rgba(34, 197, 94, 0.4)'
+                  }}
+                >
+                  <FiMaximize2 className="w-5 h-5 text-white" />
                 </div>
               </div>
             </div>
@@ -678,11 +685,15 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
                 alt="House3"
                 width={385}
                 height={300}
-                className="transition-opacity group-hover:opacity-90"
               />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
-                <div className="bg-white rounded-full p-2 shadow-lg">
-                  <FiMaximize2 className="w-5 h-5 text-gray-800" />
+              <div className="absolute bottom-4 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div
+                  className="bg-primary rounded-full p-2"
+                  style={{
+                    boxShadow: '0 0 0 3px rgba(255,255,255,0.9), 0 0 20px rgba(0,0,0,0.5), 0 10px 40px rgba(0,0,0,0.6), 0 0 60px rgba(34, 197, 94, 0.4)'
+                  }}
+                >
+                  <FiMaximize2 className="w-5 h-5 text-white" />
                 </div>
               </div>
             </div>
@@ -696,11 +707,15 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
                 alt="House4"
                 width={385}
                 height={300}
-                className="transition-opacity group-hover:opacity-90"
               />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30">
-                <div className="bg-white rounded-full p-2 shadow-lg">
-                  <FiMaximize2 className="w-5 h-5 text-gray-800" />
+              <div className="absolute bottom-4 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div
+                  className="bg-primary rounded-full p-2"
+                  style={{
+                    boxShadow: '0 0 0 3px rgba(255,255,255,0.9), 0 0 20px rgba(0,0,0,0.5), 0 10px 40px rgba(0,0,0,0.6), 0 0 60px rgba(34, 197, 94, 0.4)'
+                  }}
+                >
+                  <FiMaximize2 className="w-5 h-5 text-white" />
                 </div>
               </div>
             </div>
@@ -1117,11 +1132,10 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-black text-2xl font-semibold">Property Layout</h2>
               <a
-                href={
-                  property.layout.asset.url ||
-                  `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${property.layout.asset._ref.replace('file-', '').replace('-pdf', '.pdf').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg').replace('-png', '.png')}`
-                }
+                href={urlForFile(property.layout)}
                 download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md transition"
               >
                 <FiDownload className="w-4 h-4" />
@@ -1130,23 +1144,16 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
             </div>
             <hr className="mb-6" />
             <div className="bg-gray-100 rounded-lg p-4">
-              {property.layout.asset._ref.includes('pdf') ||
-              property.layout.asset.extension === 'pdf' ? (
+              {property.layout.asset._ref.includes('pdf') ? (
                 <iframe
-                  src={
-                    property.layout.asset.url ||
-                    `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${property.layout.asset._ref.replace('file-', '').replace('-pdf', '.pdf')}`
-                  }
+                  src={urlForFile(property.layout)}
                   className="w-full h-[600px] border-0 rounded"
                   title="Property Layout PDF"
                 />
               ) : (
                 <div className="flex justify-center">
                   <Image
-                    src={
-                      property.layout.asset.url ||
-                      `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${property.layout.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg').replace('-png', '.png')}`
-                    }
+                    src={urlForFile(property.layout)}
                     alt="Property Layout"
                     width={800}
                     height={600}
