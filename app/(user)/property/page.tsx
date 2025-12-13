@@ -11,7 +11,7 @@ function page() {
     <Header />
       <ErrorBoundary>
         <Hero
-          image={`./images/property/property.png`}
+          image="/images/property/property.png"
           title="Property Listing"
         />
       </ErrorBoundary>

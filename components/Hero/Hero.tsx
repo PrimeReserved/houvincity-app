@@ -14,12 +14,15 @@ const Hero: React.FC<IHeroProps> = ({
   const backgroundImageStyle = {
     backgroundImage: image
       ? `url(${image})`
-      : `url('./images/blog/Hero section.png')`,
+      : `url('/images/blog/Hero section.png')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
   };
 
   // Preload the background image
   useEffect(() => {
-    const imageUrl = image || './images/blog/Hero section.png';
+    const imageUrl = image || '/images/blog/Hero section.png';
     const img = new window.Image();
     img.src = imageUrl;
   }, [image]);
