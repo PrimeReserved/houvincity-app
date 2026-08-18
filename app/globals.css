@@ -13,6 +13,13 @@
 }
 
 @layer components {
+  /* Alias for Tailwind's `container` so every section shares the same
+     responsive max-width/centering as the header, at every breakpoint
+     and zoom level. */
+  .wrapper {
+    @apply container;
+  }
+
   input[type="checkbox"]:checked ~ label span svg {
     @apply inline-flex;
   }

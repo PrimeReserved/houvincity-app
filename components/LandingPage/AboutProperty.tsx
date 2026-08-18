@@ -5,7 +5,7 @@ import Loading from '@/app/loading';
 
 function AboutProperty() {
   return (
-    <div className="wrapper my-[5rem] flex flex-col md:flex-row gap-5 items-center justify-evenly px-10">
+    <div className="wrapper my-[5rem] flex flex-col md:flex-row gap-5 items-center justify-evenly">
       <div>
         <h1 className="font-semibold text-3xl text-customSecondary">
           Why Choose Us

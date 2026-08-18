@@ -9,7 +9,7 @@ interface BlogSectionProps {
 
 export default function BlogSection({ posts }: Readonly<BlogSectionProps>) {
     return (
-      <div className="wrapper flex justify-center items-center mb-[5rem] px-10">
+      <div className="wrapper flex justify-center items-center mb-[5rem]">
         <div className="flex flex-col items-center mt-10">
           <h1 className="text-customSecondary text-2xl md:text-3xl font-semibold">
             Stay Updated from Our Blog

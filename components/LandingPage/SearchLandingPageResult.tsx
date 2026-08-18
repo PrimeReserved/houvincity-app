@@ -87,8 +87,7 @@ console.log(`Unique Property Types: ${uniqueCounts.uniquePropertyTypes}`);
         </div>
       </div>
 
-      <div className="px-10">
-        <div className="wrapper mt-[3rem] mb-[5rem]">
+      <div className="wrapper mt-[3rem] mb-[5rem]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[5rem] ">
             <ErrorBoundary>
              <Suspense fallback={<Loading />}>
@@ -106,7 +105,6 @@ console.log(`Unique Property Types: ${uniqueCounts.uniquePropertyTypes}`);
               </button>
             </Link>
           </div>
-        </div>
       </div>
     </div>
   );

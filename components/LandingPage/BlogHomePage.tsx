@@ -33,7 +33,7 @@ const BlogHomePage = ({ posts }: Props) => {
 
 
   return (
-    <div className="wrapper flex justify-center items-center  mb-[5rem] px-10">
+    <div className="wrapper flex justify-center items-center mb-[5rem]">
       <div className="flex flex-col items-center mt-10">
         <h1 className="text-customSecondary text-4xl font-semibold">Stay Updated from Our Blog</h1>
         <p className="text-base text-customTextColor mt-3 mb-[3rem] ">Gather Infromation From Our Blog and Stay Updated</p>

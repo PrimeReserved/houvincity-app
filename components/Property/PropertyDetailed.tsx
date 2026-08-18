@@ -628,7 +628,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
 
       {/* Add top padding to account for fixed header */}
       <div className="pt-24">
-        <div className="flex justify-center items-center px-10 relative group">
+        <div className="container flex justify-center items-center relative group">
           {property?.fullPropertyImage && (
             <Suspense fallback={<Loading />}>
               <div
@@ -659,7 +659,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 px-10 gap-3 mt-12 mx-auto">
+      <div className="container grid grid-cols-1 sm:grid-cols-3 gap-3 mt-12">
         {property?.leftSidePropertyImage && (
           <Suspense fallback={<Loading />}>
             <div
@@ -740,7 +740,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         )}
       </div>
 
-      <div className="mt-10 px-10">
+      <div className="container mt-10">
         <p className="text-customPrimary font-semibold leading-relaxed my-8 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
           {property.location}
         </p>
@@ -1122,7 +1122,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         </Link>
       </div>
 
-      <div className="mx-10">
+      <div className="container">
         <h1 className="text-black text-2xl leading-relaxed my-8 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
           About Property
         </h1>
@@ -1144,7 +1144,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
 
       {/* Property Layout Section */}
       {property.layout && (
-        <div className="mx-10 my-16">
+        <div className="container my-16">
           <div className="px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-black text-2xl font-semibold">Property Layout</h2>
@@ -1194,7 +1194,7 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
 
       {/* Fixed Bottom Payment Section */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-[8999]">
-        <div className="wrapper max-w-7xl mx-auto px-4 py-4">
+        <div className="wrapper py-4">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <div className="flex items-center gap-4">
               <div>

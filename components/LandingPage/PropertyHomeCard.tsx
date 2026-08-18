@@ -33,12 +33,8 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
       )}
 
       <div
-        className={`${isSoldOut ? 'opacity-75' : ''}`}
-        style={{
-          width: '100%',
-          height: '70%',
-          overflow: 'hidden',
-        }}
+        className={`relative w-full overflow-hidden ${isSoldOut ? 'opacity-75' : ''}`}
+        style={{ aspectRatio: '420 / 496.93' }}
       >
         <Suspense fallback={<Loading />}>
           <Image
@@ -48,11 +44,9 @@ function PropertyHomeCard({ property }: Readonly<{ property: any }>) {
                 : House1
             }
             alt={property?.slug}
-            width={420}
-            height={496.93}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, 33vw"
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
               clipPath: 'polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%)',
               filter: isSoldOut ? 'grayscale(50%)' : 'none',

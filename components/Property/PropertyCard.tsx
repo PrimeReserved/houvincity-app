@@ -19,14 +19,7 @@ export default function PropertyCard({ property }: any) {
 
         <figure className="relative">
           <Suspense fallback={<Loading />}>
-            <div
-              className=""
-              style={{
-                width: '100%',
-                height: '100%',
-                overflow: 'hidden',
-              }}
-            >
+            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-lg">
               <Image
                 src={
                   property?.propertyImage
@@ -34,12 +27,10 @@ export default function PropertyCard({ property }: any) {
                     : Houses1
                 }
                 alt={property?.title}
-                width={500}
-                height={500}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, 33vw"
+                className="object-cover"
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
                   filter: isSoldOut ? 'grayscale(50%)' : 'none',
                 }}
                 loading="lazy"
