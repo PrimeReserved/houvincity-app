@@ -631,12 +631,17 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         <div className="flex justify-center items-center px-10 relative group">
           {property?.fullPropertyImage && (
             <Suspense fallback={<Loading />}>
-              <div className="relative cursor-pointer" onClick={() => openFullscreen(0)}>
+              <div
+                className="relative cursor-pointer w-full aspect-[16/7] overflow-hidden rounded-md"
+                onClick={() => openFullscreen(0)}
+              >
                 <Image
                   src={urlForImage(property?.fullPropertyImage?.asset?._ref)}
                   alt="House1"
-                  width={1500}
-                  height={100}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
                 />
                 <div className="absolute bottom-6 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div
@@ -654,15 +659,19 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 px-10 gap-2 justify-center items-center mt-12 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 px-10 gap-3 mt-12 mx-auto">
         {property?.leftSidePropertyImage && (
           <Suspense fallback={<Loading />}>
-            <div className="relative group cursor-pointer" onClick={() => openFullscreen(1)}>
+            <div
+              className="relative group cursor-pointer aspect-[4/3] w-full overflow-hidden rounded-md"
+              onClick={() => openFullscreen(1)}
+            >
               <Image
                 src={urlForImage(property?.leftSidePropertyImage?.asset?._ref)}
                 alt="House2"
-                width={385}
-                height={300}
+                fill
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="object-cover"
               />
               <div className="absolute bottom-4 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                 <div
@@ -679,12 +688,16 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         )}
         {property.middlePropertyImage && (
           <Suspense fallback={<Loading />}>
-            <div className="relative group cursor-pointer" onClick={() => openFullscreen(2)}>
+            <div
+              className="relative group cursor-pointer aspect-[4/3] w-full overflow-hidden rounded-md"
+              onClick={() => openFullscreen(2)}
+            >
               <Image
                 src={urlForImage(property?.middlePropertyImage.asset._ref)}
                 alt="House3"
-                width={385}
-                height={300}
+                fill
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="object-cover"
               />
               <div className="absolute bottom-4 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                 <div
@@ -701,12 +714,16 @@ function PropertyDetailed({ property }: Readonly<PropertyDetailedProps>) {
         )}
         {property.rightSidePropertyImage && (
           <Suspense fallback={<Loading />}>
-            <div className="relative group cursor-pointer" onClick={() => openFullscreen(3)}>
+            <div
+              className="relative group cursor-pointer aspect-[4/3] w-full overflow-hidden rounded-md"
+              onClick={() => openFullscreen(3)}
+            >
               <Image
                 src={urlForImage(property?.rightSidePropertyImage.asset._ref)}
                 alt="House4"
-                width={385}
-                height={300}
+                fill
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="object-cover"
               />
               <div className="absolute bottom-4 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                 <div
